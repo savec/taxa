@@ -134,6 +134,11 @@ BYTE readers_get_uid(DWORD *uid)
 	}
 }
 
+reader_status_e readers_getstatus(void)
+{
+	return status;
+}
+
 //unsigned int get_cnt0(void)
 //{
 //	return cnt0;

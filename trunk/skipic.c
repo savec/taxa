@@ -103,6 +103,8 @@
 
 // Include functions specific to this stack application
 #include "skipic.h"
+#include "readers.h"
+#include "net.h"
 
 // Used for Wi-Fi assertions
 #define WF_MODULE_NUMBER   WF_MODULE_MAIN_DEMO
@@ -113,6 +115,8 @@ static unsigned short wOriginalAppConfigChecksum;	// Checksum of the ROM default
 BYTE AN0String[8];
 BYTE myDHCPBindCount = 0xFF;
 DWORD uid;
+BYTE net_buf[128];
+WORD recieved;
 
 #if !defined(STACK_USE_DHCP_CLIENT)
 	#define DHCPBindCount	(1)
@@ -238,52 +242,54 @@ int main(void)
 	// Initialize Stack and application related NV variables into AppConfig.
 	InitAppConfig();
 
+
     // Initiates board setup process if button is depressed 
 	// on startup
-    if(BUTTON0_IO == 0u)
-    {
-		#if defined(EEPROM_CS_TRIS) || defined(SPIFLASH_CS_TRIS)
-		// Invalidate the EEPROM contents if BUTTON0 is held down for more than 4 seconds
-		DWORD StartTime = TickGet();
-		LED_PUT(0x00);
-				
-		while(BUTTON0_IO == 0u)
-		{
-			if(TickGet() - StartTime > 4*TICK_SECOND)
-			{
-				#if defined(EEPROM_CS_TRIS)
-			    XEEBeginWrite(0x0000);
-			    XEEWrite(0xFF);
-			    XEEWrite(0xFF);
-			    XEEEndWrite();
-			    #elif defined(SPIFLASH_CS_TRIS)
-			    SPIFlashBeginWrite(0x0000);
-			    SPIFlashWrite(0xFF);
-			    SPIFlashWrite(0xFF);
-			    #endif
-			    
-				#if defined(STACK_USE_UART)
-				putrsUART("\r\n\r\nBUTTON0 held for more than 4 seconds.  Default settings restored.\r\n\r\n");
-				#endif
-
-				LED_PUT(0x0F);
-				while((LONG)(TickGet() - StartTime) <= (LONG)(9*TICK_SECOND/2));
-				LED_PUT(0x00);
-				while(BUTTON0_IO == 0u);
-				Reset();
-				break;
-			}
-		}
-		#endif
-
-		#if defined(STACK_USE_UART)
-        DoUARTConfig();
-		#endif
-    }
+//    if(BUTTON0_IO == 0u)
+//    {
+//		#if defined(EEPROM_CS_TRIS) || defined(SPIFLASH_CS_TRIS)
+//		// Invalidate the EEPROM contents if BUTTON0 is held down for more than 4 seconds
+//		DWORD StartTime = TickGet();
+//		LED_PUT(0x00);
+//
+//		while(BUTTON0_IO == 0u)
+//		{
+//			if(TickGet() - StartTime > 4*TICK_SECOND)
+//			{
+//				#if defined(EEPROM_CS_TRIS)
+//			    XEEBeginWrite(0x0000);
+//			    XEEWrite(0xFF);
+//			    XEEWrite(0xFF);
+//			    XEEEndWrite();
+//			    #elif defined(SPIFLASH_CS_TRIS)
+//			    SPIFlashBeginWrite(0x0000);
+//			    SPIFlashWrite(0xFF);
+//			    SPIFlashWrite(0xFF);
+//			    #endif
+//
+//				#if defined(STACK_USE_UART)
+//				putrsUART("\r\n\r\nBUTTON0 held for more than 4 seconds.  Default settings restored.\r\n\r\n");
+//				#endif
+//
+//				LED_PUT(0x0F);
+//				while((LONG)(TickGet() - StartTime) <= (LONG)(9*TICK_SECOND/2));
+//				LED_PUT(0x00);
+//				while(BUTTON0_IO == 0u);
+//				Reset();
+//				break;
+//			}
+//		}
+//		#endif
+//
+//		#if defined(STACK_USE_UART)
+//        DoUARTConfig();
+//		#endif
+//    }
 
 	// Initialize core stack layers (MAC, ARP, TCP, UDP) and
 	// application modules (HTTP, SNMP, etc.)
     StackInit();
+    net_init();
 
     #if defined(WF_CS_TRIS)
     WF_Connect();
@@ -332,6 +338,13 @@ int main(void)
     	if(readers_get_uid(&uid)) {
     		Nop();
     	}
+
+
+    	recieved = sizeof(net_buf);
+    	if(net_recieve_data(net_buf, &recieved)) {
+    		net_send_data(net_buf, recieved);		// echo test
+    	}
+
 
         // Blink LED0 (right most one) every second.
         if(TickGet() - t >= TICK_SECOND/2ul)
@@ -395,11 +408,11 @@ int main(void)
 			SNMPSendTrap();
 		#endif
 		
-		#if defined(STACK_USE_BERKELEY_API)
-		BerkeleyTCPClientDemo();
-		BerkeleyTCPServerDemo();
-		BerkeleyUDPClientDemo();
-		#endif
+//		#if defined(STACK_USE_BERKELEY_API)
+//		BerkeleyTCPClientDemo();
+//		BerkeleyTCPServerDemo();
+//		BerkeleyUDPClientDemo();
+//		#endif
 
 		ProcessIO();
 
@@ -408,30 +421,30 @@ int main(void)
         // write the new IP address to the LCD display, UART, and Announce 
 
         // service
-//		if(dwLastIP != AppConfig.MyIPAddr.Val)
-//		{
-//
-//			dwLastIP = AppConfig.MyIPAddr.Val;
-//
-//			#if defined(STACK_USE_UART)
-//				putrsUART((ROM char*)"\r\nNew IP Address: ");
-//			#endif
-//
-//			DisplayIPValue(AppConfig.MyIPAddr);
-//
-//			#if defined(STACK_USE_UART)
-//				putrsUART((ROM char*)"\r\n");
-//			#endif
-//
-//
-//			#if defined(STACK_USE_ANNOUNCE)
-//				AnnounceIP();
-//			#endif
-//
-//            #if defined(STACK_USE_ZEROCONF_MDNS_SD)
-//				mDNSFillHostRecord();
-//			#endif
-//		}
+		if(dwLastIP != AppConfig.MyIPAddr.Val)
+		{
+
+			dwLastIP = AppConfig.MyIPAddr.Val;
+
+			#if defined(STACK_USE_UART)
+				putrsUART((ROM char*)"\r\nNew IP Address: ");
+			#endif
+
+			DisplayIPValue(AppConfig.MyIPAddr);
+
+			#if defined(STACK_USE_UART)
+				putrsUART((ROM char*)"\r\n");
+			#endif
+
+
+			#if defined(STACK_USE_ANNOUNCE)
+				AnnounceIP();
+			#endif
+
+            #if defined(STACK_USE_ZEROCONF_MDNS_SD)
+				mDNSFillHostRecord();
+			#endif
+		}
 	}
 }
 
