@@ -37,5 +37,8 @@ typedef enum {
 
 void readers_init_bsp(void);
 void readers_isr(void);
+BYTE readers_get_uid(DWORD *uid);
+reader_status_e readers_getstatus(void);
+
 
 #endif /* READERS_H_ */
