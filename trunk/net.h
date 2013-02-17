@@ -19,8 +19,9 @@ typedef enum {
 
 
 void net_init(void);
-BYTE net_recieve_data(BYTE *data, WORD *size);
-BYTE net_send_data(const BYTE *data, WORD size);
+BOOL net_recieve_data(BYTE *data, WORD *size);
+BOOL net_send_data(const BYTE *data, WORD size);
 net_status_e net_getstatus(void);
+void net_disconnect(void);
 
 #endif /* NET_H_ */
