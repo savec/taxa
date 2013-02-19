@@ -10,13 +10,34 @@
 
 #include "TCPIP Stack/TCPIP.h"
 
+#define NBUFFERS	3
+
 #define BCP_HEADER_SIZE	7
+
+#define PAYLOADLEN	64
+
+#define SIZEOF_BUF (BCP_HEADER_SIZE + PAYLOADLEN)
 
 #define BCP_SYNC 0x9c
 
+//typedef enum {
+//	BD_ERR = -1,
+//	BD_EMPTY = -2
+//} bcp_err_e;
+
+typedef signed char bd_t;
+
+typedef enum {
+	BD_FREE = 0,
+	BD_OBTAINED,
+	BD_NEED_ACK,
+	BD_ACKED,
+	BD_TIMEOUT
+} bd_status_e;
+
 typedef enum {
 	QAC_GETVER 	= 0x00,
-	QAC_ECHO 	= 0x09,
+	QAC_ECHO 	= 0x09
 } qac_e;
 
 typedef enum {
@@ -69,5 +90,11 @@ typedef struct {
 	} hdr_u;
 	BYTE raw[BCP_HEADER_SIZE];
 } bcp_header_t;
+
+typedef struct {
+	bd_status_e status;
+	DWORD 		timestamp;
+	BYTE 		buf[SIZEOF_BUF];
+} buf_t;
 
 #endif /* BCP_H_ */

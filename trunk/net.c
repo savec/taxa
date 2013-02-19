@@ -24,7 +24,7 @@ void net_init(void)
 	status = NET_LISTENING;
 }
 
-BOOL net_recieve_data(BYTE *data, WORD *size)
+int net_recieve_data(BYTE *data, size_t size)
 {
 	int recieved, addrlen;
 
@@ -33,25 +33,20 @@ BOOL net_recieve_data(BYTE *data, WORD *size)
 	case NET_LISTENING:
 
 		addrlen = sizeof(struct sockaddr);
-		recieved = recvfrom(host_soc, (char*) data, *size, 0,
+		recieved = recvfrom(host_soc, (char*) data, size, 0,
 				(struct sockaddr*) &host_addr, &addrlen);
 
-		if (!recieved)
-			return FALSE;
+		if (recieved > 0) {
+			connect(host_soc, (struct sockaddr*) &host_addr, addrlen);
+			status = NET_CONNECTED;
+		}
 
-		connect(host_soc, (struct sockaddr*) &host_addr, addrlen);
-		status = NET_CONNECTED;
-		break;
+		return recieved;
 
 	case NET_CONNECTED:
 
-		recieved = recv(host_soc, (char*) data, *size, 0);
-		if (!recieved)
-			return FALSE;
+		return recv(host_soc, (char*) data, size, 0);
 	}
-
-	*size = recieved;
-	return TRUE;
 }
 
 void net_disconnect(void)
@@ -59,15 +54,11 @@ void net_disconnect(void)
 	status = NET_LISTENING;
 }
 
-BOOL net_send_data(const BYTE *data, WORD size)
+int net_send_data(const BYTE *data, size_t size)
 {
-
 	if (status != NET_CONNECTED)
-		return FALSE;
-	if (send(host_soc, (const char*) data, size, 0) > 0)
-		return TRUE;
-	else
-		return FALSE;
+		return -1;
+	return send(host_soc, (const char*) data, size, 0);
 }
 
 net_status_e net_getstatus(void) {
