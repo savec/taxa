@@ -5,8 +5,8 @@
  *      Author: admin
  */
 
-#ifndef BCP_H_
-#define BCP_H_
+#ifndef BCP_SUPPORT_H_
+#define BCP_SUPPORT_H_
 
 #include "TCPIP Stack/TCPIP.h"
 
@@ -97,4 +97,4 @@ typedef struct {
 	BYTE 		buf[SIZEOF_BUF];
 } buf_t;
 
-#endif /* BCP_H_ */
+#endif /* BCP_SUPPORT_H_ */

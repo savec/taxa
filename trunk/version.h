@@ -8,7 +8,7 @@
 #ifndef VERSION_H_
 #define VERSION_H_
 
-#define SVN_REVISION	"5"
+#define SVN_REVISION	"6"
 
 
 #endif /* VERSION_H_ */

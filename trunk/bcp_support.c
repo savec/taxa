@@ -6,8 +6,9 @@
  */
 
 #include "net.h"
-#include "bcp.h"
+#include "bcp_support.h"
 #include "CRCMOD.h"
+#include "post.h"
 
 static buf_t bpool[NBUFFERS] = { 0 };
 
@@ -36,13 +37,28 @@ buf_t *bcp_buffer(bd_t handler)
 int bcp_reciev_buffer(bd_t handler)
 {
 	int recieved;
+	bcp_header_t * hdr;
+	WORD crc;
 
 	recieved = net_recieve_data(bpool[handler].buf, SIZEOF_BUF);
-	if(recieved <= 0)
+	if (recieved <= 0)
 		return recieved;
 
-	// TODO CRC etc
+	hdr = (bcp_header_t *) bpool[handler].buf;
 
+	crc = CRC16_MODBUS((BYTE *) hdr, BCP_HEADER_SIZE - 2);
+
+	if ((WORD) hdr->hdr_u.crcl | ((WORD) hdr->hdr_u.crch << 8) != crc)
+		return 0;
+
+	if (TYPE(hdr->hdr_u.type) == TYPE_NPDL) {
+		crc = CRC16_MODBUS((BYTE *) hdr + BCP_HEADER_SIZE, hdr->hdr_u.npdl.len - 2);
+		if (((WORD) hdr->raw[BCP_HEADER_SIZE + hdr->hdr_u.npdl.len - 2]
+		   | (WORD) hdr->raw[BCP_HEADER_SIZE + hdr->hdr_u.npdl.len - 1] << 8) != crc)
+			return 0;
+	}
+
+	return recieved;
 }
 
 int bcp_send_buffer(bd_t handler, BOOL need_ack)
@@ -58,27 +74,22 @@ int bcp_send_buffer(bd_t handler, BOOL need_ack)
 
 	if (TYPE(hdr->hdr_u.type) == TYPE_CTRL || TYPE(hdr->hdr_u.type)
 			== TYPE_NPRQ || TYPE(hdr->hdr_u.type) == TYPE_NPD1) {
-
 		size = BCP_HEADER_SIZE;
-
 	} else if (TYPE(hdr->hdr_u.type) == TYPE_NPDL && hdr->hdr_u.npdl.len > 2) {
-
 		size = BCP_HEADER_SIZE + hdr->hdr_u.npdl.len;
 		/* data crc*/
 		crc = CRC16_MODBUS((BYTE *) hdr + BCP_HEADER_SIZE, hdr->hdr_u.npdl.len - 2);
-		*((BYTE *) hdr + BCP_HEADER_SIZE + hdr->hdr_u.npdl.len - 2) = crc; /* LO as we are in little endian */
-		*((BYTE *) hdr + BCP_HEADER_SIZE + hdr->hdr_u.npdl.len - 1) = crc >> 8; /* HI as we are in little endian */
-
+		hdr->raw[BCP_HEADER_SIZE + hdr->hdr_u.npdl.len - 2] = crc; /* LO as we are in little endian */
+		hdr->raw[BCP_HEADER_SIZE + hdr->hdr_u.npdl.len - 1] = crc >> 8; /* HI as we are in little endian */
 	} else {
-
 		return -1; // unknown type or datalen error
 	}
 
 	hdr->hdr_u.sync = BCP_SYNC;
-	//	hdr->hdr_u.addr =	// XXX ?
+	//	hdr->hdr_u.addr =	// XXX ==1 :)
 
 	/* header crc*/
-	crc = CRC16_MODBUS((BYTE *) hdr, BCP_HEADER_SIZE);
+	crc = CRC16_MODBUS((BYTE *) hdr, BCP_HEADER_SIZE - 2);
 	hdr->hdr_u.crcl = crc;
 	hdr->hdr_u.crch = crc >> 8;
 
@@ -90,13 +101,15 @@ int bcp_send_buffer(bd_t handler, BOOL need_ack)
 	return net_send_data((BYTE *) hdr, size);
 }
 
-int bcp_process_buffer(bd_t handler)
-{
-	bcp_header_t * hdr = (bcp_header_t *) bpool[handler].buf;
 
-	if (hdr->hdr_u.type != BCP_SYNC) {
-		net_disconnect();
-		return FALSE;
-	}
 
-}
+//int bcp_process_buffer(bd_t handler)
+//{
+//	bcp_header_t * hdr = (bcp_header_t *) bpool[handler].buf;
+//
+////	if (hdr->hdr_u.type != BCP_SYNC) {
+////		net_disconnect();
+////		return FALSE;
+////	}
+//
+//}
