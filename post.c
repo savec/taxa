@@ -7,11 +7,13 @@
 
 #include "post.h"
 
-mail_t mail_index[MODULES_NUM];
+mailbox_t *mail_index[MODULES_NUM];
 
-int mail_subscribe(modules_e module, mail_t mailbox)
+
+
+int mail_subscribe(modules_e module, mailbox_t *mailbox)
 {
-	if(module >= MODULES_NUM)
+	if(module >= MODULE_UNKNOWN)
 		return -1;
 	mail_index[module] = mailbox;
 	return 0;
@@ -19,15 +21,19 @@ int mail_subscribe(modules_e module, mail_t mailbox)
 
 int mail_unsubscribe(modules_e module)
 {
-	if(module >= MODULES_NUM)
+	if(module >= MODULE_UNKNOWN)
 		return -1;
 	mail_index[module] = NULL;
 	return 0;
 }
 
-mail_t mail_reciev(mailbox_t *mailbox)
+mail_t mail_reciev(modules_e module)
 {
 	mail_t mail = NULL;
+	mailbox_t *mailbox = mail_index[module];
+
+	if(mailbox == NULL)
+		return -1;
 
 	if(mailbox->in != mailbox->out) {
 		mail = mailbox->mailbox[mailbox->out];
@@ -37,8 +43,18 @@ mail_t mail_reciev(mailbox_t *mailbox)
 	return mail;
 }
 
-int mail_send(mailbox_t *mailbox, mail_t mail)
+int mail_send(modules_e module, mail_t mail)
 {
+	mailbox_t *mailbox;
+
+	if(module >= MODULE_UNKNOWN)
+		return -1;
+
+	mailbox = mail_index[module];
+
+	if(mailbox == NULL)
+		return -1;
+
 	mailbox->mailbox[mailbox->in] = mail;
 	mailbox->in ++;
 	mailbox->in &= MAILBOX_MASK;

@@ -6,18 +6,21 @@
  */
 
 #include "net.h"
-#include "bcp_support.h"
+#include "m_bcp.h"
 #include "CRCMOD.h"
 #include "post.h"
 
+#define MYSELF	MODULE_BCP
+
 static buf_t bpool[NBUFFERS] = { 0 };
 
-bd_t bcp_obtain_buffer(void)
+bd_t bcp_obtain_buffer(modules_e owner)
 {
 	signed char i;
 	for (i = 0; i < NBUFFERS; i++) {
 		if (bpool[i].status == BD_FREE) {
 			bpool[i].status = BD_OBTAINED;
+			bpool[i].owner = owner;
 			return i;
 		}
 	}
@@ -101,15 +104,84 @@ int bcp_send_buffer(bd_t handler, BOOL need_ack)
 	return net_send_data((BYTE *) hdr, size);
 }
 
+void bcp_init(void)
+{
+}
+
+modules_e bcp_determine_subscriber(bd_t handler)
+{
+	bcp_header_t * hdr = (bcp_header_t *) bpool[handler].buf;
+
+	switch(hdr->raw[RAW_QAC]) {
+	case QAC_GETVER:
+		switch(hdr->raw[RAW_DATA] ){
+		case 0:
+		case 1:
+			return MODULE_BCP;
+		case 2:
+			return MODULE_READERS;
+		case 3:
+			return MODULE_ACCESSOR;
+		case 4:
+			return MODULE_SRVMACHINE;
+		case 5:
+			return MODULE_LOGGER;
+		case 6:
+			return MODULE_LCD;
+		default:
+			return MODULE_BCP;
+		}
+	case QAC_ECHO:
+		return MODULE_BCP;
+	default:
+		return MODULE_UNKNOWN;
+	}
+}
+
+int bcp_process_buffer(bd_t handler)
+{
+	bcp_header_t * hdr = (bcp_header_t *) bpool[handler].buf;
 
 
-//int bcp_process_buffer(bd_t handler)
-//{
-//	bcp_header_t * hdr = (bcp_header_t *) bpool[handler].buf;
-//
-////	if (hdr->hdr_u.type != BCP_SYNC) {
-////		net_disconnect();
-////		return FALSE;
-////	}
-//
-//}
+
+
+	bcp_release_buffer(handler);
+}
+
+
+void bcp_module(void)
+{
+	bd_t ibuffer = bcp_obtain_buffer(MYSELF);
+	modules_e subscriber;
+	bd_t i;
+
+
+	if(ibuffer < 0) {
+		// XXX ASSERT (LOGGER)
+		return;
+	}
+
+	if(bcp_reciev_buffer(ibuffer) <= 0) {
+		bcp_release_buffer(ibuffer);
+		goto skip_reciev;
+	}
+
+	subscriber = bcp_determine_subscriber(ibuffer);
+
+	if(subscriber == MYSELF)
+		bcp_process_buffer(ibuffer);
+	else
+		mail_send(subscriber, ibuffer);
+
+skip_reciev:
+
+	/* check timeouts */
+	for (i = 0; i < NBUFFERS; i++) {
+		if((bpool[i].status == BD_NEED_ACK) && (TickGet() - bpool[i].timestamp > TICK_SECOND/2)) {
+			bpool[i].status = BD_TIMEOUT;
+			mail_send(bpool[i].owner, i);
+		}
+	}
+}
+
+
