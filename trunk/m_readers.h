@@ -5,8 +5,8 @@
  *      Author: admin
  */
 
-#ifndef READERS_H_
-#define READERS_H_
+#ifndef M_READERS_H_
+#define M_READERS_H_
 
 #include "TCPIP Stack/TCPIP.h"
 
@@ -35,10 +35,10 @@ typedef enum {
 //	} field;
 //} w34_code_t;
 
-void readers_init_bsp(void);
+void readers_init(void);
 void readers_isr(void);
 BYTE readers_get_uid(DWORD *uid);
 reader_status_e readers_getstatus(void);
 
 
-#endif /* READERS_H_ */
+#endif /* M_READERS_H_ */

@@ -103,7 +103,7 @@
 
 // Include functions specific to this stack application
 #include "skipic.h"
-#include "readers.h"
+#include "m_readers.h"
 #include "net.h"
 
 // Used for Wi-Fi assertions
@@ -222,7 +222,7 @@ int main(void)
 
 	// Initialize application specific hardware
 	InitializeBoard();
-	readers_init_bsp();
+	readers_init();
 
 	#if defined(USE_LCD)
 	// Initialize and display the stack version on the LCD

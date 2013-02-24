@@ -5,8 +5,8 @@
  *      Author: admin
  */
 
-#ifndef BCP_SUPPORT_H_
-#define BCP_SUPPORT_H_
+#ifndef M_BCP_H_
+#define M_BCP_H_
 
 #include "TCPIP Stack/TCPIP.h"
 
@@ -21,9 +21,8 @@
 #define BCP_SYNC 0x9c
 
 //typedef enum {
-//	BD_ERR = -1,
-//	BD_EMPTY = -2
-//} bcp_err_e;
+//
+//} bcp_status_e;
 
 typedef signed char bd_t;
 
@@ -31,7 +30,6 @@ typedef enum {
 	BD_FREE = 0,
 	BD_OBTAINED,
 	BD_NEED_ACK,
-	BD_ACKED,
 	BD_TIMEOUT
 } bd_status_e;
 
@@ -91,10 +89,14 @@ typedef struct {
 	BYTE raw[BCP_HEADER_SIZE];
 } bcp_header_t;
 
+#define RAW_QAC		3
+#define RAW_DATA	7
+
 typedef struct {
 	bd_status_e status;
 	DWORD 		timestamp;
+	BYTE		owner;
 	BYTE 		buf[SIZEOF_BUF];
 } buf_t;
 
-#endif /* BCP_SUPPORT_H_ */
+#endif /* M_BCP_H_ */

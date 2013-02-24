@@ -5,7 +5,8 @@
  *      Author: admin
  */
 #include "bit_pattern.h"
-#include "readers.h"
+#include "m_readers.h"
+#include "post.h"
 
 
 static unsigned char code[BP_SIZE], processing_code[BP_SIZE];
@@ -57,7 +58,7 @@ do {										\
 } while(0)
 
 
-void readers_init_bsp(void)
+void readers_init(void)
 {
 	TRISBbits.TRISB0 = 1;		// INT0
 	TRISBbits.TRISB2 = 1;		// INT2
