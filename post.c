@@ -27,20 +27,20 @@ int mail_unsubscribe(modules_e module)
 	return 0;
 }
 
-mail_t mail_reciev(modules_e module)
+int mail_reciev(modules_e module, mail_t *mail)
 {
-	mail_t mail = NULL;
 	mailbox_t *mailbox = mail_index[module];
-
 	if(mailbox == NULL)
 		return -1;
 
 	if(mailbox->in != mailbox->out) {
-		mail = mailbox->mailbox[mailbox->out];
+		*mail = mailbox->mailbox[mailbox->out];
 		mailbox->out ++;
 		mailbox->out &= MAILBOX_MASK;
+		return 1;
+	} else {
+		return 0;
 	}
-	return mail;
 }
 
 int mail_send(modules_e module, mail_t mail)
