@@ -36,7 +36,7 @@ typedef struct {
 
 int mail_subscribe(modules_e module, mailbox_t *mailbox);
 int mail_unsubscribe(modules_e module);
-mail_t mail_reciev(modules_e module);
+int mail_reciev(modules_e module, mail_t *mail);
 int mail_send(modules_e module, mail_t mail);
 
 #endif /* POST_H_ */

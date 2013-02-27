@@ -14,7 +14,7 @@
 
 #define BCP_HEADER_SIZE	7
 
-#define PAYLOADLEN	64
+#define PAYLOADLEN	(64 + 2)
 
 #define SIZEOF_BUF (BCP_HEADER_SIZE + PAYLOADLEN)
 
@@ -47,10 +47,12 @@ typedef enum {
 
 #define TYPE(x)		((x) & 0x0f)
 #define FQ(x)		((x) & (1 << 7))
-#define SET_FQ(x)	(x) |= FQ
-#define RST_FQ(x)	(x) &= ~FQ
+#define SET_FQ(x)	(x) |= (1 << 7)
+#define RST_FQ(x)	(x) &= ~(1 << 7)
 
 #define BNUM(x)		(((x) & (7 << 4)) >> 4)
+
+#define ARRAYLEN(p)	(sizeof(p)/*/sizeof(p[0])*/)
 
 typedef struct {
 	BYTE blen;
@@ -72,8 +74,8 @@ typedef struct {
 	BYTE len;
 } ht_npdl_t;
 
-typedef struct {
-	union {
+typedef union {
+	struct {
 		BYTE sync;
 		BYTE type;
 		BYTE addr;
@@ -82,15 +84,15 @@ typedef struct {
 			ht_nprq_t nprq;
 			ht_npd1_t npd1;
 			ht_npdl_t npdl;
-		};
+		} packtype_u;
 		BYTE crcl;
 		BYTE crch;
-	} hdr_u;
+	} hdr_s;
 	BYTE raw[BCP_HEADER_SIZE];
 } bcp_header_t;
 
 #define RAW_QAC		3
-#define RAW_DATA	7
+#define RAW_DATA	BCP_HEADER_SIZE
 
 typedef struct {
 	bd_status_e status;
@@ -98,5 +100,10 @@ typedef struct {
 	BYTE		owner;
 	BYTE 		buf[SIZEOF_BUF];
 } buf_t;
+
+void bcp_module(void);
+int bcp_send_buffer(bd_t handler);
+buf_t *bcp_buffer(bd_t handler);
+void bcp_release_buffer(bd_t handler);
 
 #endif /* M_BCP_H_ */

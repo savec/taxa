@@ -6,7 +6,9 @@
  */
 #include "bit_pattern.h"
 #include "m_readers.h"
+#include "m_bcp.h"
 #include "post.h"
+
 
 
 static unsigned char code[BP_SIZE], processing_code[BP_SIZE];
@@ -15,6 +17,9 @@ static BYTE position;
 static DWORD t = 0;
 reader_status_e status = READER_VOID;
 
+rom static char * ver = "RD0.01";
+static mailbox_t mailbox;
+#define MYSELF	MODULE_READERS
 
 BYTE w34_get_odd(unsigned char *bp)
 {
@@ -58,6 +63,44 @@ do {										\
 } while(0)
 
 
+int readers_process_buffer(bd_t handler)
+{
+	int result = 0;
+	bcp_header_t * hdr = (bcp_header_t *) bcp_buffer(handler)->buf;
+
+	switch (TYPE(hdr->hdr_s.type)) {
+	case TYPE_NPD1:
+		switch (hdr->raw[RAW_QAC]) {
+		case QAC_GETVER:
+			switch (hdr->hdr_s.packtype_u.npd1.data) {
+			case 2:
+				/* readers ver */
+				hdr->hdr_s.type = TYPE_NPDL;
+				hdr->raw[RAW_DATA] = hdr->hdr_s.packtype_u.npd1.data;
+				hdr->hdr_s.packtype_u.npdl.len = strlenpgm(ver) + 3;
+				strcpypgm2ram((char *) &hdr->raw[RAW_DATA + 1], ver);
+				bcp_send_buffer(handler);
+//				bcp_release_buffer(handler);
+
+				break;
+			default:
+				result = -1;
+			}
+			break;
+
+		default:
+			result = -1;
+		}
+		break;
+	default:
+		result = -1;
+	}
+
+	bcp_release_buffer(handler);
+	return result;
+}
+
+
 void readers_init(void)
 {
 	TRISBbits.TRISB0 = 1;		// INT0
@@ -73,6 +116,8 @@ void readers_init(void)
 	INTCON3bits.INT2IE = 1;		// enable interrupt
 
 	reset_state();
+
+	mail_subscribe(MYSELF, &mailbox);
 }
 
 #define shift_position()							\
@@ -139,6 +184,21 @@ reader_status_e readers_getstatus(void)
 {
 	return status;
 }
+
+void readers_module(void)
+{
+	bd_t ipacket;
+	DWORD uid;
+
+	if(readers_get_uid(&uid)) {
+		/* send to host */
+	}
+
+	if(mail_reciev(MYSELF, &ipacket)) {
+		readers_process_buffer(ipacket);
+	}
+}
+
 
 //unsigned int get_cnt0(void)
 //{

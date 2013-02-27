@@ -114,8 +114,7 @@ APP_CONFIG AppConfig;
 static unsigned short wOriginalAppConfigChecksum;	// Checksum of the ROM defaults for AppConfig
 BYTE AN0String[8];
 BYTE myDHCPBindCount = 0xFF;
-DWORD uid;
-BYTE net_buf[128];
+//BYTE net_buf[128];
 WORD recieved;
 
 #if !defined(STACK_USE_DHCP_CLIENT)
@@ -334,16 +333,13 @@ int main(void)
     // down into smaller pieces so that other tasks can have CPU time.
     while(1)
     {
+    	bcp_module();
+    	readers_module();
 
-    	if(readers_get_uid(&uid)) {
-    		Nop();
-    	}
-
-
-    	recieved = sizeof(net_buf);
-    	if(net_recieve_data(net_buf, &recieved)) {
-    		net_send_data(net_buf, recieved);		// echo test
-    	}
+//    	recieved = sizeof(net_buf);
+//    	if(net_recieve_data(net_buf, &recieved)) {
+//    		net_send_data(net_buf, recieved);		// echo test
+//    	}
 
 
         // Blink LED0 (right most one) every second.
