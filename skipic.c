@@ -297,6 +297,7 @@ int main(void)
 	{
 		BYTE str[] = "Îכמכמ ןûש ןûש";
 		LCD_print(str);
+		putrsUART((ROM char*)"Îכמכמ ןûש ןûש\r\n");
 	}
 
 #if defined(WF_CS_TRIS)
