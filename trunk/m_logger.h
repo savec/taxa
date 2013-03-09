@@ -10,10 +10,21 @@
 
 #include "TCPIP Stack/TCPIP.h"
 
-#define KB	1024
+#define PAGE_SIZE	264ul
+#define PAGES_NUM	496
 
-#define SLOG_START	0
-#define SLOG_LEN	(64*KB)
+#define SLOG_START	(10ul*PAGE_SIZE)
+#define SLOG_LEN	(10ul*PAGE_SIZE)
 
+#define SLOG_EOF	0	// we cant't use standart EOF(-1) because of it's a symbol in cp1251 coding
+
+//#define slog_puts(__s, __ts) slog_putrs((far rom BYTE *)__s, __ts)
+
+void slog_init(void);
+void slog_format(void);
+int slog_putrs(const rom BYTE *str, BOOL need_timestamp);
+int slog_puts(const BYTE *str, BOOL need_timestamp);
+int slog_gets(WORD pos, BYTE *buf, BYTE len);
+void slog_flush(void);
 
 #endif /* M_LOGGER_H_ */

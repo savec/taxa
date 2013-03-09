@@ -39,6 +39,7 @@ void readers_init(void);
 void readers_isr(void);
 BYTE readers_get_uid(DWORD *uid);
 reader_status_e readers_getstatus(void);
+void readers_module(void);
 
 
 #endif /* M_READERS_H_ */
