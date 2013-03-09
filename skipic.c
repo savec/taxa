@@ -105,7 +105,9 @@
 #include "skipic.h"
 #include "m_readers.h"
 #include "net.h"
+#include "m_bcp.h"
 #include "m_lcd.h"
+#include "m_logger.h"
 
 // Used for Wi-Fi assertions
 #define WF_MODULE_NUMBER   WF_MODULE_MAIN_DEMO
@@ -225,6 +227,13 @@ int main(void)
 
 	// Initialize application specific hardware
 	InitializeBoard();
+
+	{
+		int i;
+		for(i = 0; i < 20*PAGE_SIZE; i += PAGE_SIZE)
+			EraseSector(i);
+	}
+
 	readers_init();
 
 #if defined(USE_LCD)
@@ -290,14 +299,31 @@ int main(void)
 
 	// Initialize core stack layers (MAC, ARP, TCP, UDP) and
 	// application modules (HTTP, SNMP, etc.)
+
+//	slog_format();
+
+	slog_init();
 	StackInit();
 	net_init();
 	LCD_init();
 
 	{
-		BYTE str[] = "Ололо пыщ пыщ";
+		BYTE str[] = "Ололо пыщ пыщ", str1[] = "еще чуть-чуть из RAM\r\n";
+
+		BYTE strout[70], read = 0;
 		LCD_print(str);
-		putrsUART((ROM char*)"Ололо пыщ пыщ\r\n");
+		putrsUSART((ROM char*)"Console alive!\r\n");
+
+//		slog_putrs((ROM char*)"опять в логгер по-русски из ROM\r\n", 1);
+//		slog_puts(str1, 1);
+
+		slog_flush();
+
+//		read += slog_gets(0, strout, sizeof(strout));
+//		strout[read] = '\0';
+//
+//		putsUART(strout);
+
 	}
 
 #if defined(WF_CS_TRIS)
@@ -370,7 +396,7 @@ int main(void)
 		StackTask();
 
 		// This tasks invokes each of the core stack application tasks
-		StackApplications();
+//		StackApplications();
 
 #if defined(STACK_USE_ZEROCONF_LINK_LOCAL)
 		ZeroconfLLProcess();
