@@ -30,7 +30,7 @@ void slog_format(void)
 	for (addr = SLOG_START; addr < SLOG_START + SLOG_LEN; addr++)
 		XEEWrite(SLOG_EOF);
 	XEEEndWrite();
-	slog_pos = SLOG_START;
+	slog_pos = 0;
 }
 
 static BOOL slog_need_format(void)

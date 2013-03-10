@@ -1,5 +1,5 @@
 MPLINK 4.34, Linker
-Linker Map File - Created Sun Mar 10 00:39:11 2013
+Linker Map File - Created Sun Mar 10 17:05:44 2013
 
                                  Section Info
                   Section       Type    Address   Location Size(Bytes)
@@ -72,53 +72,53 @@ Linker Map File - Created Sun Mar 10 00:39:11 2013
               .code_UDP.o       code   0x00a3fc    program   0x000f00
          .code_ETH97J60.o       code   0x00b2fc    program   0x000e22
             .code_m_bcp.o       code   0x00c11e    program   0x000cf0
-           .code_skipic.o       code   0x00ce0e    program   0x0007f8
-        .code_SPIEEPROM.o       code   0x00d606    program   0x000706
-        .code_m_readers.o       code   0x00dd0c    program   0x00064a
-              .code_ARP.o       code   0x00e356    program   0x0005c2
-         .code_m_logger.o       code   0x00e918    program   0x00056a
-       .code_UARTConfig.o       code   0x00ee82    program   0x0004d4
-               .code_IP.o       code   0x00f356    program   0x0003fa
-      .code_LCDBlocking.o       code   0x00f750    program   0x00035a
-             .stringtable    romdata   0x00faaa    program   0x0002d2
-             .code_post.o       code   0x00fd7c    program   0x0002b8
-        .romdata_CRCMOD.o    romdata   0x010034    program   0x000200
-              .code_net.o       code   0x010234    program   0x0001e4
-                   STRING       code   0x010418    program   0x0001d0
-             .code_UART.o       code   0x0105e8    program   0x0001c2
-            .code_m_lcd.o       code   0x0107aa    program   0x00017a
-      .code_bit_pattern.o       code   0x010924    program   0x00016c
-         .code_StackTsk.o       code   0x010a90    program   0x000154
-             .code_Tick.o       code   0x010be4    program   0x000140
-           .code_CRCMOD.o       code   0x010d24    program   0x0000fc
-                   STDLIB       code   0x010e20    program   0x0000ea
-                     PROG       code   0x010f0a    program   0x0000ce
-               _cinit_scn       code   0x010fd8    program   0x00009e
-         .code_fxd3232u.o       code   0x011076    program   0x000048
-         .romdata_m_lcd.o    romdata   0x0110be    program   0x000040
-           .romdata_TCP.o    romdata   0x0110fe    program   0x000036
-         .code_fxd1616u.o       code   0x011134    program   0x00002c
-                    .code       code   0x011160    program   0x00002c
-              D1KTCYXCODE       code   0x01118c    program   0x000020
-             _startup_scn       code   0x0111ac    program   0x00001c
-              D10TCYXCODE       code   0x0111c8    program   0x000016
-        .idata_skipic.o_i    romdata   0x0111de    program   0x000009
-     .idata_m_readers.o_i    romdata   0x0111e7    program   0x000008
-         .idata_m_bcp.o_i    romdata   0x0111ef    program   0x0000f3
-           .idata_UDP.o_i    romdata   0x0112e2    program   0x000002
-          .idata_Tick.o_i    romdata   0x0112e4    program   0x000004
-           .idata_TCP.o_i    romdata   0x0112e8    program   0x000002
-            .idata_IP.o_i    romdata   0x0112ea    program   0x000002
-       .idata_Helpers.o_i    romdata   0x0112ec    program   0x000004
-   .idata_BerkeleyAPI.o_i    romdata   0x0112f0    program   0x000002
-            .code_c018i.o       code   0x0112f2    program   0x000000
-            .code_Delay.o       code   0x0112f2    program   0x000000
-           .code_Hashes.o       code   0x0112f2    program   0x000000
-             .code_ICMP.o       code   0x0112f2    program   0x000000
-             .code_MPFS.o       code   0x0112f2    program   0x000000
-           .code_Reboot.o       code   0x0112f2    program   0x000000
-         .code_SPIFlash.o       code   0x0112f2    program   0x000000
-           .code_SPIRAM.o       code   0x0112f2    program   0x000000
+           .code_skipic.o       code   0x00ce0e    program   0x0007a2
+        .code_SPIEEPROM.o       code   0x00d5b0    program   0x000706
+        .code_m_readers.o       code   0x00dcb6    program   0x00064a
+              .code_ARP.o       code   0x00e300    program   0x0005c2
+         .code_m_logger.o       code   0x00e8c2    program   0x000566
+       .code_UARTConfig.o       code   0x00ee28    program   0x0004d4
+               .code_IP.o       code   0x00f2fc    program   0x0003fa
+      .code_LCDBlocking.o       code   0x00f6f6    program   0x00035a
+             .stringtable    romdata   0x00fa50    program   0x0002d2
+             .code_post.o       code   0x00fd22    program   0x0002b8
+        .romdata_CRCMOD.o    romdata   0x00ffda    program   0x000200
+              .code_net.o       code   0x0101da    program   0x0001e4
+                   STRING       code   0x0103be    program   0x0001d0
+             .code_UART.o       code   0x01058e    program   0x0001c2
+            .code_m_lcd.o       code   0x010750    program   0x00017a
+      .code_bit_pattern.o       code   0x0108ca    program   0x00016c
+         .code_StackTsk.o       code   0x010a36    program   0x000154
+             .code_Tick.o       code   0x010b8a    program   0x000140
+           .code_CRCMOD.o       code   0x010cca    program   0x0000fc
+                   STDLIB       code   0x010dc6    program   0x0000ea
+                     PROG       code   0x010eb0    program   0x0000ce
+               _cinit_scn       code   0x010f7e    program   0x00009e
+         .code_fxd3232u.o       code   0x01101c    program   0x000048
+         .romdata_m_lcd.o    romdata   0x011064    program   0x000040
+           .romdata_TCP.o    romdata   0x0110a4    program   0x000036
+         .code_fxd1616u.o       code   0x0110da    program   0x00002c
+                    .code       code   0x011106    program   0x00002c
+              D1KTCYXCODE       code   0x011132    program   0x000020
+             _startup_scn       code   0x011152    program   0x00001c
+              D10TCYXCODE       code   0x01116e    program   0x000016
+        .idata_skipic.o_i    romdata   0x011184    program   0x000009
+     .idata_m_readers.o_i    romdata   0x01118d    program   0x000008
+         .idata_m_bcp.o_i    romdata   0x011195    program   0x0000f3
+           .idata_UDP.o_i    romdata   0x011288    program   0x000002
+          .idata_Tick.o_i    romdata   0x01128a    program   0x000004
+           .idata_TCP.o_i    romdata   0x01128e    program   0x000002
+            .idata_IP.o_i    romdata   0x011290    program   0x000002
+       .idata_Helpers.o_i    romdata   0x011292    program   0x000004
+   .idata_BerkeleyAPI.o_i    romdata   0x011296    program   0x000002
+            .code_c018i.o       code   0x011298    program   0x000000
+            .code_Delay.o       code   0x011298    program   0x000000
+           .code_Hashes.o       code   0x011298    program   0x000000
+             .code_ICMP.o       code   0x011298    program   0x000000
+             .code_MPFS.o       code   0x011298    program   0x000000
+           .code_Reboot.o       code   0x011298    program   0x000000
+         .code_SPIFlash.o       code   0x011298    program   0x000000
+           .code_SPIRAM.o       code   0x011298    program   0x000000
    .config_1fff8_skipic.o    romdata   0x01fff8    program   0x000001
    .config_1fffa_skipic.o    romdata   0x01fffa    program   0x000001
    .config_1fffd_skipic.o    romdata   0x01fffd    program   0x000001
@@ -220,66 +220,66 @@ Linker Map File - Created Sun Mar 10 00:39:11 2013
                               Program Memory Usage 
                                Start         End      
                            ---------   ---------      
-                            0x000000    0x0112f1      
+                            0x000000    0x011297      
                             0x01fff8    0x01fff8      
                             0x01fffa    0x01fffa      
                             0x01fffd    0x01fffd      
-            70389 out of 131072 program addresses used, program memory utilization is 53%
+            70299 out of 131072 program addresses used, program memory utilization is 53%
 
 
 
                               Symbols - Sorted by Name
                      Name    Address   Location    Storage File                     
                 ---------  ---------  ---------  --------- ---------                
-                  ARPInit   0x00e4b0    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\ARP.c
-            ARPIsResolved   0x00e77a    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\ARP.c
-               ARPProcess   0x00e4c8    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\ARP.c
-                   ARPPut   0x00e356    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\ARP.c
-               ARPResolve   0x00e6a0    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\ARP.c
+                  ARPInit   0x00e45a    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\ARP.c
+            ARPIsResolved   0x00e724    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\ARP.c
+               ARPProcess   0x00e472    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\ARP.c
+                   ARPPut   0x00e300    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\ARP.c
+               ARPResolve   0x00e64a    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\ARP.c
        BerkeleySocketInit   0x00780c    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\BerkeleyAPI.c
-                BusyUSART   0x010668    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\UART.c
-             ByteToBuffer   0x00dc6e    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\SPIEEPROM.c
-             CRC16_MODBUS   0x010d24    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\CRCMOD.c
+                BusyUSART   0x01060e    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\UART.c
+             ByteToBuffer   0x00dc18    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\SPIEEPROM.c
+             CRC16_MODBUS   0x010cca    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\CRCMOD.c
      CalcIPBufferChecksum   0x00ba84    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\ETH97J60.c
            CalcIPChecksum   0x00a108    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\Helpers.c
               CloseSocket   0x003f58    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\TCP.c
-               CloseUSART   0x010676    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\UART.c
-                    D10_1   0x0111d8    program     static C:\MCC18\src\traditional\delays\d10tcyx.asm
-                     D10x   0x0111d0    program     static C:\MCC18\src\traditional\delays\d10tcyx.asm
-                    D1K_1   0x011198    program     static C:\MCC18\src\traditional\delays\d1ktcyx.asm
-                     D1Kx   0x011196    program     static C:\MCC18\src\traditional\delays\d1ktcyx.asm
-             DataRdyUSART   0x010682    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\UART.c
-              Delay10TCYx   0x0111c8    program     extern C:\MCC18\src\traditional\delays\d10tcyx.asm
-              Delay1KTCYx   0x01118c    program     extern C:\MCC18\src\traditional\delays\d1ktcyx.asm
-           DisplayIPValue   0x00d16e    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\skipic.c
-             DoUARTConfig   0x00ee82    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
-              EraseSector   0x00da36    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\SPIEEPROM.c
-                 FXD1616U   0x011134    program     extern C:\MCC18\src\traditional\math\fxd1616u.c
-                 FXD3232U   0x011076    program     extern C:\MCC18\src\traditional\math\fxd3232u.c
-                 FXM1616U   0x010f0a    program     extern C:\MCC18\src\traditional\math\fxm1616u.asm
-                 FXM2424U   0x010f46    program     extern C:\MCC18\src\traditional\math\fxm2424u.asm
+               CloseUSART   0x01061c    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\UART.c
+                    D10_1   0x01117e    program     static C:\MCC18\src\traditional\delays\d10tcyx.asm
+                     D10x   0x011176    program     static C:\MCC18\src\traditional\delays\d10tcyx.asm
+                    D1K_1   0x01113e    program     static C:\MCC18\src\traditional\delays\d1ktcyx.asm
+                     D1Kx   0x01113c    program     static C:\MCC18\src\traditional\delays\d1ktcyx.asm
+             DataRdyUSART   0x010628    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\UART.c
+              Delay10TCYx   0x01116e    program     extern C:\MCC18\src\traditional\delays\d10tcyx.asm
+              Delay1KTCYx   0x011132    program     extern C:\MCC18\src\traditional\delays\d1ktcyx.asm
+           DisplayIPValue   0x00d118    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\skipic.c
+             DoUARTConfig   0x00ee28    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
+              EraseSector   0x00d9e0    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\SPIEEPROM.c
+                 FXD1616U   0x0110da    program     extern C:\MCC18\src\traditional\math\fxd1616u.c
+                 FXD3232U   0x01101c    program     extern C:\MCC18\src\traditional\math\fxd3232u.c
+                 FXM1616U   0x010eb0    program     extern C:\MCC18\src\traditional\math\fxm1616u.asm
+                 FXM2424U   0x010eec    program     extern C:\MCC18\src\traditional\math\fxm2424u.asm
        FindMatchingSocket   0x00370a    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\TCP.c
        FindMatchingSocket   0x00b110    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\UDP.c
         FormatNetBIOSName   0x00a2f2    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\Helpers.c
       GenerateRandomDWORD   0x0095a6    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\Helpers.c
       GetMaxSegSizeOption   0x003fe2    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\TCP.c
-              GetTickCopy   0x010bf4    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\Tick.c
+              GetTickCopy   0x010b9a    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\Tick.c
 HandlePossibleTCPDisconnection   0x0092e0    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\BerkeleyAPI.c
              HandleTCPSeg   0x004152    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\TCP.c
                   HighISR   0x00cec8    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\skipic.c
                HighVector   0x000008    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\skipic.c
-              IPGetHeader   0x00f356    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\IP.c
-              IPPutHeader   0x00f4ca    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\IP.c
-            IPSetRxBuffer   0x00f62e    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\IP.c
-            InitAppConfig   0x00d356    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\skipic.c
-          InitializeBoard   0x00d308    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\skipic.c
-                 LCDErase   0x00fa3a    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\LCDBlocking.c
-                  LCDInit   0x00f794    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\LCDBlocking.c
-                  LCDTest   0x0107aa    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_lcd.c
-                LCDUpdate   0x00f8ea    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\LCDBlocking.c
-                 LCDWrite   0x00f750    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\LCDBlocking.c
-                 LCD_init   0x010876    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_lcd.c
-                LCD_print   0x010886    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_lcd.c
+              IPGetHeader   0x00f2fc    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\IP.c
+              IPPutHeader   0x00f470    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\IP.c
+            IPSetRxBuffer   0x00f5d4    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\IP.c
+            InitAppConfig   0x00d300    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\skipic.c
+          InitializeBoard   0x00d2b2    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\skipic.c
+                 LCDErase   0x00f9e0    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\LCDBlocking.c
+                  LCDInit   0x00f73a    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\LCDBlocking.c
+                  LCDTest   0x010750    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_lcd.c
+                LCDUpdate   0x00f890    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\LCDBlocking.c
+                 LCDWrite   0x00f6f6    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\LCDBlocking.c
+                 LCD_init   0x01081c    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_lcd.c
+                LCD_print   0x01082c    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_lcd.c
                  LFSRRand   0x009512    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\Helpers.c
              LFSRSeedRand   0x00945a    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\Helpers.c
                    LowISR   0x00ce0e    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\skipic.c
@@ -328,20 +328,20 @@ HandlePossibleTCPDisconnection   0x0092e0    program     static D:\Work\datakrat
                MPFSPutEnd   0x006fe8    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\MPFS2.c
                  MPFSSeek   0x0068e8    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\MPFS2.c
      ROMStringToIPAddress   0x009a22    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\Helpers.c
- ReadBufferFromMainMemory   0x00dbc6    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\SPIEEPROM.c
+ ReadBufferFromMainMemory   0x00db70    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\SPIEEPROM.c
                ReadPHYReg   0x00c060    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\ETH97J60.c
-           ReadStringUART   0x0105e8    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\UART.c
-                ReadUSART   0x010696    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\UART.c
-              SPITransfer   0x00d606    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\SPIEEPROM.c
-            SaveAppConfig   0x00d55a    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\skipic.c
+           ReadStringUART   0x01058e    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\UART.c
+                ReadUSART   0x01063c    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\UART.c
+              SPITransfer   0x00d5b0    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\SPIEEPROM.c
+            SaveAppConfig   0x00d504    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\skipic.c
                   SendTCP   0x002f38    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\TCP.c
      SerializedMACAddress   0x00000e    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\skipic.c
-        StackApplications   0x010be2    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\StackTsk.c
-                StackInit   0x010a90    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\StackTsk.c
-                StackTask   0x010ad8    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\StackTsk.c
+        StackApplications   0x010b88    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\StackTsk.c
+                StackInit   0x010a36    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\StackTsk.c
+                StackTask   0x010a7e    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\StackTsk.c
         StringToIPAddress   0x0097ce    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\Helpers.c
-            SwapARPPacket   0x00e840    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\ARP.c
-             SwapIPHeader   0x00f668    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\IP.c
+            SwapARPPacket   0x00e7ea    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\ARP.c
+             SwapIPHeader   0x00f60e    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\IP.c
             SwapTCPHeader   0x003d28    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\TCP.c
                   SyncTCB   0x000142    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\TCP.c
               SyncTCBStub   0x0000a4    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\TCP.c
@@ -373,15 +373,15 @@ HandlePossibleTCPDisconnection   0x0092e0    program     static D:\Work\datakrat
              TCPPutString   0x000f14    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\TCP.c
                TCPRAMCopy   0x005878    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\TCP.c
             TCPRAMCopyROM   0x0059c2    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\TCP.c
-     TCPSocketInitializer   0x0110fe    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Alternative Configurations\TCPIPConfig ENC28J60 ETH97J60.h
+     TCPSocketInitializer   0x0110a4    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Alternative Configurations\TCPIPConfig ENC28J60 ETH97J60.h
                   TCPTick   0x002486    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\TCP.c
               TCPWasReset   0x0006d2    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\TCP.c
-TickConvertToMilliseconds   0x010ccc    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\Tick.c
-                  TickGet   0x010c1a    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\Tick.c
-            TickGetDiv256   0x010c30    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\Tick.c
-            TickGetDiv64K   0x010c7e    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\Tick.c
-                 TickInit   0x010be4    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\Tick.c
-               TickUpdate   0x010d10    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\Tick.c
+TickConvertToMilliseconds   0x010c72    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\Tick.c
+                  TickGet   0x010bc0    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\Tick.c
+            TickGetDiv256   0x010bd6    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\Tick.c
+            TickGetDiv64K   0x010c24    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\Tick.c
+                 TickInit   0x010b8a    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\Tick.c
+               TickUpdate   0x010cb6    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\Tick.c
                  UDPClose   0x00a5d4    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\UDP.c
                UDPDiscard   0x00aec6    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\UDP.c
                  UDPFlush   0x00aab0    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\UDP.c
@@ -400,52 +400,52 @@ TickConvertToMilliseconds   0x010ccc    program     extern D:\Work\datakrat\PIC-
            UDPSetRxBuffer   0x00a6a4    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\UDP.c
            UDPSetTxBuffer   0x00a636    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\UDP.c
                   UDPTask   0x00a428    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\UDP.c
-  WriteBufferToMainMemory   0x00db1e    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\SPIEEPROM.c
+  WriteBufferToMainMemory   0x00dac8    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\SPIEEPROM.c
               WritePHYReg   0x00c0ba    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\ETH97J60.c
-               WriteUSART   0x01069c    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\UART.c
-             XEEBeginRead   0x00d63e    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\SPIEEPROM.c
-            XEEBeginWrite   0x00d80a    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\SPIEEPROM.c
-               XEEEndRead   0x00d6d2    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\SPIEEPROM.c
-              XEEEndWrite   0x00d96c    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\SPIEEPROM.c
-                  XEEInit   0x00d622    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\SPIEEPROM.c
-                XEEIsBusy   0x00d9f2    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\SPIEEPROM.c
-                  XEERead   0x00d674    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\SPIEEPROM.c
-             XEEReadArray   0x00d6d8    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\SPIEEPROM.c
-                 XEEWrite   0x00d844    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\SPIEEPROM.c
-            XEEWriteArray   0x00d926    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\SPIEEPROM.c
-              _2jContinue   0x010512    program     static C:\MCC18\src\traditional\stdclib\memset.asm
-                   _2jEnd   0x0105a8    program     static C:\MCC18\src\traditional\stdclib\slenpgm.asm
-              _3jContinue   0x0104de    program     static C:\MCC18\src\traditional\stdclib\mcpyp2r.asm
-              _3jContinue   0x010442    program     static C:\MCC18\src\traditional\stdclib\mcmpp2r.asm
-                   _3jEnd   0x01051c    program     static C:\MCC18\src\traditional\stdclib\memset.asm
-              _4jContinue   0x01048a    program     static C:\MCC18\src\traditional\stdclib\memcpy.asm
-                   _4jEnd   0x0104e8    program     static C:\MCC18\src\traditional\stdclib\mcpyp2r.asm
-                   _4jEnd   0x01044c    program     static C:\MCC18\src\traditional\stdclib\mcmpp2r.asm
-                   _5jEnd   0x010494    program     static C:\MCC18\src\traditional\stdclib\memcpy.asm
-        _D10TCYXCODE_000A   0x0111d2    program     static C:\MCC18\src\traditional\delays\d10tcyx.asm
-        _D10TCYXCODE_000C   0x0111d4    program     static C:\MCC18\src\traditional\delays\d10tcyx.asm
-        _D10TCYXCODE_000E   0x0111d6    program     static C:\MCC18\src\traditional\delays\d10tcyx.asm
-        _D1KTCYXCODE_0010   0x01119c    program     static C:\MCC18\src\traditional\delays\d1ktcyx.asm
-        _D1KTCYXCODE_0016   0x0111a2    program     static C:\MCC18\src\traditional\delays\d1ktcyx.asm
-              _LCD_cp1251   0x010818    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_lcd.c
+               WriteUSART   0x010642    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\UART.c
+             XEEBeginRead   0x00d5e8    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\SPIEEPROM.c
+            XEEBeginWrite   0x00d7b4    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\SPIEEPROM.c
+               XEEEndRead   0x00d67c    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\SPIEEPROM.c
+              XEEEndWrite   0x00d916    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\SPIEEPROM.c
+                  XEEInit   0x00d5cc    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\SPIEEPROM.c
+                XEEIsBusy   0x00d99c    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\SPIEEPROM.c
+                  XEERead   0x00d61e    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\SPIEEPROM.c
+             XEEReadArray   0x00d682    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\SPIEEPROM.c
+                 XEEWrite   0x00d7ee    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\SPIEEPROM.c
+            XEEWriteArray   0x00d8d0    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\SPIEEPROM.c
+              _2jContinue   0x0104b8    program     static C:\MCC18\src\traditional\stdclib\memset.asm
+                   _2jEnd   0x01054e    program     static C:\MCC18\src\traditional\stdclib\slenpgm.asm
+              _3jContinue   0x010484    program     static C:\MCC18\src\traditional\stdclib\mcpyp2r.asm
+              _3jContinue   0x0103e8    program     static C:\MCC18\src\traditional\stdclib\mcmpp2r.asm
+                   _3jEnd   0x0104c2    program     static C:\MCC18\src\traditional\stdclib\memset.asm
+              _4jContinue   0x010430    program     static C:\MCC18\src\traditional\stdclib\memcpy.asm
+                   _4jEnd   0x01048e    program     static C:\MCC18\src\traditional\stdclib\mcpyp2r.asm
+                   _4jEnd   0x0103f2    program     static C:\MCC18\src\traditional\stdclib\mcmpp2r.asm
+                   _5jEnd   0x01043a    program     static C:\MCC18\src\traditional\stdclib\memcpy.asm
+        _D10TCYXCODE_000A   0x011178    program     static C:\MCC18\src\traditional\delays\d10tcyx.asm
+        _D10TCYXCODE_000C   0x01117a    program     static C:\MCC18\src\traditional\delays\d10tcyx.asm
+        _D10TCYXCODE_000E   0x01117c    program     static C:\MCC18\src\traditional\delays\d10tcyx.asm
+        _D1KTCYXCODE_0010   0x011142    program     static C:\MCC18\src\traditional\delays\d1ktcyx.asm
+        _D1KTCYXCODE_0016   0x011148    program     static C:\MCC18\src\traditional\delays\d1ktcyx.asm
+              _LCD_cp1251   0x0107be    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_lcd.c
            _LoadFATRecord   0x007012    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\MPFS2.c
                 _Validate   0x007786    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\MPFS2.c
-           ___do_lbl00002   0x010c12    program     static                          
-           ___do_lbl00002   0x00f800    program     static                          
-           ___do_lbl00003   0x00f800    program     static                          
-           ___do_lbl00003   0x010c16    program     static                          
-           ___do_lbl00004   0x010bf4    program     static                          
-           ___do_lbl00006   0x00f7ce    program     static                          
-           ___do_lbl00009   0x00f852    program     static                          
-           ___do_lbl00010   0x00f852    program     static                          
-           ___do_lbl00013   0x00f820    program     static                          
-           ___do_lbl00015   0x00f8d6    program     static                          
-           ___do_lbl00016   0x00f8d6    program     static                          
-           ___do_lbl00019   0x00f8a4    program     static                          
+           ___do_lbl00002   0x010bb8    program     static                          
+           ___do_lbl00002   0x00f7a6    program     static                          
+           ___do_lbl00003   0x00f7a6    program     static                          
+           ___do_lbl00003   0x010bbc    program     static                          
+           ___do_lbl00004   0x010b9a    program     static                          
+           ___do_lbl00006   0x00f774    program     static                          
+           ___do_lbl00009   0x00f7f8    program     static                          
+           ___do_lbl00010   0x00f7f8    program     static                          
+           ___do_lbl00013   0x00f7c6    program     static                          
+           ___do_lbl00015   0x00f87c    program     static                          
+           ___do_lbl00016   0x00f87c    program     static                          
+           ___do_lbl00019   0x00f84a    program     static                          
          ___else_lbl00022   0x00b63e    program     static                          
-          ___for_lbl00007   0x00f852    program     static                          
-          ___for_lbl00008   0x00f856    program     static                          
-          ___for_lbl00014   0x00f80c    program     static                          
+          ___for_lbl00007   0x00f7f8    program     static                          
+          ___for_lbl00008   0x00f7fc    program     static                          
+          ___for_lbl00014   0x00f7b2    program     static                          
           ___for_lbl00100   0x00a2ae    program     static                          
           ___for_lbl00101   0x00a2b4    program     static                          
           ___for_lbl00102   0x00a290    program     static                          
@@ -465,13 +465,13 @@ TickConvertToMilliseconds   0x010ccc    program     extern D:\Work\datakrat\PIC-
            ___if_lbl00034   0x00b7b2    program     static                          
        ___return_lbl00000   0x000004    program     static                          
        ___return_lbl00000   0x00b402    program     static                          
-       ___return_lbl00000   0x01115e    program     static                          
-       ___return_lbl00000   0x0110bc    program     static                          
-       ___return_lbl00000   0x00f78c    program     static                          
-       ___return_lbl00001   0x00f8d6    program     static                          
-       ___return_lbl00001   0x010c18    program     static                          
-       ___return_lbl00001   0x0111c6    program     static                          
-       ___return_lbl00002   0x011074    program     static                          
+       ___return_lbl00000   0x011104    program     static                          
+       ___return_lbl00000   0x011062    program     static                          
+       ___return_lbl00000   0x00f732    program     static                          
+       ___return_lbl00001   0x00f87c    program     static                          
+       ___return_lbl00001   0x010bbe    program     static                          
+       ___return_lbl00001   0x01116c    program     static                          
+       ___return_lbl00002   0x01101a    program     static                          
        ___return_lbl00002   0x00001c    program     static                          
        ___return_lbl00003   0x00000c    program     static                          
        ___return_lbl00009   0x0097ba    program     static                          
@@ -484,16 +484,16 @@ TickConvertToMilliseconds   0x010ccc    program     extern D:\Work\datakrat\PIC-
        ___return_lbl00099   0x00a2de    program     static                          
         ___while_lbl00001   0x00b312    program     static                          
         ___while_lbl00002   0x00b318    program     static                          
-        ___while_lbl00004   0x00f7dc    program     static                          
-        ___while_lbl00005   0x00f800    program     static                          
+        ___while_lbl00004   0x00f782    program     static                          
+        ___while_lbl00005   0x00f7a6    program     static                          
         ___while_lbl00010   0x009614    program     static                          
-        ___while_lbl00011   0x00f82e    program     static                          
+        ___while_lbl00011   0x00f7d4    program     static                          
         ___while_lbl00011   0x009772    program     static                          
-        ___while_lbl00012   0x00f852    program     static                          
+        ___while_lbl00012   0x00f7f8    program     static                          
         ___while_lbl00012   0x00961c    program     static                          
         ___while_lbl00013   0x009620    program     static                          
-        ___while_lbl00017   0x00f8b2    program     static                          
-        ___while_lbl00018   0x00f8d6    program     static                          
+        ___while_lbl00017   0x00f858    program     static                          
+        ___while_lbl00018   0x00f87c    program     static                          
         ___while_lbl00089   0x00bfce    program     static                          
         ___while_lbl00090   0x00c002    program     static                          
         ___while_lbl00092   0x00c012    program     static                          
@@ -506,37 +506,37 @@ TickConvertToMilliseconds   0x010ccc    program     extern D:\Work\datakrat\PIC-
                __config_1   0x01fffa    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\skipic.c
                __config_2   0x01fffd    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\skipic.c
                    __init   0x000006    program     extern C:\MCC18\src\traditional\stdclib\__init.c
-               __string_0   0x00fcda    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_bcp.c
-               __string_0   0x00fc88    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
-               __string_0   0x00fd4f    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_logger.c
-               __string_0   0x00fcca    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_readers.c
-               __string_0   0x00fac5    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\MPFS2.c
-               __string_1   0x00fcd3    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_bcp.c
-               __string_1   0x00fd22    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_logger.c
-               __string_1   0x00fc6c    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
-              __string_10   0x00fb84    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
-              __string_11   0x00fb57    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
-              __string_12   0x00fb4f    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
-              __string_13   0x00fb46    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
-              __string_14   0x00fb2b    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
-              __string_15   0x00fb18    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
-              __string_16   0x00fb00    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
-              __string_17   0x00fafd    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
-              __string_18   0x00faef    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
-              __string_19   0x00fade    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
-               __string_2   0x00fab4    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\skipic.c
-               __string_2   0x00fc51    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
-               __string_2   0x00fcd1    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_bcp.c
-               __string_2   0x00fd14    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_logger.c
-              __string_20   0x00facc    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
-               __string_3   0x00faaa    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\skipic.c
-               __string_3   0x00fc2f    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
-               __string_4   0x00fc09    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
-               __string_5   0x00fbe6    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
-               __string_6   0x00fbbd    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
-               __string_7   0x00fb92    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
-               __string_8   0x00fb8b    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
-               __string_9   0x00fb87    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
+               __string_0   0x00fc80    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_bcp.c
+               __string_0   0x00fc2e    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
+               __string_0   0x00fcf5    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_logger.c
+               __string_0   0x00fc70    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_readers.c
+               __string_0   0x00fa6b    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\MPFS2.c
+               __string_1   0x00fc79    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_bcp.c
+               __string_1   0x00fcc8    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_logger.c
+               __string_1   0x00fc12    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
+              __string_10   0x00fb2a    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
+              __string_11   0x00fafd    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
+              __string_12   0x00faf5    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
+              __string_13   0x00faec    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
+              __string_14   0x00fad1    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
+              __string_15   0x00fabe    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
+              __string_16   0x00faa6    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
+              __string_17   0x00faa3    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
+              __string_18   0x00fa95    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
+              __string_19   0x00fa84    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
+               __string_2   0x00fa5a    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\skipic.c
+               __string_2   0x00fbf7    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
+               __string_2   0x00fc77    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_bcp.c
+               __string_2   0x00fcba    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_logger.c
+              __string_20   0x00fa72    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
+               __string_3   0x00fa50    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\skipic.c
+               __string_3   0x00fbd5    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
+               __string_4   0x00fbaf    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
+               __string_5   0x00fb8c    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
+               __string_6   0x00fb63    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
+               __string_7   0x00fb38    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
+               __string_8   0x00fb31    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
+               __string_9   0x00fb2d    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
                __tmplbl_0   0x00967e    program     static                          
               __tmplbl_10   0x00b6d6    program     static                          
               __tmplbl_11   0x00b6d4    program     static                          
@@ -566,15 +566,15 @@ TickConvertToMilliseconds   0x010ccc    program     extern D:\Work\datakrat\PIC-
                __tmplbl_7   0x00b70e    program     static                          
                __tmplbl_8   0x00b6fa    program     static                          
                __tmplbl_9   0x00b6e4    program     static                          
-            __zero_memory   0x011160    program     extern C:\MCC18\src\traditional\proc\p18F97J60.asm
-                _do_cinit   0x010fd8    program     extern C:\MCC18\src\traditional\startup\c018i.c
+            __zero_memory   0x011106    program     extern C:\MCC18\src\traditional\proc\p18F97J60.asm
+                _do_cinit   0x010f7e    program     extern C:\MCC18\src\traditional\startup\c018i.c
                    _entry   0x000000    program     extern C:\MCC18\src\traditional\startup\c018i.c
-                   _false   0x0110b8    program     static                          
-                 _startup   0x0111ac    program     extern C:\MCC18\src\traditional\startup\c018i.c
+                   _false   0x01105e    program     static                          
+                 _startup   0x011152    program     extern C:\MCC18\src\traditional\startup\c018i.c
                    accept   0x007e62    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\BerkeleyAPI.c
-                     atoi   0x010e20    program     extern C:\MCC18\src\traditional\stdclib\atoi.asm
-                auchCRCHi   0x010034    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\CRCMOD.c
-                auchCRCLo   0x010134    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\CRCMOD.c
+                     atoi   0x010dc6    program     extern C:\MCC18\src\traditional\stdclib\atoi.asm
+                auchCRCHi   0x00ffda    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\CRCMOD.c
+                auchCRCLo   0x0100da    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\CRCMOD.c
                bcp_buffer   0x00c212    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_bcp.c
  bcp_determine_subscriber   0x00c800    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_bcp.c
                  bcp_init   0x00c7fe    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_bcp.c
@@ -585,107 +585,107 @@ TickConvertToMilliseconds   0x010ccc    program     extern D:\Work\datakrat\PIC-
        bcp_release_buffer   0x00c1da    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_bcp.c
           bcp_send_buffer   0x00c4fa    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_bcp.c
                      bind   0x0079c0    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\BerkeleyAPI.c
-                 bp_bzero   0x010a52    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\bit_pattern.c
-                    bp_cp   0x0109fa    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\bit_pattern.c
-                bp_setbit   0x010924    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\bit_pattern.c
-                bp_tstbit   0x01098c    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\bit_pattern.c
+                 bp_bzero   0x0109f8    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\bit_pattern.c
+                    bp_cp   0x0109a0    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\bit_pattern.c
+                bp_setbit   0x0108ca    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\bit_pattern.c
+                bp_tstbit   0x010932    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\bit_pattern.c
              btohexa_high   0x009e8e    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\Helpers.c
               btohexa_low   0x009ec4    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\Helpers.c
               closesocket   0x008fc4    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\BerkeleyAPI.c
-                compare_l   0x011182    program     static C:\MCC18\src\traditional\proc\p18F97J60.asm
+                compare_l   0x011128    program     static C:\MCC18\src\traditional\proc\p18F97J60.asm
                   connect   0x0081dc    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\BerkeleyAPI.c
-                copy_loop   0x01104a    program     static                          
-            copy_one_byte   0x011050    program     static                          
-                   cp1251   0x0110be    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_lcd.c
-                     done   0x011074    program     static                          
-             done_copying   0x01105e    program     static                          
-                  endloop   0x01115a    program     static                          
-            get_ajustible   0x00d2ce    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\skipic.c
+                copy_loop   0x010ff0    program     static                          
+            copy_one_byte   0x010ff6    program     static                          
+                   cp1251   0x011064    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_lcd.c
+                     done   0x01101a    program     static                          
+             done_copying   0x011004    program     static                          
+                  endloop   0x011100    program     static                          
+            get_ajustible   0x00d278    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\skipic.c
               gethostname   0x008eba    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\BerkeleyAPI.c
-                getsUSART   0x0106b2    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\UART.c
+                getsUSART   0x010658    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\UART.c
                   hexatob   0x009dd2    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\Helpers.c
-                     jEnd   0x010ede    program     static C:\MCC18\src\traditional\stdclib\atoi.asm
-                     jEnd   0x010454    program     static C:\MCC18\src\traditional\stdclib\mcmpp2r.asm
-                     jEnd   0x01049a    program     static C:\MCC18\src\traditional\stdclib\memcpy.asm
-                     jEnd   0x0104f0    program     static C:\MCC18\src\traditional\stdclib\mcpyp2r.asm
-                     jEnd   0x010524    program     static C:\MCC18\src\traditional\stdclib\memset.asm
-                     jEnd   0x010556    program     static C:\MCC18\src\traditional\stdclib\scpyp2r.asm
-                     jEnd   0x010572    program     static C:\MCC18\src\traditional\stdclib\strlen.asm
-                     jEnd   0x0105aa    program     static C:\MCC18\src\traditional\stdclib\slenpgm.asm
-                     jEnd   0x0105e6    program     static C:\MCC18\src\traditional\stdclib\strupr.asm
-                 jEndLoop   0x010ec6    program     static C:\MCC18\src\traditional\stdclib\atoi.asm
-                    jLoop   0x01047e    program     static C:\MCC18\src\traditional\stdclib\memcpy.asm
-                    jLoop   0x0104d2    program     static C:\MCC18\src\traditional\stdclib\mcpyp2r.asm
-                    jLoop   0x010506    program     static C:\MCC18\src\traditional\stdclib\memset.asm
-                    jLoop   0x010436    program     static C:\MCC18\src\traditional\stdclib\mcmpp2r.asm
-                    jLoop   0x01054c    program     static C:\MCC18\src\traditional\stdclib\scpyp2r.asm
-                    jLoop   0x010568    program     static C:\MCC18\src\traditional\stdclib\strlen.asm
-                    jLoop   0x010592    program     static C:\MCC18\src\traditional\stdclib\slenpgm.asm
-                    jLoop   0x010e78    program     static C:\MCC18\src\traditional\stdclib\atoi.asm
-                    jLoop   0x0105d2    program     static C:\MCC18\src\traditional\stdclib\strupr.asm
-                    jSkip   0x0105e2    program     static C:\MCC18\src\traditional\stdclib\strupr.asm
-                  jSkipWS   0x010e4e    program     static C:\MCC18\src\traditional\stdclib\atoi.asm
-                 jSkipWS1   0x010e60    program     static C:\MCC18\src\traditional\stdclib\atoi.asm
-                 jTstSign   0x010e64    program     static C:\MCC18\src\traditional\stdclib\atoi.asm
-                jTstSign1   0x010e70    program     static C:\MCC18\src\traditional\stdclib\atoi.asm
-                jTstSign2   0x010e76    program     static C:\MCC18\src\traditional\stdclib\atoi.asm
-                jTstSign3   0x010e78    program     static C:\MCC18\src\traditional\stdclib\atoi.asm
+                     jEnd   0x010e84    program     static C:\MCC18\src\traditional\stdclib\atoi.asm
+                     jEnd   0x0103fa    program     static C:\MCC18\src\traditional\stdclib\mcmpp2r.asm
+                     jEnd   0x010440    program     static C:\MCC18\src\traditional\stdclib\memcpy.asm
+                     jEnd   0x010496    program     static C:\MCC18\src\traditional\stdclib\mcpyp2r.asm
+                     jEnd   0x0104ca    program     static C:\MCC18\src\traditional\stdclib\memset.asm
+                     jEnd   0x0104fc    program     static C:\MCC18\src\traditional\stdclib\scpyp2r.asm
+                     jEnd   0x010518    program     static C:\MCC18\src\traditional\stdclib\strlen.asm
+                     jEnd   0x010550    program     static C:\MCC18\src\traditional\stdclib\slenpgm.asm
+                     jEnd   0x01058c    program     static C:\MCC18\src\traditional\stdclib\strupr.asm
+                 jEndLoop   0x010e6c    program     static C:\MCC18\src\traditional\stdclib\atoi.asm
+                    jLoop   0x010424    program     static C:\MCC18\src\traditional\stdclib\memcpy.asm
+                    jLoop   0x010478    program     static C:\MCC18\src\traditional\stdclib\mcpyp2r.asm
+                    jLoop   0x0104ac    program     static C:\MCC18\src\traditional\stdclib\memset.asm
+                    jLoop   0x0103dc    program     static C:\MCC18\src\traditional\stdclib\mcmpp2r.asm
+                    jLoop   0x0104f2    program     static C:\MCC18\src\traditional\stdclib\scpyp2r.asm
+                    jLoop   0x01050e    program     static C:\MCC18\src\traditional\stdclib\strlen.asm
+                    jLoop   0x010538    program     static C:\MCC18\src\traditional\stdclib\slenpgm.asm
+                    jLoop   0x010e1e    program     static C:\MCC18\src\traditional\stdclib\atoi.asm
+                    jLoop   0x010578    program     static C:\MCC18\src\traditional\stdclib\strupr.asm
+                    jSkip   0x010588    program     static C:\MCC18\src\traditional\stdclib\strupr.asm
+                  jSkipWS   0x010df4    program     static C:\MCC18\src\traditional\stdclib\atoi.asm
+                 jSkipWS1   0x010e06    program     static C:\MCC18\src\traditional\stdclib\atoi.asm
+                 jTstSign   0x010e0a    program     static C:\MCC18\src\traditional\stdclib\atoi.asm
+                jTstSign1   0x010e16    program     static C:\MCC18\src\traditional\stdclib\atoi.asm
+                jTstSign2   0x010e1c    program     static C:\MCC18\src\traditional\stdclib\atoi.asm
+                jTstSign3   0x010e1e    program     static C:\MCC18\src\traditional\stdclib\atoi.asm
           leftRotateDWORD   0x00a266    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\Helpers.c
                    listen   0x007b5e    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\BerkeleyAPI.c
-                     loop   0x011084    program     static                          
-                     loop   0x01113e    program     static                          
-                     loop   0x0111bc    program     static                          
-                   loop_h   0x01117a    program     static C:\MCC18\src\traditional\proc\p18F97J60.asm
-                   loop_l   0x011184    program     static C:\MCC18\src\traditional\proc\p18F97J60.asm
-              mail_reciev   0x00fe2c    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\post.c
-                mail_send   0x00ff2a    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\post.c
-           mail_subscribe   0x00fd7c    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\post.c
-         mail_unsubscribe   0x00fdd8    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\post.c
+                     loop   0x01102a    program     static                          
+                     loop   0x0110e4    program     static                          
+                     loop   0x011162    program     static                          
+                   loop_h   0x011120    program     static C:\MCC18\src\traditional\proc\p18F97J60.asm
+                   loop_l   0x01112a    program     static C:\MCC18\src\traditional\proc\p18F97J60.asm
+              mail_reciev   0x00fdd2    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\post.c
+                mail_send   0x00fed0    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\post.c
+           mail_subscribe   0x00fd22    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\post.c
+         mail_unsubscribe   0x00fd7e    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\post.c
                      main   0x00cf82    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\skipic.c
-            memcmppgm2ram   0x010418    program     extern C:\MCC18\src\traditional\stdclib\mcmpp2r.asm
-                   memcpy   0x010456    program     extern C:\MCC18\src\traditional\stdclib\memcpy.asm
-            memcpypgm2ram   0x0104ac    program     extern C:\MCC18\src\traditional\stdclib\mcpyp2r.asm
-                   memset   0x0104f2    program     extern C:\MCC18\src\traditional\stdclib\memset.asm
-           net_disconnect   0x0103be    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\net.c
-            net_getstatus   0x010410    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\net.c
-                 net_init   0x010234    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\net.c
-         net_recieve_data   0x0102b6    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\net.c
-            net_send_data   0x0103c4    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\net.c
-               putrsUSART   0x010750    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\UART.c
-                putsUSART   0x01070e    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\UART.c
-          readers_get_uid   0x00e19e    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_readers.c
-        readers_getstatus   0x00e2ec    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_readers.c
-             readers_init   0x00e054    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_readers.c
-              readers_isr   0x00e0a2    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_readers.c
-           readers_module   0x00e2f4    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_readers.c
-   readers_process_buffer   0x00deb6    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_readers.c
+            memcmppgm2ram   0x0103be    program     extern C:\MCC18\src\traditional\stdclib\mcmpp2r.asm
+                   memcpy   0x0103fc    program     extern C:\MCC18\src\traditional\stdclib\memcpy.asm
+            memcpypgm2ram   0x010452    program     extern C:\MCC18\src\traditional\stdclib\mcpyp2r.asm
+                   memset   0x010498    program     extern C:\MCC18\src\traditional\stdclib\memset.asm
+           net_disconnect   0x010364    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\net.c
+            net_getstatus   0x0103b6    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\net.c
+                 net_init   0x0101da    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\net.c
+         net_recieve_data   0x01025c    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\net.c
+            net_send_data   0x01036a    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\net.c
+               putrsUSART   0x0106f6    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\UART.c
+                putsUSART   0x0106b4    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\UART.c
+          readers_get_uid   0x00e148    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_readers.c
+        readers_getstatus   0x00e296    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_readers.c
+             readers_init   0x00dffe    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_readers.c
+              readers_isr   0x00e04c    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_readers.c
+           readers_module   0x00e29e    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_readers.c
+   readers_process_buffer   0x00de60    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_readers.c
                      recv   0x008a6c    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\BerkeleyAPI.c
                  recvfrom   0x008bc0    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\BerkeleyAPI.c
                      send   0x008584    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\BerkeleyAPI.c
                    sendto   0x0085d4    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\BerkeleyAPI.c
-               slog_flush   0x00ed32    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_logger.c
-              slog_format   0x00e972    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_logger.c
-                slog_gets   0x00ec3c    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_logger.c
-                slog_init   0x00e918    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_logger.c
-         slog_need_format   0x00ea02    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_logger.c
-               slog_putrs   0x00eb54    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_logger.c
-                slog_puts   0x00ea86    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_logger.c
+               slog_flush   0x00ecd8    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_logger.c
+              slog_format   0x00e91c    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_logger.c
+                slog_gets   0x00ebe2    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_logger.c
+                slog_init   0x00e8c2    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_logger.c
+         slog_need_format   0x00e9a8    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_logger.c
+               slog_putrs   0x00eafa    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_logger.c
+                slog_puts   0x00ea2c    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_logger.c
                    socket   0x007890    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\BerkeleyAPI.c
-            strcpypgm2ram   0x010526    program     extern C:\MCC18\src\traditional\stdclib\scpyp2r.asm
+            strcpypgm2ram   0x0104cc    program     extern C:\MCC18\src\traditional\stdclib\scpyp2r.asm
            stricmppgm2ram   0x009ef8    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\Helpers.c
-                   strlen   0x010558    program     extern C:\MCC18\src\traditional\stdclib\strlen.asm
-                strlenpgm   0x010574    program     extern C:\MCC18\src\traditional\stdclib\slenpgm.asm
+                   strlen   0x0104fe    program     extern C:\MCC18\src\traditional\stdclib\strlen.asm
+                strlenpgm   0x01051a    program     extern C:\MCC18\src\traditional\stdclib\slenpgm.asm
                   strnchr   0x00a384    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\Helpers.c
-                   strupr   0x0105be    program     extern C:\MCC18\src\traditional\stdclib\strupr.asm
+                   strupr   0x010564    program     extern C:\MCC18\src\traditional\stdclib\strupr.asm
                     swapl   0x00a062    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\Helpers.c
                     swaps   0x00a00e    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\Helpers.c
-                     test   0x010ff2    program     static                          
+                     test   0x010f98    program     static                          
                     uitoa   0x009c86    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\Helpers.c
-             w34_get_even   0x00dd40    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_readers.c
-            w34_get_hdata   0x00de16    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_readers.c
-            w34_get_ldata   0x00dd76    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_readers.c
-              w34_get_odd   0x00dd0c    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_readers.c
-               zero_block   0x01117a    program     static C:\MCC18\src\traditional\proc\p18F97J60.asm
+             w34_get_even   0x00dcea    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_readers.c
+            w34_get_hdata   0x00ddc0    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_readers.c
+            w34_get_ldata   0x00dd20    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_readers.c
+              w34_get_odd   0x00dcb6    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_readers.c
+               zero_block   0x011120    program     static C:\MCC18\src\traditional\proc\p18F97J60.asm
                    ADCON0   0x000fc2       data     extern C:\MCC18\src\traditional\proc\p18F97J60.asm
                ADCON0bits   0x000fc2       data     extern C:\MCC18\src\traditional\proc\p18F97J60.asm
                    ADCON1   0x000fc1       data     extern C:\MCC18\src\traditional\proc\p18F97J60.asm
@@ -1442,234 +1442,234 @@ HandlePossibleTCPDisconnection   0x0092e0    program     static D:\Work\datakrat
                    LowISR   0x00ce0e    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\skipic.c
                   HighISR   0x00cec8    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\skipic.c
                      main   0x00cf82    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\skipic.c
-           DisplayIPValue   0x00d16e    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\skipic.c
-            get_ajustible   0x00d2ce    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\skipic.c
-          InitializeBoard   0x00d308    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\skipic.c
-            InitAppConfig   0x00d356    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\skipic.c
-            SaveAppConfig   0x00d55a    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\skipic.c
-              SPITransfer   0x00d606    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\SPIEEPROM.c
-                  XEEInit   0x00d622    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\SPIEEPROM.c
-             XEEBeginRead   0x00d63e    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\SPIEEPROM.c
-                  XEERead   0x00d674    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\SPIEEPROM.c
-               XEEEndRead   0x00d6d2    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\SPIEEPROM.c
-             XEEReadArray   0x00d6d8    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\SPIEEPROM.c
-            XEEBeginWrite   0x00d80a    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\SPIEEPROM.c
-                 XEEWrite   0x00d844    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\SPIEEPROM.c
-            XEEWriteArray   0x00d926    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\SPIEEPROM.c
-              XEEEndWrite   0x00d96c    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\SPIEEPROM.c
-                XEEIsBusy   0x00d9f2    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\SPIEEPROM.c
-              EraseSector   0x00da36    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\SPIEEPROM.c
-  WriteBufferToMainMemory   0x00db1e    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\SPIEEPROM.c
- ReadBufferFromMainMemory   0x00dbc6    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\SPIEEPROM.c
-             ByteToBuffer   0x00dc6e    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\SPIEEPROM.c
-              w34_get_odd   0x00dd0c    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_readers.c
-             w34_get_even   0x00dd40    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_readers.c
-            w34_get_ldata   0x00dd76    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_readers.c
-            w34_get_hdata   0x00de16    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_readers.c
-   readers_process_buffer   0x00deb6    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_readers.c
-             readers_init   0x00e054    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_readers.c
-              readers_isr   0x00e0a2    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_readers.c
-          readers_get_uid   0x00e19e    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_readers.c
-        readers_getstatus   0x00e2ec    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_readers.c
-           readers_module   0x00e2f4    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_readers.c
-                   ARPPut   0x00e356    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\ARP.c
-                  ARPInit   0x00e4b0    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\ARP.c
-               ARPProcess   0x00e4c8    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\ARP.c
-               ARPResolve   0x00e6a0    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\ARP.c
-            ARPIsResolved   0x00e77a    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\ARP.c
-            SwapARPPacket   0x00e840    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\ARP.c
-                slog_init   0x00e918    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_logger.c
-              slog_format   0x00e972    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_logger.c
-         slog_need_format   0x00ea02    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_logger.c
-                slog_puts   0x00ea86    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_logger.c
-               slog_putrs   0x00eb54    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_logger.c
-                slog_gets   0x00ec3c    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_logger.c
-               slog_flush   0x00ed32    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_logger.c
-             DoUARTConfig   0x00ee82    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
-              IPGetHeader   0x00f356    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\IP.c
-              IPPutHeader   0x00f4ca    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\IP.c
-            IPSetRxBuffer   0x00f62e    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\IP.c
-             SwapIPHeader   0x00f668    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\IP.c
-                 LCDWrite   0x00f750    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\LCDBlocking.c
-       ___return_lbl00000   0x00f78c    program     static                          
-                  LCDInit   0x00f794    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\LCDBlocking.c
-           ___do_lbl00006   0x00f7ce    program     static                          
-        ___while_lbl00004   0x00f7dc    program     static                          
-           ___do_lbl00002   0x00f800    program     static                          
-           ___do_lbl00003   0x00f800    program     static                          
-        ___while_lbl00005   0x00f800    program     static                          
-          ___for_lbl00014   0x00f80c    program     static                          
-           ___do_lbl00013   0x00f820    program     static                          
-        ___while_lbl00011   0x00f82e    program     static                          
-        ___while_lbl00012   0x00f852    program     static                          
-          ___for_lbl00007   0x00f852    program     static                          
-           ___do_lbl00009   0x00f852    program     static                          
-           ___do_lbl00010   0x00f852    program     static                          
-          ___for_lbl00008   0x00f856    program     static                          
-           ___do_lbl00019   0x00f8a4    program     static                          
-        ___while_lbl00017   0x00f8b2    program     static                          
-           ___do_lbl00016   0x00f8d6    program     static                          
-        ___while_lbl00018   0x00f8d6    program     static                          
-       ___return_lbl00001   0x00f8d6    program     static                          
-           ___do_lbl00015   0x00f8d6    program     static                          
-                LCDUpdate   0x00f8ea    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\LCDBlocking.c
-                 LCDErase   0x00fa3a    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\LCDBlocking.c
-               __string_3   0x00faaa    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\skipic.c
-               __string_2   0x00fab4    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\skipic.c
-               __string_0   0x00fac5    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\MPFS2.c
-              __string_20   0x00facc    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
-              __string_19   0x00fade    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
-              __string_18   0x00faef    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
-              __string_17   0x00fafd    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
-              __string_16   0x00fb00    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
-              __string_15   0x00fb18    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
-              __string_14   0x00fb2b    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
-              __string_13   0x00fb46    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
-              __string_12   0x00fb4f    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
-              __string_11   0x00fb57    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
-              __string_10   0x00fb84    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
-               __string_9   0x00fb87    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
-               __string_8   0x00fb8b    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
-               __string_7   0x00fb92    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
-               __string_6   0x00fbbd    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
-               __string_5   0x00fbe6    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
-               __string_4   0x00fc09    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
-               __string_3   0x00fc2f    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
-               __string_2   0x00fc51    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
-               __string_1   0x00fc6c    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
-               __string_0   0x00fc88    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
-               __string_0   0x00fcca    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_readers.c
-               __string_2   0x00fcd1    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_bcp.c
-               __string_1   0x00fcd3    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_bcp.c
-               __string_0   0x00fcda    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_bcp.c
-               __string_2   0x00fd14    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_logger.c
-               __string_1   0x00fd22    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_logger.c
-               __string_0   0x00fd4f    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_logger.c
-           mail_subscribe   0x00fd7c    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\post.c
-         mail_unsubscribe   0x00fdd8    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\post.c
-              mail_reciev   0x00fe2c    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\post.c
-                mail_send   0x00ff2a    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\post.c
-                auchCRCHi   0x010034    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\CRCMOD.c
-                auchCRCLo   0x010134    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\CRCMOD.c
-                 net_init   0x010234    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\net.c
-         net_recieve_data   0x0102b6    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\net.c
-           net_disconnect   0x0103be    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\net.c
-            net_send_data   0x0103c4    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\net.c
-            net_getstatus   0x010410    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\net.c
-            memcmppgm2ram   0x010418    program     extern C:\MCC18\src\traditional\stdclib\mcmpp2r.asm
-                    jLoop   0x010436    program     static C:\MCC18\src\traditional\stdclib\mcmpp2r.asm
-              _3jContinue   0x010442    program     static C:\MCC18\src\traditional\stdclib\mcmpp2r.asm
-                   _4jEnd   0x01044c    program     static C:\MCC18\src\traditional\stdclib\mcmpp2r.asm
-                     jEnd   0x010454    program     static C:\MCC18\src\traditional\stdclib\mcmpp2r.asm
-                   memcpy   0x010456    program     extern C:\MCC18\src\traditional\stdclib\memcpy.asm
-                    jLoop   0x01047e    program     static C:\MCC18\src\traditional\stdclib\memcpy.asm
-              _4jContinue   0x01048a    program     static C:\MCC18\src\traditional\stdclib\memcpy.asm
-                   _5jEnd   0x010494    program     static C:\MCC18\src\traditional\stdclib\memcpy.asm
-                     jEnd   0x01049a    program     static C:\MCC18\src\traditional\stdclib\memcpy.asm
-            memcpypgm2ram   0x0104ac    program     extern C:\MCC18\src\traditional\stdclib\mcpyp2r.asm
-                    jLoop   0x0104d2    program     static C:\MCC18\src\traditional\stdclib\mcpyp2r.asm
-              _3jContinue   0x0104de    program     static C:\MCC18\src\traditional\stdclib\mcpyp2r.asm
-                   _4jEnd   0x0104e8    program     static C:\MCC18\src\traditional\stdclib\mcpyp2r.asm
-                     jEnd   0x0104f0    program     static C:\MCC18\src\traditional\stdclib\mcpyp2r.asm
-                   memset   0x0104f2    program     extern C:\MCC18\src\traditional\stdclib\memset.asm
-                    jLoop   0x010506    program     static C:\MCC18\src\traditional\stdclib\memset.asm
-              _2jContinue   0x010512    program     static C:\MCC18\src\traditional\stdclib\memset.asm
-                   _3jEnd   0x01051c    program     static C:\MCC18\src\traditional\stdclib\memset.asm
-                     jEnd   0x010524    program     static C:\MCC18\src\traditional\stdclib\memset.asm
-            strcpypgm2ram   0x010526    program     extern C:\MCC18\src\traditional\stdclib\scpyp2r.asm
-                    jLoop   0x01054c    program     static C:\MCC18\src\traditional\stdclib\scpyp2r.asm
-                     jEnd   0x010556    program     static C:\MCC18\src\traditional\stdclib\scpyp2r.asm
-                   strlen   0x010558    program     extern C:\MCC18\src\traditional\stdclib\strlen.asm
-                    jLoop   0x010568    program     static C:\MCC18\src\traditional\stdclib\strlen.asm
-                     jEnd   0x010572    program     static C:\MCC18\src\traditional\stdclib\strlen.asm
-                strlenpgm   0x010574    program     extern C:\MCC18\src\traditional\stdclib\slenpgm.asm
-                    jLoop   0x010592    program     static C:\MCC18\src\traditional\stdclib\slenpgm.asm
-                   _2jEnd   0x0105a8    program     static C:\MCC18\src\traditional\stdclib\slenpgm.asm
-                     jEnd   0x0105aa    program     static C:\MCC18\src\traditional\stdclib\slenpgm.asm
-                   strupr   0x0105be    program     extern C:\MCC18\src\traditional\stdclib\strupr.asm
-                    jLoop   0x0105d2    program     static C:\MCC18\src\traditional\stdclib\strupr.asm
-                    jSkip   0x0105e2    program     static C:\MCC18\src\traditional\stdclib\strupr.asm
-                     jEnd   0x0105e6    program     static C:\MCC18\src\traditional\stdclib\strupr.asm
-           ReadStringUART   0x0105e8    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\UART.c
-                BusyUSART   0x010668    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\UART.c
-               CloseUSART   0x010676    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\UART.c
-             DataRdyUSART   0x010682    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\UART.c
-                ReadUSART   0x010696    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\UART.c
-               WriteUSART   0x01069c    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\UART.c
-                getsUSART   0x0106b2    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\UART.c
-                putsUSART   0x01070e    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\UART.c
-               putrsUSART   0x010750    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\UART.c
-                  LCDTest   0x0107aa    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_lcd.c
-              _LCD_cp1251   0x010818    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_lcd.c
-                 LCD_init   0x010876    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_lcd.c
-                LCD_print   0x010886    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_lcd.c
-                bp_setbit   0x010924    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\bit_pattern.c
-                bp_tstbit   0x01098c    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\bit_pattern.c
-                    bp_cp   0x0109fa    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\bit_pattern.c
-                 bp_bzero   0x010a52    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\bit_pattern.c
-                StackInit   0x010a90    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\StackTsk.c
-                StackTask   0x010ad8    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\StackTsk.c
-        StackApplications   0x010be2    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\StackTsk.c
-                 TickInit   0x010be4    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\Tick.c
-              GetTickCopy   0x010bf4    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\Tick.c
-           ___do_lbl00004   0x010bf4    program     static                          
-           ___do_lbl00002   0x010c12    program     static                          
-           ___do_lbl00003   0x010c16    program     static                          
-       ___return_lbl00001   0x010c18    program     static                          
-                  TickGet   0x010c1a    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\Tick.c
-            TickGetDiv256   0x010c30    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\Tick.c
-            TickGetDiv64K   0x010c7e    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\Tick.c
-TickConvertToMilliseconds   0x010ccc    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\Tick.c
-               TickUpdate   0x010d10    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\Tick.c
-             CRC16_MODBUS   0x010d24    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\CRCMOD.c
-                     atoi   0x010e20    program     extern C:\MCC18\src\traditional\stdclib\atoi.asm
-                  jSkipWS   0x010e4e    program     static C:\MCC18\src\traditional\stdclib\atoi.asm
-                 jSkipWS1   0x010e60    program     static C:\MCC18\src\traditional\stdclib\atoi.asm
-                 jTstSign   0x010e64    program     static C:\MCC18\src\traditional\stdclib\atoi.asm
-                jTstSign1   0x010e70    program     static C:\MCC18\src\traditional\stdclib\atoi.asm
-                jTstSign2   0x010e76    program     static C:\MCC18\src\traditional\stdclib\atoi.asm
-                jTstSign3   0x010e78    program     static C:\MCC18\src\traditional\stdclib\atoi.asm
-                    jLoop   0x010e78    program     static C:\MCC18\src\traditional\stdclib\atoi.asm
-                 jEndLoop   0x010ec6    program     static C:\MCC18\src\traditional\stdclib\atoi.asm
-                     jEnd   0x010ede    program     static C:\MCC18\src\traditional\stdclib\atoi.asm
-                 FXM1616U   0x010f0a    program     extern C:\MCC18\src\traditional\math\fxm1616u.asm
-                 FXM2424U   0x010f46    program     extern C:\MCC18\src\traditional\math\fxm2424u.asm
-                _do_cinit   0x010fd8    program     extern C:\MCC18\src\traditional\startup\c018i.c
-                     test   0x010ff2    program     static                          
-                copy_loop   0x01104a    program     static                          
-            copy_one_byte   0x011050    program     static                          
-             done_copying   0x01105e    program     static                          
-       ___return_lbl00002   0x011074    program     static                          
-                     done   0x011074    program     static                          
-                 FXD3232U   0x011076    program     extern C:\MCC18\src\traditional\math\fxd3232u.c
-                     loop   0x011084    program     static                          
-                   _false   0x0110b8    program     static                          
-       ___return_lbl00000   0x0110bc    program     static                          
-                   cp1251   0x0110be    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_lcd.c
-     TCPSocketInitializer   0x0110fe    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Alternative Configurations\TCPIPConfig ENC28J60 ETH97J60.h
-                 FXD1616U   0x011134    program     extern C:\MCC18\src\traditional\math\fxd1616u.c
-                     loop   0x01113e    program     static                          
-                  endloop   0x01115a    program     static                          
-       ___return_lbl00000   0x01115e    program     static                          
-            __zero_memory   0x011160    program     extern C:\MCC18\src\traditional\proc\p18F97J60.asm
-               zero_block   0x01117a    program     static C:\MCC18\src\traditional\proc\p18F97J60.asm
-                   loop_h   0x01117a    program     static C:\MCC18\src\traditional\proc\p18F97J60.asm
-                compare_l   0x011182    program     static C:\MCC18\src\traditional\proc\p18F97J60.asm
-                   loop_l   0x011184    program     static C:\MCC18\src\traditional\proc\p18F97J60.asm
-              Delay1KTCYx   0x01118c    program     extern C:\MCC18\src\traditional\delays\d1ktcyx.asm
-                     D1Kx   0x011196    program     static C:\MCC18\src\traditional\delays\d1ktcyx.asm
-                    D1K_1   0x011198    program     static C:\MCC18\src\traditional\delays\d1ktcyx.asm
-        _D1KTCYXCODE_0010   0x01119c    program     static C:\MCC18\src\traditional\delays\d1ktcyx.asm
-        _D1KTCYXCODE_0016   0x0111a2    program     static C:\MCC18\src\traditional\delays\d1ktcyx.asm
-                 _startup   0x0111ac    program     extern C:\MCC18\src\traditional\startup\c018i.c
-                     loop   0x0111bc    program     static                          
-       ___return_lbl00001   0x0111c6    program     static                          
-              Delay10TCYx   0x0111c8    program     extern C:\MCC18\src\traditional\delays\d10tcyx.asm
-                     D10x   0x0111d0    program     static C:\MCC18\src\traditional\delays\d10tcyx.asm
-        _D10TCYXCODE_000A   0x0111d2    program     static C:\MCC18\src\traditional\delays\d10tcyx.asm
-        _D10TCYXCODE_000C   0x0111d4    program     static C:\MCC18\src\traditional\delays\d10tcyx.asm
-        _D10TCYXCODE_000E   0x0111d6    program     static C:\MCC18\src\traditional\delays\d10tcyx.asm
-                    D10_1   0x0111d8    program     static C:\MCC18\src\traditional\delays\d10tcyx.asm
+           DisplayIPValue   0x00d118    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\skipic.c
+            get_ajustible   0x00d278    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\skipic.c
+          InitializeBoard   0x00d2b2    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\skipic.c
+            InitAppConfig   0x00d300    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\skipic.c
+            SaveAppConfig   0x00d504    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\skipic.c
+              SPITransfer   0x00d5b0    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\SPIEEPROM.c
+                  XEEInit   0x00d5cc    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\SPIEEPROM.c
+             XEEBeginRead   0x00d5e8    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\SPIEEPROM.c
+                  XEERead   0x00d61e    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\SPIEEPROM.c
+               XEEEndRead   0x00d67c    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\SPIEEPROM.c
+             XEEReadArray   0x00d682    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\SPIEEPROM.c
+            XEEBeginWrite   0x00d7b4    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\SPIEEPROM.c
+                 XEEWrite   0x00d7ee    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\SPIEEPROM.c
+            XEEWriteArray   0x00d8d0    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\SPIEEPROM.c
+              XEEEndWrite   0x00d916    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\SPIEEPROM.c
+                XEEIsBusy   0x00d99c    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\SPIEEPROM.c
+              EraseSector   0x00d9e0    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\SPIEEPROM.c
+  WriteBufferToMainMemory   0x00dac8    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\SPIEEPROM.c
+ ReadBufferFromMainMemory   0x00db70    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\SPIEEPROM.c
+             ByteToBuffer   0x00dc18    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\SPIEEPROM.c
+              w34_get_odd   0x00dcb6    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_readers.c
+             w34_get_even   0x00dcea    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_readers.c
+            w34_get_ldata   0x00dd20    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_readers.c
+            w34_get_hdata   0x00ddc0    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_readers.c
+   readers_process_buffer   0x00de60    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_readers.c
+             readers_init   0x00dffe    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_readers.c
+              readers_isr   0x00e04c    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_readers.c
+          readers_get_uid   0x00e148    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_readers.c
+        readers_getstatus   0x00e296    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_readers.c
+           readers_module   0x00e29e    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_readers.c
+                   ARPPut   0x00e300    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\ARP.c
+                  ARPInit   0x00e45a    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\ARP.c
+               ARPProcess   0x00e472    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\ARP.c
+               ARPResolve   0x00e64a    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\ARP.c
+            ARPIsResolved   0x00e724    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\ARP.c
+            SwapARPPacket   0x00e7ea    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\ARP.c
+                slog_init   0x00e8c2    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_logger.c
+              slog_format   0x00e91c    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_logger.c
+         slog_need_format   0x00e9a8    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_logger.c
+                slog_puts   0x00ea2c    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_logger.c
+               slog_putrs   0x00eafa    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_logger.c
+                slog_gets   0x00ebe2    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_logger.c
+               slog_flush   0x00ecd8    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_logger.c
+             DoUARTConfig   0x00ee28    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
+              IPGetHeader   0x00f2fc    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\IP.c
+              IPPutHeader   0x00f470    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\IP.c
+            IPSetRxBuffer   0x00f5d4    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\IP.c
+             SwapIPHeader   0x00f60e    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\IP.c
+                 LCDWrite   0x00f6f6    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\LCDBlocking.c
+       ___return_lbl00000   0x00f732    program     static                          
+                  LCDInit   0x00f73a    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\LCDBlocking.c
+           ___do_lbl00006   0x00f774    program     static                          
+        ___while_lbl00004   0x00f782    program     static                          
+           ___do_lbl00002   0x00f7a6    program     static                          
+           ___do_lbl00003   0x00f7a6    program     static                          
+        ___while_lbl00005   0x00f7a6    program     static                          
+          ___for_lbl00014   0x00f7b2    program     static                          
+           ___do_lbl00013   0x00f7c6    program     static                          
+        ___while_lbl00011   0x00f7d4    program     static                          
+        ___while_lbl00012   0x00f7f8    program     static                          
+          ___for_lbl00007   0x00f7f8    program     static                          
+           ___do_lbl00009   0x00f7f8    program     static                          
+           ___do_lbl00010   0x00f7f8    program     static                          
+          ___for_lbl00008   0x00f7fc    program     static                          
+           ___do_lbl00019   0x00f84a    program     static                          
+        ___while_lbl00017   0x00f858    program     static                          
+           ___do_lbl00016   0x00f87c    program     static                          
+        ___while_lbl00018   0x00f87c    program     static                          
+       ___return_lbl00001   0x00f87c    program     static                          
+           ___do_lbl00015   0x00f87c    program     static                          
+                LCDUpdate   0x00f890    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\LCDBlocking.c
+                 LCDErase   0x00f9e0    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\LCDBlocking.c
+               __string_3   0x00fa50    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\skipic.c
+               __string_2   0x00fa5a    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\skipic.c
+               __string_0   0x00fa6b    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\MPFS2.c
+              __string_20   0x00fa72    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
+              __string_19   0x00fa84    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
+              __string_18   0x00fa95    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
+              __string_17   0x00faa3    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
+              __string_16   0x00faa6    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
+              __string_15   0x00fabe    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
+              __string_14   0x00fad1    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
+              __string_13   0x00faec    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
+              __string_12   0x00faf5    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
+              __string_11   0x00fafd    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
+              __string_10   0x00fb2a    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
+               __string_9   0x00fb2d    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
+               __string_8   0x00fb31    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
+               __string_7   0x00fb38    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
+               __string_6   0x00fb63    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
+               __string_5   0x00fb8c    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
+               __string_4   0x00fbaf    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
+               __string_3   0x00fbd5    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
+               __string_2   0x00fbf7    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
+               __string_1   0x00fc12    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
+               __string_0   0x00fc2e    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\UARTConfig.c
+               __string_0   0x00fc70    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_readers.c
+               __string_2   0x00fc77    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_bcp.c
+               __string_1   0x00fc79    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_bcp.c
+               __string_0   0x00fc80    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_bcp.c
+               __string_2   0x00fcba    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_logger.c
+               __string_1   0x00fcc8    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_logger.c
+               __string_0   0x00fcf5    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_logger.c
+           mail_subscribe   0x00fd22    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\post.c
+         mail_unsubscribe   0x00fd7e    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\post.c
+              mail_reciev   0x00fdd2    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\post.c
+                mail_send   0x00fed0    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\post.c
+                auchCRCHi   0x00ffda    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\CRCMOD.c
+                auchCRCLo   0x0100da    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\CRCMOD.c
+                 net_init   0x0101da    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\net.c
+         net_recieve_data   0x01025c    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\net.c
+           net_disconnect   0x010364    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\net.c
+            net_send_data   0x01036a    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\net.c
+            net_getstatus   0x0103b6    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\net.c
+            memcmppgm2ram   0x0103be    program     extern C:\MCC18\src\traditional\stdclib\mcmpp2r.asm
+                    jLoop   0x0103dc    program     static C:\MCC18\src\traditional\stdclib\mcmpp2r.asm
+              _3jContinue   0x0103e8    program     static C:\MCC18\src\traditional\stdclib\mcmpp2r.asm
+                   _4jEnd   0x0103f2    program     static C:\MCC18\src\traditional\stdclib\mcmpp2r.asm
+                     jEnd   0x0103fa    program     static C:\MCC18\src\traditional\stdclib\mcmpp2r.asm
+                   memcpy   0x0103fc    program     extern C:\MCC18\src\traditional\stdclib\memcpy.asm
+                    jLoop   0x010424    program     static C:\MCC18\src\traditional\stdclib\memcpy.asm
+              _4jContinue   0x010430    program     static C:\MCC18\src\traditional\stdclib\memcpy.asm
+                   _5jEnd   0x01043a    program     static C:\MCC18\src\traditional\stdclib\memcpy.asm
+                     jEnd   0x010440    program     static C:\MCC18\src\traditional\stdclib\memcpy.asm
+            memcpypgm2ram   0x010452    program     extern C:\MCC18\src\traditional\stdclib\mcpyp2r.asm
+                    jLoop   0x010478    program     static C:\MCC18\src\traditional\stdclib\mcpyp2r.asm
+              _3jContinue   0x010484    program     static C:\MCC18\src\traditional\stdclib\mcpyp2r.asm
+                   _4jEnd   0x01048e    program     static C:\MCC18\src\traditional\stdclib\mcpyp2r.asm
+                     jEnd   0x010496    program     static C:\MCC18\src\traditional\stdclib\mcpyp2r.asm
+                   memset   0x010498    program     extern C:\MCC18\src\traditional\stdclib\memset.asm
+                    jLoop   0x0104ac    program     static C:\MCC18\src\traditional\stdclib\memset.asm
+              _2jContinue   0x0104b8    program     static C:\MCC18\src\traditional\stdclib\memset.asm
+                   _3jEnd   0x0104c2    program     static C:\MCC18\src\traditional\stdclib\memset.asm
+                     jEnd   0x0104ca    program     static C:\MCC18\src\traditional\stdclib\memset.asm
+            strcpypgm2ram   0x0104cc    program     extern C:\MCC18\src\traditional\stdclib\scpyp2r.asm
+                    jLoop   0x0104f2    program     static C:\MCC18\src\traditional\stdclib\scpyp2r.asm
+                     jEnd   0x0104fc    program     static C:\MCC18\src\traditional\stdclib\scpyp2r.asm
+                   strlen   0x0104fe    program     extern C:\MCC18\src\traditional\stdclib\strlen.asm
+                    jLoop   0x01050e    program     static C:\MCC18\src\traditional\stdclib\strlen.asm
+                     jEnd   0x010518    program     static C:\MCC18\src\traditional\stdclib\strlen.asm
+                strlenpgm   0x01051a    program     extern C:\MCC18\src\traditional\stdclib\slenpgm.asm
+                    jLoop   0x010538    program     static C:\MCC18\src\traditional\stdclib\slenpgm.asm
+                   _2jEnd   0x01054e    program     static C:\MCC18\src\traditional\stdclib\slenpgm.asm
+                     jEnd   0x010550    program     static C:\MCC18\src\traditional\stdclib\slenpgm.asm
+                   strupr   0x010564    program     extern C:\MCC18\src\traditional\stdclib\strupr.asm
+                    jLoop   0x010578    program     static C:\MCC18\src\traditional\stdclib\strupr.asm
+                    jSkip   0x010588    program     static C:\MCC18\src\traditional\stdclib\strupr.asm
+                     jEnd   0x01058c    program     static C:\MCC18\src\traditional\stdclib\strupr.asm
+           ReadStringUART   0x01058e    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\UART.c
+                BusyUSART   0x01060e    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\UART.c
+               CloseUSART   0x01061c    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\UART.c
+             DataRdyUSART   0x010628    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\UART.c
+                ReadUSART   0x01063c    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\UART.c
+               WriteUSART   0x010642    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\UART.c
+                getsUSART   0x010658    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\UART.c
+                putsUSART   0x0106b4    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\UART.c
+               putrsUSART   0x0106f6    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\UART.c
+                  LCDTest   0x010750    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_lcd.c
+              _LCD_cp1251   0x0107be    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_lcd.c
+                 LCD_init   0x01081c    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_lcd.c
+                LCD_print   0x01082c    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_lcd.c
+                bp_setbit   0x0108ca    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\bit_pattern.c
+                bp_tstbit   0x010932    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\bit_pattern.c
+                    bp_cp   0x0109a0    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\bit_pattern.c
+                 bp_bzero   0x0109f8    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\bit_pattern.c
+                StackInit   0x010a36    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\StackTsk.c
+                StackTask   0x010a7e    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\StackTsk.c
+        StackApplications   0x010b88    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\StackTsk.c
+                 TickInit   0x010b8a    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\Tick.c
+              GetTickCopy   0x010b9a    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\Tick.c
+           ___do_lbl00004   0x010b9a    program     static                          
+           ___do_lbl00002   0x010bb8    program     static                          
+           ___do_lbl00003   0x010bbc    program     static                          
+       ___return_lbl00001   0x010bbe    program     static                          
+                  TickGet   0x010bc0    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\Tick.c
+            TickGetDiv256   0x010bd6    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\Tick.c
+            TickGetDiv64K   0x010c24    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\Tick.c
+TickConvertToMilliseconds   0x010c72    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\Tick.c
+               TickUpdate   0x010cb6    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\Microchip\TCPIP Stack\Tick.c
+             CRC16_MODBUS   0x010cca    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\CRCMOD.c
+                     atoi   0x010dc6    program     extern C:\MCC18\src\traditional\stdclib\atoi.asm
+                  jSkipWS   0x010df4    program     static C:\MCC18\src\traditional\stdclib\atoi.asm
+                 jSkipWS1   0x010e06    program     static C:\MCC18\src\traditional\stdclib\atoi.asm
+                 jTstSign   0x010e0a    program     static C:\MCC18\src\traditional\stdclib\atoi.asm
+                jTstSign1   0x010e16    program     static C:\MCC18\src\traditional\stdclib\atoi.asm
+                jTstSign2   0x010e1c    program     static C:\MCC18\src\traditional\stdclib\atoi.asm
+                jTstSign3   0x010e1e    program     static C:\MCC18\src\traditional\stdclib\atoi.asm
+                    jLoop   0x010e1e    program     static C:\MCC18\src\traditional\stdclib\atoi.asm
+                 jEndLoop   0x010e6c    program     static C:\MCC18\src\traditional\stdclib\atoi.asm
+                     jEnd   0x010e84    program     static C:\MCC18\src\traditional\stdclib\atoi.asm
+                 FXM1616U   0x010eb0    program     extern C:\MCC18\src\traditional\math\fxm1616u.asm
+                 FXM2424U   0x010eec    program     extern C:\MCC18\src\traditional\math\fxm2424u.asm
+                _do_cinit   0x010f7e    program     extern C:\MCC18\src\traditional\startup\c018i.c
+                     test   0x010f98    program     static                          
+                copy_loop   0x010ff0    program     static                          
+            copy_one_byte   0x010ff6    program     static                          
+             done_copying   0x011004    program     static                          
+       ___return_lbl00002   0x01101a    program     static                          
+                     done   0x01101a    program     static                          
+                 FXD3232U   0x01101c    program     extern C:\MCC18\src\traditional\math\fxd3232u.c
+                     loop   0x01102a    program     static                          
+                   _false   0x01105e    program     static                          
+       ___return_lbl00000   0x011062    program     static                          
+                   cp1251   0x011064    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\m_lcd.c
+     TCPSocketInitializer   0x0110a4    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Alternative Configurations\TCPIPConfig ENC28J60 ETH97J60.h
+                 FXD1616U   0x0110da    program     extern C:\MCC18\src\traditional\math\fxd1616u.c
+                     loop   0x0110e4    program     static                          
+                  endloop   0x011100    program     static                          
+       ___return_lbl00000   0x011104    program     static                          
+            __zero_memory   0x011106    program     extern C:\MCC18\src\traditional\proc\p18F97J60.asm
+               zero_block   0x011120    program     static C:\MCC18\src\traditional\proc\p18F97J60.asm
+                   loop_h   0x011120    program     static C:\MCC18\src\traditional\proc\p18F97J60.asm
+                compare_l   0x011128    program     static C:\MCC18\src\traditional\proc\p18F97J60.asm
+                   loop_l   0x01112a    program     static C:\MCC18\src\traditional\proc\p18F97J60.asm
+              Delay1KTCYx   0x011132    program     extern C:\MCC18\src\traditional\delays\d1ktcyx.asm
+                     D1Kx   0x01113c    program     static C:\MCC18\src\traditional\delays\d1ktcyx.asm
+                    D1K_1   0x01113e    program     static C:\MCC18\src\traditional\delays\d1ktcyx.asm
+        _D1KTCYXCODE_0010   0x011142    program     static C:\MCC18\src\traditional\delays\d1ktcyx.asm
+        _D1KTCYXCODE_0016   0x011148    program     static C:\MCC18\src\traditional\delays\d1ktcyx.asm
+                 _startup   0x011152    program     extern C:\MCC18\src\traditional\startup\c018i.c
+                     loop   0x011162    program     static                          
+       ___return_lbl00001   0x01116c    program     static                          
+              Delay10TCYx   0x01116e    program     extern C:\MCC18\src\traditional\delays\d10tcyx.asm
+                     D10x   0x011176    program     static C:\MCC18\src\traditional\delays\d10tcyx.asm
+        _D10TCYXCODE_000A   0x011178    program     static C:\MCC18\src\traditional\delays\d10tcyx.asm
+        _D10TCYXCODE_000C   0x01117a    program     static C:\MCC18\src\traditional\delays\d10tcyx.asm
+        _D10TCYXCODE_000E   0x01117c    program     static C:\MCC18\src\traditional\delays\d10tcyx.asm
+                    D10_1   0x01117e    program     static C:\MCC18\src\traditional\delays\d10tcyx.asm
                __config_0   0x01fff8    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\skipic.c
                __config_1   0x01fffa    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\skipic.c
                __config_2   0x01fffd    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\skipic.c

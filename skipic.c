@@ -228,11 +228,11 @@ int main(void)
 	// Initialize application specific hardware
 	InitializeBoard();
 
-	{
-		int i;
-		for(i = 0; i < 20*PAGE_SIZE; i += PAGE_SIZE)
-			EraseSector(i);
-	}
+//	{
+//		int i;
+//		for(i = 0; i < 20*PAGE_SIZE; i += PAGE_SIZE)
+//			EraseSector(i);
+//	}
 
 	readers_init();
 
@@ -250,6 +250,8 @@ int main(void)
 #if defined(STACK_USE_MPFS) || defined(STACK_USE_MPFS2)
 	MPFSInit();
 #endif
+
+	slog_format();
 
 	// Initialize Stack and application related NV variables into AppConfig.
 	InitAppConfig();
@@ -300,7 +302,6 @@ int main(void)
 	// Initialize core stack layers (MAC, ARP, TCP, UDP) and
 	// application modules (HTTP, SNMP, etc.)
 
-//	slog_format();
 
 	slog_init();
 	StackInit();
@@ -310,7 +311,7 @@ int main(void)
 	{
 		BYTE str[] = "ќлоло пыщ пыщ", str1[] = "еще чуть-чуть из RAM\r\n";
 
-		BYTE strout[70], read = 0;
+//		BYTE strout[70], read = 0;
 		LCD_print(str);
 		putrsUSART((ROM char*)"Console alive!\r\n");
 
