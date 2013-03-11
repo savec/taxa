@@ -24,7 +24,7 @@ void slog_init(void);
 void slog_format(void);
 int slog_putrs(const rom BYTE *str, BOOL need_timestamp);
 int slog_puts(const BYTE *str, BOOL need_timestamp);
-int slog_gets(WORD pos, BYTE *buf, BYTE len);
+int slog_gets(DWORD pos, BYTE *buf, BYTE len);
 void slog_flush(void);
 
 #endif /* M_LOGGER_H_ */
