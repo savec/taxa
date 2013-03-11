@@ -25,10 +25,13 @@ void slog_init(void)
 
 void slog_format(void)
 {
-	DWORD addr;
-	XEEBeginWrite(SLOG_START);
-	for (addr = SLOG_START; addr < SLOG_START + SLOG_LEN; addr++)
+	DWORD addr = SLOG_START;
+
+	for (XEEBeginWrite(SLOG_START); addr < SLOG_START + SLOG_LEN; addr++) {
+		if(addr % PAGE_SIZE == 0)
+			XEEBeginWrite(SLOG_START);
 		XEEWrite(SLOG_EOF);
+	}
 	XEEEndWrite();
 	slog_pos = 0;
 }
@@ -38,7 +41,7 @@ static BOOL slog_need_format(void)
 	/*
 	 * check's first slog page
 	 */
-	WORD addr;
+	DWORD addr;
 	XEEBeginRead(SLOG_START);
 	for (addr = SLOG_START; addr < SLOG_START + PAGE_SIZE; addr++) {
 		if (XEERead() ^ 0xFF) {
@@ -56,8 +59,11 @@ int slog_puts(const BYTE *str, BOOL need_timestamp)
 
 	// XXX timestamp
 
-	for (XEEBeginWrite(SLOG_START + slog_pos); (*str) && (slog_pos < SLOG_LEN); slog_pos++, put++, str++)
+	for (put = 0; (*str) && (slog_pos < SLOG_LEN); slog_pos++, put++, str++) {
+		if((SLOG_START + slog_pos) % PAGE_SIZE == 0)
+			XEEBeginWrite(SLOG_START + slog_pos);
 		XEEWrite(*str);
+	}
 	XEEEndWrite();
 
 	return put;
@@ -69,15 +75,18 @@ int slog_putrs(const rom BYTE *str, BOOL need_timestamp)
 
 	// XXX timestamp
 
-	for (XEEBeginWrite(SLOG_START + slog_pos); (*str) && (slog_pos < SLOG_LEN); slog_pos++, put++, str++)
+	for (XEEBeginWrite(SLOG_START + slog_pos); (*str) && (slog_pos < SLOG_LEN); slog_pos++, put++, str++) {
+		if((SLOG_START + slog_pos) % PAGE_SIZE == 0)
+			XEEBeginWrite(SLOG_START + slog_pos);
 		XEEWrite(*str);
+	}
 	XEEEndWrite();
 
 	return put;
 }
 
 
-int slog_gets(WORD pos, BYTE *buf, BYTE len)
+int slog_gets(DWORD pos, BYTE *buf, BYTE len)
 {
 	int got = 0;
 

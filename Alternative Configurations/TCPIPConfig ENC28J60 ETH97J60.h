@@ -109,7 +109,7 @@
  *   otherwise, uncomment the appropriate selection.
  */
 //#define STACK_USE_MPFS
-#define STACK_USE_MPFS2
+//#define STACK_USE_MPFS2
 
 /* MPFS Storage Location
  *   If html pages are stored in internal program memory,

@@ -315,8 +315,8 @@ int main(void)
 		LCD_print(str);
 		putrsUSART((ROM char*)"Console alive!\r\n");
 
-//		slog_putrs((ROM char*)"опять в логгер по-русски из ROM\r\n", 1);
-//		slog_puts(str1, 1);
+		slog_putrs((ROM char*)"опять в логгер по-русски из ROM\r\n", 1);
+		slog_puts(str1, 1);
 
 		slog_flush();
 
