@@ -251,7 +251,7 @@ int main(void)
 	MPFSInit();
 #endif
 
-	slog_format();
+//	slog_format();
 
 	// Initialize Stack and application related NV variables into AppConfig.
 	InitAppConfig();
@@ -309,7 +309,9 @@ int main(void)
 	LCD_init();
 
 	{
-		BYTE str[] = "ќлоло пыщ пыщ", str1[] = "еще чуть-чуть из RAM\r\n";
+		config();
+
+/*		BYTE str[] = "ќлоло пыщ пыщ", str1[] = "еще чуть-чуть из RAM\r\n";
 
 //		BYTE strout[70], read = 0;
 		LCD_print(str);
@@ -324,7 +326,7 @@ int main(void)
 //		strout[read] = '\0';
 //
 //		putsUART(strout);
-
+*/
 	}
 
 #if defined(WF_CS_TRIS)
@@ -1091,8 +1093,8 @@ static void InitAppConfig(void)
 		// deterministic for checksum generation
 		memset((void*) &AppConfig, 0x00, sizeof(AppConfig));
 
-		AppConfig.Flags.bIsDHCPEnabled = TRUE;
-		AppConfig.Flags.bInConfigMode = TRUE;
+//		AppConfig.Flags.bIsDHCPEnabled = TRUE;
+//		AppConfig.Flags.bInConfigMode = TRUE;
 		memcpypgm2ram((void*)&AppConfig.MyMACAddr, (ROM void*)SerializedMACAddress, sizeof(AppConfig.MyMACAddr));
 		//		{
 		//			_prog_addressT MACAddressAddress;

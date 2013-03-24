@@ -76,43 +76,43 @@ void DoUARTConfig(void)
 	while(!bQuit)
 	{
 		// Display the menu
-	    putrsUART("\r\n\r\n\rMicrochip TCP/IP Config Application ("TCPIP_STACK_VERSION", " __DATE__ ")\r\n\r\n");
-	    putrsUART("\t1: Change serial number:\t\t");
+	    putrsUSART("\r\n\r\n\rMicrochip TCP/IP Config Application ("TCPIP_STACK_VERSION", " __DATE__ ")\r\n\r\n");
+	    putrsUSART("\t1: Change serial number:\t\t");
 		wvTemp.v[1] = AppConfig.MyMACAddr.v[4];
 		wvTemp.v[0] = AppConfig.MyMACAddr.v[5];
 		uitoa(wvTemp.Val, response);
 		putsUART(response);
-		putrsUART("\r\n\t2: Change host name:\t\t\t");
-		putsUART(AppConfig.NetBIOSName);
-	    putrsUART("\r\n\t3: Change static IP address:\t\t");
+//		putrsUSART("\r\n\t2: Change host name:\t\t\t");
+//		putsUART(AppConfig.NetBIOSName);
+	    putrsUSART("\r\n\t2: Change static IP address:\t\t");
 	    DisplayIPValue(AppConfig.MyIPAddr);
-	    putrsUART("\r\n\t4: Change static gateway address:\t");
+	    putrsUSART("\r\n\t3: Change static gateway address:\t");
 	    DisplayIPValue(AppConfig.MyGateway);
-	    putrsUART("\r\n\t5: Change static subnet mask:\t\t");
+	    putrsUSART("\r\n\t4: Change static subnet mask:\t\t");
 	    DisplayIPValue(AppConfig.MyMask);
-		putrsUART("\r\n\t6: Change static primary DNS server:\t");
+		putrsUSART("\r\n\t5: Change static primary DNS server:\t");
 	    DisplayIPValue(AppConfig.PrimaryDNSServer);
-		putrsUART("\r\n\t7: Change static secondary DNS server:\t");
+		putrsUSART("\r\n\t6 Change static secondary DNS server:\t");
 	    DisplayIPValue(AppConfig.SecondaryDNSServer);
-	    putrsUART("\r\n\t8: ");
-		putrsUART((ROM BYTE*)(AppConfig.Flags.bIsDHCPEnabled ? "Dis" : "En"));
-		putrsUART("able DHCP & IP Gleaning:\t\tDHCP is currently ");
-		putrsUART((ROM BYTE*)(AppConfig.Flags.bIsDHCPEnabled ? "enabled" : "disabled"));
-	    putrsUART("\r\n\t9: Download MPFS image.");
-	    putrsUART("\r\n\t0: Save & Quit.");
-	    putrsUART("\r\nEnter a menu choice: ");
+//	    putrsUART("\r\n\t8: ");
+//		putrsUART((ROM BYTE*)(AppConfig.Flags.bIsDHCPEnabled ? "Dis" : "En"));
+//		putrsUART("able DHCP & IP Gleaning:\t\tDHCP is currently ");
+//		putrsUART((ROM BYTE*)(AppConfig.Flags.bIsDHCPEnabled ? "enabled" : "disabled"));
+//	    putrsUART("\r\n\t9: Download MPFS image.");
+	    putrsUSART("\r\n\t0: Save & Quit.");
+	    putrsUSART("\r\nEnter a menu choice: ");
 	
 	
 		// Wait for the user to press a key
 	    while(!DataRdyUART());
 	
-		putrsUART((ROM char*)"\r\n");
+		putrsUSART((ROM char*)"\r\n");
 	
 		// Execute the user selection
 	    switch(ReadUART())
 	    {
 		    case '1':
-				putrsUART("New setting: ");
+				putrsUSART("New setting: ");
 				if(ReadStringUART(response, sizeof(response)))
 				{
 					wvTemp.Val = atoi((char*)response);
@@ -121,63 +121,63 @@ void DoUARTConfig(void)
 				}
 		        break;
 		
-			case '2':
-				putrsUART("New setting: ");
-		        ReadStringUART(response, sizeof(response) > sizeof(AppConfig.NetBIOSName) ? sizeof(AppConfig.NetBIOSName) : sizeof(response));
-				if(response[0] != '\0')
-				{
-					memcpy(AppConfig.NetBIOSName, (void*)response, sizeof(AppConfig.NetBIOSName));
-			        FormatNetBIOSName(AppConfig.NetBIOSName);
-				}
-				break;
+//			case '2':
+//				putrsUSART("New setting: ");
+//		        ReadStringUART(response, sizeof(response) > sizeof(AppConfig.NetBIOSName) ? sizeof(AppConfig.NetBIOSName) : sizeof(response));
+//				if(response[0] != '\0')
+//				{
+//					memcpy(AppConfig.NetBIOSName, (void*)response, sizeof(AppConfig.NetBIOSName));
+//			        FormatNetBIOSName(AppConfig.NetBIOSName);
+//				}
+//				break;
 		
-		    case '3':
+		    case '2':
 		        destIPValue = &AppConfig.MyIPAddr;
 		        goto ReadIPConfig;
 		
-		    case '4':
+		    case '3':
 		        destIPValue = &AppConfig.MyGateway;
 		        goto ReadIPConfig;
 		
-		    case '5':
+		    case '4':
 		        destIPValue = &AppConfig.MyMask;
 		        goto ReadIPConfig;
 		
-		    case '6':
+		    case '5':
 		        destIPValue = &AppConfig.PrimaryDNSServer;
 		        goto ReadIPConfig;
 	
-			case '7':
+			case '6':
 		        destIPValue = &AppConfig.SecondaryDNSServer;
 		        goto ReadIPConfig;
 		
 ReadIPConfig:
-				putrsUART("New setting: ");
+				putrsSUART("New setting: ");
 		        ReadStringUART(response, sizeof(response));
 		
 		        if(StringToIPAddress(response, &tempIPValue))
 		            destIPValue->Val = tempIPValue.Val;
 				else
-		            putrsUART("Invalid input.\r\n");
+		            putrsUSART("Invalid input.\r\n");
 
 		        break;
 		
 		
-		    case '8':
-		        AppConfig.Flags.bIsDHCPEnabled = !AppConfig.Flags.bIsDHCPEnabled;
-		        break;
-		
-		    case '9':
-				#if defined(MPFS_USE_EEPROM) && defined(STACK_USE_MPFS)
-		        	DownloadMPFS();
-				#endif
-		        break;
+//		    case '8':
+//		        AppConfig.Flags.bIsDHCPEnabled = !AppConfig.Flags.bIsDHCPEnabled;
+//		        break;
+//
+//		    case '9':
+//				#if defined(MPFS_USE_EEPROM) && defined(STACK_USE_MPFS)
+//		        	DownloadMPFS();
+//				#endif
+//		        break;
 		
 		    case '0':
 			    bQuit = TRUE;
 				#if defined(EEPROM_CS_TRIS) || defined(SPIFLASH_CS_TRIS)
 		        	SaveAppConfig(&AppConfig);
-					putrsUART("Settings saved.\r\n");
+					putrsUSART("Settings saved.\r\n");
 				#else
 					putrsUART("External EEPROM/Flash not present -- settings will be lost at reset.\r\n");
 				#endif
