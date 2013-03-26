@@ -8,7 +8,7 @@
 #ifndef CONFIG_H_
 #define CONFIG_H_
 
-#define MAX_PRMS	7
+#define MAX_PRMS	20
 
 typedef enum {
 	TYPE_STRING, TYPE_CHAR, TYPE_SHORT, TYPE_LONG
@@ -25,14 +25,14 @@ typedef struct {
 		} d;
 		struct {
 			ROM DWORD maxlen;
-			ROM DWORD dummy;
+			int (*check_prm)(BYTE *);
 		} s;
 	} lim;
 } menu_prm_t;
 
 typedef struct {
 	ROM const BYTE *caption;
-	ROM const menu_prm_t * ROM const prms[MAX_PRMS];
+	ROM const menu_prm_t * ROM prms[MAX_PRMS];
 } menu_section_t;
 
 //void menu_show(void);
