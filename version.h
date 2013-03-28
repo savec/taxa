@@ -10,8 +10,8 @@
 
 #include "TCPIP Stack/TCPIP.h"
 
-#define SVN_REVISION	"16"
-#define SVN_DATETIME	"2013/03/26 23:02:51"
+#define SVN_REVISION	"17"
+#define SVN_DATETIME	"2013/03/29 00:34:40"
 #define SVN_URL			"https://taxa.googlecode.com/svn/trunk"
 
 rom char * buildlabel = SVN_URL " " SVN_DATETIME;

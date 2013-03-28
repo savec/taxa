@@ -11,22 +11,29 @@
 #define MAX_PRMS	20
 
 typedef enum {
-	TYPE_STRING, TYPE_CHAR, TYPE_SHORT, TYPE_LONG
+	TYPE_STRING, TYPE_CHAR, TYPE_SHORT, TYPE_LONG, TYPE_VECTOR
 } type_e;
+
+typedef int (* ROM convert_prm_cb)(char *, char *);
 
 typedef struct {
 	ROM const type_e type;
 	ROM const BYTE *caption;
 	void *prm;
 	union {
+		ROM DWORD ROM raw[3];
 		struct {
 			ROM DWORD min;
 			ROM DWORD max;
 		} d;
 		struct {
 			ROM DWORD maxlen;
-			int (*check_prm)(BYTE *);
 		} s;
+		struct {
+			ROM DWORD cvrt_in;
+			ROM DWORD cvrt_out;
+			ROM DWORD len;
+		} v;
 	} lim;
 } menu_prm_t;
 
