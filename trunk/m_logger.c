@@ -27,9 +27,9 @@ void slog_format(void)
 {
 	DWORD addr = SLOG_START;
 
-	for (XEEBeginWrite(SLOG_START); addr < SLOG_START + SLOG_LEN; addr++) {
+	for (XEEBeginWrite(addr); addr < SLOG_START + SLOG_LEN; addr++) {
 		if(addr % PAGE_SIZE == 0)
-			XEEBeginWrite(SLOG_START);
+			XEEBeginWrite(addr);
 		XEEWrite(SLOG_EOF);
 	}
 	XEEEndWrite();

@@ -314,22 +314,7 @@ int main(void)
 		test();
 	if(!BUTTON1_IO)
 		config();
-/*		BYTE str[] = "Ололо пыщ пыщ", str1[] = "еще чуть-чуть из RAM\r\n";
 
-//		BYTE strout[70], read = 0;
-		LCD_print(str);
-		putrsUSART((ROM char*)"Console alive!\r\n");
-
-		slog_putrs((ROM char*)"опять в логгер по-русски из ROM\r\n", 1);
-		slog_puts(str1, 1);
-
-		slog_flush();
-
-//		read += slog_gets(0, strout, sizeof(strout));
-//		strout[read] = '\0';
-//
-//		putsUART(strout);
-*/
 
 #if defined(WF_CS_TRIS)
 	WF_Connect();
