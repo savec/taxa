@@ -11,8 +11,14 @@
 #define MAX_PRMS	20
 
 typedef enum {
-	TYPE_STRING, TYPE_CHAR, TYPE_SHORT, TYPE_LONG, TYPE_VECTOR
+	TYPE_STRING, TYPE_CHAR, TYPE_SHORT, TYPE_LONG, TYPE_VECTOR, TYPE_ACTION
 } type_e;
+
+typedef enum {
+	SHOW_SECTIONS,
+	SHOW_SECTION,
+	SHOW_PARAM
+} menu_state_e;
 
 typedef int (* ROM convert_prm_cb)(char *, char *);
 

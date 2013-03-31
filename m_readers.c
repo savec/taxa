@@ -14,8 +14,8 @@
 static unsigned char code[BP_SIZE], processing_code[BP_SIZE];
 
 static BYTE position;
-static DWORD t = 0;
-reader_status_e status = READER_VOID;
+static volatile DWORD t = 0;
+static reader_status_e status = READER_VOID;
 
 rom static char * ver = "RD0.01";
 static mailbox_t mailbox;
@@ -159,7 +159,7 @@ BYTE readers_get_uid(DWORD *uid)
 		return 0;
 
 	case READER_INPROGRESS:
-		if(TickGet() - t >= TICK_SECOND/10ul) {
+		if(TickGet() - t > TICK_SECOND/2) {
 			reset_state();
 		}
 		return 0;

@@ -14,7 +14,7 @@
 #define PAGES_NUM	496
 
 #define SLOG_START	(10ul*PAGE_SIZE)
-#define SLOG_LEN	(10ul*PAGE_SIZE)
+#define SLOG_LEN	(10ul*PAGE_SIZE) 
 
 #define SLOG_EOF	0	// we cant't use standart EOF(-1) because of it's a symbol in cp1251 coding
 
