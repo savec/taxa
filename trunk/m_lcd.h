@@ -14,6 +14,10 @@ typedef BYTE (*decode_t)(BYTE);
 
 void LCDTest(WORD offset);
 void LCD_init(void);
-void LCD_print(BYTE *str);
+BYTE * LCD_decode(BYTE *str);
+
+#define LCD_STRING_0	(LCDText)
+#define LCD_STRING_1	(LCDText + 16)
+#define LCD_ALL			(LCD_STRING_0)
 
 #endif /* M_LCD_H_ */

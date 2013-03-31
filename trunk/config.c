@@ -2,6 +2,9 @@
 #include "config.h"
 #include <stdlib.h>
 #include <string.h>
+#include "m_lcd.h"
+#include "version.h"
+#include "m_logger.h"
 
 static int cvrt_ip_in(char *from, char *to);
 static int cvrt_mac_in(char *from, char *to);
@@ -15,22 +18,22 @@ static int cvrt_mac_out(char *from, char *to);
 //static ROM const menu_prm_t prm01 = { TYPE_CHAR, "char parameter 1",
 //		(void *) &char_prm1, { { 0, 10 } } };
 
-static ROM const menu_section_t general_cfg_s = { "GENERAL CONFIG", {
-		(ROM menu_prm_t *) 0 } };
+//static ROM const menu_section_t general_cfg_s = { "GENERAL CONFIG", {
+//		(ROM menu_prm_t *) 0 } };
 
 /*================================ COMMUNICATIONS ==============================================*/
 BYTE station_id = 1;
 static ROM const menu_prm_t station_id_p = { TYPE_CHAR, "Station ID",
-		(void *) &station_id, { { 255, 0 } } };
+		(void *) &station_id, { { 0, 255 } } };
 
 BYTE mac_addr[6] = { 0xAB, 0x89, 0x67, 0x45, 0x23, 0x01 };
 static ROM const menu_prm_t mac_addr_p = { TYPE_VECTOR, "MAC address",
-		(void *) mac_addr, { { (ROM DWORD)cvrt_mac_in, (ROM DWORD)cvrt_mac_out,
-				sizeof(mac_addr) } } };
+		(void *) mac_addr, { { (ROM DWORD) cvrt_mac_in,
+				(ROM DWORD) cvrt_mac_out, sizeof(mac_addr) } } };
 
 BYTE ip_addr[4] = { 192, 168, 10, 100 };
 static ROM const menu_prm_t ip_addr_p = { TYPE_VECTOR, "IP address",
-		(void *) ip_addr, { { (ROM DWORD)cvrt_ip_in, (ROM DWORD)cvrt_ip_out,
+		(void *) ip_addr, { { (ROM DWORD) cvrt_ip_in, (ROM DWORD) cvrt_ip_out,
 				sizeof(ip_addr) } } };
 
 WORD port = 50;
@@ -228,10 +231,28 @@ static ROM const menu_section_t serv_machine_settings_s = {
 
 				(ROM menu_prm_t *) 0 } };
 
+///*================================ ACTION: slog_flush ==========================================*/
+//
+//static ROM const menu_prm_t data_bits_p = { TYPE_CHAR, "Data bits",
+//		(void *) &data_bits, { { 5, 9 } } };
+//
+///*================================ ACTION: exit ================================================*/
+//
+//BYTE stop_bits = 2;
+//static ROM const menu_prm_t stop_bits_p = { TYPE_CHAR, "Stop bits",
+//		(void *) &stop_bits, { { 0, 2 } } };
+//
+///*================================ ACTION: save & exit =========================================*/
+//
+//BYTE handshake = 0;
+//static ROM const menu_prm_t handshake_p = { TYPE_CHAR, "Handshake",
+//		(void *) &handshake, { { 0, 1 } } };
+
+
 /*==============================================================================================*/
 
 static ROM const menu_section_t * ROM sections[] =
-		{ &general_cfg_s, &communications_s, &rs232_settings_s,
+		{ /*&general_cfg_s,*/&communications_s, &rs232_settings_s,
 				&reader1_settings_s, &reader2_settings_s, &accessor_settings_s,
 				&serv_machine_settings_s, 0 };
 
@@ -240,9 +261,10 @@ static ROM const menu_section_t * ROM sections[] =
 void config_show_sections(void)
 {
 	BYTE i;
-	putrsUSART("\n\n\r");
+	BYTE a[6];
+
+	putrsUSART("\n\r");
 	for (i = 0; sections[i]; i++) {
-		BYTE a[6];
 		uitoa((WORD) (i + 1), a);
 		putsUSART(a);
 		putrsUSART(". ");
@@ -256,13 +278,15 @@ int config_show_section(ROM const menu_section_t * section)
 {
 
 	BYTE i;
-	BYTE buf[40];
+	static BYTE buf[40];
+	BYTE a[6];
 
 	if (section == NULL)
 		return -1;
 
+	putrsUSART("\r\n");
+
 	for (i = 0; section->prms[i]; i++) {
-		BYTE a[6];
 		uitoa((WORD) (i + 1), a);
 		putsUSART(a);
 		putrsUSART(". ");
@@ -285,7 +309,8 @@ int config_show_section(ROM const menu_section_t * section)
 			putsUSART((BYTE *) section->prms[i]->prm);
 			break;
 		case TYPE_VECTOR:
-			(*(convert_prm_cb)(section->prms[i]->lim.v.cvrt_out))((BYTE *) section->prms[i]->prm, buf);
+			(*(convert_prm_cb) (section->prms[i]->lim.v.cvrt_out))(
+					(BYTE *) section->prms[i]->prm, buf);
 			putsUSART(buf);
 		}
 
@@ -295,22 +320,69 @@ int config_show_section(ROM const menu_section_t * section)
 	return 0;
 }
 
-int config_show_param(menu_prm_t * prm)
+int config_show_param(ROM const menu_prm_t * prm)
 {
+	static BYTE buf[40];
 
 	if (prm == NULL)
 		return -1;
 
-	putrsUSART("\n\r< ");
+	putrsUSART("\r\n< ");
 	putrsUSART(prm->caption);
 	putrsUSART(" >\n\r");
 
 	switch (prm->type) {
 	case TYPE_CHAR:
+		ultoa(prm->lim.d.min, buf);
+		putrsUSART("Min = ");
+		putsUSART(buf);
+		ultoa(prm->lim.d.max, buf);
+		putrsUSART("; Max = ");
+		putsUSART(buf);
+		uitoa(*(BYTE *) prm->prm, buf);
+		putrsUSART("; Val = ");
+		putsUSART(buf);
+		putrsUSART("\n\r");
+		break;
+
 	case TYPE_SHORT:
+		ultoa(prm->lim.d.min, buf);
+		putrsUSART("Min = ");
+		putsUSART(buf);
+		ultoa(prm->lim.d.max, buf);
+		putrsUSART("; Max = ");
+		putsUSART(buf);
+		uitoa(*(WORD *) prm->prm, buf);
+		putrsUSART("; Val = ");
+		putsUSART(buf);
+		putrsUSART("\n\r");
+		break;
+
 	case TYPE_LONG:
+		ultoa(prm->lim.d.min, buf);
+		putrsUSART("Min = ");
+		putsUSART(buf);
+		ultoa(prm->lim.d.max, buf);
+		putrsUSART("; Max = ");
+		putsUSART(buf);
+		ultoa(*(DWORD *) prm->prm, buf);
+		putrsUSART("; Val = ");
+		putsUSART(buf);
+		putrsUSART("\n\r");
+		break;
+
 	case TYPE_STRING:
+		putrsUSART("Val = ");
+		putsUSART((BYTE *) prm->prm);
+		putrsUSART("\n\r");
+		break;
+
 	case TYPE_VECTOR:
+		putrsUSART("Val = ");
+		(*(convert_prm_cb) (prm->lim.v.cvrt_out))((BYTE *) prm->prm, buf);
+		putsUSART(buf);
+		putrsUSART("\n\r");
+
 		break;
 	}
 
@@ -327,16 +399,16 @@ static int cvrt_ip_out(char *from, char *to)
 	BYTE dot[] = ".";
 
 	*to = '\0';
-	itoa((int)from[0], sbyte);
+	itoa((int) from[0], sbyte);
 	strcat(to, sbyte);
 	strcat(to, dot);
-	itoa((int)from[1], sbyte);
+	itoa((int) from[1], sbyte);
 	strcat(to, sbyte);
 	strcat(to, dot);
-	itoa((int)from[2], sbyte);
+	itoa((int) from[2], sbyte);
 	strcat(to, sbyte);
 	strcat(to, dot);
-	itoa((int)from[3], sbyte);
+	itoa((int) from[3], sbyte);
 	strcat(to, sbyte);
 	return 1;
 }
@@ -392,7 +464,7 @@ static int cvrt_ip_in(char *from, char *to)
 }
 
 #define ishex(ch) 			(((ch) >= '0' && (ch) <= '9') || ((ch) >= 'a' && (ch) <= 'f') || ((ch) >= 'A' && (ch) <= 'F'))
-#define isseparator(ch)		(((ch) == '-') || ((ch) == ':') || ((ch) == '\n'))
+#define isseparator(ch)		(((ch) == '-') || ((ch) == ':') || ((ch) == '\n') || ((ch) == ' ') || ((ch) == '\0'))
 
 static int cvrt_mac_in(char *from, char *to)
 {
@@ -404,7 +476,7 @@ static int cvrt_mac_in(char *from, char *to)
 	if (strlen(from) != 17)
 		return 0;
 
-	for (_from = from; _from < from + 3 * 6; _from += 3) {
+	for (_from = from; _from < from + 3 * 6; _from += 3, to ++) {
 		if (ishex(_from[0]) && ishex(_from[1]) && isseparator(_from[2]))
 			*to = hexatob(*(WORD_VAL *) _from);
 		else
@@ -413,32 +485,169 @@ static int cvrt_mac_in(char *from, char *to)
 	return 1;
 }
 
+//static int escape_there(BYTE *s)
+//{
+//	while (*s)
+//		if (*s++ == '\x1b')
+//			return 1;
+//
+//	return 0;
+//}
+
+static void config_restore(void) {
+	/* XXX restore config */
+}
+
+static void config_save_reboot(void) {
+
+	/* XXX save config */
+
+	Reset();
+}
+
+
+static void console_caption(void) {
+	putrsUSART("\r\nSkiPIC Configuration menu. System built " SVN_DATETIME " (revision " SVN_REVISION ")\n\r");
+	putrsUSART("type:\t\'s\' to save;\r\n");
+	putrsUSART("\t\'e\' to exit without saving;\r\n");
+	putrsUSART("\t\'l\' to show syslog;\r\n");
+	putrsUSART("\t\'f\' to clean syslog;\r\n\r\n");
+}
+
 void config(void)
 {
-	BYTE buffer[40];
-	BYTE ch;
+	static BYTE buffer[40];
+	BYTE ch_section;
+	BYTE ch_param;
+	DWORD input;
+	menu_state_e state = SHOW_SECTIONS;
 
-//	while (1) { // XXX add switch/case
-//		config_show_sections();
-//		ReadStringUART(buffer, sizeof(buffer), TRUE);
-//		ch = atob(buffer);
-//		if (!ch || ch > n_elements(sections))
-//			continue;
-//		config_show_section(sections[ch - 1]);
-//		ReadStringUART(buffer, sizeof(buffer), TRUE);
-//		ch = atob(buffer);
-//
-//	}
+	sprintf(LCD_STRING_0, "Configuration");
+	sprintf(LCD_STRING_1, "mode");
+	LCD_decode(LCD_ALL);
+	LCDUpdate();
 
-		config_show_section(sections[0]);
-		config_show_section(sections[1]);
-		config_show_section(sections[2]);
-		config_show_section(sections[3]);
-		config_show_section(sections[4]);
-		config_show_section(sections[5]);
-		config_show_section(sections[6]);
-	//	config_show_section(1);
-	//	config_show_section(2);
+	console_caption();
+
+	while (1) { // XXX add switch/case
+		switch (state) {
+		case SHOW_SECTIONS:
+			config_show_sections();
+			ReadStringUART(buffer, sizeof(buffer), TRUE);
+			if(buffer[0] == 'l' || buffer[0] == 'L') {
+				slog_flush();
+				break;
+			} else if(buffer[0] == 'f' || buffer[0] == 'F') {
+				slog_format();
+				break;
+			} else if(buffer[0] == 'e' || buffer[0] == 'E') {
+				config_restore();
+				return;
+			} else if(buffer[0] == 's' || buffer[0] == 'S') {
+				config_save_reboot();
+			}
+
+			if (!isdigit(buffer[0])/* || escape_there(buffer)*/)
+				break;
+			ch_section = atob(buffer) - 1;
+			if (ch_section < n_elements(sections) - 1)
+				state = SHOW_SECTION;
+			break;
+		case SHOW_SECTION:
+			config_show_section(sections[ch_section]);
+			ReadStringUART(buffer, sizeof(buffer), TRUE);
+			if (!isdigit(buffer[0])/* || escape_there(buffer)*/) {
+				state = SHOW_SECTIONS;
+				break;
+			}
+			ch_param = atob(buffer) - 1;
+			if (ch_param < MAX_PRMS && sections[ch_section]->prms[ch_param])
+				state = SHOW_PARAM;
+			break;
+		case SHOW_PARAM:
+			config_show_param(sections[ch_section]->prms[ch_param]);
+			ReadStringUART(buffer, sizeof(buffer), TRUE);
+			switch (sections[ch_section]->prms[ch_param]->type) {
+			case TYPE_CHAR:
+				if (!isdigit(buffer[0])/* || escape_there(buffer)*/) {
+					state = SHOW_SECTION;
+					break;
+				}
+
+				input = (DWORD) atoi(buffer);
+				if (input >= sections[ch_section]->prms[ch_param]->lim.d.min
+						&& input
+								<= sections[ch_section]->prms[ch_param]->lim.d.max) {
+					*(BYTE *) sections[ch_section]->prms[ch_param]->prm
+							= (BYTE) input;
+					state = SHOW_SECTION;
+				} else {
+					putrsUSART("\n\rOut of range\n\r");
+				}
+				break;
+			case TYPE_SHORT:
+				if (!isdigit(buffer[0])/* || escape_there(buffer)*/) {
+					state = SHOW_SECTION;
+					break;
+				}
+
+				input = (DWORD) atoi(buffer);
+				if (input >= sections[ch_section]->prms[ch_param]->lim.d.min
+						&& input
+								<= sections[ch_section]->prms[ch_param]->lim.d.max) {
+					*(WORD *) sections[ch_section]->prms[ch_param]->prm
+							= (WORD) input;
+					state = SHOW_SECTION;
+				} else {
+					putrsUSART("\n\rOut of range\n\r");
+				}
+
+				break;
+			case TYPE_LONG:
+				if (!isdigit(buffer[0])/* || escape_there(buffer)*/) {
+					state = SHOW_SECTION;
+					break;
+				}
+
+				input = (DWORD) atol(buffer);
+				if (input >= sections[ch_section]->prms[ch_param]->lim.d.min
+						&& input
+								<= sections[ch_section]->prms[ch_param]->lim.d.max) {
+					*(DWORD *) sections[ch_section]->prms[ch_param]->prm
+							= (DWORD) input;
+					state = SHOW_SECTION;
+				} else {
+					putrsUSART("\n\rOut of range\n\r");
+				}
+				break;
+			case TYPE_STRING:
+				if (strlen(buffer)
+						> sections[ch_section]->prms[ch_param]->lim.s.maxlen) {
+					putrsUSART("\n\rToo long\n\r");
+				} else {
+					strcpy((BYTE *) sections[ch_section]->prms[ch_param]->prm,
+							buffer);
+					state = SHOW_SECTION;
+				}
+				break;
+			case TYPE_VECTOR:
+				if(*buffer == '\0'){
+					state = SHOW_SECTION;
+				} else if ((*(convert_prm_cb) (sections[ch_section]->prms[ch_param]->lim.v.cvrt_in))(
+						buffer,
+						(BYTE *) sections[ch_section]->prms[ch_param]->prm)) {
+					state = SHOW_SECTION;
+				} else {
+					putrsUSART("\n\rWrong format\n\r");
+				}
+
+				break;
+			default:
+				break;
+			}
+			break;
+		}
+	}
 }
 
 //void menu_show(void)

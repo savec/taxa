@@ -108,6 +108,8 @@
 #include "m_bcp.h"
 #include "m_lcd.h"
 #include "m_logger.h"
+#include "test.h"
+#include <stdio.h>
 
 // Used for Wi-Fi assertions
 #define WF_MODULE_NUMBER   WF_MODULE_MAIN_DEMO
@@ -308,9 +310,10 @@ int main(void)
 	net_init();
 	LCD_init();
 
-	{
+	if(!BUTTON0_IO)
+		test();
+	if(!BUTTON1_IO)
 		config();
-
 /*		BYTE str[] = "Ололо пыщ пыщ", str1[] = "еще чуть-чуть из RAM\r\n";
 
 //		BYTE strout[70], read = 0;
@@ -327,7 +330,6 @@ int main(void)
 //
 //		putsUART(strout);
 */
-	}
 
 #if defined(WF_CS_TRIS)
 	WF_Connect();
@@ -370,21 +372,17 @@ int main(void)
 	// job.
 	// If a task needs very long time to do its job, it must be broken
 	// down into smaller pieces so that other tasks can have CPU time.
-	while (1) {
 
-//		{
-//			WORD av;
-//			get_ajustible(&av);
-//			LCDTest((av >> 3)*2);
-//		}
+	sprintf(LCD_STRING_0, "Предъявите карту");
+	sprintf(LCD_STRING_1, "                ");
+	LCD_decode(LCD_ALL);
+	LCDUpdate();
+
+
+	while (1) {
 
 		bcp_module();
 		readers_module();
-
-		//    	recieved = sizeof(net_buf);
-		//    	if(net_recieve_data(net_buf, &recieved)) {
-		//    		net_send_data(net_buf, recieved);		// echo test
-		//    	}
 
 
 		// Blink LED0 (right most one) every second.

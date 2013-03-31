@@ -13,6 +13,7 @@
 
 #define MYSELF	MODULE_BCP
 
+rom char * buildlabel = SVN_URL " " SVN_DATETIME;
 rom static char * ver = "BC0.01";
 
 static buf_t bpool[NBUFFERS] = { 0 };
