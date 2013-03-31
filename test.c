@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include "m_lcd.h"
 #include "m_readers.h"
+#include "m_logger.h"
 
 #define P_REL1	LED5_IO
 #define P_REL2	LED6_IO
@@ -26,6 +27,9 @@ void test(void)
 
 		if (readers_get_uid(&uid)) {
 			sprintf(LCD_STRING_0, "[%X%X]", (WORD) (uid >> 16), (WORD) uid);
+			slog_putrs("Getting uid: ", 1);
+			slog_puts(LCD_STRING_0, 1);
+			slog_putrs(" (reader1)\n\r", 1);
 		}
 
 		if(!BUTTON0_IO)
