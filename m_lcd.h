@@ -9,6 +9,7 @@
 #define M_LCD_H_
 
 #include "TCPIP Stack/TCPIP.h"
+#include "modules.h"
 
 typedef BYTE (*decode_t)(BYTE);
 

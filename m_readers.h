@@ -9,6 +9,7 @@
 #define M_READERS_H_
 
 #include "TCPIP Stack/TCPIP.h"
+#include "modules.h"
 
 //#define MIN_WIEGAND_PULSE_LEN	TICK_SECOND/2ul
 

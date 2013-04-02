@@ -109,7 +109,7 @@ int bcp_send_buffer(bd_t handler)
 	}
 
 	hdr->hdr_s.sync = BCP_SYNC;
-	//	hdr->hdr_u.addr =	// XXX ==1 :)
+	hdr->hdr_s.addr = 1;	// XXX ==1 CHECK IT!!
 
 	/* header crc*/
 	crc = CRC16_MODBUS((BYTE *) hdr, BCP_HEADER_SIZE - 2);
@@ -208,6 +208,7 @@ int bcp_process_buffer(bd_t handler)
 			default:
 				/* no more modules */
 				hdr->hdr_s.type = TYPE_NPDL;
+				hdr->raw[RAW_DATA] = hdr->hdr_s.packtype_u.npd1.data;
 				strcpypgm2ram((char *) &hdr->raw[RAW_DATA + 1], "\xFF");
 				hdr->hdr_s.packtype_u.npdl.len = 1 + 3;
 				bcp_send_buffer(handler);
@@ -251,7 +252,7 @@ void bcp_module(void)
 
 	if (ibuffer < 0) {
 		// XXX ASSERT (LOGGER)
-		putrsUSART("BCP: \n\rcan't obtaine buffer");
+		putrsUSART("\r\nBCP: rcan't obtaine buffer");
 		return;
 	}
 

@@ -17,7 +17,7 @@ static BYTE position;
 static volatile DWORD t = 0;
 static reader_status_e status = READER_VOID;
 
-rom static char * ver = "RD0.01";
+rom static char * ver = "RD0.00";
 static mailbox_t mailbox;
 #define MYSELF	MODULE_READERS
 
@@ -189,11 +189,6 @@ reader_status_e readers_getstatus(void)
 void readers_module(void)
 {
 	bd_t ipacket;
-	DWORD uid;
-
-	if(readers_get_uid(&uid)) {
-		/* send to host */
-	}
 
 	if(mail_reciev(MYSELF, &ipacket)) {
 		readers_process_buffer(ipacket);
