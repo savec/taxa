@@ -9,6 +9,7 @@
 #define M_LOGGER_H_
 
 #include "TCPIP Stack/TCPIP.h"
+#include "modules.h"
 
 #define PAGE_SIZE	264ul
 #define PAGES_NUM	496

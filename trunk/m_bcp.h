@@ -9,6 +9,7 @@
 #define M_BCP_H_
 
 #include "TCPIP Stack/TCPIP.h"
+#include "modules.h"
 
 #define NBUFFERS	3
 
@@ -35,7 +36,8 @@ typedef enum {
 
 typedef enum {
 	QAC_GETVER 	= 0x00,
-	QAC_ECHO 	= 0x09
+	QAC_ECHO 	= 0x09,
+	QAC_AR_REQUEST = 0x1E
 } qac_e;
 
 typedef enum {
@@ -105,5 +107,6 @@ void bcp_module(void);
 int bcp_send_buffer(bd_t handler);
 buf_t *bcp_buffer(bd_t handler);
 void bcp_release_buffer(bd_t handler);
+bd_t bcp_obtain_buffer(modules_e owner);
 
 #endif /* M_BCP_H_ */

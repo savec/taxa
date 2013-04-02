@@ -4,7 +4,7 @@
  *  Created on: 23.02.2013
  *      Author: admin
  */
-
+#include "m_bcp.h"
 #include "post.h"
 
 mailbox_t *mail_index[MODULES_NUM];
@@ -15,6 +15,7 @@ int mail_subscribe(modules_e module, mailbox_t *mailbox)
 {
 	if(module >= MODULE_UNKNOWN)
 		return -1;
+	mailbox->in = mailbox->out = 0;
 	mail_index[module] = mailbox;
 	return 0;
 }
@@ -27,7 +28,7 @@ int mail_unsubscribe(modules_e module)
 	return 0;
 }
 
-int mail_reciev(modules_e module, mail_t *mail)
+int mail_reciev(modules_e module, bd_t *mail)
 {
 	mailbox_t *mailbox = mail_index[module];
 	if(mailbox == NULL)
@@ -43,7 +44,7 @@ int mail_reciev(modules_e module, mail_t *mail)
 	}
 }
 
-int mail_send(modules_e module, mail_t mail)
+int mail_send(modules_e module, bd_t mail)
 {
 	mailbox_t *mailbox;
 
