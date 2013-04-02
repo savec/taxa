@@ -48,6 +48,6 @@ typedef struct {
 	ROM const menu_prm_t * ROM prms[MAX_PRMS];
 } menu_section_t;
 
-//void menu_show(void);
+void config(void);
 
 #endif /* CONFIG_H_ */
