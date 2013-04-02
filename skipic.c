@@ -109,6 +109,8 @@
 #include "m_lcd.h"
 #include "m_logger.h"
 #include "test.h"
+#include "config.h"
+#include "m_accessor.h"
 #include <stdio.h>
 
 // Used for Wi-Fi assertions
@@ -237,6 +239,7 @@ int main(void)
 //	}
 
 	readers_init();
+	accessor_init();
 
 #if defined(USE_LCD)
 	// Initialize and display the stack version on the LCD
@@ -368,6 +371,7 @@ int main(void)
 
 		bcp_module();
 		readers_module();
+		accessor_module();
 
 
 		// Blink LED0 (right most one) every second.

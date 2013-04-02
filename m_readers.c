@@ -63,7 +63,7 @@ do {										\
 } while(0)
 
 
-int readers_process_buffer(bd_t handler)
+static int readers_process_buffer(bd_t handler)
 {
 	int result = 0;
 	bcp_header_t * hdr = (bcp_header_t *) bcp_buffer(handler)->buf;
@@ -73,7 +73,7 @@ int readers_process_buffer(bd_t handler)
 		switch (hdr->raw[RAW_QAC]) {
 		case QAC_GETVER:
 			switch (hdr->hdr_s.packtype_u.npd1.data) {
-			case 2:
+			case (MYSELF + 1):
 				/* readers ver */
 				hdr->hdr_s.type = TYPE_NPDL;
 				hdr->raw[RAW_DATA] = hdr->hdr_s.packtype_u.npd1.data;
@@ -97,6 +97,7 @@ int readers_process_buffer(bd_t handler)
 	}
 
 	bcp_release_buffer(handler);
+	putrsUSART("\n\rREADERS: buffer released");
 	return result;
 }
 

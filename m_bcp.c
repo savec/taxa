@@ -14,7 +14,7 @@
 #define MYSELF	MODULE_BCP
 
 rom char * buildlabel = SVN_URL " " SVN_DATETIME;
-rom static char * ver = "BC0.01";
+rom static char * ver = "CR0.01";
 
 static buf_t bpool[NBUFFERS] = { 0 };
 
@@ -145,9 +145,9 @@ modules_e bcp_determine_subscriber(bd_t handler)
 			case 2:
 				return MODULE_READERS;
 			case 3:
-				return MODULE_BCP;//MODULE_ACCESSOR; 	// XXX tst
+				return MODULE_ACCESSOR;
 			case 4:
-				return MODULE_SRVMACHINE;
+				return MODULE_BCP /*MODULE_SRVMACHINE*/; // XXX tst
 			case 5:
 				return MODULE_LOGGER;
 			case 6:
@@ -195,7 +195,7 @@ int bcp_process_buffer(bd_t handler)
 //				bcp_release_buffer(handler);
 
 				break;
-			case 1:
+			case (MYSELF + 1):
 				/* bcp ver */
 				hdr->hdr_s.type = TYPE_NPDL;
 				hdr->raw[RAW_DATA] = hdr->hdr_s.packtype_u.npd1.data;
@@ -239,6 +239,7 @@ int bcp_process_buffer(bd_t handler)
 	}
 
 	bcp_release_buffer(handler);
+	putrsUSART("\n\rBCP: buffer released");
 	return result;
 }
 
@@ -250,13 +251,17 @@ void bcp_module(void)
 
 	if (ibuffer < 0) {
 		// XXX ASSERT (LOGGER)
+		putrsUSART("BCP: \n\rcan't obtaine buffer");
 		return;
 	}
+
 
 	if (bcp_reciev_buffer(ibuffer) <= 0) {
 		bcp_release_buffer(ibuffer);
 		goto skip_reciev;
 	}
+
+	putrsUSART("\n\rBCP: buffer obtained");
 
 	subscriber = bcp_determine_subscriber(ibuffer);
 
