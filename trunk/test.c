@@ -26,6 +26,7 @@ void test(void)
 	while (1) {
 
 		if (readers_get_uid(&uid)) {
+			uid = swapl(uid);
 			sprintf(LCD_STRING_0, "[%X%X]", (WORD) (uid >> 16), (WORD) uid);
 			slog_putrs("Getting uid: ", 1);
 			slog_puts(LCD_STRING_0, 1);

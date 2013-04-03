@@ -25,8 +25,7 @@ typedef struct {
 	BYTE retries;
 	BYTE reader_n;
 	WORD req_label;
-	WORD uid;
-//	BYTE uid[MAX_UID_SIZE];		// XXX check it!
+	BYTE uid[MAX_UID_SIZE];
 } ar_req;
 
 typedef struct {
