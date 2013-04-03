@@ -172,6 +172,7 @@ BYTE readers_get_uid(DWORD *uid)
 
 		// odd/even check here
 
+//		*uid = swapl(((DWORD)hdata << 16) | ldata);
 		*uid = ((DWORD)hdata << 16) | ldata;
 
 		reset_state();

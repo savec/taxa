@@ -56,6 +56,8 @@ typedef enum {
 
 #define ARRAYLEN(p)	(sizeof(p)/*/sizeof(p[0])*/)
 
+#define CRC16_BYTES	2
+
 typedef struct {
 	BYTE blen;
 	BYTE mtmo;
