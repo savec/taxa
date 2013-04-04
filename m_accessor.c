@@ -9,6 +9,7 @@
 #include "m_bcp.h"
 #include "m_readers.h"
 #include "post.h"
+#include "m_lcd.h"
 
 rom static char * ver = "AC0.01";
 static mailbox_t mailbox;
@@ -137,6 +138,7 @@ static int process_buffer_wait_host(bd_t handler)
 		ar_rsp *request = (ar_rsp *) &hdr->raw[RAW_DATA];
 
 		memcpy((void *)LCDText, (void *)request->msg, 32);
+		LCD_decode(LCDText);
 		LCDUpdate();
 		bcp_release_buffer(handler);
 		putrsUSART("\n\rACCESSOR: buffer released (wait host)");

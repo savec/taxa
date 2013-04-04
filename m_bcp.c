@@ -162,6 +162,14 @@ modules_e bcp_determine_subscriber(bd_t handler)
 		}
 
 	case TYPE_NPDL:
+		switch (hdr->raw[RAW_QAC]) {
+		case QAC_AR_REQUEST:
+			return MODULE_ACCESSOR;
+		default:
+			return MODULE_UNKNOWN;
+
+			return MODULE_BCP;
+		}
 	case TYPE_CTRL:
 		return MODULE_BCP;
 	default:
