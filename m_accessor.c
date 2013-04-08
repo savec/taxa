@@ -69,7 +69,7 @@ void accessor_module(void)
 			hdr->hdr_s.packtype_u.npdl.len = (sizeof(ar_req) - MAX_UID_SIZE)
 					+ 8 + CRC16_BYTES; // XXX check size!
 
-			request->retries = 0;
+			request->retries = 3;
 			request->reader_n = 1;
 			request->req_label = (WORD) TickGet();
 			uid2hex((BYTE *) &uid, request->uid, 4); // XXX check size!
@@ -114,8 +114,8 @@ static int process_tout_buffer(bd_t handler)
 
 			ar_req *request = (ar_req *) &hdr->raw[RAW_DATA];
 
-			if (request->retries < 3) {
-				request->retries++;
+			if (request->retries) {
+				request->retries--;
 				bcp_send_buffer(handler);
 				putrsUSART("\n\rACS: resend");
 			} else {
