@@ -80,7 +80,6 @@ static int readers_process_buffer(bd_t handler)
 				hdr->hdr_s.packtype_u.npdl.len = strlenpgm(ver) + 3;
 				strcpypgm2ram((char *) &hdr->raw[RAW_DATA + 1], ver);
 				bcp_send_buffer(handler);
-//				bcp_release_buffer(handler);
 
 				break;
 			default:
@@ -97,7 +96,8 @@ static int readers_process_buffer(bd_t handler)
 	}
 
 	bcp_release_buffer(handler);
-	putrsUSART("\n\rREADERS: buffer released");
+	putrsUSART("\n\rRDR: buffer released (rsp sent)");
+
 	return result;
 }
 

@@ -11,6 +11,8 @@
 #include "TCPIP Stack/TCPIP.h"
 #include "modules.h"
 
+#define BCP_TRACE
+
 #define NBUFFERS	3
 
 #define BCP_HEADER_SIZE	7
