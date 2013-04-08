@@ -21,18 +21,74 @@ static buf_t bpool[NBUFFERS] = { 0 };
 bd_t bcp_obtain_buffer(modules_e owner)
 {
 	signed char i;
+
+//#ifdef BCP_TRACE
+//			putrsUSART("\n\r");
+//			switch (owner) {
+//			case MODULE_BCP:
+//				putrsUSART("BCP");
+//				break;
+//			case MODULE_READERS:
+//				putrsUSART("RDR");
+//				break;
+//			case MODULE_ACCESSOR:
+//				putrsUSART("ACS");
+//				break;
+//			case MODULE_SRVMACHINE:
+//				putrsUSART("SRV");
+//				break;
+//			case MODULE_LOGGER:
+//				putrsUSART("LOG");
+//				break;
+//			default:
+//				putrsUSART("UNK");
+//			}
+//#endif
+
 	for (i = 0; i < NBUFFERS; i++) {
 		if (bpool[i].status == BD_FREE) {
 			bpool[i].status = BD_OBTAINED;
 			bpool[i].owner = owner;
+//#ifdef BCP_TRACE
+//			putrsUSART(": buffer obtained");
+//#endif
 			return i;
 		}
 	}
+
+//#ifdef BCP_TRACE
+//			putrsUSART(": can't obtaine buffer");
+//#endif
+
 	return -1;
 }
 
 void bcp_release_buffer(bd_t handler)
 {
+//#ifdef BCP_TRACE
+//	putrsUSART("\n\r");
+//	switch (bpool[handler].owner) {
+//	case MODULE_BCP:
+//		putrsUSART("BCP");
+//		break;
+//	case MODULE_READERS:
+//		putrsUSART("RDR");
+//		break;
+//	case MODULE_ACCESSOR:
+//		putrsUSART("ACS");
+//		break;
+//	case MODULE_SRVMACHINE:
+//		putrsUSART("SRV");
+//		break;
+//	case MODULE_LOGGER:
+//		putrsUSART("LOG");
+//		break;
+//	default:
+//		putrsUSART("UNK");
+//	}
+//	putrsUSART(": buffer released");
+//#endif
+
 	bpool[handler].status = BD_FREE;
 }
 
@@ -109,7 +165,7 @@ int bcp_send_buffer(bd_t handler)
 	}
 
 	hdr->hdr_s.sync = BCP_SYNC;
-	hdr->hdr_s.addr = 1;	// XXX ==1 CHECK IT!!
+	hdr->hdr_s.addr = 1; // XXX ==1 CHECK IT!!
 
 	/* header crc*/
 	crc = CRC16_MODBUS((BYTE *) hdr, BCP_HEADER_SIZE - 2);
@@ -200,7 +256,7 @@ int bcp_process_buffer(bd_t handler)
 				hdr->hdr_s.packtype_u.npdl.len = strlenpgm(buildlabel) + 3;
 				strcpypgm2ram((char *) &hdr->raw[RAW_DATA + 1], buildlabel);
 				bcp_send_buffer(handler);
-//				bcp_release_buffer(handler);
+				//				bcp_release_buffer(handler);
 
 				break;
 			case (MYSELF + 1):
@@ -210,7 +266,7 @@ int bcp_process_buffer(bd_t handler)
 				hdr->hdr_s.packtype_u.npdl.len = strlenpgm(ver) + 3;
 				strcpypgm2ram((char *) &hdr->raw[RAW_DATA + 1], ver);
 				bcp_send_buffer(handler);
-//				bcp_release_buffer(handler);
+				//				bcp_release_buffer(handler);
 
 				break;
 			default:
@@ -220,7 +276,7 @@ int bcp_process_buffer(bd_t handler)
 				strcpypgm2ram((char *) &hdr->raw[RAW_DATA + 1], "\xFF");
 				hdr->hdr_s.packtype_u.npdl.len = 1 + 3;
 				bcp_send_buffer(handler);
-//				bcp_release_buffer(handler);
+				//				bcp_release_buffer(handler);
 
 				break;
 			}
@@ -235,7 +291,7 @@ int bcp_process_buffer(bd_t handler)
 			/* echo request*/
 			RST_FQ(hdr->hdr_s.type);
 			bcp_send_buffer(handler);
-//			bcp_release_buffer(handler);
+			//			bcp_release_buffer(handler);
 
 			break;
 		default:
@@ -248,8 +304,24 @@ int bcp_process_buffer(bd_t handler)
 	}
 
 	bcp_release_buffer(handler);
-	putrsUSART("\n\rBCP: buffer released");
+	putrsUSART("\n\rBCP: buffer released (rsp sent)");
 	return result;
+}
+
+static void bcp_check_acked(bd_t buffer) {
+
+	bcp_header_t * ihdr = (bcp_header_t *) bpool[buffer].buf;
+	BYTE i;
+
+	for (i = 0; i < NBUFFERS; i++) {
+		bcp_header_t * hdr = (bcp_header_t *) bpool[i].buf;
+
+		if (bpool[i].status == BD_NEED_ACK && hdr->raw[RAW_QAC] == ihdr->raw[RAW_QAC]) {
+			bcp_release_buffer(i);
+			putrsUSART("\n\rBCP: buffer released (acked)");
+		}
+	}
+
 }
 
 void bcp_module(void)
@@ -259,18 +331,15 @@ void bcp_module(void)
 	bd_t i;
 
 	if (ibuffer < 0) {
-		// XXX ASSERT (LOGGER)
-		putrsUSART("\r\nBCP: rcan't obtaine buffer");
 		return;
 	}
-
 
 	if (bcp_reciev_buffer(ibuffer) <= 0) {
 		bcp_release_buffer(ibuffer);
 		goto skip_reciev;
 	}
 
-	putrsUSART("\n\rBCP: buffer obtained");
+	putrsUSART("\n\rBCP: buffer obtained (ipacket)");
 
 	subscriber = bcp_determine_subscriber(ibuffer);
 
@@ -279,7 +348,9 @@ void bcp_module(void)
 	else
 		mail_send(subscriber, ibuffer);
 
-	skip_reciev:
+	bcp_check_acked(ibuffer);
+
+skip_reciev:
 
 	/* check timeouts */
 	for (i = 0; i < NBUFFERS; i++) {
