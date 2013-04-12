@@ -11,7 +11,7 @@
 #include "TCPIP Stack/TCPIP.h"
 #include "modules.h"
 
-typedef DWORD event_t;
+typedef WORD event_t;
 
 void event_send(modules_e module, event_t event);
 int event_recieve(modules_e module, event_t *event);
