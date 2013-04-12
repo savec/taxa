@@ -19,6 +19,13 @@ typedef enum {
 	SM_FAILURE = 0x0100
 }sm_state_e;
 
+typedef enum {
+	EVT_SM_PREPARE = 0x0001,
+	EVT_SM_ENABLE = 0x0002,
+	EVT_SM_DISABLE = 0x0004,
+	EVT_SM_FINALIZE = 0x0008
+} sm_events;
+
 #define P_REL1	LED5_IO
 #define P_REL2	LED6_IO
 
@@ -28,6 +35,6 @@ typedef enum {
 
 void sm_init(void);
 void sm_module(void);
-
+BOOL sm_is_ready(void);
 
 #endif /* M_SMACHINE_H_ */

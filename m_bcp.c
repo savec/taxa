@@ -203,7 +203,7 @@ modules_e bcp_determine_subscriber(bd_t handler)
 			case 3:
 				return MODULE_ACCESSOR;
 			case 4:
-				return MODULE_BCP; //MODULE_SRVMACHINE;
+				return MODULE_SRVMACHINE;
 			case 5:
 				return MODULE_BCP /*MODULE_LOGGER*/; // XXX tst
 			case 6:
@@ -331,7 +331,8 @@ void bcp_module(void)
 	bd_t i;
 
 	if (ibuffer < 0) {
-		return;
+		putrsUSART("\n\rcan't obtaine buffer");
+		goto skip_reciev;
 	}
 
 	if (bcp_reciev_buffer(ibuffer) <= 0) {

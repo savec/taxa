@@ -15,6 +15,11 @@
 #define MAX_MSG_SIZE	40
 
 typedef enum {
+	EVT_AC_DONE = 0x0001,
+	EVT_AC_TOUT = 0x0002
+} acs_events;
+
+typedef enum {
 	WAIT_UID,
 	CHECK_SM,
 	WAIT_HOST_ANSWER,

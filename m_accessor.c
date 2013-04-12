@@ -16,6 +16,7 @@
 rom static char * ver = "AC0.01";
 static mailbox_t mailbox;
 static accessor_state_e state = WAIT_UID;
+static event_t event;
 
 #define MYSELF	MODULE_ACCESSOR
 
@@ -35,6 +36,7 @@ void accessor_module(void)
 {
 	bd_t ipacket, opacket;
 	static DWORD uid;
+	static WORD label_cache;
 
 	if (mail_reciev(MYSELF, &ipacket)) {
 
@@ -52,7 +54,10 @@ void accessor_module(void)
 
 		break;
 	case CHECK_SM:
-		// XXX Service Machine implementation
+		if(sm_is_ready())
+			event_send(MODULE_SRVMACHINE, EVT_SM_PREPARE);
+		else
+			break;	// XXX check it
 
 		/* It's OK, send to host */
 		opacket = bcp_obtain_buffer(MYSELF);
@@ -71,16 +76,12 @@ void accessor_module(void)
 			hdr->hdr_s.packtype_u.npdl.len = (sizeof(ar_req) - MAX_UID_SIZE)
 					+ 8 + CRC16_BYTES; // XXX check size!
 
-			request->retries = 3;
+			request->retries = 2;
 			request->reader_n = 1;
-			request->req_label = (WORD) TickGet();
+			request->req_label = label_cache = (WORD) TickGet();
 			uid2hex((BYTE *) &uid, request->uid, 4); // XXX check size!
 
 			bcp_send_buffer(opacket);
-
-			//			bcp_release_buffer(opacket); // XXX remove!
-			//			putrsUSART("\r\nACS: buffer released");
-			//			state = WAIT_UID; // XXX remove!
 			state = WAIT_HOST_ANSWER;
 		}
 		break;
@@ -88,11 +89,57 @@ void accessor_module(void)
 
 		break;
 	case WAIT_SM:
-		// XXX Service Machine implementation
+		if(event_recieve(MYSELF, &event)) {
 
-		/* It's OK, send to host */
+			opacket = bcp_obtain_buffer(MYSELF);
+			if (opacket < 0) {
+				break;
+			}
 
-		state = WAIT_UID;
+			if(event & EVT_AC_DONE) {
+
+				bcp_header_t * hdr = (bcp_header_t *) bcp_buffer(opacket)->buf;
+				eos_req *request = (eos_req *) &hdr->raw[RAW_DATA];
+
+				putrsUSART("\n\rACS: buffer obtained (QAC_SERV_DONE)");
+
+				hdr->hdr_s.type = TYPE_NPDL;
+				SET_FQ(hdr->hdr_s.type);
+				hdr->hdr_s.packtype_u.npdl.qac = QAC_SERV_DONE;
+				hdr->hdr_s.packtype_u.npdl.len = sizeof(eos_req) + CRC16_BYTES;
+
+				request->retries = 2;
+				request->reader_n = 1;
+				request->req_label = label_cache;
+
+				bcp_send_buffer(opacket);
+
+				state = WAIT_UID;
+
+			} else if (event & EVT_AC_TOUT) {
+
+				bcp_header_t * hdr = (bcp_header_t *) bcp_buffer(opacket)->buf;
+				eos_req *request = (eos_req *) &hdr->raw[RAW_DATA];
+
+				putrsUSART("\n\rACS: buffer obtained (QAC_SERV_REJECT)");
+
+				hdr->hdr_s.type = TYPE_NPDL;
+				SET_FQ(hdr->hdr_s.type);
+				hdr->hdr_s.packtype_u.npdl.qac = QAC_SERV_REJECT;
+				hdr->hdr_s.packtype_u.npdl.len = sizeof(eos_req) + CRC16_BYTES;
+
+				request->retries = 2;
+				request->reader_n = 1;
+				request->req_label = label_cache;
+
+				bcp_send_buffer(opacket);
+
+				state = WAIT_UID;
+
+			} else {
+				bcp_release_buffer(opacket);
+			}
+		}
 
 		break;
 	}
@@ -119,12 +166,43 @@ static int process_tout_buffer(bd_t handler)
 			if (request->retries) {
 				request->retries--;
 				bcp_send_buffer(handler);
-				putrsUSART("\n\rACS: resend");
+				putrsUSART("\n\rACS: resend QAC_AR_REQUEST");
 			} else {
 				bcp_release_buffer(handler);
-				putrsUSART("\n\rACS: buffer released (no rsp)");
-				state = WAIT_UID;
-				// XXX
+				putrsUSART("\n\rACS: buffer released (no rsp QAC_AR_REQUEST)");
+				if(state == WAIT_HOST_ANSWER)
+					state = WAIT_UID;
+
+			}
+		} else if (hdr->hdr_s.packtype_u.npdl.qac == QAC_SERV_DONE) {
+
+			eos_req *request = (eos_req *) &hdr->raw[RAW_DATA];
+
+			if (request->retries) {
+				request->retries--;
+				bcp_send_buffer(handler);
+				putrsUSART("\n\rACS: resend QAC_SERV_DONE");
+			} else {
+				bcp_release_buffer(handler);
+				putrsUSART("\n\rACS: buffer released (no rsp QAC_SERV_DONE)");
+				if(state == WAIT_HOST_ANSWER)
+					state = WAIT_UID;
+
+			}
+		} else if (hdr->hdr_s.packtype_u.npdl.qac == QAC_SERV_REJECT) {
+
+			eos_req *request = (eos_req *) &hdr->raw[RAW_DATA];
+
+			if (request->retries) {
+				request->retries--;
+				bcp_send_buffer(handler);
+				putrsUSART("\n\rACS: resend QAC_SERV_REJECT");
+			} else {
+				bcp_release_buffer(handler);
+				putrsUSART("\n\rACS: buffer released (no rsp QAC_SERV_REJECT)");
+				if(state == WAIT_HOST_ANSWER)
+					state = WAIT_UID;
+
 			}
 		} else {
 			result = -1;
@@ -179,7 +257,14 @@ static int process_host_buffer(bd_t handler)
 		LCDText[msg_len] = '\0';
 		LCD_decode(LCDText);
 		LCDUpdate();
-		state = WAIT_SM;
+
+		if(request->access_code)	// XXX separate access
+			event_send(MODULE_SRVMACHINE, EVT_SM_ENABLE);
+		else
+			event_send(MODULE_SRVMACHINE, EVT_SM_DISABLE);
+
+		if(state == WAIT_HOST_ANSWER)
+			state = WAIT_SM;
 	}
 		break;
 

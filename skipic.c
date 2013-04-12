@@ -241,7 +241,6 @@ int main(void)
 
 	readers_init();
 	accessor_init();
-//	sm_init();
 
 #if defined(USE_LCD)
 	// Initialize and display the stack version on the LCD
@@ -314,6 +313,8 @@ int main(void)
 	StackInit();
 	net_init();
 	LCD_init();
+	sm_init();
+
 
 	if(!BUTTON0_IO)
 		test();
@@ -363,10 +364,6 @@ int main(void)
 	// If a task needs very long time to do its job, it must be broken
 	// down into smaller pieces so that other tasks can have CPU time.
 
-	sprintf(LCD_STRING_0, "Предъявите карту");
-	sprintf(LCD_STRING_1, "                ");
-	LCD_decode(LCD_ALL);
-	LCDUpdate();
 
 
 	while (1) {
@@ -380,7 +377,7 @@ int main(void)
 		bcp_module();
 		readers_module();
 		accessor_module();
-//		sm_module();
+		sm_module();
 
 
 		// Blink LED0 (right most one) every second.

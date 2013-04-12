@@ -10,7 +10,7 @@
 event_t events[MODULES_NUM];
 
 void event_send(modules_e module, event_t event) {
-	events[module] = event;
+	events[module] |= event;
 }
 
 int event_recieve(modules_e module, event_t *event) {
