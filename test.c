@@ -10,12 +10,9 @@
 #include "m_lcd.h"
 #include "m_readers.h"
 #include "m_logger.h"
+#include "m_smachine.h"
 
-#define P_REL1	LED5_IO
-#define P_REL2	LED6_IO
 
-#define P_IN1	BUTTON2_IO
-#define P_IN2	BUTTON3_IO
 
 void test(void)
 {
@@ -33,20 +30,19 @@ void test(void)
 			slog_putrs(" (reader1)\n\r", 1);
 		}
 
-		if(!BUTTON0_IO)
+		if (!BUTTON0_IO)
 			P_REL1 = 1;
 		else
 			P_REL1 = 0;
 
-
-		if(!BUTTON1_IO)
+			if(!BUTTON1_IO)
 			P_REL2 = 1;
-		else
+			else
 			P_REL2 = 0;
 
-		sprintf(LCD_STRING_1, "R1:%d R2:%d", (WORD) P_REL1, (WORD) P_REL2);
+			sprintf(LCD_STRING_1, "R1%cR2%cS1%cS2%cS3%c", P_REL1?'*':' ', P_REL2?'*':' ', P_IN1?'*':' ', P_IN2?'*':' ', P_IN3?'*':' ');
 
-		LCD_decode(LCD_ALL);
-		LCDUpdate();
+			LCD_decode(LCD_ALL);
+			LCDUpdate();
+		}
 	}
-}

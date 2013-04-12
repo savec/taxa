@@ -35,6 +35,22 @@ typedef struct {
 	BYTE msg[MAX_MSG_SIZE];
 } ar_rsp;
 
+typedef struct {
+	BYTE retries;
+	BYTE reader_n;
+	WORD req_label;
+} eos_req;
+
+typedef struct {
+	BYTE reader_n;
+	WORD req_label;
+	BYTE null;
+} eos_rsp;
+
+
+
+
+
 void accessor_init(void);
 void accessor_module(void);
 #endif /* M_ACCESSOR_H_ */

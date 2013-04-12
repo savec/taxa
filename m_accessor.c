@@ -10,6 +10,8 @@
 #include "m_readers.h"
 #include "post.h"
 #include "m_lcd.h"
+#include "eventer.h"
+#include "m_smachine.h"
 
 rom static char * ver = "AC0.01";
 static mailbox_t mailbox;
