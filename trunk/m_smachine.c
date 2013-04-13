@@ -16,6 +16,7 @@ rom static char * ver = "SM0.01";
 static mailbox_t mailbox;
 static event_t event;
 
+
 #define MYSELF	MODULE_SRVMACHINE
 
 static int process_buffer(bd_t handler)
@@ -74,6 +75,18 @@ BOOL sm_is_ready(void) {
 	return TRUE;	// XXX check it
 }
 
+static void sm_indicator(BOOL on)
+{
+	static DWORD t;
+
+	if(on) {
+		t = TickGet();
+		P_REL2 = 1;
+	} else if(P_REL2 && TickGet() - t > TICK_SECOND * 3) {
+		P_REL2 = 0;
+	}
+}
+ 
 void sm_module(void)
 {
 	bd_t ipacket;
@@ -81,6 +94,8 @@ void sm_module(void)
 
 	if (mail_reciev(MYSELF, &ipacket))
 			process_buffer(ipacket);
+
+	sm_indicator(FALSE);
 
 	switch(state) {
 	case SM_INIT:
@@ -94,12 +109,17 @@ void sm_module(void)
 		break;
 	case SM_PREPARE:
 		if(event_recieve(MYSELF, &event)) {
-			if(event & EVT_SM_ENABLE) {
+			switch(event) {
+			case EVT_SM_ENABLE_INDICATOR | EVT_SM_ENABLE_CONTROL:
+				sm_indicator(TRUE);
+			case EVT_SM_ENABLE_CONTROL:
 				P_REL1 = 1;
-				P_REL2 = 1;
 				t = TickGet();
 				state = SM_WORK;
-			} else if (event & EVT_SM_DISABLE) {
+				break;
+			case EVT_SM_ENABLE_INDICATOR:
+				sm_indicator(TRUE);
+			case EVT_SM_DISABLE:
 				state = SM_READY;
 			}
 		}
@@ -115,7 +135,6 @@ void sm_module(void)
 		break;
 	case SM_FINAL:
 		P_REL1 = 0;
-		P_REL2 = 0;
 
 		state = SM_READY;	// XXX
 		break;
