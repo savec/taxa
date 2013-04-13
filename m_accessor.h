@@ -33,6 +33,9 @@ typedef struct {
 	BYTE uid[MAX_UID_SIZE];
 } ar_req;
 
+#define ACCESS_CONTROL		(1 << 0)
+#define ACCESS_INDICATOR	(1 << 1)
+
 typedef struct {
 	BYTE reader_n;
 	WORD req_label;
