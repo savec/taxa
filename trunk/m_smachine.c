@@ -80,7 +80,7 @@ static void sm_indicator(BOOL on)
 	static DWORD t;
 
 	if(on) {
-		t = TickGet();
+		t = TickGet(); 
 		P_REL2 = 1;
 	} else if(P_REL2 && TickGet() - t > TICK_SECOND * 3) {
 		P_REL2 = 0;
