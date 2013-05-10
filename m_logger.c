@@ -10,6 +10,7 @@
 static BOOL slog_need_format(void);
 
 static DWORD slog_pos;
+static DWORD get_pos;
 
 static void slog_get_time(time_t *time)
 {
@@ -25,13 +26,21 @@ static void slog_get_time(time_t *time)
 void slog_init(void)
 {
 	if (slog_need_format()) {
-		slog_format();
+		slog_fast_format();
 	} else {
 		XEEBeginRead(SLOG_START);
 		for (slog_pos = 0; (XEERead() != SLOG_EOF) && (slog_pos < SLOG_LEN); slog_pos++)
 			;
 		XEEEndRead();
 	}
+}
+
+void slog_fast_format(void)
+{
+	XEEBeginWrite(SLOG_START);
+	XEEWrite(SLOG_EOF);
+	XEEEndWrite();
+	slog_pos = 0;
 }
 
 void slog_format(void)
@@ -92,6 +101,10 @@ int slog_puts(const BYTE *str)
 			XEEBeginWrite(SLOG_START + slog_pos);
 		XEEWrite(*str);
 	}
+
+	XEEWrite('\r');
+	XEEWrite('\n');
+
 	XEEEndWrite();
 
 	return put;
@@ -106,6 +119,10 @@ int slog_putrs(const rom BYTE *str)
 			XEEBeginWrite(SLOG_START + slog_pos);
 		XEEWrite(*str);
 	}
+
+	XEEWrite('\r');
+	XEEWrite('\n');
+
 	XEEEndWrite();
 
 	return put;
@@ -148,4 +165,49 @@ void slog_flush(void)
 
 	putsUSART(buf);
 	putrsUSART(" bytes free\n\r");
+}
+
+
+
+int slog_getlast(BYTE *buf, BYTE len)
+{
+	if(slog_pos == 0)
+		return 0;
+
+	get_pos = slog_pos;
+	return slog_getnext(buf, len);
+}
+
+int slog_getnext(BYTE *buf, BYTE len)
+{
+	BYTE read, ch;
+
+	if(get_pos < 2)
+		return 0;
+
+	get_pos -= 2;
+
+	for(; get_pos > 0; get_pos--)
+	{
+		XEEBeginRead(get_pos + SLOG_START);
+		ch = XEERead();
+		XEEEndRead();
+		if(ch == '\n') {
+			get_pos ++;
+			break;
+		}
+	}
+
+	for(read = 0, XEEBeginRead(get_pos + SLOG_START); (read < len); read ++)
+	{
+		*buf++ = ch = XEERead();
+		if(ch == '\n')
+			break;
+	}
+
+	XEEEndRead();
+
+	*buf = '\0';
+
+	return read;
 }

@@ -29,9 +29,12 @@ typedef struct {
 
 void slog_init(void);
 void slog_format(void);
+void slog_fast_format(void);
 int slog_putrs(const rom BYTE *str);
 int slog_puts(const BYTE *str);
 int slog_gets(DWORD pos, BYTE *buf, BYTE len);
 void slog_flush(void);
+int slog_getlast(BYTE *buf, BYTE len);
+int slog_getnext(BYTE *buf, BYTE len);
 
 #endif /* M_LOGGER_H_ */

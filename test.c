@@ -41,7 +41,7 @@ void test(void) {
 		if (readers_get_uid(&uid)) {
 			uid = swapl(uid);
 			sprintf(LCD_STRING_0, "[%04X%04X]", (WORD) (uid >> 16), (WORD) uid);
-			sprintf(str_log, "RD [%04X%04X]\r\n", (WORD) (uid >> 16),
+			sprintf(str_log, "RD [%04X%04X]", (WORD) (uid >> 16),
 					(WORD) uid);
 
 			slog_puts(str_log);
