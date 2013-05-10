@@ -518,7 +518,9 @@ static void console_caption(void) {
 	putrsUSART("\t\'e\' to exit without saving;\r\n");
 	putrsUSART("\t\'l\' to show syslog;\r\n");
 	putrsUSART("\t\'f\' to clean syslog;\r\n");
-	putrsUSART("\t\'r\' to restore defaults;\r\n\r\n");
+	putrsUSART("\t\'r\' to restore defaults;\r\n");
+	putrsUSART("\t\'t\' to print last event;\r\n");
+	putrsUSART("\t\'n\' to print next event;\r\n\r\n");
 }
 
 void config(void)
@@ -540,19 +542,31 @@ void config(void)
 			console_caption();
 			config_show_sections();
 			ReadStringUART(buffer, sizeof(buffer), TRUE);
-			if(buffer[0] == 'l' || buffer[0] == 'L') {
+			if (buffer[0] == 'l' || buffer[0] == 'L') {
 				slog_flush();
 				break;
-			} else if(buffer[0] == 'f' || buffer[0] == 'F') {
-				slog_format();
+			} else if (buffer[0] == 'f' || buffer[0] == 'F') {
+				slog_fast_format();
 				break;
-			} else if(buffer[0] == 'e' || buffer[0] == 'E') {
+			} else if (buffer[0] == 'e' || buffer[0] == 'E') {
 				config_restore();
 				return;
-			} else if(buffer[0] == 's' || buffer[0] == 'S') {
+			} else if (buffer[0] == 's' || buffer[0] == 'S') {
 				config_save_reboot();
-			} else if(buffer[0] == 'r' || buffer[0] == 'R') {
+			} else if (buffer[0] == 'r' || buffer[0] == 'R') {
 				config_restore_defaults();
+				break;
+			} else if (buffer[0] == 't' || buffer[0] == 'T') {
+
+				slog_getlast(buffer, sizeof(buffer));
+				putsUSART(buffer);
+
+				break;
+			} else if (buffer[0] == 'n' || buffer[0] == 'N') {
+
+				slog_getnext(buffer, sizeof(buffer));
+				putsUSART(buffer);
+
 				break;
 			}
 
