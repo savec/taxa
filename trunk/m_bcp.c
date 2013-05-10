@@ -223,11 +223,11 @@ modules_e bcp_determine_subscriber(bd_t handler)
 		case QAC_SERV_DONE:
 		case QAC_SERV_REJECT:
 			return MODULE_ACCESSOR;
+		case QAC_ECHO:
+			return MODULE_BCP;
 
 		default:
 			return MODULE_UNKNOWN;
-
-			return MODULE_BCP;
 		}
 	case TYPE_CTRL:
 		return MODULE_BCP;
