@@ -258,17 +258,20 @@ static int process_host_buffer(bd_t handler)
 		LCD_decode(LCDText);
 		LCDUpdate();
 
-		if(!request->access_code) {
+		if(!(request->access_code & ACCESS_CONTROL)) {
 			event_send(MODULE_SRVMACHINE, EVT_SM_DISABLE);
+
+			state = WAIT_UID;
 		} else {
-			if(request->access_code & ACCESS_CONTROL)
-				event_send(MODULE_SRVMACHINE, EVT_SM_ENABLE_CONTROL);
+//			if(request->access_code & ACCESS_CONTROL)
+			event_send(MODULE_SRVMACHINE, EVT_SM_ENABLE_CONTROL);
+
 			if(request->access_code & ACCESS_INDICATOR)
 				event_send(MODULE_SRVMACHINE, EVT_SM_ENABLE_INDICATOR);
+
+			state = WAIT_SM;
 		}
 
-		if(state == WAIT_HOST_ANSWER)
-			state = WAIT_SM;
 	}
 		break;
 

@@ -5,6 +5,7 @@
 #include "m_lcd.h"
 #include "version.h"
 #include "m_logger.h"
+//#include "helpers.h"
 
 static int cvrt_ip_in(char *from, char *to);
 static int cvrt_mac_in(char *from, char *to);
@@ -22,19 +23,19 @@ static int cvrt_mac_out(char *from, char *to);
 //		(ROM menu_prm_t *) 0 } };
 
 /*================================ COMMUNICATIONS ==============================================*/
-BYTE station_id = 1;
+//BYTE station_id = 1;
 static ROM const menu_prm_t station_id_p = { TYPE_CHAR, "Station ID",
-		(void *) &station_id, { { 0, 255 } } };
+		(void *) &AppConfig.comm_station_id, { { 0, 255 } } };
 
-BYTE mac_addr[6] = { 0xAB, 0x89, 0x67, 0x45, 0x23, 0x01 };
+//BYTE mac_addr[6] = { 0xAB, 0x89, 0x67, 0x45, 0x23, 0x01 };
 static ROM const menu_prm_t mac_addr_p = { TYPE_VECTOR, "MAC address",
-		(void *) mac_addr, { { (ROM DWORD) cvrt_mac_in,
-				(ROM DWORD) cvrt_mac_out, sizeof(mac_addr) } } };
+		(void *) AppConfig.MyMACAddr.v, { { (ROM DWORD) cvrt_mac_in,
+				(ROM DWORD) cvrt_mac_out, sizeof(AppConfig.MyMACAddr.v) } } };
 
-BYTE ip_addr[4] = { 192, 168, 10, 100 };
+//IP_ADDR ip_addr = (192l << 24) | (168l << 16) | (10l << 8) | 100;
 static ROM const menu_prm_t ip_addr_p = { TYPE_VECTOR, "IP address",
-		(void *) ip_addr, { { (ROM DWORD) cvrt_ip_in, (ROM DWORD) cvrt_ip_out,
-				sizeof(ip_addr) } } };
+		(void *) &AppConfig.MyIPAddr, { { (ROM DWORD) cvrt_ip_in, (ROM DWORD) cvrt_ip_out,
+				sizeof(AppConfig.MyIPAddr) } } };
 
 WORD port = 50;
 static ROM const menu_prm_t port_p = { TYPE_SHORT, "Port", (void *) &port, { {
@@ -46,25 +47,25 @@ static ROM const menu_section_t communications_s =
 
 /*================================ RS-232 SETTINGS =============================================*/
 
-DWORD baud_rate = 9600;
+//DWORD baud_rate = 9600;
 static ROM const menu_prm_t baud_rate_p = { TYPE_LONG, "Baud rate",
-		(void *) &baud_rate, { { 9600, 115200 } } };
+		(void *) &AppConfig.rs232_baudrate, { { 9600, 115200 } } };
 
-BYTE parity = 1;
-static ROM const menu_prm_t parity_p = { TYPE_CHAR, "Parity", (void *) &parity,
+//BYTE parity = 1;
+static ROM const menu_prm_t parity_p = { TYPE_CHAR, "Parity", (void *) &AppConfig.rs232_parity,
 		{ { 0, 1 } } };
 
-BYTE data_bits = 8;
+//BYTE data_bits = 8;
 static ROM const menu_prm_t data_bits_p = { TYPE_CHAR, "Data bits",
-		(void *) &data_bits, { { 5, 9 } } };
+		(void *) &AppConfig.rs232_databits, { { 5, 9 } } };
 
-BYTE stop_bits = 2;
+//BYTE stop_bits = 2;
 static ROM const menu_prm_t stop_bits_p = { TYPE_CHAR, "Stop bits",
-		(void *) &stop_bits, { { 0, 2 } } };
+		(void *) &AppConfig.rs232_stopbits, { { 0, 2 } } };
 
-BYTE handshake = 0;
+//BYTE handshake = 0;
 static ROM const menu_prm_t handshake_p = { TYPE_CHAR, "Handshake",
-		(void *) &handshake, { { 0, 1 } } };
+		(void *) &AppConfig.rs232_handshake, { { 0, 1 } } };
 
 static ROM const menu_section_t rs232_settings_s = { "RS-232 SETTINGS", {
 		&baud_rate_p, &parity_p, &data_bits_p, &stop_bits_p, &handshake_p,
@@ -72,18 +73,18 @@ static ROM const menu_section_t rs232_settings_s = { "RS-232 SETTINGS", {
 
 /*==================================== READER 1 ================================================*/
 
-BYTE r1_activity = 1;
+//BYTE r1_activity = 1;
 static ROM const menu_prm_t r1_activity_p = { TYPE_CHAR, "Activity",
-		(void *) &r1_activity, { { 0, 1 } } };
+		(void *) &AppConfig.r1_activity, { { 0, 1 } } };
 
-BYTE r1_wiegand_framelen = 34;
+//BYTE r1_wiegand_framelen = 34;
 static ROM const menu_prm_t r1_wiegand_framelen_p =
-		{ TYPE_CHAR, "Wiegand frame length", (void *) &r1_wiegand_framelen, { {
+		{ TYPE_CHAR, "Wiegand frame length", (void *) &AppConfig.r1_framelen, { {
 				26, 128 } } };
 
-BYTE r1_wg_parity[16] = "Classic e/o";
+//BYTE r1_wg_parity[16] = "Classic e/o";
 static ROM const menu_prm_t r1_wg_parity_p = { TYPE_STRING,
-		"Wiegand parity control", (void *) r1_wg_parity, { { 16 /*, 0*/} } };
+		"Wiegand parity control", (void *) AppConfig.r1_parity, { { 16 /*, 0*/} } };
 
 static ROM const menu_section_t reader1_settings_s = { "READER 1 SETTINGS", {
 		&r1_activity_p, &r1_wiegand_framelen_p, &r1_wg_parity_p,
@@ -91,33 +92,33 @@ static ROM const menu_section_t reader1_settings_s = { "READER 1 SETTINGS", {
 
 /*==================================== READER 2 ================================================*/
 
-BYTE r2_activity = 1;
+//BYTE r2_activity = 1;
 static ROM const menu_prm_t r2_activity_p = { TYPE_CHAR, "Activity",
-		(void *) &r2_activity, { { 0, 1 } } };
+		(void *) &AppConfig.r2_activity, { { 0, 1 } } };
 
-BYTE r2_convert2hex = 1;
+//BYTE r2_convert2hex = 1;
 static ROM const menu_prm_t r2_convert2hex_p = { TYPE_CHAR, "Convert to hex",
-		(void *) &r2_convert2hex, { { 0, 1 } } };
+		(void *) &AppConfig.r2_convert2hex, { { 0, 1 } } };
 
-BYTE r2_framelen = 1;
+//BYTE r2_framelen = 1;
 static ROM const menu_prm_t r2_framelen_p = { TYPE_CHAR, "Frame length",
-		(void *) &r2_framelen, { { 0, 255 } } };
+		(void *) &AppConfig.r2_framelen, { { 0, 255 } } };
 
-BYTE r2_stop_byte = 0x0D;
+//BYTE r2_stop_byte = 0x0D;
 static ROM const menu_prm_t r2_stop_byte_p = { TYPE_CHAR, "Stop byte",
-		(void *) &r2_stop_byte, { { 0, 255 } } };
+		(void *) &AppConfig.r2_stop_byte, { { 0, 255 } } };
 
-BYTE r2_code_begin = 0;
+//BYTE r2_code_begin = 0;
 static ROM const menu_prm_t r2_code_begin_p = { TYPE_CHAR, "Code begin",
-		(void *) &r2_code_begin, { { 0, 255 } } };
+		(void *) &AppConfig.r2_code_begin, { { 0, 255 } } };
 
-BYTE r2_code_len = 0;
+//BYTE r2_code_len = 0;
 static ROM const menu_prm_t r2_code_len_p = { TYPE_CHAR, "Code length",
-		(void *) &r2_code_len, { { 0, 255 } } };
+		(void *) &AppConfig.r2_code_len, { { 0, 255 } } };
 
-BYTE r2_max_delay = 10;
+//BYTE r2_max_delay = 10;
 static ROM const menu_prm_t r2_max_delay_p = { TYPE_CHAR,
-		"Max symbol delay x10ms", (void *) &r2_max_delay, { { 1, 100 } } };
+		"Max symbol delay x10ms", (void *) &AppConfig.r2_max_delay, { { 1, 100 } } };
 
 static ROM const menu_section_t reader2_settings_s = { "READER 2 SETTINGS",
 		{ &r2_activity_p, &r2_convert2hex_p, &r2_framelen_p, &r2_stop_byte_p,
@@ -126,33 +127,33 @@ static ROM const menu_section_t reader2_settings_s = { "READER 2 SETTINGS",
 
 /*=================================== ACCESSOR =================================================*/
 
-BYTE host_tout = 10;
+//BYTE host_tout = 10;
 static ROM const menu_prm_t host_tout_p = { TYPE_CHAR, "Host timeout x10ms",
-		(void *) &host_tout, { { 10, 100 } } };
+		(void *) &AppConfig.acc_host_tout, { { 10, 100 } } };
 
-BYTE retry_cnt = 2;
+//BYTE retry_cnt = 2;
 static ROM const menu_prm_t retry_cnt_p = { TYPE_CHAR, "Max retries",
-		(void *) &retry_cnt, { { 1, 10 } } };
+		(void *) &AppConfig.acc_retry_cnt, { { 1, 10 } } };
 
-BYTE local_access = 3;
+//BYTE local_access = 3;
 static ROM const menu_prm_t local_access_p = { TYPE_CHAR, "Local access mode",
-		(void *) &local_access, { { 0, 3 } } };
+		(void *) &AppConfig.acc_local_access, { { 0, 3 } } };
 
-BYTE local_msg[32] = "Проходите пожалуйста";
+//BYTE local_msg[32] = "Проходите пожалуйста";
 static ROM const menu_prm_t local_msg_p = { TYPE_STRING,
-		"Local customer message", (void *) local_msg, { { 32 /*, 0*/} } };
+		"Local customer message", (void *) AppConfig.acc_local_msg, { { 32 /*, 0*/} } };
 
-BYTE busy_msg[32] = "Извините, временно не работаю";
+//BYTE busy_msg[32] = "Извините, временно не работаю";
 static ROM const menu_prm_t busy_msg_p = { TYPE_STRING,
-		"Busy customer message", (void *) busy_msg, { { 32 /*, 0*/} } };
+		"Busy customer message", (void *) AppConfig.acc_busy_msg, { { 32 /*, 0*/} } };
 
-BYTE failure_msg[32] = "Извините, временно не работаю";
+//BYTE failure_msg[32] = "Извините, временно не работаю";
 static ROM const menu_prm_t failure_msg_p = { TYPE_STRING,
-		"Failure customer message", (void *) failure_msg, { { 32 /*, 0*/} } };
+		"Failure customer message", (void *) AppConfig.acc_failure_msg, { { 32 /*, 0*/} } };
 
-BYTE prompt_msg[32] = "Предъявите карту";
+//BYTE prompt_msg[32] = "Предъявите карту";
 static ROM const menu_prm_t prompt_msg_p = { TYPE_STRING, "Prompt message",
-		(void *) prompt_msg, { { 32 /*, 0*/} } };
+		(void *) AppConfig.acc_prompt_msg, { { 32 /*, 0*/} } };
 
 static ROM const menu_section_t accessor_settings_s = { "ACCESSOR SETTINGS", {
 		&host_tout_p, &retry_cnt_p, &local_access_p, &local_msg_p, &busy_msg_p,
@@ -160,64 +161,64 @@ static ROM const menu_section_t accessor_settings_s = { "ACCESSOR SETTINGS", {
 
 /*================================ SERVICE MACHINE =============================================*/
 
-DWORD service_time = 1000;
+//DWORD service_time = 1000;
 static ROM const menu_prm_t service_time_p = { TYPE_LONG, "Service time x10ms",
-		(void *) &service_time, { { 500, 100000 } } };
+		(void *) &AppConfig.sm_service_time, { { 500, 100000 } } };
 
-BYTE sig_control_en = 1;
+//BYTE sig_control_en = 1;
 static ROM const menu_prm_t sig_control_en_p = { TYPE_CHAR,
-		"Signal <CONTROL> enabled", (void *) &sig_control_en, { { 0, 1 } } };
-BYTE sig_control_relay = 0;
+		"Signal <CONTROL> enabled", (void *) &AppConfig.sm_sig_control_en, { { 0, 1 } } };
+//BYTE sig_control_relay = 0;
 static ROM const menu_prm_t sig_control_relay_p = { TYPE_CHAR,
-		"Signal <CONTROL> relay number", (void *) &sig_control_relay, {
+		"Signal <CONTROL> relay number", (void *) &AppConfig.sm_sig_control_relay, {
 				{ 0, 1 } } };
-BYTE sig_control_inverse = 0;
+//BYTE sig_control_inverse = 0;
 static ROM const menu_prm_t sig_control_inverse_p =
-		{ TYPE_CHAR, "Signal <CONTROL> inverse", (void *) &sig_control_inverse,
+		{ TYPE_CHAR, "Signal <CONTROL> inverse", (void *) &AppConfig.sm_sig_control_inverse,
 				{ { 0, 1 } } };
-WORD sig_control_duration = 10;
+//WORD sig_control_duration = 10;
 static ROM const menu_prm_t sig_control_duration_p = { TYPE_CHAR,
-		"Signal <CONTROL> duration", (void *) &sig_control_duration, { { 0,
+		"Signal <CONTROL> duration", (void *) &AppConfig.sm_sig_control_duration, { { 0,
 				1000 } } };
 
-BYTE sig_indicator_en = 1;
+//BYTE sig_indicator_en = 1;
 static ROM const menu_prm_t sig_indicator_en_p =
-		{ TYPE_CHAR, "Signal <INDICATOR> enabled", (void *) &sig_indicator_en,
+		{ TYPE_CHAR, "Signal <INDICATOR> enabled", (void *) &AppConfig.sm_sig_indicator_en,
 				{ { 0, 1 } } };
-BYTE sig_indicator_relay = 0;
+//BYTE sig_indicator_relay = 0;
 static ROM const menu_prm_t sig_indicator_relay_p = { TYPE_CHAR,
-		"Signal <INDICATOR> relay number", (void *) &sig_indicator_relay, { {
+		"Signal <INDICATOR> relay number", (void *) &AppConfig.sm_sig_indicator_relay, { {
 				0, 1 } } };
-BYTE sig_indicator_inverse = 0;
+//BYTE sig_indicator_inverse = 0;
 static ROM const menu_prm_t sig_indicator_inverse_p = { TYPE_CHAR,
-		"Signal <INDICATOR> inverse", (void *) &sig_indicator_inverse, {
+		"Signal <INDICATOR> inverse", (void *) &AppConfig.sm_sig_indicator_inverse, {
 				{ 0, 1 } } };
-WORD sig_indicator_duration = 10;
+//WORD sig_indicator_duration = 10;
 static ROM const menu_prm_t sig_indicator_duration_p = { TYPE_CHAR,
-		"Signal <INDICATOR> duration", (void *) &sig_indicator_duration, { { 0,
+		"Signal <INDICATOR> duration", (void *) &AppConfig.sm_sig_indicator_duration, { { 0,
 				1000 } } };
 
-BYTE sig_done_en = 1;
+//BYTE sig_done_en = 1;
 static ROM const menu_prm_t sig_done_en_p = { TYPE_CHAR,
-		"Signal <DONE> enabled", (void *) &sig_done_en, { { 0, 1 } } };
-BYTE sig_done_sensor = 0;
+		"Signal <DONE> enabled", (void *) &AppConfig.sm_sig_done_en, { { 0, 1 } } };
+//BYTE sig_done_sensor = 0;
 static ROM const menu_prm_t sig_done_sensor_p =
-		{ TYPE_CHAR, "Signal <DONE> sensor number", (void *) &sig_done_sensor,
+		{ TYPE_CHAR, "Signal <DONE> sensor number", (void *) &AppConfig.sm_sig_done_sensor,
 				{ { 0, 1 } } };
-BYTE sig_done_inverse = 0;
+//BYTE sig_done_inverse = 0;
 static ROM const menu_prm_t sig_done_inverse_p = { TYPE_CHAR,
-		"Signal <DONE> inverse", (void *) &sig_done_inverse, { { 0, 1 } } };
+		"Signal <DONE> inverse", (void *) &AppConfig.sm_sig_done_inverse, { { 0, 1 } } };
 
-BYTE sig_failure_en = 1;
+//BYTE sig_failure_en = 1;
 static ROM const menu_prm_t sig_failure_en_p = { TYPE_CHAR,
-		"Signal <FAILURE> enabled", (void *) &sig_failure_en, { { 0, 1 } } };
-BYTE sig_failure_sensor = 0;
+		"Signal <FAILURE> enabled", (void *) &AppConfig.sm_sig_failure_en, { { 0, 1 } } };
+//BYTE sig_failure_sensor = 0;
 static ROM const menu_prm_t sig_failure_sensor_p = { TYPE_CHAR,
-		"Signal <FAILURE> sensor number", (void *) &sig_failure_sensor, { { 0,
+		"Signal <FAILURE> sensor number", (void *) &AppConfig.sm_sig_failure_sensor, { { 0,
 				1 } } };
-BYTE sig_failure_inverse = 0;
+//BYTE sig_failure_inverse = 0;
 static ROM const menu_prm_t sig_failure_inverse_p =
-		{ TYPE_CHAR, "Signal <FAILURE> inverse", (void *) &sig_failure_inverse,
+		{ TYPE_CHAR, "Signal <FAILURE> inverse", (void *) &AppConfig.sm_sig_failure_inverse,
 				{ { 0, 1 } } };
 
 static ROM const menu_section_t serv_machine_settings_s = {
@@ -426,7 +427,8 @@ static int cvrt_mac_out(char *from, char *to)
 }
 static int cvrt_ip_in(char *from, char *to)
 {
-	char *_to = to + 3;
+	char tmp[4], *p_tmp = tmp;
+	char *_to = p_tmp + 3;
 	char sbyte[4], dg_cnt = 0;
 	char *pbyte = sbyte;
 	int i;
@@ -441,7 +443,7 @@ static int cvrt_ip_in(char *from, char *to)
 			if ((i = atoi(sbyte)) > 255)
 				return 0;
 			*_to-- = (char) i;
-			if (_to < to)
+			if (_to < p_tmp)
 				return 0;
 			from++;
 			pbyte = sbyte;
@@ -455,12 +457,15 @@ static int cvrt_ip_in(char *from, char *to)
 	if ((i = atoi(sbyte)) > 255)
 		return 0;
 
-	*to = (char) i;
+	*p_tmp = (char) i;
 
-	if (_to != to)
+	if (_to != p_tmp)
 		return 0;
-	else
-		return 1;
+
+	*(DWORD *)tmp = swapl(*(DWORD *)tmp);
+	memcpy(to, tmp, sizeof(tmp));
+
+	return 1;
 }
 
 #define ishex(ch) 			(((ch) >= '0' && (ch) <= '9') || ((ch) >= 'a' && (ch) <= 'f') || ((ch) >= 'A' && (ch) <= 'F'))
@@ -468,6 +473,7 @@ static int cvrt_ip_in(char *from, char *to)
 
 static int cvrt_mac_in(char *from, char *to)
 {
+	char tmp[6], *p_tmp = tmp, swp_byte;
 	char sbyte[3];
 	char *pbyte = sbyte;
 	char *_from;
@@ -476,12 +482,15 @@ static int cvrt_mac_in(char *from, char *to)
 	if (strlen(from) != 17)
 		return 0;
 
-	for (_from = from; _from < from + 3 * 6; _from += 3, to ++) {
-		if (ishex(_from[0]) && ishex(_from[1]) && isseparator(_from[2]))
-			*to = hexatob(*(WORD_VAL *) _from);
-		else
+	for (_from = from; _from < from + 3 * 6; _from += 3, p_tmp ++) {
+		if (ishex(_from[0]) && ishex(_from[1]) && isseparator(_from[2])) {
+			swp_byte = hexatob(*(WORD_VAL *) _from);
+			*p_tmp = (swp_byte << 4) | (swp_byte >> 4);
+		} else
 			return 0;
 	}
+
+	memcpy(to, tmp, sizeof(tmp));
 	return 1;
 }
 
@@ -494,14 +503,11 @@ static int cvrt_mac_in(char *from, char *to)
 //	return 0;
 //}
 
-static void config_restore(void) {
-	/* XXX restore config */
-}
+
 
 static void config_save_reboot(void) {
 
-	/* XXX save config */
-
+	config_save();
 	Reset();
 }
 
@@ -511,7 +517,8 @@ static void console_caption(void) {
 	putrsUSART("type:\t\'s\' to save;\r\n");
 	putrsUSART("\t\'e\' to exit without saving;\r\n");
 	putrsUSART("\t\'l\' to show syslog;\r\n");
-	putrsUSART("\t\'f\' to clean syslog;\r\n\r\n");
+	putrsUSART("\t\'f\' to clean syslog;\r\n");
+	putrsUSART("\t\'r\' to restore defaults;\r\n\r\n");
 }
 
 void config(void)
@@ -527,11 +534,10 @@ void config(void)
 	LCD_decode(LCD_ALL);
 	LCDUpdate();
 
-	console_caption();
-
 	while (1) { // XXX add switch/case
 		switch (state) {
 		case SHOW_SECTIONS:
+			console_caption();
 			config_show_sections();
 			ReadStringUART(buffer, sizeof(buffer), TRUE);
 			if(buffer[0] == 'l' || buffer[0] == 'L') {
@@ -545,7 +551,11 @@ void config(void)
 				return;
 			} else if(buffer[0] == 's' || buffer[0] == 'S') {
 				config_save_reboot();
+			} else if(buffer[0] == 'r' || buffer[0] == 'R') {
+				config_restore_defaults();
+				break;
 			}
+
 
 			if (!isdigit(buffer[0])/* || escape_there(buffer)*/)
 				break;
@@ -650,39 +660,108 @@ void config(void)
 	}
 }
 
-//void menu_show(void)
-//{
-//	int i;
-//
-//	for (i = 0; sections[i]; i++) {
-//		printf("%d. %s\n", i, sections[i]->caption);
-//
-//		int j;
-//		for (j = 0; sections[i]->prms[j]; j++) {
-//
-//			printf("\t%d.%d. %s", i, j, sections[i]->prms[j]->caption);
-//
-//			switch (sections[i]->prms[j]->type) {
-//			case TYPE_CHAR:
-//			case TYPE_SHORT:
-//			case TYPE_LONG:
-//				printf(" (val=%d, min=%d, max=%d)\n",
-//						*(int *) (sections[i]->prms[j]->prm),
-//						(int) (sections[i]->prms[j]->d.min),
-//						(int) (sections[i]->prms[j]->d.max));
-//				break;
-//
-//			case TYPE_STRING:
-//				printf(" (val=\"%s\", maxlen=%d)\n",
-//						(char *) (sections[i]->prms[j]->prm),
-//						(int) (sections[i]->prms[j]->s.maxlen));
-//
-//				break;
-//
-//			default:
-//				break;
-//			}
-//		}
-//
-//	}
-//}
+void config_restore(void)
+{
+	WORD cs;
+
+	memset((void*) &AppConfig, 0x00, sizeof(AppConfig));
+	XEEReadArray(0, (BYTE*) &AppConfig, sizeof(AppConfig));
+
+	cs = CalcIPChecksum((BYTE*) &AppConfig,	sizeof(AppConfig) - sizeof(AppConfig.checksum));
+
+	if(cs != AppConfig.checksum)
+		config_restore_defaults();
+}
+
+void config_save(void)
+{
+	AppConfig.checksum = CalcIPChecksum((BYTE*) &AppConfig,	sizeof(AppConfig) - sizeof(AppConfig.checksum));
+	XEEBeginWrite(0x0000);
+	XEEWriteArray((BYTE*) &AppConfig, sizeof(AppConfig));
+}
+
+static ROM BYTE SerializedMACAddress[6] = {MY_DEFAULT_MAC_BYTE1, MY_DEFAULT_MAC_BYTE2, MY_DEFAULT_MAC_BYTE3, MY_DEFAULT_MAC_BYTE4, MY_DEFAULT_MAC_BYTE5, MY_DEFAULT_MAC_BYTE6};
+
+void config_restore_defaults(void)
+{
+
+	memcpypgm2ram((void*) &AppConfig.MyMACAddr,
+			(ROM void*) SerializedMACAddress, sizeof(AppConfig.MyMACAddr));
+	AppConfig.MyIPAddr.Val = MY_DEFAULT_IP_ADDR_BYTE1
+			| MY_DEFAULT_IP_ADDR_BYTE2 << 8ul | MY_DEFAULT_IP_ADDR_BYTE3
+			<< 16ul | MY_DEFAULT_IP_ADDR_BYTE4 << 24ul;
+	AppConfig.MyMask.Val = MY_DEFAULT_MASK_BYTE1 | MY_DEFAULT_MASK_BYTE2 << 8ul
+			| MY_DEFAULT_MASK_BYTE3 << 16ul | MY_DEFAULT_MASK_BYTE4 << 24ul;
+	AppConfig.MyGateway.Val = MY_DEFAULT_GATE_BYTE1 | MY_DEFAULT_GATE_BYTE2
+			<< 8ul | MY_DEFAULT_GATE_BYTE3 << 16ul | MY_DEFAULT_GATE_BYTE4
+			<< 24ul;
+	AppConfig.PrimaryDNSServer.Val = MY_DEFAULT_PRIMARY_DNS_BYTE1
+			| MY_DEFAULT_PRIMARY_DNS_BYTE2 << 8ul
+			| MY_DEFAULT_PRIMARY_DNS_BYTE3 << 16ul
+			| MY_DEFAULT_PRIMARY_DNS_BYTE4 << 24ul;
+	AppConfig.SecondaryDNSServer.Val = MY_DEFAULT_SECONDARY_DNS_BYTE1
+			| MY_DEFAULT_SECONDARY_DNS_BYTE2 << 8ul
+			| MY_DEFAULT_SECONDARY_DNS_BYTE3 << 16ul
+			| MY_DEFAULT_SECONDARY_DNS_BYTE4 << 24ul;
+
+	memcpypgm2ram(AppConfig.NetBIOSName, (ROM void*)MY_DEFAULT_HOST_NAME, 16);
+	FormatNetBIOSName(AppConfig.NetBIOSName);
+
+	AppConfig.comm_station_id = DFLT_COMM_STATION_ID;
+	AppConfig.comm_port = DFLT_COMM_PORT;
+
+	AppConfig.rs232_baudrate = DFLT_RS232_BAUDRATE;
+	AppConfig.rs232_parity = DFLT_RS232_PARITY;
+	AppConfig.rs232_databits = DFLT_RS232_DATABITS;
+	AppConfig.rs232_stopbits = DFLT_RS232_STOPBITS;
+	AppConfig.rs232_handshake = DFLT_RS232_HANDSHAKE;
+
+	AppConfig.r1_activity = DFLT_R1_ACTIVITY;
+	AppConfig.r1_framelen = DFLT_R1_FRAMELEN;
+
+//	AppConfig.r1_parity[16];
+	strcpypgm2ram((char*) AppConfig.r1_parity, DFLT_R1_PARITY);
+
+	AppConfig.r2_activity = DFLT_R2_ACTIVITY;
+	AppConfig.r2_convert2hex = DFLT_R2_CONVERT2HEX;
+	AppConfig.r2_framelen = DFLT_R2_FRAMELEN;
+	AppConfig.r2_stop_byte = DFLT_R2_STOPBYTE;
+	AppConfig.r2_code_begin = DFLT_R2_CODE_BEGIN;
+	AppConfig.r2_code_len = DFLT_R2_CODE_LEN;
+	AppConfig.r2_max_delay = DFLT_R2_MAX_DELAY;
+
+	AppConfig.acc_host_tout = DFLT_ACC_HOST_TOUT;
+	AppConfig.acc_retry_cnt = DFLT_ACC_RETRY_CNT;
+	AppConfig.acc_local_access = DFLT_ACC_LOCAL_ACCESS;
+
+//	AppConfig.acc_local_msg[32];
+	strcpypgm2ram((char*) AppConfig.acc_local_msg, DFLT_ACC_LOCAL_MSG);
+
+//	AppConfig.acc_busy_msg[32];
+	strcpypgm2ram((char*) AppConfig.acc_busy_msg, DFLT_ACC_BUSY_MSG);
+
+//	AppConfig.acc_failure_msg[32];
+	strcpypgm2ram((char*) AppConfig.acc_failure_msg, DFLT_ACC_FAILURE_MSG);
+
+//	AppConfig.acc_prompt_msg[32];
+	strcpypgm2ram((char*) AppConfig.acc_prompt_msg, DFLT_ACC_PROMPT_MSG);
+
+
+	AppConfig.sm_service_time = DFLT_SM_SERVICE_TIME;
+	AppConfig.sm_sig_control_en = DFLT_SM_SIG_CONTROL_EN;
+	AppConfig.sm_sig_control_relay = DFLT_SM_SIG_CONTROL_RELAY;
+	AppConfig.sm_sig_control_inverse = DFLT_SM_SIG_CONTROL_INVERSE;
+	AppConfig.sm_sig_control_duration = DFLT_SM_SIG_CONTROL_DURATION;
+	AppConfig.sm_sig_indicator_en = DFLT_SM_SIG_INDICATOR_EN;
+	AppConfig.sm_sig_indicator_relay = DFLT_SM_SIG_INDICATOR_RELAY;
+	AppConfig.sm_sig_indicator_inverse = DFLT_SM_SIG_INDICATOR_INVERSE;
+	AppConfig.sm_sig_indicator_duration = DFLT_SM_SIG_INDICATOR_DURATION;
+	AppConfig.sm_sig_done_en = DFLT_SM_SIG_DONE_EN;
+	AppConfig.sm_sig_done_sensor = DFLT_SM_SIG_DONE_SENSOR;
+	AppConfig.sm_sig_done_inverse = DFLT_SM_SIG_DONE_INVERSE;
+	AppConfig.sm_sig_failure_en = DFLT_SM_SIG_FAILURE_EN;
+	AppConfig.sm_sig_failure_sensor = DFLT_SM_SIG_FAILURE_SENSOR;
+	AppConfig.sm_sig_failure_inverse = DFLT_SM_SIG_FAILURE_INVERSE;
+
+	config_save();
+}

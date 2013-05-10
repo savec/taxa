@@ -57,14 +57,19 @@ static int process_buffer(bd_t handler)
 	return result;
 }
 
-void sm_init(void)
+static void sm_lcd_prompt(void)
 {
-	// XXX check INs
-
 	sprintf(LCD_STRING_0, "Предъявите карту");
 	sprintf(LCD_STRING_1, "                ");
 	LCD_decode(LCD_ALL);
 	LCDUpdate();
+}
+
+void sm_init(void)
+{
+	// XXX check INs
+
+	sm_lcd_prompt();
 
 	mail_subscribe(MYSELF, &mailbox);
 	state = SM_READY;
@@ -127,9 +132,11 @@ void sm_module(void)
 	case SM_WORK:
 		if(TickGet() - t > TICK_SECOND * 2) {
 			event_send(MODULE_ACCESSOR, EVT_AC_TOUT);
+			sm_lcd_prompt();
 			state = SM_FINAL;
 		} else if (P_IN1) {
 			event_send(MODULE_ACCESSOR, EVT_AC_DONE);
+			sm_lcd_prompt();
 			state = SM_FINAL;
 		}
 		break;

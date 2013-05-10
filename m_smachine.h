@@ -33,6 +33,7 @@ typedef enum {
 #define P_IN1	(!BUTTON2_IO)
 #define P_IN2	(!BUTTON3_IO)
 #define P_IN3	(!BUTTON4_IO)
+#define P_IN4	(!BUTTON5_IO)
 
 void sm_init(void);
 void sm_module(void);
