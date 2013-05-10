@@ -220,7 +220,10 @@ modules_e bcp_determine_subscriber(bd_t handler)
 	case TYPE_NPDL:
 		switch (hdr->raw[RAW_QAC]) {
 		case QAC_AR_REQUEST:
+		case QAC_SERV_DONE:
+		case QAC_SERV_REJECT:
 			return MODULE_ACCESSOR;
+
 		default:
 			return MODULE_UNKNOWN;
 

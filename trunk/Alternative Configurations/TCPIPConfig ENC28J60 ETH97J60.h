@@ -68,7 +68,7 @@
 #define STACK_USE_UART					// Application demo using UART for IP address display and stack configuration
 //#define STACK_USE_UART2TCP_BRIDGE		// UART to TCP Bridge application example
 //#define STACK_USE_IP_GLEANING
-//#define STACK_USE_ICMP_SERVER			// Ping query and response capability
+#define STACK_USE_ICMP_SERVER			// Ping query and response capability
 //#define STACK_USE_ICMP_CLIENT			// Ping transmission capability
 //#define STACK_USE_HTTP_SERVER			// Old HTTP server
 //#define STACK_USE_HTTP2_SERVER			// New HTTP server with POST, Cookies, Authentication, etc.
@@ -154,7 +154,7 @@
  *   To clear EEPROM, hold BUTTON0, reset the board, and continue
  *   holding until the LEDs flash.  Release, and reset again.
  */
-#define MY_DEFAULT_HOST_NAME			"MCHPBOARD"
+#define MY_DEFAULT_HOST_NAME			"SKIPIC"
 
 #define MY_DEFAULT_MAC_BYTE1            (0x00)	// Use the default of 00-04-A3-00-00-00
 #define MY_DEFAULT_MAC_BYTE2            (0x04)	// if using an ENCX24J600, MRF24WB0M, or
@@ -230,7 +230,7 @@
  *   mode.  In CLIENT mode, some functions specific to client operation
  *   are enabled.
  */
-#define STACK_CLIENT_MODE
+//#define STACK_CLIENT_MODE
 
 /* TCP Socket Memory Allocation
  *   TCP needs memory to buffer incoming and outgoing data.  The

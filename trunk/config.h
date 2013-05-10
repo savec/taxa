@@ -48,6 +48,53 @@ typedef struct {
 	ROM const menu_prm_t * ROM prms[MAX_PRMS];
 } menu_section_t;
 
+#define DFLT_COMM_STATION_ID 1
+#define DFLT_COMM_PORT 50
+#define DFLT_RS232_BAUDRATE 9600
+#define DFLT_RS232_PARITY 1
+#define DFLT_RS232_DATABITS 8
+#define DFLT_RS232_STOPBITS 2
+#define DFLT_RS232_HANDSHAKE 0
+
+#define DFLT_R1_ACTIVITY 1
+#define DFLT_R1_FRAMELEN 34
+
+#define DFLT_R1_PARITY "Classic e/o"
+#define DFLT_R2_ACTIVITY 0
+#define DFLT_R2_CONVERT2HEX 1
+#define DFLT_R2_FRAMELEN 20
+#define DFLT_R2_STOPBYTE 0x0D
+#define DFLT_R2_CODE_BEGIN 0
+#define DFLT_R2_CODE_LEN 20
+#define DFLT_R2_MAX_DELAY 10
+
+#define DFLT_ACC_HOST_TOUT 10
+#define DFLT_ACC_RETRY_CNT 2
+#define DFLT_ACC_LOCAL_ACCESS 3
+#define DFLT_ACC_LOCAL_MSG "Проходите пожалуйста"
+#define DFLT_ACC_BUSY_MSG "Извините, временно не работаю"
+#define DFLT_ACC_FAILURE_MSG "Извините, временно не работаю"
+#define DFLT_ACC_PROMPT_MSG "Предъявите карту"
+
+#define DFLT_SM_SERVICE_TIME 1000
+#define DFLT_SM_SIG_CONTROL_EN 1
+#define DFLT_SM_SIG_CONTROL_RELAY 0
+#define DFLT_SM_SIG_CONTROL_INVERSE 0
+#define DFLT_SM_SIG_CONTROL_DURATION 10
+#define DFLT_SM_SIG_INDICATOR_EN 1
+#define DFLT_SM_SIG_INDICATOR_RELAY 0
+#define DFLT_SM_SIG_INDICATOR_INVERSE 0
+#define DFLT_SM_SIG_INDICATOR_DURATION 10
+#define DFLT_SM_SIG_DONE_EN 1
+#define DFLT_SM_SIG_DONE_SENSOR 0
+#define DFLT_SM_SIG_DONE_INVERSE 0
+#define DFLT_SM_SIG_FAILURE_EN 1
+#define DFLT_SM_SIG_FAILURE_SENSOR 0
+#define DFLT_SM_SIG_FAILURE_INVERSE 0
+
 void config(void);
+void config_restore_defaults(void);
+void config_restore(void);
+void config_save(void);
 
 #endif /* CONFIG_H_ */

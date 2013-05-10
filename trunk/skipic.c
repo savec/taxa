@@ -137,7 +137,7 @@ int __C30_UART = 2;
 
 // Private helper functions.
 // These may or may not be present in all applications.
-static void InitAppConfig(void);
+//static void InitAppConfig(void);
 static void InitializeBoard(void);
 //static void ProcessIO(void);
 static void get_ajustible(WORD *value);
@@ -260,7 +260,8 @@ int main(void)
 //	slog_format();
 
 	// Initialize Stack and application related NV variables into AppConfig.
-	InitAppConfig();
+//	InitAppConfig();
+	config_restore();
 
 	// Initiates board setup process if button is depressed
 	// on startup
@@ -1072,8 +1073,10 @@ static void InitializeBoard(void)
 // that locate the MAC address at 0x1FFF0.  Syntax below is for MPLAB C 
 // Compiler for PIC18 MCUs. Syntax will vary for other compilers.
 //#pragma romdata MACROM=0x1FFF0
+/*
 static ROM BYTE SerializedMACAddress[6] = {MY_DEFAULT_MAC_BYTE1, MY_DEFAULT_MAC_BYTE2, MY_DEFAULT_MAC_BYTE3, MY_DEFAULT_MAC_BYTE4, MY_DEFAULT_MAC_BYTE5, MY_DEFAULT_MAC_BYTE6};
 //#pragma romdata
+
 
 static void InitAppConfig(void)
 {
@@ -1097,11 +1100,11 @@ static void InitAppConfig(void)
 		AppConfig.MyIPAddr.Val = MY_DEFAULT_IP_ADDR_BYTE1
 				| MY_DEFAULT_IP_ADDR_BYTE2 << 8ul | MY_DEFAULT_IP_ADDR_BYTE3
 				<< 16ul | MY_DEFAULT_IP_ADDR_BYTE4 << 24ul;
-		AppConfig.DefaultIPAddr.Val = AppConfig.MyIPAddr.Val;
+//		AppConfig.DefaultIPAddr.Val = AppConfig.MyIPAddr.Val;
 		AppConfig.MyMask.Val = MY_DEFAULT_MASK_BYTE1 | MY_DEFAULT_MASK_BYTE2
 				<< 8ul | MY_DEFAULT_MASK_BYTE3 << 16ul | MY_DEFAULT_MASK_BYTE4
 				<< 24ul;
-		AppConfig.DefaultMask.Val = AppConfig.MyMask.Val;
+//		AppConfig.DefaultMask.Val = AppConfig.MyMask.Val;
 		AppConfig.MyGateway.Val = MY_DEFAULT_GATE_BYTE1 | MY_DEFAULT_GATE_BYTE2
 				<< 8ul | MY_DEFAULT_GATE_BYTE3 << 16ul | MY_DEFAULT_GATE_BYTE4
 				<< 24ul;
@@ -1197,7 +1200,7 @@ static void InitAppConfig(void)
 
 #else
 #error "No security defined"
-#endif /* MY_DEFAULT_WIFI_SECURITY_MODE */
+#endif  MY_DEFAULT_WIFI_SECURITY_MODE
 
 #endif
 
@@ -1306,4 +1309,5 @@ void SaveAppConfig(const APP_CONFIG *ptrAppConfig)
 #endif
 }
 #endif
+*/
 

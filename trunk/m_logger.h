@@ -11,6 +11,12 @@
 #include "TCPIP Stack/TCPIP.h"
 #include "modules.h"
 
+typedef struct {
+	WORD hours;
+	BYTE minutes;
+	BYTE seconds;
+} time_t;
+
 #define PAGE_SIZE	264ul
 #define PAGES_NUM	496
 
@@ -23,8 +29,8 @@
 
 void slog_init(void);
 void slog_format(void);
-int slog_putrs(const rom BYTE *str, BOOL need_timestamp);
-int slog_puts(const BYTE *str, BOOL need_timestamp);
+int slog_putrs(const rom BYTE *str);
+int slog_puts(const BYTE *str);
 int slog_gets(DWORD pos, BYTE *buf, BYTE len);
 void slog_flush(void);
 
