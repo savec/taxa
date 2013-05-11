@@ -6,6 +6,13 @@
  */
 
 #include "m_logger.h"
+#include "post.h"
+
+rom static char * ver = "LG0.01";
+static mailbox_t mailbox;
+
+#define MYSELF	MODULE_LOGGER
+
 
 static BOOL slog_need_format(void);
 
@@ -33,6 +40,8 @@ void slog_init(void)
 			;
 		XEEEndRead();
 	}
+
+	mail_subscribe(MYSELF, &mailbox);
 }
 
 void slog_fast_format(void)
@@ -83,29 +92,49 @@ static int slog_put_timestamp(void)
 	slog_get_time(&time);
 	sprintf(str_buf, "%05i:%02i:%02i ", (int)time.hours, (int)time.minutes, (int)time.seconds);
 
+	XEEBeginWrite(SLOG_START + slog_pos);
 	for (put = 0, str_time = str_buf; (*str_time) && (slog_pos < SLOG_LEN); slog_pos++, put++, str_time++) {
 		if((SLOG_START + slog_pos) % PAGE_SIZE == 0)
 			XEEBeginWrite(SLOG_START + slog_pos);
 		XEEWrite(*str_time);
 	}
+	XEEEndWrite();
 
 	return put;
+}
+
+static int slog_terminate(void)
+{
+	BYTE str_buf[] = {'\r', '\n', SLOG_EOF};
+	BYTE *str = str_buf;
+
+	XEEBeginWrite(SLOG_START + slog_pos);
+	do
+	{
+		if((SLOG_START + slog_pos) % PAGE_SIZE == 0)
+			XEEBeginWrite(SLOG_START + slog_pos);
+		XEEWrite(*str);
+	} while(*str++);
+	XEEEndWrite();
+
+	slog_pos += (sizeof(str_buf) - 1);
+
+	return (sizeof(str_buf) - 1);
 }
 
 int slog_puts(const BYTE *str)
 {
 	int put = slog_put_timestamp();
 
-	for (put = 0; (*str) && (slog_pos < SLOG_LEN); slog_pos++, put++, str++) {
+	XEEBeginWrite(SLOG_START + slog_pos);
+	for (; (*str) && (slog_pos < SLOG_LEN); slog_pos++, put++, str++) {
 		if((SLOG_START + slog_pos) % PAGE_SIZE == 0)
 			XEEBeginWrite(SLOG_START + slog_pos);
 		XEEWrite(*str);
 	}
-
-	XEEWrite('\r');
-	XEEWrite('\n');
-
 	XEEEndWrite();
+
+	put += slog_terminate();
 
 	return put;
 }
@@ -114,16 +143,15 @@ int slog_putrs(const rom BYTE *str)
 {
 	int put = slog_put_timestamp();
 
-	for (XEEBeginWrite(SLOG_START + slog_pos); (*str) && (slog_pos < SLOG_LEN); slog_pos++, put++, str++) {
+	XEEBeginWrite(SLOG_START + slog_pos);
+	for (; (*str) && (slog_pos < SLOG_LEN); slog_pos++, put++, str++) {
 		if((SLOG_START + slog_pos) % PAGE_SIZE == 0)
 			XEEBeginWrite(SLOG_START + slog_pos);
 		XEEWrite(*str);
 	}
-
-	XEEWrite('\r');
-	XEEWrite('\n');
-
 	XEEEndWrite();
+
+	put += slog_terminate();
 
 	return put;
 }
@@ -171,14 +199,13 @@ void slog_flush(void)
 
 int slog_getlast(BYTE *buf, BYTE len)
 {
+	get_pos = slog_pos;
 	if(slog_pos == 0)
 		return 0;
-
-	get_pos = slog_pos;
-	return slog_getnext(buf, len);
+	return slog_getnext(buf, len, 0);
 }
 
-int slog_getnext(BYTE *buf, BYTE len)
+int slog_getnext(BYTE *buf, BYTE len, BOOL erase)
 {
 	BYTE read, ch;
 
@@ -206,8 +233,64 @@ int slog_getnext(BYTE *buf, BYTE len)
 	}
 
 	XEEEndRead();
-
 	*buf = '\0';
+
+	if(!erase)
+		return read;
+
+	XEEBeginWrite(get_pos + SLOG_START);
+	XEEWrite(SLOG_EOF);
+	XEEEndWrite();
+	slog_pos = get_pos;
 
 	return read;
 }
+
+static int process_buffer(bd_t handler)
+{
+	int result = 0;
+	bcp_header_t * hdr = (bcp_header_t *) bcp_buffer(handler)->buf;
+
+	switch (TYPE(hdr->hdr_s.type)) {
+	case TYPE_NPD1:
+		switch (hdr->raw[RAW_QAC]) {
+		case QAC_GETVER:
+			switch (hdr->hdr_s.packtype_u.npd1.data) {
+			case (MYSELF + 1):
+				/* readers ver */
+				hdr->hdr_s.type = TYPE_NPDL;
+				hdr->raw[RAW_DATA] = hdr->hdr_s.packtype_u.npd1.data;
+				hdr->hdr_s.packtype_u.npdl.len = strlenpgm(ver) + 3;
+				strcpypgm2ram((char *) &hdr->raw[RAW_DATA + 1], ver);
+				bcp_send_buffer(handler);
+
+				break;
+			default:
+				result = -1;
+			}
+			break;
+
+		default:
+			result = -1;
+		}
+		break;
+	default:
+		result = -1;
+	}
+
+	bcp_release_buffer(handler);
+	putrsUSART("\n\rLOG: buffer released (rsp sent)");
+
+	return result;
+}
+
+
+void slog_module(void)
+{
+	bd_t ipacket;
+
+	if(mail_reciev(MYSELF, &ipacket)) {
+		process_buffer(ipacket);
+	}
+}
+

@@ -42,6 +42,7 @@ typedef enum {
 	QAC_AR_REQUEST = 0x1E,
 	QAC_SERV_DONE = 0x1F,
 	QAC_SERV_REJECT = 0x20
+
 } qac_e;
 
 typedef enum {

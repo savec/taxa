@@ -273,6 +273,7 @@ void config_show_sections(void)
 		putrsUSART("\n\r");
 	}
 
+	putrsUSART("\n\r");
 }
 
 int config_show_section(ROM const menu_section_t * section)
@@ -536,10 +537,11 @@ void config(void)
 	LCD_decode(LCD_ALL);
 	LCDUpdate();
 
+	console_caption();
+
 	while (1) { // XXX add switch/case
 		switch (state) {
 		case SHOW_SECTIONS:
-			console_caption();
 			config_show_sections();
 			ReadStringUART(buffer, sizeof(buffer), TRUE);
 			if (buffer[0] == 'l' || buffer[0] == 'L') {
@@ -558,14 +560,18 @@ void config(void)
 				break;
 			} else if (buffer[0] == 't' || buffer[0] == 'T') {
 
-				slog_getlast(buffer, sizeof(buffer));
-				putsUSART(buffer);
+				if(slog_getlast(buffer, sizeof(buffer)))
+					putsUSART(buffer);
+				else
+					putrsUSART("System log is empty\r\n");
 
 				break;
 			} else if (buffer[0] == 'n' || buffer[0] == 'N') {
 
-				slog_getnext(buffer, sizeof(buffer));
-				putsUSART(buffer);
+				if(slog_getnext(buffer, sizeof(buffer), 1))
+					putsUSART(buffer);
+				else
+					putrsUSART("There are no more events\r\n");
 
 				break;
 			}

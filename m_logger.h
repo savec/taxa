@@ -21,7 +21,7 @@ typedef struct {
 #define PAGES_NUM	496
 
 #define SLOG_START	(10ul*PAGE_SIZE)
-#define SLOG_LEN	(10ul*PAGE_SIZE) 
+#define SLOG_LEN	(100ul*PAGE_SIZE)
 
 #define SLOG_EOF	0	// we cant't use standart EOF(-1) because of it's a symbol in cp1251 coding
 
@@ -35,6 +35,7 @@ int slog_puts(const BYTE *str);
 int slog_gets(DWORD pos, BYTE *buf, BYTE len);
 void slog_flush(void);
 int slog_getlast(BYTE *buf, BYTE len);
-int slog_getnext(BYTE *buf, BYTE len);
+int slog_getnext(BYTE *buf, BYTE len, BOOL erase);
+void slog_module(void);
 
 #endif /* M_LOGGER_H_ */
