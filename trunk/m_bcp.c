@@ -205,9 +205,9 @@ modules_e bcp_determine_subscriber(bd_t handler)
 			case 4:
 				return MODULE_SRVMACHINE;
 			case 5:
-				return MODULE_BCP /*MODULE_LOGGER*/; // XXX tst
-			case 6:
-				return MODULE_LCD;
+				return MODULE_LOGGER;
+//			case 6:
+//				return MODULE_LCD;
 			default:
 				return MODULE_BCP;
 			}

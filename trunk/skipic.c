@@ -379,6 +379,7 @@ int main(void)
 		readers_module();
 		accessor_module();
 		sm_module();
+		slog_module();
 
 
 		// Blink LED0 (right most one) every second.
