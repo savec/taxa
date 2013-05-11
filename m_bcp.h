@@ -39,10 +39,14 @@ typedef enum {
 typedef enum {
 	QAC_GETVER 	= 0x00,
 	QAC_ECHO 	= 0x09,
+	QAC_LG_CLEAR_ALL = 0x0A,
+	QAC_LG_READ_LAST = 0x0B,
+	QAC_LG_READ_NEXT = 0x0C,
+	QAC_LG_GET_COUNT = 0x0D,
+	QAC_LG_WRITE_EVENT = 0x0E,
 	QAC_AR_REQUEST = 0x1E,
 	QAC_SERV_DONE = 0x1F,
 	QAC_SERV_REJECT = 0x20
-
 } qac_e;
 
 typedef enum {

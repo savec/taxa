@@ -18,6 +18,7 @@ static BOOL slog_need_format(void);
 
 static DWORD slog_pos;
 static DWORD get_pos;
+static WORD cnt_events;
 
 static void slog_get_time(time_t *time)
 {
@@ -35,9 +36,15 @@ void slog_init(void)
 	if (slog_need_format()) {
 		slog_fast_format();
 	} else {
+		cnt_events = 0;
 		XEEBeginRead(SLOG_START);
-		for (slog_pos = 0; (XEERead() != SLOG_EOF) && (slog_pos < SLOG_LEN); slog_pos++)
-			;
+		for (slog_pos = 0; slog_pos < SLOG_LEN; slog_pos++) {
+			BYTE ch = XEERead();
+			if(ch == SLOG_EOF)
+				break;
+			if(ch == '\n')
+				cnt_events ++;
+		}
 		XEEEndRead();
 	}
 
@@ -50,6 +57,7 @@ void slog_fast_format(void)
 	XEEWrite(SLOG_EOF);
 	XEEEndWrite();
 	slog_pos = 0;
+	cnt_events = 0;
 }
 
 void slog_format(void)
@@ -63,6 +71,7 @@ void slog_format(void)
 	}
 	XEEEndWrite();
 	slog_pos = 0;
+	cnt_events = 0;
 }
 
 static BOOL slog_need_format(void)
@@ -135,6 +144,7 @@ int slog_puts(const BYTE *str)
 	XEEEndWrite();
 
 	put += slog_terminate();
+	cnt_events ++;
 
 	return put;
 }
@@ -152,6 +162,7 @@ int slog_putrs(const rom BYTE *str)
 	XEEEndWrite();
 
 	put += slog_terminate();
+	cnt_events ++;
 
 	return put;
 }
@@ -189,10 +200,15 @@ void slog_flush(void)
 
 	putrsUSART("\n\r>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n\r");
 
-	uitoa((WORD)(SLOG_LEN - all), buf);
+	putrsUSART("Total: ");
+	uitoa(cnt_events, buf);
+	putsUSART(buf);
+	putrsUSART(" events, ");
 
+	uitoa((WORD)(SLOG_LEN - all), buf);
 	putsUSART(buf);
 	putrsUSART(" bytes free\n\r");
+
 }
 
 
@@ -205,9 +221,22 @@ int slog_getlast(BYTE *buf, BYTE len)
 	return slog_getnext(buf, len, 0);
 }
 
+/*
+ * slog_getlast MUST be called before slog_getnext!!!
+ */
+
 int slog_getnext(BYTE *buf, BYTE len, BOOL erase)
 {
 	BYTE read, ch;
+
+	if (erase) {
+		XEEBeginWrite(get_pos + SLOG_START);
+		XEEWrite(SLOG_EOF);
+		XEEEndWrite();
+		slog_pos = get_pos;
+		if (cnt_events)
+			cnt_events--;
+	}
 
 	if(get_pos < 2)
 		return 0;
@@ -234,14 +263,6 @@ int slog_getnext(BYTE *buf, BYTE len, BOOL erase)
 
 	XEEEndRead();
 	*buf = '\0';
-
-	if(!erase)
-		return read;
-
-	XEEBeginWrite(get_pos + SLOG_START);
-	XEEWrite(SLOG_EOF);
-	XEEEndWrite();
-	slog_pos = get_pos;
 
 	return read;
 }
