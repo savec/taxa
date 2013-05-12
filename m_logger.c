@@ -7,6 +7,7 @@
 
 #include "m_logger.h"
 #include "post.h"
+#include <string.h>
 
 rom static char * ver = "LG0.01";
 static mailbox_t mailbox;
@@ -18,7 +19,7 @@ static BOOL slog_need_format(void);
 
 static DWORD slog_pos;
 static DWORD get_pos;
-static WORD cnt_events;
+static DWORD cnt_events;
 
 static void slog_get_time(time_t *time)
 {
@@ -47,6 +48,8 @@ void slog_init(void)
 		}
 		XEEEndRead();
 	}
+
+	slog_getlast(NULL, 0); // set get_pos pointer
 
 	mail_subscribe(MYSELF, &mailbox);
 }
@@ -254,6 +257,9 @@ int slog_getnext(BYTE *buf, BYTE len, BOOL erase)
 		}
 	}
 
+	if(buf == NULL)
+		return 0;
+
 	for(read = 0, XEEBeginRead(get_pos + SLOG_START); (read < len); read ++)
 	{
 		*buf++ = ch = XEERead();
@@ -264,7 +270,7 @@ int slog_getnext(BYTE *buf, BYTE len, BOOL erase)
 	XEEEndRead();
 	*buf = '\0';
 
-	return read;
+	return read + 1; // + '\0'
 }
 
 static int process_buffer(bd_t handler)
@@ -273,6 +279,45 @@ static int process_buffer(bd_t handler)
 	bcp_header_t * hdr = (bcp_header_t *) bcp_buffer(handler)->buf;
 
 	switch (TYPE(hdr->hdr_s.type)) {
+	case TYPE_NPRQ:
+		switch (hdr->raw[RAW_QAC]) {
+		case QAC_LG_CLEAR_ALL:
+			putrsUSART("QAC_LG_CLEAR_ALL");
+
+			break;
+		case QAC_LG_READ_LAST:
+			putrsUSART("QAC_LG_READ_LAST");
+
+			hdr->hdr_s.type = TYPE_NPDL;
+			hdr->hdr_s.packtype_u.npdl.len = slog_getlast(
+					(BYTE *) &hdr->raw[RAW_DATA], (PAYLOADLEN - 2)) + 2;
+			bcp_send_buffer(handler);
+
+			break;
+		case QAC_LG_READ_NEXT:
+			putrsUSART("QAC_LG_READ_NEXT");
+
+			hdr->hdr_s.type = TYPE_NPDL;
+			hdr->hdr_s.packtype_u.npdl.len = slog_getnext(
+					(BYTE *) &hdr->raw[RAW_DATA], (PAYLOADLEN - 2), 1) + 2;
+			bcp_send_buffer(handler);
+
+			break;
+		case QAC_LG_GET_COUNT:
+			putrsUSART("QAC_LG_GET_COUNT");
+
+			hdr->hdr_s.type = TYPE_NPDL;
+//			*(DWORD *)&hdr->raw[RAW_DATA] = cnt_events; // alignment problems possible
+			memcpy((void *)&hdr->raw[RAW_DATA], (void *)&cnt_events, sizeof(cnt_events));
+			hdr->hdr_s.packtype_u.npdl.len = sizeof(cnt_events) + 2;
+			bcp_send_buffer(handler);
+
+			break;
+		default:
+			result = -1;
+		}
+
+		break;
 	case TYPE_NPD1:
 		switch (hdr->raw[RAW_QAC]) {
 		case QAC_GETVER:
@@ -295,6 +340,30 @@ static int process_buffer(bd_t handler)
 			result = -1;
 		}
 		break;
+
+	case TYPE_NPDL:
+		switch (hdr->raw[RAW_QAC]) {
+
+		case QAC_LG_WRITE_EVENT:
+			putrsUSART("QAC_LG_WRITE_EVENT");
+
+			hdr->raw[RAW_DATA + hdr->hdr_s.packtype_u.npdl.len - 2] = '\0';
+			slog_puts((BYTE *)&hdr->raw[RAW_DATA]);
+
+			hdr->hdr_s.type = TYPE_NPDL;
+//			*(DWORD *)&hdr->raw[RAW_DATA] = cnt_events; // alignment problems possible
+			memcpy((void *)&hdr->raw[RAW_DATA], (void *)&cnt_events, sizeof(cnt_events));
+			hdr->hdr_s.packtype_u.npdl.len = sizeof(cnt_events) + 2;
+			bcp_send_buffer(handler);
+
+			break;
+
+		default:
+			result = -1;
+		}
+
+		break;
+
 	default:
 		result = -1;
 	}
