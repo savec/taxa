@@ -190,7 +190,20 @@ modules_e bcp_determine_subscriber(bd_t handler)
 
 	switch (TYPE(hdr->hdr_s.type)) {
 	case TYPE_NPRQ:
-		return MODULE_BCP;
+		switch (hdr->raw[RAW_QAC]) {
+		case QAC_LG_CLEAR_ALL:
+			return MODULE_LOGGER;
+		case QAC_LG_READ_LAST:
+			return MODULE_LOGGER;
+		case QAC_LG_READ_NEXT:
+			return MODULE_LOGGER;
+		case QAC_LG_GET_COUNT:
+			return MODULE_LOGGER;
+
+		default:
+			return MODULE_BCP;
+		}
+
 	case TYPE_NPD1:
 		switch (hdr->raw[RAW_QAC]) {
 		case QAC_GETVER:
@@ -213,8 +226,9 @@ modules_e bcp_determine_subscriber(bd_t handler)
 			}
 		case QAC_ECHO:
 			return MODULE_BCP;
+
 		default:
-			return MODULE_UNKNOWN;
+			return MODULE_BCP; //MODULE_UNKNOWN;
 		}
 
 	case TYPE_NPDL:
@@ -225,14 +239,16 @@ modules_e bcp_determine_subscriber(bd_t handler)
 			return MODULE_ACCESSOR;
 		case QAC_ECHO:
 			return MODULE_BCP;
+		case QAC_LG_WRITE_EVENT:
+			return MODULE_LOGGER;
 
 		default:
-			return MODULE_UNKNOWN;
+			return MODULE_BCP; //MODULE_UNKNOWN;
 		}
 	case TYPE_CTRL:
 		return MODULE_BCP;
 	default:
-		return MODULE_UNKNOWN;
+		return MODULE_BCP; //MODULE_UNKNOWN;
 	}
 }
 

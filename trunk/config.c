@@ -547,8 +547,11 @@ void config(void)
 			if (buffer[0] == 'l' || buffer[0] == 'L') {
 				slog_flush();
 				break;
-			} else if (buffer[0] == 'f' || buffer[0] == 'F') {
+			} else if (buffer[0] == 'f') {
 				slog_fast_format();
+				break;
+			} else if (buffer[0] == 'F') {
+				slog_format();
 				break;
 			} else if (buffer[0] == 'e' || buffer[0] == 'E') {
 				config_restore();
