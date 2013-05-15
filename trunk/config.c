@@ -518,7 +518,8 @@ static void console_caption(void) {
 	putrsUSART("type:\t\'s\' to save;\r\n");
 	putrsUSART("\t\'e\' to exit without saving;\r\n");
 	putrsUSART("\t\'l\' to show syslog;\r\n");
-	putrsUSART("\t\'f\' to clean syslog;\r\n");
+	putrsUSART("\t\'f\' to format syslog;\r\n");
+	putrsUSART("\t\'c\' to clean syslog;\r\n");
 	putrsUSART("\t\'r\' to restore defaults;\r\n");
 	putrsUSART("\t\'t\' to print last event;\r\n");
 	putrsUSART("\t\'n\' to print next event;\r\n\r\n");
@@ -526,7 +527,7 @@ static void console_caption(void) {
 
 void config(void)
 {
-	static BYTE buffer[40];
+	static BYTE buffer[40], evt_len;
 	BYTE ch_section;
 	BYTE ch_param;
 	DWORD input;
@@ -547,11 +548,11 @@ void config(void)
 			if (buffer[0] == 'l' || buffer[0] == 'L') {
 				slog_flush();
 				break;
-			} else if (buffer[0] == 'f') {
-				slog_fast_format();
-				break;
-			} else if (buffer[0] == 'F') {
+			} else if (buffer[0] == 'f' || buffer[0] == 'F') {
 				slog_format();
+				break;
+			} else if (buffer[0] == 'c' || buffer[0] == 'C') {
+				slog_clean();
 				break;
 			} else if (buffer[0] == 'e' || buffer[0] == 'E') {
 				config_restore();
@@ -563,16 +564,22 @@ void config(void)
 				break;
 			} else if (buffer[0] == 't' || buffer[0] == 'T') {
 
-				if(slog_getlast(buffer, sizeof(buffer)))
+				evt_len = slog_getlast(buffer, sizeof(buffer));
+				if(evt_len) {
+					buffer[evt_len] = '\0';
 					putsUSART(buffer);
+				}
 				else
 					putrsUSART("System log is empty\r\n");
 
 				break;
 			} else if (buffer[0] == 'n' || buffer[0] == 'N') {
 
-				if(slog_getnext(buffer, sizeof(buffer), 1))
+				evt_len = slog_getnext(buffer, sizeof(buffer));
+				if(evt_len) {
+					buffer[evt_len] = '\0';
 					putsUSART(buffer);
+				}
 				else
 					putrsUSART("There are no more events\r\n");
 
