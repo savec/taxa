@@ -44,7 +44,7 @@ void test(void) {
 			sprintf(str_log, "RD [%04X%04X]", (WORD) (uid >> 16),
 					(WORD) uid);
 
-			slog_puts(str_log);
+			slog_evt(str_log);
 		}
 
 		if (!BUTTON0_IO)

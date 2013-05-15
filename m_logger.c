@@ -15,11 +15,17 @@ static mailbox_t mailbox;
 #define MYSELF	MODULE_LOGGER
 
 
-static BOOL slog_need_format(void);
+//static BOOL slog_need_format(void);
 
-static DWORD slog_pos;
-static DWORD get_pos;
+//static DWORD slog_pos;
+//static DWORD get_pos;
 static DWORD cnt_events;
+
+static struct {
+  int head;
+  int tail;
+} indx;
+
 
 static void slog_get_time(time_t *time)
 {
@@ -32,246 +38,540 @@ static void slog_get_time(time_t *time)
 	time->seconds = (BYTE)(qw_time/TICK_SECOND);
 }
 
-void slog_init(void)
-{
-	if (slog_need_format()) {
-		slog_fast_format();
-	} else {
-		cnt_events = 0;
-		XEEBeginRead(SLOG_START);
-		for (slog_pos = 0; slog_pos < SLOG_LEN; slog_pos++) {
-			BYTE ch = XEERead();
-			if(ch == SLOG_EOF)
-				break;
-			if(ch == '\n')
-				cnt_events ++;
-		}
-		XEEEndRead();
-	}
+//void slog_init(void)
+//{
+//	if (slog_need_format()) {
+//		slog_fast_format();
+//	} else {
+//		cnt_events = 0;
+//		XEEBeginRead(SLOG_START);
+//		for (slog_pos = 0; slog_pos < SLOG_LEN; slog_pos++) {
+//			BYTE ch = XEERead();
+//			if(ch == SLOG_EOF)
+//				break;
+//			if(ch == '\n')
+//				cnt_events ++;
+//		}
+//		XEEEndRead();
+//	}
+//
+//	slog_getlast(NULL, 0); // set get_pos pointer
+//
+//	mail_subscribe(MYSELF, &mailbox);
+//}
 
-	slog_getlast(NULL, 0); // set get_pos pointer
 
-	mail_subscribe(MYSELF, &mailbox);
+
+//unsigned char buf[SLOG_LEN];
+//int cnt_events;
+
+
+
+//void WriteEEX(int pos, unsigned char ch)
+//{
+//  buf[pos] = ch;
+//}
+//
+//unsigned char ReadEEX(int pos)
+//{
+//  return buf[pos];
+//}
+
+int tail(void) {
+	return indx.tail;
 }
 
-void slog_fast_format(void)
+void set_tail(int p) {
+	indx.tail = p;
+}
+
+int move_tail(void) {
+	indx.tail++;
+	indx.tail &= SLOG_MASK;
+
+	return (indx.head == indx.tail);
+}
+
+int head(void) {
+	return indx.head;
+}
+
+void set_head(int p) {
+	indx.head = p;
+}
+
+int move_head(void) {
+	indx.head++;
+	indx.head &= SLOG_MASK;
+
+	return (indx.head == indx.tail);
+}
+
+static BYTE XEEReadNext(DWORD addr)
 {
-	XEEBeginWrite(SLOG_START);
-	XEEWrite(SLOG_EOF);
+	if(addr == SLOG_START)
+		XEEBeginRead(addr);
+	return XEERead();
+}
+
+
+static void XEEWriteNext(DWORD addr, BYTE data)
+{
+	if(addr % PAGE_SIZE == 0)
+		XEEBeginWrite(addr);
+	XEEWrite(data);
+}
+
+static void CyclicFill(DWORD start, DWORD end, BYTE data)
+{
+	XEEBeginWrite(SLOG_START + start);
+
+	do {
+		XEEWriteNext(SLOG_START + start, data);
+		start ++;
+		start &= SLOG_MASK;
+	} while (start != end);
+
 	XEEEndWrite();
-	slog_pos = 0;
-	cnt_events = 0;
 }
 
-void slog_format(void)
-{
-	DWORD addr = SLOG_START;
+//static void slog_put_str(BYTE * str)
+//{
+//	XEEBeginWrite(SLOG_START + head());
+//
+//	while (*str++) {
+//		XEEWriteNext(SLOG_START + head(), *str);
+//		move_head();
+//	}
+//
+//	XEEEndWrite();
+//}
 
-	for (XEEBeginWrite(addr); addr < SLOG_START + SLOG_LEN; addr++) {
-		if(addr % PAGE_SIZE == 0)
-			XEEBeginWrite(addr);
-		XEEWrite(SLOG_EOF);
-	}
-	XEEEndWrite();
-	slog_pos = 0;
-	cnt_events = 0;
-}
 
-static BOOL slog_need_format(void)
-{
-	/*
-	 * check's first slog page
-	 */
-	DWORD addr;
-	XEEBeginRead(SLOG_START);
-	for (addr = SLOG_START; addr < SLOG_START + PAGE_SIZE; addr++) {
-		if (XEERead() ^ 0xFF) {
+static int cyclic_search(int from, unsigned char from_char, unsigned char to_char) {
+	int pos = from;
+	BYTE ch;
+
+	XEEBeginRead(SLOG_START + pos);
+
+	do {
+		ch = XEEReadNext(SLOG_START + pos);
+
+		if (ch >= from_char && ch <= to_char) {
 			XEEEndRead();
-			return FALSE;
+			return pos;
 		}
-	}
+
+		pos++;
+		pos &= SLOG_MASK;
+	} while (pos != from);
+
 	XEEEndRead();
-	return TRUE;
+
+	return -1;
 }
 
-static int slog_put_timestamp(void)
+static void pull_tail(unsigned char erase) {
+
+	DWORD pos = cyclic_search(tail(), SLOG_EOE, SLOG_EOE);
+
+	if(erase)
+		CyclicFill(tail(), pos, SLOG_EMPTY);
+
+	set_tail(pos);
+	move_tail();
+
+	if(erase) {
+		XEEBeginWrite(SLOG_START + tail());
+		XEEWrite(SLOG_START + SLOG_EMPTY);
+		XEEEndWrite();
+	}
+
+	if (cnt_events)
+		cnt_events--;
+}
+
+
+static int slog_cnt_events(DWORD from, DWORD to) {
+	DWORD pos, cnt = 0;
+
+	XEEBeginRead(SLOG_START + from);
+
+	for (pos = from; pos != to; pos++, pos &= SLOG_MASK)
+		if (XEEReadNext(SLOG_START + pos) == SLOG_EOE)
+			cnt++;
+
+	XEEEndRead();
+
+	return cnt;
+}
+
+static int slog_scan(void) {
+	int pos_start, pos_end, cnt;
+
+	pos_start = cyclic_search(0, SLOG_EMPTY, SLOG_EMPTY);
+
+	if (pos_start == -1)
+		return -1; /*can't find SLOG_EMPTY, need format.*/// XXX
+
+	pos_start = cyclic_search(pos_start, ASCII_PRINTABLE_FIRST,
+			ASCII_PRINTABLE_LAST);
+
+	if (pos_start == -1) {
+
+		cnt = slog_cnt_events(0, 0);
+
+		if (cnt == 0) {
+			/* all empty, need reset */
+			return -2;
+		} else if (cnt > 1) {
+			/* multiple SLOG_EOE, need format */
+			return -1;
+		}
+	}
+
+	set_tail(pos_start);
+	pos_end = cyclic_search(pos_start, SLOG_EMPTY, SLOG_EMPTY) - 1; // . . . . EOE EOE EMPTY
+	set_head(pos_end);
+	cnt_events = slog_cnt_events(pos_start, pos_end);
+
+	return 0;
+}
+
+static void slog_reset(void) {
+	set_tail(0);
+	set_head(0);
+
+	cnt_events = 0;
+
+	XEEBeginWrite(SLOG_START);
+	XEEWrite(SLOG_EOE);
+	XEEEndWrite();
+}
+
+void slog_format(void) {
+
+	CyclicFill(0, 0, SLOG_EMPTY);
+
+	slog_reset();
+}
+
+void slog_clean(void) {
+	CyclicFill(tail(), (head() - 1) & SLOG_MASK, SLOG_EMPTY);
+	set_tail(head());
+	cnt_events = 0;
+}
+
+void slog_init(void) {
+	switch (slog_scan()) {
+	case SLOG_NEED_FORMAT:
+		slog_format();
+		break;
+	case SLOG_NEED_RESET:
+		slog_reset();
+		break;
+	default:
+		;
+	}
+}
+
+//void slog_fast_format(void)
+//{
+//	XEEBeginWrite(SLOG_START);
+//	XEEWrite(SLOG_EOF);
+//	XEEEndWrite();
+//	slog_pos = 0;
+//	cnt_events = 0;
+//}
+//
+//void slog_format(void)
+//{
+//	DWORD addr = SLOG_START;
+//
+//	for (XEEBeginWrite(addr); addr < SLOG_START + SLOG_LEN; addr++) {
+//		if(addr % PAGE_SIZE == 0)
+//			XEEBeginWrite(addr);
+//		XEEWrite(SLOG_EOF);
+//	}
+//	XEEEndWrite();
+//	slog_pos = 0;
+//	cnt_events = 0;
+//}
+//
+//static BOOL slog_need_format(void)
+//{
+//	/*
+//	 * check's first slog page
+//	 */
+//	DWORD addr;
+//	XEEBeginRead(SLOG_START);
+//	for (addr = SLOG_START; addr < SLOG_START + PAGE_SIZE; addr++) {
+//		if (XEERead() ^ 0xFF) {
+//			XEEEndRead();
+//			return FALSE;
+//		}
+//	}
+//	XEEEndRead();
+//	return TRUE;
+//}
+
+static void slog_get_timestamp(BYTE * str_buf)
 {
 	int put;
 	time_t time;
-	BYTE str_buf[13];
 	char *str_time;
 
 	slog_get_time(&time);
 	sprintf(str_buf, "%05i:%02i:%02i ", (int)time.hours, (int)time.minutes, (int)time.seconds);
+}
 
-	XEEBeginWrite(SLOG_START + slog_pos);
-	for (put = 0, str_time = str_buf; (*str_time) && (slog_pos < SLOG_LEN); slog_pos++, put++, str_time++) {
-		if((SLOG_START + slog_pos) % PAGE_SIZE == 0)
-			XEEBeginWrite(SLOG_START + slog_pos);
-		XEEWrite(*str_time);
+//static int slog_terminate(void)
+//{
+//	BYTE str_buf[] = {'\r', '\n', SLOG_EOF};
+//	BYTE *str = str_buf;
+//
+//	XEEBeginWrite(SLOG_START + slog_pos);
+//	do
+//	{
+//		if((SLOG_START + slog_pos) % PAGE_SIZE == 0)
+//			XEEBeginWrite(SLOG_START + slog_pos);
+//		XEEWrite(*str);
+//	} while(*str++);
+//	XEEEndWrite();
+//
+//	slog_pos += (sizeof(str_buf) - 1);
+//
+//	return (sizeof(str_buf) - 1);
+//}
+//
+//int slog_puts(const BYTE *str)
+//{
+//	int put = slog_put_timestamp();
+//
+//	XEEBeginWrite(SLOG_START + slog_pos);
+//	for (; (*str) && (slog_pos < SLOG_LEN); slog_pos++, put++, str++) {
+//		if((SLOG_START + slog_pos) % PAGE_SIZE == 0)
+//			XEEBeginWrite(SLOG_START + slog_pos);
+//		XEEWrite(*str);
+//	}
+//	XEEEndWrite();
+//
+//	put += slog_terminate();
+//	cnt_events ++;
+//
+//	return put;
+//}
+//
+//int slog_putrs(const rom BYTE *str)
+//{
+//	int put = slog_put_timestamp();
+//
+//	XEEBeginWrite(SLOG_START + slog_pos);
+//	for (; (*str) && (slog_pos < SLOG_LEN); slog_pos++, put++, str++) {
+//		if((SLOG_START + slog_pos) % PAGE_SIZE == 0)
+//			XEEBeginWrite(SLOG_START + slog_pos);
+//		XEEWrite(*str);
+//	}
+//	XEEEndWrite();
+//
+//	put += slog_terminate();
+//	cnt_events ++;
+//
+//	return put;
+//}
+
+
+//int slog_gets(DWORD pos, BYTE *buf, BYTE len)
+//{
+//	int got = 0;
+//
+//	if (pos >= SLOG_LEN)
+//		return -1;
+//	if (!len)
+//		return 0;
+//
+//	for (XEEBeginRead(pos + SLOG_START); got < len; got++, buf++)
+//		if ((*buf = XEERead()) == SLOG_EOF)
+//			break;
+//	XEEEndRead();
+//
+//	return got;
+//}
+
+static int slog_put(const char *buf) {
+	int destroyed = 0;
+	BYTE ch;
+	BYTE timestamp[20], *p_timestamp = timestamp;
+
+	slog_get_timestamp(timestamp);
+
+	XEEBeginWrite(SLOG_START + head());
+
+	for (; *p_timestamp; p_timestamp++) {
+		XEEWriteNext(SLOG_START + head(), *p_timestamp);
+		if (move_head()) {
+			pull_tail(1);
+			destroyed++;
+		}
 	}
-	XEEEndWrite();
 
-	return put;
-}
-
-static int slog_terminate(void)
-{
-	BYTE str_buf[] = {'\r', '\n', SLOG_EOF};
-	BYTE *str = str_buf;
-
-	XEEBeginWrite(SLOG_START + slog_pos);
-	do
-	{
-		if((SLOG_START + slog_pos) % PAGE_SIZE == 0)
-			XEEBeginWrite(SLOG_START + slog_pos);
-		XEEWrite(*str);
-	} while(*str++);
-	XEEEndWrite();
-
-	slog_pos += (sizeof(str_buf) - 1);
-
-	return (sizeof(str_buf) - 1);
-}
-
-int slog_puts(const BYTE *str)
-{
-	int put = slog_put_timestamp();
-
-	XEEBeginWrite(SLOG_START + slog_pos);
-	for (; (*str) && (slog_pos < SLOG_LEN); slog_pos++, put++, str++) {
-		if((SLOG_START + slog_pos) % PAGE_SIZE == 0)
-			XEEBeginWrite(SLOG_START + slog_pos);
-		XEEWrite(*str);
+	for (; *buf; buf++) {
+		ch = IS_PRINTABLE(*buf) ? *buf : ASCII_PRINTABLE_FIRST;
+		XEEWriteNext(SLOG_START + head(), ch);
+		if (move_head()) {
+			pull_tail(1);
+			destroyed++;
+		}
 	}
-	XEEEndWrite();
 
-	put += slog_terminate();
-	cnt_events ++;
+	XEEWriteNext(SLOG_START + head(), SLOG_EOE); // end of event
 
-	return put;
-}
-
-int slog_putrs(const rom BYTE *str)
-{
-	int put = slog_put_timestamp();
-
-	XEEBeginWrite(SLOG_START + slog_pos);
-	for (; (*str) && (slog_pos < SLOG_LEN); slog_pos++, put++, str++) {
-		if((SLOG_START + slog_pos) % PAGE_SIZE == 0)
-			XEEBeginWrite(SLOG_START + slog_pos);
-		XEEWrite(*str);
+	if (move_head()) {
+		pull_tail(1);
+		destroyed++;
 	}
+
+	XEEWriteNext(SLOG_START + head(), SLOG_EOE); // . . . . . SLOG_EOE SLOG_EOE - end of log
+
 	XEEEndWrite();
 
-	put += slog_terminate();
-	cnt_events ++;
-
-	return put;
+	cnt_events++;
+	return destroyed;
 }
 
+void slog_evt(const BYTE *buf) {
+	int destroyed = slog_put(buf);
 
-int slog_gets(DWORD pos, BYTE *buf, BYTE len)
-{
+	while (destroyed) {
+		BYTE str_ovf[] = "OVF";
+		destroyed = slog_put(str_ovf);
+	}
+}
+
+int slog_getlast(BYTE *buf, size_t len) {
 	int got = 0;
+	DWORD cached_tail;
+	BYTE ch;
 
-	if (pos >= SLOG_LEN)
-		return -1;
-	if (!len)
+	if (cnt_events == 0)
 		return 0;
 
-	for (XEEBeginRead(pos + SLOG_START); got < len; got++, buf++)
-		if ((*buf = XEERead()) == SLOG_EOF)
+	cached_tail = tail();
+	XEEBeginRead(SLOG_START + cached_tail);
+
+	for (; len; len--, got++) {
+		if ((ch = XEEReadNext(SLOG_START + tail())) == SLOG_EOE)
 			break;
+		*buf++ = ch;
+		move_tail();
+	}
+
 	XEEEndRead();
+
+	set_tail(cached_tail);
 
 	return got;
 }
 
-void slog_flush(void)
-{
-	static BYTE buf[PAGE_SIZE/4];
-	int read, all = 0;
+int slog_getnext(BYTE *buf, size_t len) {
+	if (cnt_events == 0)
+		return 0;
+
+	pull_tail(1);
+
+	return slog_getlast(buf, len);
+}
+
+void slog_flush(void) {
+	DWORD cached_tail = tail();
+	DWORD cache_cnt = cnt_events;
+	BYTE buf[40];
 
 	putrsUSART("\n\r<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n\r");
 
-	while((read = slog_gets(all, buf, sizeof(buf))) > 0) {
-		buf[read] = '\0';
+	while (cnt_events) {
+		putrsUSART("\n\r");
+		buf[slog_getlast(buf, sizeof(buf))] = '\0';
+		pull_tail(0);
 		putsUSART(buf);
-		all += read;
+
 	}
 
 	putrsUSART("\n\r>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n\r");
+
+	set_tail(cached_tail);
+	cnt_events = cache_cnt;
 
 	putrsUSART("Total: ");
 	uitoa(cnt_events, buf);
 	putsUSART(buf);
 	putrsUSART(" events, ");
 
-	uitoa((WORD)(SLOG_LEN - all), buf);
-	putsUSART(buf);
-	putrsUSART(" bytes free\n\r");
-
 }
 
 
+//
+//int slog_getlast(BYTE *buf, BYTE len)
+//{
+//	get_pos = slog_pos;
+//	if(slog_pos == 0)
+//		return 0;
+//	return slog_getnext(buf, len, 0);
+//}
+//
+///*
+// * slog_getlast MUST be called before slog_getnext!!!
+// */
+//
+//int slog_getnext(BYTE *buf, BYTE len, BOOL erase)
+//{
+//	BYTE read, ch;
+//
+//	if (erase) {
+//		XEEBeginWrite(get_pos + SLOG_START);
+//		XEEWrite(SLOG_EOF);
+//		XEEEndWrite();
+//		slog_pos = get_pos;
+//		if (cnt_events)
+//			cnt_events--;
+//	}
+//
+//	if(get_pos < 2)
+//		return 0;
+//
+//	get_pos -= 2;
+//
+//	for(; get_pos > 0; get_pos--)
+//	{
+//		XEEBeginRead(get_pos + SLOG_START);
+//		ch = XEERead();
+//		XEEEndRead();
+//		if(ch == '\n') {
+//			get_pos ++;
+//			break;
+//		}
+//	}
+//
+//	if(buf == NULL)
+//		return 0;
+//
+//	for(read = 0, XEEBeginRead(get_pos + SLOG_START); (read < len); read ++)
+//	{
+//		*buf++ = ch = XEERead();
+//		if(ch == '\n')
+//			break;
+//	}
+//
+//	XEEEndRead();
+//	*buf = '\0';
+//
+//	return read + 1; // + '\0'
+//}
 
-int slog_getlast(BYTE *buf, BYTE len)
-{
-	get_pos = slog_pos;
-	if(slog_pos == 0)
-		return 0;
-	return slog_getnext(buf, len, 0);
-}
 
-/*
- * slog_getlast MUST be called before slog_getnext!!!
- */
 
-int slog_getnext(BYTE *buf, BYTE len, BOOL erase)
-{
-	BYTE read, ch;
 
-	if (erase) {
-		XEEBeginWrite(get_pos + SLOG_START);
-		XEEWrite(SLOG_EOF);
-		XEEEndWrite();
-		slog_pos = get_pos;
-		if (cnt_events)
-			cnt_events--;
-	}
 
-	if(get_pos < 2)
-		return 0;
-
-	get_pos -= 2;
-
-	for(; get_pos > 0; get_pos--)
-	{
-		XEEBeginRead(get_pos + SLOG_START);
-		ch = XEERead();
-		XEEEndRead();
-		if(ch == '\n') {
-			get_pos ++;
-			break;
-		}
-	}
-
-	if(buf == NULL)
-		return 0;
-
-	for(read = 0, XEEBeginRead(get_pos + SLOG_START); (read < len); read ++)
-	{
-		*buf++ = ch = XEERead();
-		if(ch == '\n')
-			break;
-	}
-
-	XEEEndRead();
-	*buf = '\0';
-
-	return read + 1; // + '\0'
-}
 
 static int process_buffer(bd_t handler)
 {
@@ -299,7 +599,7 @@ static int process_buffer(bd_t handler)
 
 			hdr->hdr_s.type = TYPE_NPDL;
 			hdr->hdr_s.packtype_u.npdl.len = slog_getnext(
-					(BYTE *) &hdr->raw[RAW_DATA], (PAYLOADLEN - 2), 1) + 2;
+					(BYTE *) &hdr->raw[RAW_DATA], (PAYLOADLEN - 2)) + 2;
 			bcp_send_buffer(handler);
 
 			break;
@@ -348,7 +648,7 @@ static int process_buffer(bd_t handler)
 			putrsUSART("QAC_LG_WRITE_EVENT");
 
 			hdr->raw[RAW_DATA + hdr->hdr_s.packtype_u.npdl.len - 2] = '\0';
-			slog_puts((BYTE *)&hdr->raw[RAW_DATA]);
+			slog_evt((BYTE *)&hdr->raw[RAW_DATA]);
 
 			hdr->hdr_s.type = TYPE_NPDL;
 //			*(DWORD *)&hdr->raw[RAW_DATA] = cnt_events; // alignment problems possible
