@@ -11,6 +11,7 @@
 
 rom static char * ver = "LG0.01";
 static mailbox_t mailbox;
+static BYTE host_read = 0;
 
 #define MYSELF	MODULE_LOGGER
 
@@ -179,13 +180,12 @@ static void pull_tail(unsigned char erase) {
 		CyclicFill(tail(), pos, SLOG_EMPTY);
 
 	set_tail(pos);
-	move_tail();
-
 	if(erase) {
 		XEEBeginWrite(SLOG_START + tail());
-		XEEWrite(SLOG_START + SLOG_EMPTY);
+		XEEWrite(SLOG_EMPTY);
 		XEEEndWrite();
 	}
+	move_tail();
 
 	if (cnt_events)
 		cnt_events--;
@@ -193,13 +193,18 @@ static void pull_tail(unsigned char erase) {
 
 
 static int slog_cnt_events(DWORD from, DWORD to) {
-	DWORD pos, cnt = 0;
+	DWORD cnt = 0;
 
 	XEEBeginRead(SLOG_START + from);
 
-	for (pos = from; pos != to; pos++, pos &= SLOG_MASK)
-		if (XEEReadNext(SLOG_START + pos) == SLOG_EOE)
+	do {
+		if (XEEReadNext(SLOG_START + from) == SLOG_EOE)
 			cnt++;
+
+		from ++;
+		from &= SLOG_MASK;
+
+	} while (from != to);
 
 	XEEEndRead();
 
@@ -227,6 +232,12 @@ static int slog_scan(void) {
 		} else if (cnt > 1) {
 			/* multiple SLOG_EOE, need format */
 			return -1;
+		} else {
+			/* after format+reset state */
+			set_tail(0);
+			set_head(0);
+			cnt_events = 0;
+			return 0;
 		}
 	}
 
@@ -505,7 +516,7 @@ void slog_flush(void) {
 	putrsUSART("Total: ");
 	uitoa(cnt_events, buf);
 	putsUSART(buf);
-	putrsUSART(" events, ");
+	putrsUSART(" events\r\n");
 
 }
 
@@ -598,8 +609,16 @@ static int process_buffer(bd_t handler)
 			putrsUSART("QAC_LG_READ_NEXT");
 
 			hdr->hdr_s.type = TYPE_NPDL;
-			hdr->hdr_s.packtype_u.npdl.len = slog_getnext(
+
+			if(host_read)
+				hdr->hdr_s.packtype_u.npdl.len = slog_getnext(
 					(BYTE *) &hdr->raw[RAW_DATA], (PAYLOADLEN - 2)) + 2;
+			else {
+				hdr->hdr_s.packtype_u.npdl.len = slog_getlast(
+						(BYTE *) &hdr->raw[RAW_DATA], (PAYLOADLEN - 2)) + 2;
+				host_read = 1;
+			}
+
 			bcp_send_buffer(handler);
 
 			break;
