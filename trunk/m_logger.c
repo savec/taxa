@@ -284,6 +284,8 @@ void slog_init(void) {
 	default:
 		;
 	}
+
+	mail_subscribe(MYSELF, &mailbox);
 }
 
 //void slog_fast_format(void)
@@ -586,7 +588,7 @@ void slog_flush(void) {
 
 static int process_buffer(bd_t handler)
 {
-	int result = 0;
+	int result = 0, read_cnt;
 	bcp_header_t * hdr = (bcp_header_t *) bcp_buffer(handler)->buf;
 
 	switch (TYPE(hdr->hdr_s.type)) {
@@ -611,12 +613,24 @@ static int process_buffer(bd_t handler)
 			hdr->hdr_s.type = TYPE_NPDL;
 
 			if(host_read)
-				hdr->hdr_s.packtype_u.npdl.len = slog_getnext(
-					(BYTE *) &hdr->raw[RAW_DATA], (PAYLOADLEN - 2)) + 2;
+				read_cnt = slog_getnext(
+					(BYTE *) &hdr->raw[RAW_DATA], (PAYLOADLEN - 2));
 			else {
-				hdr->hdr_s.packtype_u.npdl.len = slog_getlast(
-						(BYTE *) &hdr->raw[RAW_DATA], (PAYLOADLEN - 2)) + 2;
+				read_cnt = slog_getlast(
+						(BYTE *) &hdr->raw[RAW_DATA], (PAYLOADLEN - 2));
 				host_read = 1;
+			}
+
+			if(read_cnt) {
+				hdr->hdr_s.type = TYPE_NPDL;
+				hdr->hdr_s.packtype_u.npdl.len = read_cnt + 2;
+			} else {
+//				hdr->hdr_s.type = TYPE_NPRQ;
+//				hdr->hdr_s.packtype_u.nprq.dummy = 0;
+
+				hdr->hdr_s.type = TYPE_NPD1;
+				hdr->hdr_s.packtype_u.npd1.data = 0;
+
 			}
 
 			bcp_send_buffer(handler);
