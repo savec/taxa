@@ -21,6 +21,7 @@ static BYTE host_read = 0;
 //static DWORD slog_pos;
 //static DWORD get_pos;
 static DWORD cnt_events;
+static DWORD cnt_lost = 0;
 
 static struct {
   int head;
@@ -411,54 +412,75 @@ static void slog_get_timestamp(BYTE * str_buf)
 //	return got;
 //}
 
-static int slog_put(const char *buf) {
-	int destroyed = 0;
+
+/*
+ *  size MUST be > 0
+ *
+ */
+
+static int check_empty(DWORD from, BYTE size)
+{
+	BYTE ch;
+
+	from ++;
+	from &= SLOG_MASK;
+
+	XEEBeginRead(SLOG_START + from);
+
+	do {
+		if (XEEReadNext(SLOG_START + from) != SLOG_EMPTY) {
+			XEEEndRead();
+			return -1;
+		}
+
+		from ++;
+		from &= SLOG_MASK;
+	} while (-- size);
+
+	XEEEndRead();
+
+	return 0;
+
+}
+
+int slog_put(const char *buf) {
 	BYTE ch;
 	BYTE timestamp[20], *p_timestamp = timestamp;
+	BYTE total_len;
 
 	slog_get_timestamp(timestamp);
+
+	total_len = strlen(timestamp) + strlen(buf) + 2;
+
+	if (check_empty(head(), total_len) < 0) {
+		cnt_lost ++;
+		return -1;
+	}
 
 	XEEBeginWrite(SLOG_START + head());
 
 	for (; *p_timestamp; p_timestamp++) {
 		XEEWriteNext(SLOG_START + head(), *p_timestamp);
-		if (move_head()) {
-			pull_tail(1);
-			destroyed++;
-		}
+		move_head();
 	}
 
 	for (; *buf; buf++) {
 		ch = IS_PRINTABLE(*buf) ? *buf : ASCII_PRINTABLE_FIRST;
 		XEEWriteNext(SLOG_START + head(), ch);
-		if (move_head()) {
-			pull_tail(1);
-			destroyed++;
-		}
+		move_head();
 	}
 
 	XEEWriteNext(SLOG_START + head(), SLOG_EOE); // end of event
 
-	if (move_head()) {
-		pull_tail(1);
-		destroyed++;
-	}
+	move_head();
 
 	XEEWriteNext(SLOG_START + head(), SLOG_EOE); // . . . . . SLOG_EOE SLOG_EOE - end of log
 
 	XEEEndWrite();
 
 	cnt_events++;
-	return destroyed;
-}
 
-void slog_evt(const BYTE *buf) {
-	int destroyed = slog_put(buf);
-
-	while (destroyed) {
-		BYTE str_ovf[] = "OVF";
-		destroyed = slog_put(str_ovf);
-	}
+	return 0;
 }
 
 int slog_getlast(BYTE *buf, size_t len) {
@@ -681,7 +703,7 @@ static int process_buffer(bd_t handler)
 			putrsUSART("QAC_LG_WRITE_EVENT");
 
 			hdr->raw[RAW_DATA + hdr->hdr_s.packtype_u.npdl.len - 2] = '\0';
-			slog_evt((BYTE *)&hdr->raw[RAW_DATA]);
+			slog_put((BYTE *)&hdr->raw[RAW_DATA]);
 
 			hdr->hdr_s.type = TYPE_NPDL;
 //			*(DWORD *)&hdr->raw[RAW_DATA] = cnt_events; // alignment problems possible
