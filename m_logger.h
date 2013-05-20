@@ -50,7 +50,7 @@ void slog_clean(void);
 void slog_flush(void);
 int slog_getlast(BYTE *buf, size_t len);
 int slog_getnext(BYTE *buf, size_t len);
-void slog_evt(const BYTE *buf);
+int slog_put(const BYTE *buf);
 
 
 void slog_module(void);
