@@ -21,6 +21,8 @@ static BYTE host_read = 0;
 //static DWORD slog_pos;
 //static DWORD get_pos;
 static DWORD cnt_events;
+static DWORD cnt_not_read;
+
 static DWORD cnt_lost = 0;
 
 static struct {
@@ -111,7 +113,7 @@ int move_head(void) {
 
 static BYTE XEEReadNext(DWORD addr)
 {
-	if(addr == SLOG_START)
+	if(addr % PAGE_SIZE == 0)
 		XEEBeginRead(addr);
 	return XEERead();
 }
@@ -214,11 +216,18 @@ static int slog_cnt_events(DWORD from, DWORD to) {
 
 static int slog_scan(void) {
 	int pos_start, pos_end, cnt;
+	BYTE str_buf[40];
 
 	pos_start = cyclic_search(0, SLOG_EMPTY, SLOG_EMPTY);
 
-	if (pos_start == -1)
+	if (pos_start == -1) {
+		putrsUSART("\n\rcan't find SLOG_EMPTY, need format.");
 		return -1; /*can't find SLOG_EMPTY, need format.*/// XXX
+	}
+
+	sprintf(str_buf, "\n\rfind SLOG_EMPTY at %u ", (int)pos_start);
+	putsUSART(str_buf);
+
 
 	pos_start = cyclic_search(pos_start, ASCII_PRINTABLE_FIRST,
 			ASCII_PRINTABLE_LAST);
@@ -229,23 +238,38 @@ static int slog_scan(void) {
 
 		if (cnt == 0) {
 			/* all empty, need reset */
+			putrsUSART("\n\rall empty, need reset.");
 			return -2;
 		} else if (cnt > 1) {
 			/* multiple SLOG_EOE, need format */
+			putrsUSART("\n\rmultiple SLOG_EOE, need format.");
 			return -1;
 		} else {
 			/* after format+reset state */
 			set_tail(0);
 			set_head(0);
-			cnt_events = 0;
+			cnt_not_read = cnt_events = 0;
+			putrsUSART("\n\rafter format+reset state.");
 			return 0;
 		}
 	}
 
+	sprintf(str_buf, "\n\rfind PRINTABLE at %u ", (int)pos_start);
+	putsUSART(str_buf);
+
 	set_tail(pos_start);
-	pos_end = cyclic_search(pos_start, SLOG_EMPTY, SLOG_EMPTY) - 1; // . . . . EOE EOE EMPTY
+	pos_end = (cyclic_search(pos_start, SLOG_EMPTY, SLOG_EMPTY) - 1) & SLOG_MASK; // . . . . EOE EOE EMPTY
 	set_head(pos_end);
-	cnt_events = slog_cnt_events(pos_start, pos_end);
+	cnt_not_read = cnt_events = slog_cnt_events(pos_start, pos_end) - 1; // last EOE is not event
+
+	{
+
+
+		putrsUSART("\n\rslog not empty, normal.");
+		sprintf(str_buf, "\n\rtail=%u, head=%u, not_read=%u ", (int)tail(), (int)head(), (int)cnt_not_read);
+		putsUSART(str_buf);
+	}
+
 
 	return 0;
 }
@@ -479,6 +503,7 @@ int slog_put(const char *buf) {
 	XEEEndWrite();
 
 	cnt_events++;
+	cnt_not_read ++;
 
 	return 0;
 }
@@ -512,7 +537,12 @@ int slog_getnext(BYTE *buf, size_t len) {
 	if (cnt_events == 0)
 		return 0;
 
-	pull_tail(1);
+	if(host_read) {
+		pull_tail(1);
+	}
+
+	if(cnt_not_read)
+		cnt_not_read --;
 
 	return slog_getlast(buf, len);
 }
@@ -634,25 +664,16 @@ static int process_buffer(bd_t handler)
 
 			hdr->hdr_s.type = TYPE_NPDL;
 
-			if(host_read)
-				read_cnt = slog_getnext(
+			read_cnt = slog_getnext(
 					(BYTE *) &hdr->raw[RAW_DATA], (PAYLOADLEN - 2));
-			else {
-				read_cnt = slog_getlast(
-						(BYTE *) &hdr->raw[RAW_DATA], (PAYLOADLEN - 2));
-				host_read = 1;
-			}
+			host_read = 1;
 
 			if(read_cnt) {
 				hdr->hdr_s.type = TYPE_NPDL;
 				hdr->hdr_s.packtype_u.npdl.len = read_cnt + 2;
 			} else {
-//				hdr->hdr_s.type = TYPE_NPRQ;
-//				hdr->hdr_s.packtype_u.nprq.dummy = 0;
-
-				hdr->hdr_s.type = TYPE_NPD1;
-				hdr->hdr_s.packtype_u.npd1.data = 0;
-
+				hdr->hdr_s.type = TYPE_NPRQ;
+				hdr->hdr_s.packtype_u.nprq.dummy = 0;
 			}
 
 			bcp_send_buffer(handler);
@@ -663,8 +684,8 @@ static int process_buffer(bd_t handler)
 
 			hdr->hdr_s.type = TYPE_NPDL;
 //			*(DWORD *)&hdr->raw[RAW_DATA] = cnt_events; // alignment problems possible
-			memcpy((void *)&hdr->raw[RAW_DATA], (void *)&cnt_events, sizeof(cnt_events));
-			hdr->hdr_s.packtype_u.npdl.len = sizeof(cnt_events) + 2;
+			memcpy((void *)&hdr->raw[RAW_DATA], (void *)&cnt_not_read, sizeof(cnt_not_read));
+			hdr->hdr_s.packtype_u.npdl.len = sizeof(cnt_not_read) + 2;
 			bcp_send_buffer(handler);
 
 			break;
