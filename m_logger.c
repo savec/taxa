@@ -260,7 +260,7 @@ static int slog_scan(void) {
 	set_tail(pos_start);
 	pos_end = (cyclic_search(pos_start, SLOG_EMPTY, SLOG_EMPTY) - 1) & SLOG_MASK; // . . . . EOE EOE EMPTY
 	set_head(pos_end);
-	cnt_not_read = cnt_events = slog_cnt_events(pos_start, pos_end) - 1; // last EOE is not event
+	cnt_not_read = cnt_events = slog_cnt_events(pos_start, pos_end) - 0; // last EOE is not event
 
 	{
 
