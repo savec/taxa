@@ -87,10 +87,23 @@ static void sm_indicator(BOOL on)
 	if(on) {
 		t = TickGet(); 
 		P_REL2 = 1;
-	} else if(P_REL2 && TickGet() - t > TICK_SECOND * 3) {
+	} else if(P_REL2 && (TickGet() - t) > ((TICK_SECOND / 100L) * (DWORD)AppConfig.sm_sig_indicator_duration)) {
 		P_REL2 = 0;
 	}
 }
+
+static void sm_control(BOOL on)
+{
+	static DWORD t;
+
+	if(on) {
+		t = TickGet();
+		P_REL1 = 1;
+	} else if(P_REL1 && (TickGet() - t) > ((TICK_SECOND / 100L) * (DWORD)AppConfig.sm_sig_control_duration)) {
+		P_REL1 = 0;
+	}
+}
+
  
 void sm_module(void)
 {
@@ -101,6 +114,7 @@ void sm_module(void)
 			process_buffer(ipacket);
 
 	sm_indicator(FALSE);
+	sm_control(FALSE);
 
 	switch(state) {
 	case SM_INIT:
@@ -118,7 +132,7 @@ void sm_module(void)
 			case EVT_SM_ENABLE_INDICATOR | EVT_SM_ENABLE_CONTROL:
 				sm_indicator(TRUE);
 			case EVT_SM_ENABLE_CONTROL:
-				P_REL1 = 1;
+				sm_control(TRUE);
 				t = TickGet();
 				state = SM_WORK;
 				break;
@@ -130,7 +144,7 @@ void sm_module(void)
 		}
 		break;
 	case SM_WORK:
-		if(TickGet() - t > TICK_SECOND * 2) {
+		if((TickGet() - t) > ((TICK_SECOND / 100L) * (DWORD)AppConfig.sm_service_time)) {
 			event_send(MODULE_ACCESSOR, EVT_AC_TOUT);
 			sm_lcd_prompt();
 			state = SM_FINAL;
@@ -141,8 +155,6 @@ void sm_module(void)
 		}
 		break;
 	case SM_FINAL:
-		P_REL1 = 0;
-
 		state = SM_READY;	// XXX
 		break;
 	case SM_FAILURE:
