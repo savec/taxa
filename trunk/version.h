@@ -10,8 +10,8 @@
 
 #include "TCPIP Stack/TCPIP.h"
 
-#define SVN_REVISION	"49"
-#define SVN_DATETIME	"2013/05/26 23:33:03"
+#define SVN_REVISION	"50"
+#define SVN_DATETIME	"2013/05/27 00:47:46"
 #define SVN_URL			"https://taxa.googlecode.com/svn/trunk"
 
 #endif /* VERSION_H_ */
