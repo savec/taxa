@@ -74,7 +74,8 @@ void GenericTCPServer(void);
 void BerkeleyTCPClientDemo(void);
 void BerkeleyTCPServerDemo(void);
 void BerkeleyUDPClientDemo(void);
-
+void splx(BYTE level);
+BYTE splhigh(void);
 
 // Define a header structure for validating the AppConfig data structure in EEPROM/Flash
 typedef struct
@@ -88,6 +89,6 @@ typedef struct
 // An actual function defined in MainDemo.c for displaying the current IP 
 // address on the UART and/or LCD.
 void DisplayIPValue(IP_ADDR IPVal);
-
+void set_uart(DWORD baudrate, BOOL rx_int, BOOL tx_int);
 
 #endif // _MAINDEMO_H
