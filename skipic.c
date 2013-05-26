@@ -169,7 +169,8 @@ void interrupt HighISR(void)
 void HighISR(void)
 #endif
 {
-	readers_isr();
+	wg_readers_isr();
+	serial_isr();
 
 #if defined(STACK_USE_UART2TCP_BRIDGE)
 	UART2TCPBridgeISR();
@@ -239,7 +240,6 @@ int main(void)
 //			EraseSector(i);
 //	}
 
-	readers_init();
 	accessor_init();
 
 #if defined(USE_LCD)
@@ -263,53 +263,6 @@ int main(void)
 //	InitAppConfig();
 	config_restore();
 
-	// Initiates board setup process if button is depressed
-	// on startup
-	//    if(BUTTON0_IO == 0u)
-	//    {
-	//		#if defined(EEPROM_CS_TRIS) || defined(SPIFLASH_CS_TRIS)
-	//		// Invalidate the EEPROM contents if BUTTON0 is held down for more than 4 seconds
-	//		DWORD StartTime = TickGet();
-	//		LED_PUT(0x00);
-	//
-	//		while(BUTTON0_IO == 0u)
-	//		{
-	//			if(TickGet() - StartTime > 4*TICK_SECOND)
-	//			{
-	//				#if defined(EEPROM_CS_TRIS)
-	//			    XEEBeginWrite(0x0000);
-	//			    XEEWrite(0xFF);
-	//			    XEEWrite(0xFF);
-	//			    XEEEndWrite();
-	//			    #elif defined(SPIFLASH_CS_TRIS)
-	//			    SPIFlashBeginWrite(0x0000);
-	//			    SPIFlashWrite(0xFF);
-	//			    SPIFlashWrite(0xFF);
-	//			    #endif
-	//
-	//				#if defined(STACK_USE_UART)
-	//				putrsUART("\r\n\r\nBUTTON0 held for more than 4 seconds.  Default settings restored.\r\n\r\n");
-	//				#endif
-	//
-	//				LED_PUT(0x0F);
-	//				while((LONG)(TickGet() - StartTime) <= (LONG)(9*TICK_SECOND/2));
-	//				LED_PUT(0x00);
-	//				while(BUTTON0_IO == 0u);
-	//				Reset();
-	//				break;
-	//			}
-	//		}
-	//		#endif
-	//
-	//		#if defined(STACK_USE_UART)
-	//        DoUARTConfig();
-	//		#endif
-	//    }
-
-	// Initialize core stack layers (MAC, ARP, TCP, UDP) and
-	// application modules (HTTP, SNMP, etc.)
-
-
 	slog_init();
 	StackInit();
 	net_init();
@@ -317,10 +270,13 @@ int main(void)
 	sm_init();
 
 
-	if(!BUTTON0_IO)
-		test();
 	if(!BUTTON1_IO)
 		config();
+
+	readers_init();
+
+	if(!BUTTON0_IO)
+		test();
 
 
 #if defined(WF_CS_TRIS)
@@ -707,6 +663,35 @@ static void get_ajustible(WORD *value)
 	*value = *((WORD*) (&ADRESL));
 }
 
+void set_uart(DWORD baudrate, BOOL rx_int, BOOL tx_int) {
+
+	// Configure USART
+	TXSTA = 0x20;
+	RCSTA = 0x90;
+
+	// See if we can use the high baud rate setting
+	if (((GetPeripheralClock() + 2 * baudrate) / baudrate / 4 - 1) <= 255) {
+		SPBRG = (GetPeripheralClock() + 2 * baudrate) / baudrate / 4 - 1;
+		TXSTAbits.BRGH = 1;
+	} else
+		// Use the low baud rate setting
+		SPBRG = (GetPeripheralClock() + 8 * baudrate) / baudrate / 16 - 1;
+
+	if(rx_int) {
+
+		IPR1bits.RC1IP = 1;
+		PIR1bits.RC1IF = 0;
+		PIE1bits.RC1IE = 1;
+	}
+
+	if(tx_int) {
+//		IPR1bits.TX1IP = 1;	// not implemented yet
+//		PIR1bits.TX1IF = 0;
+//		PIE1bits.TX1IE = 1;
+	}
+
+}
+
 /****************************************************************************
  Function:
  static void InitializeBoard(void)
@@ -728,6 +713,19 @@ static void get_ajustible(WORD *value)
  Remarks:
  None
  ***************************************************************************/
+
+BYTE splhigh(void)
+{
+	BYTE level = INTCONbits.GIEH;
+	INTCONbits.GIEH = 0;
+	return level;
+}
+
+void splx(BYTE level)
+{
+	INTCONbits.GIEH = level;
+}
+
 static void InitializeBoard(void)
 {
 	// LEDs
@@ -772,17 +770,7 @@ static void InitializeBoard(void)
 	// Enable internal PORTB pull-ups
 	INTCON2bits.RBPU = 0;
 
-	// Configure USART
-	TXSTA = 0x20;
-	RCSTA = 0x90;
-
-	// See if we can use the high baud rate setting
-#if ((GetPeripheralClock()+2*BAUD_RATE)/BAUD_RATE/4 - 1) <= 255
-	SPBRG = (GetPeripheralClock() + 2 * BAUD_RATE) / BAUD_RATE / 4 - 1;
-	TXSTAbits.BRGH = 1;
-#else	// Use the low baud rate setting
-	SPBRG = (GetPeripheralClock()+8*BAUD_RATE)/BAUD_RATE/16 - 1;
-#endif
+	set_uart(BAUD_RATE, 0, 0);
 
 	// Enable Interrupts
 	RCONbits.IPEN = 1; // Enable interrupt priorities

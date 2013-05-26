@@ -35,7 +35,7 @@ static void uid2hex(BYTE * uid, BYTE * s, BYTE size)
 void accessor_module(void)
 {
 	bd_t ipacket, opacket;
-	static DWORD uid;
+	static uid_t uid;
 	static WORD label_cache;
 
 	if (mail_reciev(MYSELF, &ipacket)) {
@@ -79,7 +79,7 @@ void accessor_module(void)
 			request->retries = 2;
 			request->reader_n = 1;
 			request->req_label = label_cache = (WORD) TickGet();
-			uid2hex((BYTE *) &uid, request->uid, 4); // XXX check size!
+			uid2hex((BYTE *) &uid.uid, request->uid, 4); // XXX check size!
 
 			bcp_send_buffer(opacket);
 			state = WAIT_HOST_ANSWER;

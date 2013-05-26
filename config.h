@@ -60,7 +60,7 @@ typedef struct {
 #define DFLT_R1_FRAMELEN 34
 
 #define DFLT_R1_PARITY "Classic e/o"
-#define DFLT_R2_ACTIVITY 0
+#define DFLT_R2_ACTIVITY 1
 #define DFLT_R2_CONVERT2HEX 1
 #define DFLT_R2_FRAMELEN 20
 #define DFLT_R2_STOPBYTE 0x0D

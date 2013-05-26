@@ -8,6 +8,7 @@
 #include "m_readers.h"
 #include "m_bcp.h"
 #include "post.h"
+#include "skipic.h"
 
 
 
@@ -15,11 +16,52 @@ static unsigned char code[BP_SIZE], processing_code[BP_SIZE];
 
 static BYTE position;
 static volatile DWORD t = 0;
-static reader_status_e status = READER_VOID;
+static wg_reader_status_e wg_status = WG_READER_VOID;
+static serial_reader_status_e serial_status = SERIAL_WAIT_CODE;
 
 rom static char * ver = "RD0.00";
 static mailbox_t mailbox;
 #define MYSELF	MODULE_READERS
+
+volatile static serial_buffer_t sb;
+
+void serial_reset(void)
+{
+//	BYTE l = splhigh();
+	sb.in = sb.out = sb.cnt = 0;
+//	splx(l);
+}
+
+BOOL serial_in(BYTE data)
+{
+	if(((sb.in + 1)& SERIAL_BUF_MASK) == sb.out)
+		return FALSE;
+
+	sb.buf[sb.in] = data;
+	sb.in ++;
+	sb.in &= SERIAL_BUF_MASK;
+	sb.cnt ++;
+
+	return TRUE;
+}
+
+BOOL serial_out(BYTE *data)
+{
+	if(sb.cnt == 0)
+		return FALSE;
+
+	*data = sb.buf[sb.out];
+	sb.out ++;
+	sb.out &= SERIAL_BUF_MASK;
+	sb.cnt--;
+
+	return TRUE;
+}
+
+BYTE serial_cnt(void)
+{
+	return sb.cnt;
+}
 
 BYTE w34_get_odd(unsigned char *bp)
 {
@@ -55,11 +97,11 @@ void w34_get_hdata(unsigned char *bp, WORD *hdata)
 
 //#define w34_get_ldata(bp, ldata)	((bp >> 1) & 0xffff)
 //#define w34_get_hdata(bp, hdata)	((bp >> (WIEGAND_34_LEN / 2)) & 0xffff)
-#define reset_state()						\
+#define wg_reset_state()						\
 do {										\
 	bp_bzero(processing_code, sizeof(processing_code));					\
 	position = WIEGAND_34_LEN - 1;	\
-	status = READER_VOID;					\
+	wg_status = WG_READER_VOID;					\
 } while(0)
 
 
@@ -101,8 +143,26 @@ static int readers_process_buffer(bd_t handler)
 	return result;
 }
 
+#define isdigit(ch) ((ch) >= '0' && (ch) <= '9')
 
-void readers_init(void)
+void serial_isr(void)
+{
+//	BYTE data;
+
+	if(PIR1bits.RC1IF) {
+//		data = RCREG;
+//		if(isdigit(data))
+		serial_in(RCREG);
+	}
+}
+
+static void serial_init(void)
+{
+	set_uart(AppConfig.rs232_baudrate, TRUE, FALSE);
+	serial_reset();
+}
+
+static void wg_init(void)
 {
 	TRISBbits.TRISB0 = 1;		// INT0
 	TRISBbits.TRISB2 = 1;		// INT2
@@ -116,8 +176,16 @@ void readers_init(void)
 	INTCON3bits.INT2IF = 0;		// clear pending
 	INTCON3bits.INT2IE = 1;		// enable interrupt
 
-	reset_state();
+	wg_reset_state();
+}
 
+
+void readers_init(void)
+{
+	if(AppConfig.r1_activity)
+		wg_init();
+	if(AppConfig.r2_activity)
+		serial_init();
 	mail_subscribe(MYSELF, &mailbox);
 }
 
@@ -125,16 +193,16 @@ void readers_init(void)
 	do{												\
 		if(position) {								\
 			position --;							\
-			status = READER_INPROGRESS;				\
+			wg_status = WG_READER_INPROGRESS;				\
 		} else { 									\
 			bp_cp(processing_code, code, sizeof(processing_code)); 				\
 			bp_bzero(processing_code, sizeof(processing_code)); 					\
 			position = WIEGAND_34_LEN - 1;			\
-			status = READER_READY; 					\
+			wg_status = WG_READER_READY; 					\
 		} 											\
 	}while(0)
 
-void readers_isr(void)
+void wg_readers_isr(void)
 {
 	if(INTCONbits.INT0IF) {
 		INTCONbits.INT0IF = 0;
@@ -149,23 +217,62 @@ void readers_isr(void)
 	}
 }
 
-BYTE readers_get_uid(DWORD *uid)
+BYTE serial_get_uid(DWORD *uid)
+{
+	static BYTE code_str[40], cnt = 0;
+	BYTE data, result = FALSE;
+
+	while (serial_cnt()) {
+
+		serial_out(&data);
+
+		switch (serial_status) {
+		case SERIAL_WAIT_CODE:
+			if(isdigit(data)) {
+				code_str[cnt ++] = data;
+				if(cnt >= SERIAL_CODE_LEN) {
+					serial_status = SERIAL_WAIT_CR;
+				}
+			}
+
+			break;
+		case SERIAL_WAIT_CR:
+
+			if(data == 0x0d) {
+				code_str[cnt] = '\0';
+				*uid = swapl((DWORD) atol(code_str));
+				result = TRUE;
+			}
+
+			cnt = 0;
+			serial_status = SERIAL_WAIT_CODE;
+
+			break;
+		}
+
+	}
+
+	return result;
+}
+
+
+BYTE wg_get_uid(DWORD *uid)
 {
 	WORD ldata;
 	WORD hdata;
 
 
-	switch(status) {
-	case READER_VOID:
+	switch(wg_status) {
+	case WG_READER_VOID:
 		return 0;
 
-	case READER_INPROGRESS:
+	case WG_READER_INPROGRESS:
 		if(TickGet() - t > TICK_SECOND/2) {
-			reset_state();
+			wg_reset_state();
 		}
 		return 0;
 
-	case READER_READY:
+	case WG_READER_READY:
 
 		w34_get_ldata(code, &ldata);
 		w34_get_hdata(code, &hdata);
@@ -175,16 +282,35 @@ BYTE readers_get_uid(DWORD *uid)
 //		*uid = swapl(((DWORD)hdata << 16) | ldata);
 		*uid = ((DWORD)hdata << 16) | ldata;
 
-		reset_state();
+		wg_reset_state();
 
 		return 1;
 
 	}
 }
 
-reader_status_e readers_getstatus(void)
+
+BYTE readers_get_uid(uid_t *uid)
 {
-	return status;
+	if(AppConfig.r1_activity) {
+		if(wg_get_uid(&uid->uid)) {
+			uid->gate = 0;
+			return 1;
+		}
+	}
+
+	if(AppConfig.r2_activity) {
+		if(serial_get_uid(&uid->uid)) {
+			uid->gate = 1;
+			return 1;
+		}
+	}
+	return 0;
+}
+
+wg_reader_status_e wg_readers_getstatus(void)
+{
+	return wg_status;
 }
 
 void readers_module(void)
@@ -195,17 +321,6 @@ void readers_module(void)
 		readers_process_buffer(ipacket);
 	}
 }
-
-
-//unsigned int get_cnt0(void)
-//{
-//	return cnt0;
-//}
-//
-//unsigned int get_cnt1(void)
-//{
-//	return cnt1;
-//}
 
 
 
