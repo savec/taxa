@@ -18,10 +18,12 @@
 static rom char * projectname = SVN_URL;
 static rom char * buildtime = SVN_DATETIME;
 
+static uid_t uid;
+static BYTE str_log[40];
+
+
 void test(void) {
-	uid_t uid;
-	BYTE str_log[60];
-	DWORD t, data;
+	DWORD t/*, data*/;
 
 	strncpypgm2ram(LCD_STRING_0, projectname, 16);
 	strncpypgm2ram(LCD_STRING_1, buildtime, 16);
@@ -39,22 +41,11 @@ void test(void) {
 	while (1) {
 
 		if (readers_get_uid(&uid)) {
-//			if(uid.gate == 0) {
-				data = swapl(uid.uid);
-				sprintf(LCD_STRING_0, "[%04X%04X]:%d", (WORD) (data >> 16), (WORD) data, uid.gate);
-				sprintf(str_log, "RD [%04X%04X]:%d", (WORD) (data >> 16),
-						(WORD) data, uid.gate);
 
-				slog_put(str_log);
+			sprintf(LCD_STRING_0, "[%s]:%d", (char *) uid.uid, uid.gate);
+			sprintf(str_log, "RD [%s]:%d", (char *) uid.uid, uid.gate);
 
-//			} else if(uid.gate == 1) {
-//				data = uid.uid;
-//				sprintf(LCD_STRING_0, "[%06d]:%u", (WORD) data, uid.gate);
-//				sprintf(str_log, "RD [%06d]:%u", (WORD) data, uid.gate);
-//
-//				slog_put(str_log);
-//
-//			}
+			slog_put(str_log);
 		}
 
 		if (!BUTTON0_IO)

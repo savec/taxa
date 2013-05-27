@@ -24,14 +24,6 @@ static int process_host_buffer(bd_t handler);
 static int process_tout_buffer(bd_t handler);
 
 
-static void uid2hex(BYTE * uid, BYTE * s, BYTE size)
-{
-	for (; size--; s += 2, uid++) {
-		s[0] = btohexa_high(*uid);
-		s[1] = btohexa_low(*uid);
-	}
-}
-
 void accessor_module(void)
 {
 	bd_t ipacket, opacket;
@@ -74,12 +66,12 @@ void accessor_module(void)
 			SET_FQ(hdr->hdr_s.type);
 			hdr->hdr_s.packtype_u.npdl.qac = QAC_AR_REQUEST;
 			hdr->hdr_s.packtype_u.npdl.len = (sizeof(ar_req) - MAX_UID_SIZE)
-					+ 8 + CRC16_BYTES; // XXX check size!
+					+ strlen(uid.uid) + CRC16_BYTES;
 
-			request->retries = 2;
-			request->reader_n = 1;
+			request->retries = AppConfig.acc_retry_cnt;
+			request->reader_n = uid.gate;
 			request->req_label = label_cache = (WORD) TickGet();
-			uid2hex((BYTE *) &uid.uid, request->uid, 4); // XXX check size!
+			strcpy(request->uid, uid.uid);
 
 			bcp_send_buffer(opacket);
 			state = WAIT_HOST_ANSWER;
@@ -108,8 +100,8 @@ void accessor_module(void)
 				hdr->hdr_s.packtype_u.npdl.qac = QAC_SERV_DONE;
 				hdr->hdr_s.packtype_u.npdl.len = sizeof(eos_req) + CRC16_BYTES;
 
-				request->retries = 2;
-				request->reader_n = 1;
+				request->retries = AppConfig.acc_retry_cnt;
+				request->reader_n = uid.gate;
 				request->req_label = label_cache;
 
 				bcp_send_buffer(opacket);
@@ -128,8 +120,8 @@ void accessor_module(void)
 				hdr->hdr_s.packtype_u.npdl.qac = QAC_SERV_REJECT;
 				hdr->hdr_s.packtype_u.npdl.len = sizeof(eos_req) + CRC16_BYTES;
 
-				request->retries = 2;
-				request->reader_n = 1;
+				request->retries = AppConfig.acc_retry_cnt;
+				request->reader_n = uid.gate;
 				request->req_label = label_cache;
 
 				bcp_send_buffer(opacket);
