@@ -25,6 +25,19 @@ static mailbox_t mailbox;
 
 volatile static serial_buffer_t sb;
 
+static void uid2hex(BYTE * uid, BYTE * hex, BYTE size)
+{
+	BYTE *s = hex;
+	BYTE *b = uid + (size - 1);
+
+	for (; size--; s += 2, b--) {
+		s[0] = btohexa_high(*b);
+		s[1] = btohexa_low(*b);
+	}
+
+	*s = '\0';
+}
+
 void serial_reset(void)
 {
 //	BYTE l = splhigh();
@@ -217,15 +230,13 @@ void wg_readers_isr(void)
 	}
 }
 
-BYTE serial_get_uid(DWORD *uid)
+static BOOL serial_get_uid(BYTE *uid)
 {
 	static BYTE code_str[40], cnt = 0;
-	BYTE data, result = FALSE;
+	BYTE data;
 
 	while (serial_cnt()) {
-
 		serial_out(&data);
-
 		switch (serial_status) {
 		case SERIAL_WAIT_CODE:
 			if(isdigit(data)) {
@@ -233,6 +244,8 @@ BYTE serial_get_uid(DWORD *uid)
 				if(cnt >= SERIAL_CODE_LEN) {
 					serial_status = SERIAL_WAIT_CR;
 				}
+			} else if(data == 0x0d) { // <CR>
+				cnt = 0;
 			}
 
 			break;
@@ -240,37 +253,34 @@ BYTE serial_get_uid(DWORD *uid)
 
 			if(data == 0x0d) {
 				code_str[cnt] = '\0';
-				*uid = swapl((DWORD) atol(code_str));
-				result = TRUE;
+				strcpy(uid, code_str);
+				return TRUE;
 			}
-
 			cnt = 0;
 			serial_status = SERIAL_WAIT_CODE;
-
 			break;
 		}
-
 	}
-
-	return result;
+	return FALSE;
 }
 
 
-BYTE wg_get_uid(DWORD *uid)
+static BOOL wg_get_uid(BYTE *uid)
 {
 	WORD ldata;
 	WORD hdata;
+	DWORD d_uid;
 
 
 	switch(wg_status) {
 	case WG_READER_VOID:
-		return 0;
+		return FALSE;
 
 	case WG_READER_INPROGRESS:
 		if(TickGet() - t > TICK_SECOND/2) {
 			wg_reset_state();
 		}
-		return 0;
+		return FALSE;
 
 	case WG_READER_READY:
 
@@ -279,12 +289,13 @@ BYTE wg_get_uid(DWORD *uid)
 
 		// odd/even check here
 
-//		*uid = swapl(((DWORD)hdata << 16) | ldata);
-		*uid = ((DWORD)hdata << 16) | ldata;
+		d_uid = swapl(((DWORD)hdata << 16) | ldata);
 
 		wg_reset_state();
 
-		return 1;
+		uid2hex(&d_uid, uid, sizeof(d_uid));
+
+		return TRUE;
 
 	}
 }
@@ -293,14 +304,14 @@ BYTE wg_get_uid(DWORD *uid)
 BYTE readers_get_uid(uid_t *uid)
 {
 	if(AppConfig.r1_activity) {
-		if(wg_get_uid(&uid->uid)) {
+		if(wg_get_uid(uid->uid)) {
 			uid->gate = 0;
 			return 1;
 		}
 	}
 
 	if(AppConfig.r2_activity) {
-		if(serial_get_uid(&uid->uid)) {
+		if(serial_get_uid(uid->uid)) {
 			uid->gate = 1;
 			return 1;
 		}

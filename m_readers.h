@@ -32,9 +32,10 @@ typedef enum {
 //	SERIAL_WAIT_LF
 } serial_reader_status_e;
 
+#define MAX_UID_LEN 40
 
 typedef struct {
-	DWORD uid;
+	BYTE uid[MAX_UID_LEN];
 	BYTE gate;
 } uid_t;
 

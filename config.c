@@ -177,7 +177,7 @@ static ROM const menu_prm_t sig_control_inverse_p =
 		{ TYPE_CHAR, "Signal <CONTROL> inverse", (void *) &AppConfig.sm_sig_control_inverse,
 				{ { 0, 1 } } };
 //WORD sig_control_duration = 10;
-static ROM const menu_prm_t sig_control_duration_p = { TYPE_CHAR,
+static ROM const menu_prm_t sig_control_duration_p = { TYPE_SHORT,
 		"Signal <CONTROL> duration x10ms", (void *) &AppConfig.sm_sig_control_duration, { { 0,
 				1000 } } };
 
@@ -194,7 +194,7 @@ static ROM const menu_prm_t sig_indicator_inverse_p = { TYPE_CHAR,
 		"Signal <INDICATOR> inverse", (void *) &AppConfig.sm_sig_indicator_inverse, {
 				{ 0, 1 } } };
 //WORD sig_indicator_duration = 10;
-static ROM const menu_prm_t sig_indicator_duration_p = { TYPE_CHAR,
+static ROM const menu_prm_t sig_indicator_duration_p = { TYPE_SHORT,
 		"Signal <INDICATOR> duration x10ms", (void *) &AppConfig.sm_sig_indicator_duration, { { 0,
 				1000 } } };
 
