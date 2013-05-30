@@ -80,6 +80,16 @@ BOOL sm_is_ready(void) {
 	return TRUE;	// XXX check it
 }
 
+static void sm_indicator_off(void)
+{
+	P_REL2 = 0;
+}
+
+static void sm_control_off(void)
+{
+	P_REL1 = 0;
+}
+
 static void sm_indicator(BOOL on)
 {
 	static DWORD t;
@@ -149,6 +159,8 @@ void sm_module(void)
 			sm_lcd_prompt();
 			state = SM_FINAL;
 		} else if (P_IN1) {
+			sm_control_off();
+			sm_indicator_off();
 			event_send(MODULE_ACCESSOR, EVT_AC_DONE);
 			sm_lcd_prompt();
 			state = SM_FINAL;

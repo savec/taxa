@@ -38,10 +38,11 @@ static void uid2hex(BYTE * uid, BYTE * hex, BYTE size)
 	*s = '\0';
 }
 
-void serial_reset(void)
+static void serial_reset_state(void)
 {
 //	BYTE l = splhigh();
 	sb.in = sb.out = sb.cnt = 0;
+	serial_status = SERIAL_WAIT_CODE;
 //	splx(l);
 }
 
@@ -118,6 +119,7 @@ do {										\
 } while(0)
 
 
+
 static int readers_process_buffer(bd_t handler)
 {
 	int result = 0;
@@ -172,7 +174,13 @@ void serial_isr(void)
 static void serial_init(void)
 {
 	set_uart(AppConfig.rs232_baudrate, TRUE, FALSE);
-	serial_reset();
+	serial_reset_state();
+}
+
+void readers_reset_state(void)
+{
+	wg_reset_state();
+	serial_reset_state();
 }
 
 static void wg_init(void)
