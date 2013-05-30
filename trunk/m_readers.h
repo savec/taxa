@@ -68,6 +68,6 @@ BYTE readers_get_uid(uid_t *uid);
 wg_reader_status_e wg_readers_getstatus(void);
 void readers_module(void);
 void serial_isr(void);
-
+void readers_reset_state(void);
 
 #endif /* M_READERS_H_ */

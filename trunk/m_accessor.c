@@ -107,6 +107,7 @@ void accessor_module(void)
 				bcp_send_buffer(opacket);
 
 				state = WAIT_UID;
+				readers_reset_state();
 
 			} else if (event & EVT_AC_TOUT) {
 
@@ -127,6 +128,7 @@ void accessor_module(void)
 				bcp_send_buffer(opacket);
 
 				state = WAIT_UID;
+				readers_reset_state();
 
 			} else {
 				bcp_release_buffer(opacket);
@@ -162,8 +164,10 @@ static int process_tout_buffer(bd_t handler)
 			} else {
 				bcp_release_buffer(handler);
 				putrsUSART("\n\rACS: buffer released (no rsp QAC_AR_REQUEST)");
-				if(state == WAIT_HOST_ANSWER)
+				if(state == WAIT_HOST_ANSWER) {
 					state = WAIT_UID;
+					readers_reset_state();
+				}
 
 			}
 		} else if (hdr->hdr_s.packtype_u.npdl.qac == QAC_SERV_DONE) {
@@ -177,8 +181,10 @@ static int process_tout_buffer(bd_t handler)
 			} else {
 				bcp_release_buffer(handler);
 				putrsUSART("\n\rACS: buffer released (no rsp QAC_SERV_DONE)");
-				if(state == WAIT_HOST_ANSWER)
+				if(state == WAIT_HOST_ANSWER) {
 					state = WAIT_UID;
+					readers_reset_state();
+				}
 
 			}
 		} else if (hdr->hdr_s.packtype_u.npdl.qac == QAC_SERV_REJECT) {
@@ -192,8 +198,10 @@ static int process_tout_buffer(bd_t handler)
 			} else {
 				bcp_release_buffer(handler);
 				putrsUSART("\n\rACS: buffer released (no rsp QAC_SERV_REJECT)");
-				if(state == WAIT_HOST_ANSWER)
+				if(state == WAIT_HOST_ANSWER) {
 					state = WAIT_UID;
+					readers_reset_state();
+				}
 
 			}
 		} else {
@@ -252,8 +260,8 @@ static int process_host_buffer(bd_t handler)
 
 		if(!(request->access_code & ACCESS_CONTROL)) {
 			event_send(MODULE_SRVMACHINE, EVT_SM_DISABLE);
-
 			state = WAIT_UID;
+			readers_reset_state();
 		} else {
 //			if(request->access_code & ACCESS_CONTROL)
 			event_send(MODULE_SRVMACHINE, EVT_SM_ENABLE_CONTROL);
