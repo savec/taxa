@@ -119,7 +119,7 @@ do {										\
 } while(0)
 
 
-
+// Reader Command Processor
 static int readers_process_buffer(bd_t handler)
 {
 	int result = 0;
@@ -332,6 +332,7 @@ wg_reader_status_e wg_readers_getstatus(void)
 	return wg_status;
 }
 
+// Reader Processor
 void readers_module(void)
 {
 	bd_t ipacket;
