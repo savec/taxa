@@ -238,10 +238,18 @@ void wg_readers_isr(void)
 	}
 }
 
+static BOOL serial_decode(BYTE *from, BYTE * to)
+{
+	strcpy(to, from); 	// in our case it's simple copy
+						// Reader2 AppConfig prms will be added later XXX
+	return TRUE;
+}
+
 static BOOL serial_get_uid(BYTE *uid)
 {
 	static BYTE code_str[40], cnt = 0;
 	BYTE data;
+	BOOL result = FALSE;
 
 	while (serial_cnt()) {
 		serial_out(&data);
@@ -261,15 +269,14 @@ static BOOL serial_get_uid(BYTE *uid)
 
 			if(data == 0x0d) {
 				code_str[cnt] = '\0';
-				strcpy(uid, code_str);
-				return TRUE;
+				result = serial_decode(code_str, uid);
 			}
 			cnt = 0;
 			serial_status = SERIAL_WAIT_CODE;
 			break;
 		}
 	}
-	return FALSE;
+	return result;
 }
 
 

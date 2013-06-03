@@ -148,8 +148,12 @@ void sm_module(void)
 				break;
 			case EVT_SM_ENABLE_INDICATOR:
 				sm_indicator(TRUE);
-			case EVT_SM_DISABLE:
 				state = SM_READY;
+				break;
+			case EVT_SM_DISABLE:
+				sm_indicator_off();
+				state = SM_READY;
+				break;
 			}
 		}
 		break;
