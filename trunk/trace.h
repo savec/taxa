@@ -7,6 +7,8 @@
 
 #ifndef TRACE_H_
 #define TRACE_H_
+#include "TCPIP Stack/TCPIP.h"
+#include <stdio.h>
 
 //#define UART_TRACE
 
