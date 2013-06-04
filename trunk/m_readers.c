@@ -9,7 +9,7 @@
 #include "m_bcp.h"
 #include "post.h"
 #include "skipic.h"
-
+#include "trace.h"
 
 
 static unsigned char code[BP_SIZE], processing_code[BP_SIZE];
@@ -153,7 +153,7 @@ static int readers_process_buffer(bd_t handler)
 	}
 
 	bcp_release_buffer(handler);
-	putrsUSART("\n\rRDR: buffer released (rsp sent)");
+	TRACE("\n\rRDR: buffer released (rsp sent)");
 
 	return result;
 }
@@ -320,14 +320,14 @@ BYTE readers_get_uid(uid_t *uid)
 {
 	if(AppConfig.r1_activity) {
 		if(wg_get_uid(uid->uid)) {
-			uid->gate = 0;
+			uid->gate = 1;
 			return 1;
 		}
 	}
 
 	if(AppConfig.r2_activity) {
 		if(serial_get_uid(uid->uid)) {
-			uid->gate = 1;
+			uid->gate = 2;
 			return 1;
 		}
 	}

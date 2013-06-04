@@ -37,8 +37,8 @@ static ROM const menu_prm_t ip_addr_p = { TYPE_VECTOR, "IP address",
 		(void *) &AppConfig.MyIPAddr, { { (ROM DWORD) cvrt_ip_in, (ROM DWORD) cvrt_ip_out,
 				sizeof(AppConfig.MyIPAddr) } } };
 
-WORD port = 50;
-static ROM const menu_prm_t port_p = { TYPE_SHORT, "Port", (void *) &port, { {
+//WORD port = 50;
+static ROM const menu_prm_t port_p = { TYPE_SHORT, "Port", (void *) &AppConfig.comm_port, { {
 		0, 65535 } } };
 
 static ROM const menu_section_t communications_s =

@@ -12,6 +12,7 @@
 #include "m_lcd.h"
 #include "eventer.h"
 #include "m_smachine.h"
+#include "trace.h"
 
 rom static char * ver = "AC0.01";
 static mailbox_t mailbox;
@@ -53,7 +54,7 @@ void accessor_module(void)
 
 		/* It's OK, send to host */
 		opacket = bcp_obtain_buffer(MYSELF);
-		putrsUSART("\n\rACS: buffer obtained (QAC_AR_REQUEST)");
+		TRACE("\n\rACS: buffer obtained (QAC_AR_REQUEST)");
 
 		if (opacket < 0) {
 			break;
@@ -93,7 +94,7 @@ void accessor_module(void)
 				bcp_header_t * hdr = (bcp_header_t *) bcp_buffer(opacket)->buf;
 				eos_req *request = (eos_req *) &hdr->raw[RAW_DATA];
 
-				putrsUSART("\n\rACS: buffer obtained (QAC_SERV_DONE)");
+				TRACE("\n\rACS: buffer obtained (QAC_SERV_DONE)");
 
 				hdr->hdr_s.type = TYPE_NPDL;
 				SET_FQ(hdr->hdr_s.type);
@@ -114,7 +115,7 @@ void accessor_module(void)
 				bcp_header_t * hdr = (bcp_header_t *) bcp_buffer(opacket)->buf;
 				eos_req *request = (eos_req *) &hdr->raw[RAW_DATA];
 
-				putrsUSART("\n\rACS: buffer obtained (QAC_SERV_REJECT)");
+				TRACE("\n\rACS: buffer obtained (QAC_SERV_REJECT)");
 
 				hdr->hdr_s.type = TYPE_NPDL;
 				SET_FQ(hdr->hdr_s.type);
@@ -160,10 +161,10 @@ static int process_tout_buffer(bd_t handler)
 			if (request->retries) {
 				request->retries--;
 				bcp_send_buffer(handler);
-				putrsUSART("\n\rACS: resend QAC_AR_REQUEST");
+				TRACE("\n\rACS: resend QAC_AR_REQUEST");
 			} else {
 				bcp_release_buffer(handler);
-				putrsUSART("\n\rACS: buffer released (no rsp QAC_AR_REQUEST)");
+				TRACE("\n\rACS: buffer released (no rsp QAC_AR_REQUEST)");
 				if(state == WAIT_HOST_ANSWER) {
 					state = WAIT_UID;
 					readers_reset_state();
@@ -177,10 +178,10 @@ static int process_tout_buffer(bd_t handler)
 			if (request->retries) {
 				request->retries--;
 				bcp_send_buffer(handler);
-				putrsUSART("\n\rACS: resend QAC_SERV_DONE");
+				TRACE("\n\rACS: resend QAC_SERV_DONE");
 			} else {
 				bcp_release_buffer(handler);
-				putrsUSART("\n\rACS: buffer released (no rsp QAC_SERV_DONE)");
+				TRACE("\n\rACS: buffer released (no rsp QAC_SERV_DONE)");
 				if(state == WAIT_HOST_ANSWER) {
 					state = WAIT_UID;
 					readers_reset_state();
@@ -194,10 +195,10 @@ static int process_tout_buffer(bd_t handler)
 			if (request->retries) {
 				request->retries--;
 				bcp_send_buffer(handler);
-				putrsUSART("\n\rACS: resend QAC_SERV_REJECT");
+				TRACE("\n\rACS: resend QAC_SERV_REJECT");
 			} else {
 				bcp_release_buffer(handler);
-				putrsUSART("\n\rACS: buffer released (no rsp QAC_SERV_REJECT)");
+				TRACE("\n\rACS: buffer released (no rsp QAC_SERV_REJECT)");
 				if(state == WAIT_HOST_ANSWER) {
 					state = WAIT_UID;
 					readers_reset_state();
@@ -280,7 +281,7 @@ static int process_host_buffer(bd_t handler)
 	}
 
 	bcp_release_buffer(handler);
-	putrsUSART("\n\rACS: buffer released (rsp sent)");
+	TRACE("\n\rACS: buffer released (rsp sent)");
 
 	return result;
 }

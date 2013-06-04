@@ -10,6 +10,7 @@
 #include "CRCMOD.h"
 #include "post.h"
 #include "version.h"
+#include "trace.h"
 
 #define MYSELF	MODULE_BCP
 
@@ -22,72 +23,22 @@ bd_t bcp_obtain_buffer(modules_e owner)
 {
 	signed char i;
 
-//#ifdef BCP_TRACE
-//			putrsUSART("\n\r");
-//			switch (owner) {
-//			case MODULE_BCP:
-//				putrsUSART("BCP");
-//				break;
-//			case MODULE_READERS:
-//				putrsUSART("RDR");
-//				break;
-//			case MODULE_ACCESSOR:
-//				putrsUSART("ACS");
-//				break;
-//			case MODULE_SRVMACHINE:
-//				putrsUSART("SRV");
-//				break;
-//			case MODULE_LOGGER:
-//				putrsUSART("LOG");
-//				break;
-//			default:
-//				putrsUSART("UNK");
-//			}
-//#endif
 
 	for (i = 0; i < NBUFFERS; i++) {
 		if (bpool[i].status == BD_FREE) {
 			bpool[i].status = BD_OBTAINED;
 			bpool[i].owner = owner;
-//#ifdef BCP_TRACE
-//			putrsUSART(": buffer obtained");
-//#endif
+
 			return i;
 		}
 	}
 
-//#ifdef BCP_TRACE
-//			putrsUSART(": can't obtaine buffer");
-//#endif
 
 	return -1;
 }
 
 void bcp_release_buffer(bd_t handler)
 {
-//#ifdef BCP_TRACE
-//	putrsUSART("\n\r");
-//	switch (bpool[handler].owner) {
-//	case MODULE_BCP:
-//		putrsUSART("BCP");
-//		break;
-//	case MODULE_READERS:
-//		putrsUSART("RDR");
-//		break;
-//	case MODULE_ACCESSOR:
-//		putrsUSART("ACS");
-//		break;
-//	case MODULE_SRVMACHINE:
-//		putrsUSART("SRV");
-//		break;
-//	case MODULE_LOGGER:
-//		putrsUSART("LOG");
-//		break;
-//	default:
-//		putrsUSART("UNK");
-//	}
-//	putrsUSART(": buffer released");
-//#endif
 
 	bpool[handler].status = BD_FREE;
 }
@@ -323,7 +274,7 @@ int bcp_process_buffer(bd_t handler)
 	}
 
 	bcp_release_buffer(handler);
-	putrsUSART("\n\rBCP: buffer released (rsp sent)");
+	TRACE("\n\rBCP: buffer released (rsp sent)");
 	return result;
 }
 
@@ -337,7 +288,7 @@ static void bcp_check_acked(bd_t buffer) {
 
 		if (bpool[i].status == BD_NEED_ACK && hdr->raw[RAW_QAC] == ihdr->raw[RAW_QAC]) {
 			bcp_release_buffer(i);
-			putrsUSART("\n\rBCP: buffer released (acked)");
+			TRACE("\n\rBCP: buffer released (acked)");
 		}
 	}
 
@@ -350,7 +301,7 @@ void bcp_module(void)
 	bd_t i;
 
 	if (ibuffer < 0) {
-		putrsUSART("\n\rcan't obtaine buffer");
+		TRACE("\n\rcan't obtaine buffer");
 		goto skip_reciev;
 	}
 
@@ -359,7 +310,7 @@ void bcp_module(void)
 		goto skip_reciev;
 	}
 
-	putrsUSART("\n\rBCP: buffer obtained (ipacket)");
+	TRACE("\n\rBCP: buffer obtained (ipacket)");
 
 	subscriber = bcp_determine_subscriber(ibuffer);
 

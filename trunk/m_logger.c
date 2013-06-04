@@ -8,6 +8,7 @@
 #include "m_logger.h"
 #include "post.h"
 #include <string.h>
+#include "trace.h"
 
 rom static char * ver = "LG0.01";
 static mailbox_t mailbox;
@@ -216,18 +217,15 @@ static int slog_cnt_events(DWORD from, DWORD to) {
 
 static int slog_scan(void) {
 	int pos_start, pos_end, cnt;
-	BYTE str_buf[40];
 
 	pos_start = cyclic_search(0, SLOG_EMPTY, SLOG_EMPTY);
 
 	if (pos_start == -1) {
-		putrsUSART("\n\rcan't find SLOG_EMPTY, need format.");
+		TRACE("\n\rcan't find SLOG_EMPTY, need format.");
 		return -1; /*can't find SLOG_EMPTY, need format.*/// XXX
 	}
 
-	sprintf(str_buf, "\n\rfind SLOG_EMPTY at %u ", (int)pos_start);
-	putsUSART(str_buf);
-
+	TRACE("\n\rfind SLOG_EMPTY at %u ", (int)pos_start);
 
 	pos_start = cyclic_search(pos_start, ASCII_PRINTABLE_FIRST,
 			ASCII_PRINTABLE_LAST);
@@ -238,24 +236,23 @@ static int slog_scan(void) {
 
 		if (cnt == 0) {
 			/* all empty, need reset */
-			putrsUSART("\n\rall empty, need reset.");
+			TRACE("\n\rall empty, need reset.");
 			return -2;
 		} else if (cnt > 1) {
 			/* multiple SLOG_EOE, need format */
-			putrsUSART("\n\rmultiple SLOG_EOE, need format.");
+			TRACE("\n\rmultiple SLOG_EOE, need format.");
 			return -1;
 		} else {
 			/* after format+reset state */
 			set_tail(0);
 			set_head(0);
 			cnt_not_read = cnt_events = 0;
-			putrsUSART("\n\rafter format+reset state.");
+			TRACE("\n\rafter format+reset state.");
 			return 0;
 		}
 	}
 
-	sprintf(str_buf, "\n\rfind PRINTABLE at %u ", (int)pos_start);
-	putsUSART(str_buf);
+	TRACE("\n\rfind PRINTABLE at %u ", (int)pos_start);
 
 	set_tail(pos_start);
 	pos_end = (cyclic_search(pos_start, SLOG_EMPTY, SLOG_EMPTY) - 1) & SLOG_MASK; // . . . . EOE EOE EMPTY
@@ -265,9 +262,8 @@ static int slog_scan(void) {
 	{
 
 
-		putrsUSART("\n\rslog not empty, normal.");
-		sprintf(str_buf, "\n\rtail=%u, head=%u, not_read=%u ", (int)tail(), (int)head(), (int)cnt_not_read);
-		putsUSART(str_buf);
+		TRACE("\n\rslog not empty, normal.");
+		TRACE("\n\rtail=%u, head=%u, not_read=%u ", (int)tail(), (int)head(), (int)cnt_not_read);
 	}
 
 
@@ -647,11 +643,11 @@ static int process_buffer(bd_t handler)
 	case TYPE_NPRQ:
 		switch (hdr->raw[RAW_QAC]) {
 		case QAC_LG_CLEAR_ALL:
-			putrsUSART("QAC_LG_CLEAR_ALL");
+			TRACE("QAC_LG_CLEAR_ALL");
 
 			break;
 		case QAC_LG_READ_LAST:
-			putrsUSART("QAC_LG_READ_LAST");
+			TRACE("QAC_LG_READ_LAST");
 
 			hdr->hdr_s.type = TYPE_NPDL;
 			hdr->hdr_s.packtype_u.npdl.len = slog_getlast(
@@ -660,7 +656,7 @@ static int process_buffer(bd_t handler)
 
 			break;
 		case QAC_LG_READ_NEXT:
-			putrsUSART("QAC_LG_READ_NEXT");
+			TRACE("QAC_LG_READ_NEXT");
 
 			hdr->hdr_s.type = TYPE_NPDL;
 
@@ -680,7 +676,7 @@ static int process_buffer(bd_t handler)
 
 			break;
 		case QAC_LG_GET_COUNT:
-			putrsUSART("QAC_LG_GET_COUNT");
+			TRACE("QAC_LG_GET_COUNT");
 
 			hdr->hdr_s.type = TYPE_NPDL;
 //			*(DWORD *)&hdr->raw[RAW_DATA] = cnt_events; // alignment problems possible
@@ -721,7 +717,7 @@ static int process_buffer(bd_t handler)
 		switch (hdr->raw[RAW_QAC]) {
 
 		case QAC_LG_WRITE_EVENT:
-			putrsUSART("QAC_LG_WRITE_EVENT");
+			TRACE("QAC_LG_WRITE_EVENT");
 
 			hdr->raw[RAW_DATA + hdr->hdr_s.packtype_u.npdl.len - 2] = '\0';
 			slog_put((BYTE *)&hdr->raw[RAW_DATA]);
@@ -745,7 +741,7 @@ static int process_buffer(bd_t handler)
 	}
 
 	bcp_release_buffer(handler);
-	putrsUSART("\n\rLOG: buffer released (rsp sent)");
+	TRACE("\n\rLOG: buffer released (rsp sent)");
 
 	return result;
 }
