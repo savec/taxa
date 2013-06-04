@@ -10,6 +10,7 @@
 #include "eventer.h"
 #include "m_accessor.h"
 #include "m_lcd.h"
+#include "trace.h"
 
 sm_state_e state;
 rom static char * ver = "SM0.01";
@@ -52,7 +53,7 @@ static int process_buffer(bd_t handler)
 	}
 
 	bcp_release_buffer(handler);
-	putrsUSART("\n\rSM: buffer released (rsp sent)");
+	TRACE("\n\rSM: buffer released (rsp sent)");
 
 	return result;
 }
@@ -164,7 +165,7 @@ void sm_module(void)
 			state = SM_FINAL;
 		} else if (P_IN1) {
 			sm_control_off();
-			sm_indicator_off();
+//			sm_indicator_off();
 			event_send(MODULE_ACCESSOR, EVT_AC_DONE);
 			sm_lcd_prompt();
 			state = SM_FINAL;

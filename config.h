@@ -96,5 +96,6 @@ void config(void);
 void config_restore_defaults(void);
 void config_restore(void);
 void config_save(void);
+extern APP_CONFIG AppConfig;
 
 #endif /* CONFIG_H_ */
