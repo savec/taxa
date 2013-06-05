@@ -15,7 +15,8 @@
 #include "m_smachine.h"
 #include "version.h"
 
-static rom char * projectname = SVN_URL;
+//static rom char * projectname = SVN_URL;
+static rom char * projectname = PROJ_NAME;
 static rom char * buildtime = SVN_DATETIME;
 
 static uid_t uid;

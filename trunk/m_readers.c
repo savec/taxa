@@ -200,7 +200,7 @@ static void wg_init(void)
 	wg_reset_state();
 }
 
-
+// *** Reader Initiator
 void readers_init(void)
 {
 	if(AppConfig.r1_activity)
@@ -237,7 +237,7 @@ void wg_readers_isr(void)
 		t = TickGet();
 	}
 }
-
+//Serial reading
 static BOOL serial_decode(BYTE *from, BYTE * to)
 {
 	strcpy(to, from); 	// in our case it's simple copy
@@ -279,7 +279,7 @@ static BOOL serial_get_uid(BYTE *uid)
 	return result;
 }
 
-
+//  Wiegand reading
 static BOOL wg_get_uid(BYTE *uid)
 {
 	WORD ldata;

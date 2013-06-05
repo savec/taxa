@@ -1,7 +1,7 @@
 /*
- * version.h
+ * version.h - AutoGen
  *
- *  Created on: 04.02.2013
+ *  TPL Created on: 04.02.2013
  *      Author: admin
  */
 
@@ -11,7 +11,7 @@
 #include "TCPIP Stack/TCPIP.h"
 
 #define SVN_REVISION	"$WCREV$"
-#define SVN_DATETIME	"$WCNOW$"
-#define SVN_URL			"$WCURL$"
+#define SVN_MODIFYED	"$WCMODS?+:$"
 
-#endif /* VERSION_H_ */
+#define SVN_DATETIME	"$WCNOW$"
+#define SVN_URL	"$WCURL$"

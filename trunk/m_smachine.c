@@ -134,12 +134,13 @@ void sm_module(void)
 		if(event_recieve(MYSELF, &event)) {
 			if(event & EVT_SM_PREPARE) {
 				state = SM_PREPARE;
+                sm_indicator_off();
 			}
 		}
 		break;
 	case SM_PREPARE:
 		if(event_recieve(MYSELF, &event)) {
-			switch(event) {
+/*			switch(event) {
 			case EVT_SM_ENABLE_INDICATOR | EVT_SM_ENABLE_CONTROL:
 				sm_indicator(TRUE);
 			case EVT_SM_ENABLE_CONTROL:
@@ -155,7 +156,20 @@ void sm_module(void)
 				sm_indicator_off();
 				state = SM_READY;
 				break;
-			}
+			}*/
+            if(event & EVT_SM_ENABLE_INDICATOR)
+                sm_indicator(TRUE);
+            else
+                sm_indicator(FALSE);
+           
+            if (event & EVT_SM_ENABLE_CONTROL)
+               {
+                sm_control(TRUE);
+				t = TickGet();
+				state = SM_WORK;
+                 }
+            else 
+               state = SM_READY;
 		}
 		break;
 	case SM_WORK:
