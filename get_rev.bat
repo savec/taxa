@@ -1,1 +1,3 @@
-SubWCRev D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\version.tpl D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\version.h
+SubWCRev %1 %1\version.tpl version.h
+@echo #define PROJ_NAME "%2@%3" >> version.h
+@echo #endif /* VERSION_H_ */ >> version.h

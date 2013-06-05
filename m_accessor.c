@@ -221,6 +221,7 @@ static int process_tout_buffer(bd_t handler)
 static int process_host_buffer(bd_t handler)
 {
 	int result = 0;
+    event_t sm_evnt=0;
 	bcp_header_t * hdr = (bcp_header_t *) bcp_buffer(handler)->buf;
 
 	switch (TYPE(hdr->hdr_s.type)) {
@@ -259,16 +260,21 @@ static int process_host_buffer(bd_t handler)
 		LCD_decode(LCDText);
 		LCDUpdate();
 
+        if(request->access_code & ACCESS_INDICATOR)        
+           sm_evnt = EVT_SM_ENABLE_INDICATOR;
+        else 
+           sm_evnt ==0;
+
 		if(!(request->access_code & ACCESS_CONTROL)) {
-			event_send(MODULE_SRVMACHINE, EVT_SM_DISABLE);
+			event_send(MODULE_SRVMACHINE, sm_evnt | EVT_SM_DISABLE);
 			state = WAIT_UID;
 			readers_reset_state();
 		} else {
 //			if(request->access_code & ACCESS_CONTROL)
-			event_send(MODULE_SRVMACHINE, EVT_SM_ENABLE_CONTROL);
+			event_send(MODULE_SRVMACHINE, sm_evnt | EVT_SM_ENABLE_CONTROL);
 
-			if(request->access_code & ACCESS_INDICATOR)
-				event_send(MODULE_SRVMACHINE, EVT_SM_ENABLE_INDICATOR);
+//			if(request->access_code & ACCESS_INDICATOR)
+//				event_send(MODULE_SRVMACHINE, EVT_SM_ENABLE_INDICATOR);
 
 			state = WAIT_SM;
 		}

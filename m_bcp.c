@@ -14,7 +14,9 @@
 
 #define MYSELF	MODULE_BCP
 
-rom char * buildlabel = SVN_URL " " SVN_DATETIME;
+//rom char * buildlabel = SVN_URL " " SVN_DATETIME;
+rom char * buildlabel = PROJ_NAME " " SVN_DATETIME " Rev:" SVN_REVISION SVN_MODIFYED;
+
 rom static char * ver = "CR0.01";
 
 static buf_t bpool[NBUFFERS] = { 0 };
