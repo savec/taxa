@@ -23,7 +23,7 @@ typedef enum {
 	EVT_SM_PREPARE = 0x0001,
 	EVT_SM_ENABLE_CONTROL = 0x0002,
 	EVT_SM_ENABLE_INDICATOR = 0x0004,
-	EVT_SM_DISABLE = 0x0008,
+	EVT_SM_DISABLE_CONTROL = 0x0008,
 	EVT_SM_FINALIZE = 0x0010
 } sm_events;
 
@@ -38,5 +38,6 @@ typedef enum {
 void sm_init(void);
 void sm_module(void);
 BOOL sm_is_ready(void);
+//void sm_lcd_prompt(void);
 
 #endif /* M_SMACHINE_H_ */

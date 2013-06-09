@@ -8,6 +8,22 @@
 #ifndef CONFIG_H_
 #define CONFIG_H_
 
+#define CFG_START "config"
+
+//#define put_string	putsUSART
+//#define put_rom_string	putrsUSART
+//#define get_string	ReadStringUART
+
+#define get_string	net_get_string
+
+//					putsUSART(string_buf); \
+
+#define put_string(...) 	do {	\
+					sprintf (string_buf, __VA_ARGS__); \
+					net_send_string(string_buf); \
+					} while(0)
+
+
 #define MAX_PRMS	20
 
 typedef enum {
@@ -78,18 +94,18 @@ typedef struct {
 
 #define DFLT_SM_SERVICE_TIME 1000
 #define DFLT_SM_SIG_CONTROL_EN 1
-#define DFLT_SM_SIG_CONTROL_RELAY 0
+#define DFLT_SM_SIG_CONTROL_RELAY 1
 #define DFLT_SM_SIG_CONTROL_INVERSE 0
-#define DFLT_SM_SIG_CONTROL_DURATION 10
+#define DFLT_SM_SIG_CONTROL_DURATION 100
 #define DFLT_SM_SIG_INDICATOR_EN 1
 #define DFLT_SM_SIG_INDICATOR_RELAY 0
 #define DFLT_SM_SIG_INDICATOR_INVERSE 0
-#define DFLT_SM_SIG_INDICATOR_DURATION 10
+#define DFLT_SM_SIG_INDICATOR_DURATION 100
 #define DFLT_SM_SIG_DONE_EN 1
 #define DFLT_SM_SIG_DONE_SENSOR 0
 #define DFLT_SM_SIG_DONE_INVERSE 0
 #define DFLT_SM_SIG_FAILURE_EN 1
-#define DFLT_SM_SIG_FAILURE_SENSOR 0
+#define DFLT_SM_SIG_FAILURE_SENSOR 1
 #define DFLT_SM_SIG_FAILURE_INVERSE 0
 
 void config(void);

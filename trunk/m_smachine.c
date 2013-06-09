@@ -58,10 +58,10 @@ static int process_buffer(bd_t handler)
 	return result;
 }
 
-static void sm_lcd_prompt(void)
+ static void sm_lcd_prompt(void)
 {
-	sprintf(LCD_STRING_0, "Предъявите карту");
-	sprintf(LCD_STRING_1, "                ");
+	strcpy(LCD_STRING_0, AppConfig.acc_prompt_msg);
+	strcpypgm2ram(LCD_STRING_1, "                ");
 	LCD_decode(LCD_ALL);
 	LCDUpdate();
 }
@@ -81,41 +81,217 @@ BOOL sm_is_ready(void) {
 	return TRUE;	// XXX check it
 }
 
-static void sm_indicator_off(void)
-{
-	P_REL2 = 0;
-}
-
 static void sm_control_off(void)
 {
-	P_REL1 = 0;
+	if(AppConfig.sm_sig_control_en) {
+		if(AppConfig.sm_sig_control_inverse)
+			switch(AppConfig.sm_sig_control_relay)
+			{
+			case 0:
+				P_REL1 = 1;
+				break;
+			case 1:
+				P_REL2 = 1;
+				break;
+			}
+		else
+			switch(AppConfig.sm_sig_control_relay)
+			{
+			case 0:
+				P_REL1 = 0;
+				break;
+			case 1:
+				P_REL2 = 0;
+				break;
+			}
+	}
 }
 
-static void sm_indicator(BOOL on)
+static void sm_control_on(void)
+{
+	if(AppConfig.sm_sig_control_en) {
+		if(AppConfig.sm_sig_control_inverse)
+			switch(AppConfig.sm_sig_control_relay)
+			{
+			case 0:
+				P_REL1 = 0;
+				break;
+			case 1:
+				P_REL2 = 0;
+				break;
+			}
+		else
+			switch(AppConfig.sm_sig_control_relay)
+			{
+			case 0:
+				P_REL1 = 1;
+				break;
+			case 1:
+				P_REL2 = 1;
+				break;
+			}
+	}
+}
+
+static void sm_indicator_off(void)
+{
+	if(AppConfig.sm_sig_indicator_en) {
+		if(AppConfig.sm_sig_indicator_inverse)
+			switch(AppConfig.sm_sig_indicator_relay)
+			{
+			case 0:
+				P_REL1 = 1;
+				break;
+			case 1:
+				P_REL2 = 1;
+				break;
+			}
+		else
+			switch(AppConfig.sm_sig_indicator_relay)
+			{
+			case 0:
+				P_REL1 = 0;
+				break;
+			case 1:
+				P_REL2 = 0;
+				break;
+			}
+	}
+}
+
+static void sm_indicator_on(void)
+{
+	if(AppConfig.sm_sig_indicator_en) {
+		if(AppConfig.sm_sig_indicator_en) {
+			if(AppConfig.sm_sig_indicator_inverse)
+				switch(AppConfig.sm_sig_indicator_relay)
+				{
+				case 0:
+					P_REL1 = 0;
+					break;
+				case 1:
+					P_REL2 = 0;
+					break;
+				}
+			else
+				switch(AppConfig.sm_sig_indicator_relay)
+				{
+				case 0:
+					P_REL1 = 1;
+					break;
+				case 1:
+					P_REL2 = 1;
+					break;
+				}
+		}
+	}
+}
+
+
+
+static void sm_indicator(int on)
 {
 	static DWORD t;
+	static BOOL armed = 0;
 
-	if(on) {
+	switch(on) {
+	case -1:
+		if(armed && ((TickGet() - t) > ((TICK_SECOND / 100L) * (DWORD)AppConfig.sm_sig_indicator_duration))) {
+			sm_indicator_off();
+			armed = 0;
+		}
+		break;
+	case 0:
+		sm_indicator_off();
+		armed = 0;
+		break;
+	case 1:
 		t = TickGet(); 
-		P_REL2 = 1;
-	} else if(P_REL2 && (TickGet() - t) > ((TICK_SECOND / 100L) * (DWORD)AppConfig.sm_sig_indicator_duration)) {
-		P_REL2 = 0;
+		sm_indicator_on();
+		armed = 1;
+		break;
 	}
 }
 
-static void sm_control(BOOL on)
+static void sm_control(int on)
 {
 	static DWORD t;
+	static BOOL armed = 0;
 
-	if(on) {
+	switch(on) {
+	case -1:
+		if(armed && ((TickGet() - t) > ((TICK_SECOND / 100L) * (DWORD)AppConfig.sm_sig_control_duration))) {
+			sm_control_off();
+			armed = 0;
+		}
+		break;
+	case 0:
+		sm_control_off();
+		armed = 0;
+		break;
+	case 1:
 		t = TickGet();
-		P_REL1 = 1;
-	} else if(P_REL1 && (TickGet() - t) > ((TICK_SECOND / 100L) * (DWORD)AppConfig.sm_sig_control_duration)) {
-		P_REL1 = 0;
+		sm_control_on();
+		armed = 1;
+		break;
 	}
 }
+static void sm_lcd(int on)
+{
+	static DWORD t;
+	static BOOL armed = 0;
 
- 
+	switch(on) {
+	case -1:
+		if(armed && ((TickGet() - t) > (TICK_SECOND * 5))) {
+			sm_lcd_prompt();
+			armed = 0;
+		}
+		break;
+	case 1:
+		t = TickGet();
+
+		armed = 1;
+		break;
+	}
+
+}
+
+static BOOL sm_is_sig_done(void)
+{
+	BOOL result = FALSE;
+
+	if(AppConfig.sm_sig_done_en) {
+		switch(AppConfig.sm_sig_done_sensor) {
+		case 0:
+			result = AppConfig.sm_sig_done_inverse ? !P_IN1 : P_IN1;
+			break;
+		case 1:
+			result = AppConfig.sm_sig_done_inverse ? !P_IN2 : P_IN2;
+			break;
+		}
+	}
+	return result;
+}
+
+static BOOL sm_is_sig_failure(void)
+{
+	BOOL result = FALSE;
+
+	if(AppConfig.sm_sig_failure_en) {
+		switch(AppConfig.sm_sig_failure_sensor) {
+		case 0:
+			result = AppConfig.sm_sig_failure_inverse ? !P_IN1 : P_IN1;
+			break;
+		case 1:
+			result = AppConfig.sm_sig_failure_inverse ? !P_IN2 : P_IN2;
+			break;
+		}
+	}
+	return result;
+}
+
+
 void sm_module(void)
 {
 	bd_t ipacket;
@@ -124,8 +300,9 @@ void sm_module(void)
 	if (mail_reciev(MYSELF, &ipacket))
 			process_buffer(ipacket);
 
-	sm_indicator(FALSE);
-	sm_control(FALSE);
+	sm_indicator(-1);
+	sm_control(-1);
+	sm_lcd(-1);
 
 	switch(state) {
 	case SM_INIT:
@@ -134,52 +311,37 @@ void sm_module(void)
 		if(event_recieve(MYSELF, &event)) {
 			if(event & EVT_SM_PREPARE) {
 				state = SM_PREPARE;
-                sm_indicator_off();
+                sm_indicator(0);
 			}
 		}
 		break;
 	case SM_PREPARE:
 		if(event_recieve(MYSELF, &event)) {
-/*			switch(event) {
-			case EVT_SM_ENABLE_INDICATOR | EVT_SM_ENABLE_CONTROL:
-				sm_indicator(TRUE);
-			case EVT_SM_ENABLE_CONTROL:
-				sm_control(TRUE);
-				t = TickGet();
-				state = SM_WORK;
-				break;
-			case EVT_SM_ENABLE_INDICATOR:
-				sm_indicator(TRUE);
-				state = SM_READY;
-				break;
-			case EVT_SM_DISABLE:
-				sm_indicator_off();
-				state = SM_READY;
-				break;
-			}*/
+
             if(event & EVT_SM_ENABLE_INDICATOR)
-                sm_indicator(TRUE);
+                sm_indicator(1);
             else
-                sm_indicator(FALSE);
+                sm_indicator(0);
            
             if (event & EVT_SM_ENABLE_CONTROL)
-               {
-                sm_control(TRUE);
+            {
+                sm_control(1);
 				t = TickGet();
 				state = SM_WORK;
-                 }
-            else 
-               state = SM_READY;
+            }
+            else {
+            	sm_lcd(1);
+            	state = SM_READY;
+            }
 		}
 		break;
 	case SM_WORK:
-		if((TickGet() - t) > ((TICK_SECOND / 100L) * (DWORD)AppConfig.sm_service_time)) {
+		if((TickGet() - t) > ((TICK_SECOND * (DWORD)AppConfig.sm_service_time) / 100L)) {
 			event_send(MODULE_ACCESSOR, EVT_AC_TOUT);
 			sm_lcd_prompt();
 			state = SM_FINAL;
-		} else if (P_IN1) {
-			sm_control_off();
-//			sm_indicator_off();
+		} else if (sm_is_sig_done()) {
+			sm_control(0);
 			event_send(MODULE_ACCESSOR, EVT_AC_DONE);
 			sm_lcd_prompt();
 			state = SM_FINAL;
