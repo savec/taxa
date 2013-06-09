@@ -270,8 +270,8 @@ int main(void)
 	sm_init();
 
 
-	if(!BUTTON1_IO)
-		config();
+//	if(!BUTTON1_IO)
+//		config();
 
 	readers_init();
 
@@ -330,6 +330,9 @@ int main(void)
 //			get_ajustible(&val);
 //			LCDTest(val >> 2);
 //		}
+
+		if(net_cfg_activity())
+			config();
 
 		bcp_module();
 		readers_module();
