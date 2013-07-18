@@ -27,10 +27,12 @@ typedef enum {
 } wg_reader_status_e;
 
 typedef enum {
-	SERIAL_WAIT_CODE = 0,
-	SERIAL_WAIT_CR
+	SERIAL_WAIT_FRAME = 0,
+	SERIAL_WAIT_ENDFRAME
 //	SERIAL_WAIT_LF
 } serial_reader_status_e;
+
+
 
 #define MAX_UID_LEN 40
 
@@ -39,14 +41,14 @@ typedef struct {
 	BYTE gate;
 } uid_t;
 
-#define SERIAL_CODE_LEN	6	// replace whith prm
-#define SERIAL_MAX_CODE_LEN	16
-#define SERIAL_BUF_MASK	(SERIAL_MAX_CODE_LEN - 1)
-
-
+//#define SERIAL_CODE_LEN	6	// replace whith prm
+//#define SERIAL_MAX_CODE_LEN	16
+//#define SERIAL_BUF_MASK	(SERIAL_MAX_CODE_LEN - 1)
+#define SERIAL_MAX_FRAME_LEN 32
+#define SERIAL_BUF_MASK	(SERIAL_MAX_FRAME_LEN - 1)
 
 typedef struct {
-	BYTE buf[SERIAL_MAX_CODE_LEN];
+	BYTE buf[SERIAL_MAX_FRAME_LEN]; //SERIAL_MAX_CODE_LEN];
 	BYTE in;
 	BYTE out;
 	BYTE cnt;
