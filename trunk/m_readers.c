@@ -17,7 +17,7 @@ static unsigned char code[BP_SIZE], processing_code[BP_SIZE];
 static BYTE position;
 static volatile DWORD t = 0;
 static wg_reader_status_e wg_status = WG_READER_VOID;
-static serial_reader_status_e serial_status = SERIAL_WAIT_CODE;
+static serial_reader_status_e serial_status = SERIAL_WAIT_FRAME;
 
 rom static char * ver = "RD0.00";
 static mailbox_t mailbox;
@@ -42,7 +42,7 @@ static void serial_reset_state(void)
 {
 //	BYTE l = splhigh();
 	sb.in = sb.out = sb.cnt = 0;
-	serial_status = SERIAL_WAIT_CODE;
+	serial_status = SERIAL_WAIT_FRAME;
 //	splx(l);
 }
 
@@ -238,42 +238,62 @@ void wg_readers_isr(void)
 	}
 }
 //Serial reading
-static BOOL serial_decode(BYTE *from, BYTE * to)
+static BOOL serial_decode(BYTE *from, BYTE * to, BYTE count)
 {
-	strcpy(to, from); 	// in our case it's simple copy
+	strncpy(to, from, count); 	// in our case it's simple copy
+    *(to+count) = '\0';
 						// Reader2 AppConfig prms will be added later XXX
 	return TRUE;
 }
 
 static BOOL serial_get_uid(BYTE *uid)
 {
-	static BYTE code_str[40], cnt = 0;
+	static BYTE code_str[SERIAL_MAX_FRAME_LEN], cnt = 0;
+    static DWORD t;
 	BYTE data;
 	BOOL result = FALSE;
 
+// intreChar delay
+	if(serial_status==SERIAL_WAIT_ENDFRAME
+       && AppConfig.r2_max_delay  
+       && ((TickGet() - t) > ((TICK_SECOND / 100L) * (DWORD)AppConfig.r2_max_delay))) {
+		//serial_reset_state();
+    	cnt = 0;
+   		serial_status = SERIAL_WAIT_FRAME;
+    }
+
 	while (serial_cnt()) {
 		serial_out(&data);
+        t = TickGet();
 		switch (serial_status) {
-		case SERIAL_WAIT_CODE:
-			if(isdigit(data)) {
-				code_str[cnt ++] = data;
-				if(cnt >= SERIAL_CODE_LEN) {
-					serial_status = SERIAL_WAIT_CR;
-				}
-			} else if(data == 0x0d) { // <CR>
-				cnt = 0;
-			}
+		case SERIAL_WAIT_FRAME:
+			code_str[cnt ++] = data;
+			serial_status = SERIAL_WAIT_ENDFRAME;
+			break;
+
+		case SERIAL_WAIT_ENDFRAME:
+            code_str[cnt ++] = data;
+            
+            if (cnt > SERIAL_MAX_FRAME_LEN)  { // BufferCLenontrol
+		    	result = serial_decode(code_str, uid, cnt);
+		    	cnt = 0;
+	    		serial_status = SERIAL_WAIT_FRAME;
+
+            } else if (AppConfig.r2_framelen) { // stopbyte & FrameLen - Alternative
+                if (cnt >= AppConfig.r2_framelen)  {
+			    	result = serial_decode(code_str, uid, cnt);
+			    	cnt = 0;
+				    serial_status = SERIAL_WAIT_FRAME;
+                }
+            } else if( data == AppConfig.r2_stop_byte) {
+			    	result = serial_decode(code_str, uid, --cnt);
+			    	cnt = 0;
+		    		serial_status = SERIAL_WAIT_FRAME;
+            }
 
 			break;
-		case SERIAL_WAIT_CR:
 
-			if(data == 0x0d) {
-				code_str[cnt] = '\0';
-				result = serial_decode(code_str, uid);
-			}
-			cnt = 0;
-			serial_status = SERIAL_WAIT_CODE;
-			break;
+        default: serial_reset_state();
 		}
 	}
 	return result;
