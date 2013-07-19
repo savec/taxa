@@ -211,11 +211,11 @@ static int process_tout_buffer(bd_t handler)
 			} else {
 				bcp_release_buffer(handler);
 				TRACE("\n\rACS: buffer released (no rsp QAC_SERV_DONE)");
-				if(state == WAIT_HOST_ANSWER) {
-					state = WAIT_UID;
-					readers_reset_state();
-				}
-
+//				if(state == WAIT_HOST_ANSWER) {
+//					state = WAIT_UID;
+//					readers_reset_state();
+//				}
+//
 			}
 		} else if (hdr->hdr_s.packtype_u.npdl.qac == QAC_SERV_REJECT) {
 
@@ -228,11 +228,11 @@ static int process_tout_buffer(bd_t handler)
 			} else {
 				bcp_release_buffer(handler);
 				TRACE("\n\rACS: buffer released (no rsp QAC_SERV_REJECT)");
-				if(state == WAIT_HOST_ANSWER) {
-					state = WAIT_UID;
-					readers_reset_state();
-				}
-
+//				if(state == WAIT_HOST_ANSWER) {
+//					state = WAIT_UID;
+//					readers_reset_state();
+//				}
+//
 			}
 		} else {
 			result = -1;
