@@ -42,6 +42,9 @@ void accessor_module(void)
 	switch (state) {
 	case WAIT_UID:
 		if (readers_get_uid(&uid)) {
+        	memset((void *)LCDText, ' ', LCD_SIZE);
+        	LCDText[LCD_SIZE] = '\0';
+        	LCDUpdate();
 			state = CHECK_SM;
 		}
 
@@ -146,6 +149,29 @@ void accessor_init(void)
 	mail_subscribe(MYSELF, &mailbox);
 }
 
+void ServiceIt (BYTE aCode, char* msg, int len_msg)
+{
+    int l;
+    l=(len_msg > LCD_SIZE) ? LCD_SIZE : len_msg;
+	memset((void *)LCDText, ' ', LCD_SIZE);
+	memcpy((void *)LCDText, (void *)msg, l);
+	LCDText[l] = '\0';
+	LCD_decode(LCDText);
+	LCDUpdate();
+
+    if(aCode & ACCESS_INDICATOR)        
+    	event_send(MODULE_SRVMACHINE, EVT_SM_ENABLE_INDICATOR);
+
+	if(!(aCode & ACCESS_CONTROL)) {
+		event_send(MODULE_SRVMACHINE, EVT_SM_DISABLE_CONTROL);
+		state = WAIT_UID;
+		readers_reset_state();
+	} else {
+		event_send(MODULE_SRVMACHINE, EVT_SM_ENABLE_CONTROL);
+		state = WAIT_SM;
+        }       
+}
+
 static int process_tout_buffer(bd_t handler)
 {
 	int result = 0;
@@ -165,11 +191,14 @@ static int process_tout_buffer(bd_t handler)
 			} else {
 				bcp_release_buffer(handler);
 				TRACE("\n\rACS: buffer released (no rsp QAC_AR_REQUEST)");
-				if(state == WAIT_HOST_ANSWER) {
-					state = WAIT_UID;
-					readers_reset_state();
-				}
+//### OFF-LineMode
+            	ServiceIt (AppConfig.acc_local_access, AppConfig.acc_local_msg, strlen(AppConfig.acc_local_msg));
 
+//				if(state == WAIT_HOST_ANSWER) {
+//					state = WAIT_UID;
+//					readers_reset_state();
+//				}
+//
 			}
 		} else if (hdr->hdr_s.packtype_u.npdl.qac == QAC_SERV_DONE) {
 
@@ -251,26 +280,26 @@ static int process_host_buffer(bd_t handler)
 	if(hdr->hdr_s.packtype_u.npdl.qac == QAC_AR_REQUEST) {
 		BYTE msg_len = hdr->hdr_s.packtype_u.npdl.len - (sizeof(ar_rsp) - MAX_MSG_SIZE) - 2;
 		ar_rsp *request = (ar_rsp *) &hdr->raw[RAW_DATA];
-		
-		msg_len = (msg_len > 32) ? 32 : msg_len;
+		 ServiceIt (request->access_code, request->msg,  msg_len);
+//		msg_len = (msg_len > 32) ? 32 : msg_len;
 
-		memset((void *)LCDText, ' ', 32);
-		memcpy((void *)LCDText, (void *)request->msg, msg_len);
-		LCDText[msg_len] = '\0';
-		LCD_decode(LCDText);
-		LCDUpdate();
+//		memset((void *)LCDText, ' ', 32);
+//		memcpy((void *)LCDText, (void *)request->msg, msg_len);
+//		LCDText[msg_len] = '\0';
+//		LCD_decode(LCDText);
+//		LCDUpdate();
 
-        if(request->access_code & ACCESS_INDICATOR)        
-        	event_send(MODULE_SRVMACHINE, EVT_SM_ENABLE_INDICATOR);
-
-		if(!(request->access_code & ACCESS_CONTROL)) {
-			event_send(MODULE_SRVMACHINE, EVT_SM_DISABLE_CONTROL);
-			state = WAIT_UID;
-			readers_reset_state();
-		} else {
-			event_send(MODULE_SRVMACHINE, EVT_SM_ENABLE_CONTROL);
-			state = WAIT_SM;
-		}
+//        if(request->access_code & ACCESS_INDICATOR)        
+//        	event_send(MODULE_SRVMACHINE, EVT_SM_ENABLE_INDICATOR);
+//
+//		if(!(request->access_code & ACCESS_CONTROL)) {
+//			event_send(MODULE_SRVMACHINE, EVT_SM_DISABLE_CONTROL);
+//			state = WAIT_UID;
+//			readers_reset_state();
+//		} else {
+//			event_send(MODULE_SRVMACHINE, EVT_SM_ENABLE_CONTROL);
+//			state = WAIT_SM;
+//		}
 
 	}
 		break;

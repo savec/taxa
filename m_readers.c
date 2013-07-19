@@ -361,7 +361,7 @@ wg_reader_status_e wg_readers_getstatus(void)
 
 // Reader Processor
 void readers_module(void)
-{
+  {
 	bd_t ipacket;
 
 	if(mail_reciev(MYSELF, &ipacket)) {
