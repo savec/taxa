@@ -1,0 +1,1608 @@
+MPLINK 4.34, Linker
+Linker Map File - Created Fri Jul 26 21:25:31 2013
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+              BOOTJUMPROM    romdata   0x00dbc0    program   0x000008
+                  BOOTROM       code   0x00dc00    program   0x001d78
+                   .cinit    romdata   0x00f978    program   0x00000e
+                   STRING       code   0x00f986    program   0x0000d0
+             .stringtable    romdata   0x00fa56    program   0x000074
+          .code_fxm3232.o       code   0x00faca    program   0x000070
+                    .code       code   0x00fb3a    program   0x00002c
+       .romdata_fxm3232.o    romdata   0x00fb66    program   0x000000
+       .idata_fxm3232.o_i    romdata   0x00fb66    program   0x000000
+          .romdata_Main.o    romdata   0x00fb66    program   0x000000
+          .idata_Main.o_i    romdata   0x00fb66    program   0x000001
+             .code_Main.o       code   0x00fb68    program   0x000000
+      .config_fff8_Main.o    romdata   0x00fff8    program   0x000001
+      .config_fff9_Main.o    romdata   0x00fff9    program   0x000001
+      .config_fffa_Main.o    romdata   0x00fffa    program   0x000001
+      .config_fffb_Main.o    romdata   0x00fffb    program   0x000001
+      .config_fffd_Main.o    romdata   0x00fffd    program   0x000001
+                 .tmpdata      udata   0x000000       data   0x000010
+                MATH_DATA      udata   0x000010       data   0x00000e
+                  BOOTMEM      udata   0x000060       data   0x000246
+                  SAVEMEM      udata   0x000300       data   0x000400
+       Main.o:MACGetArray     actrec   0x000b00       data   0x000002
+    Main.o:CalcIPChecksum     actrec   0x000b00       data   0x000002
+        Main.o:ARPProcess     actrec   0x000b00       data   0x000020
+         Main.o:DecodeHex     actrec   0x000b00       data   0x000006
+        Main.o:EraseFlash     actrec   0x000b00       data   0x00000c
+   Main.o:WriteFlashBlock     actrec   0x000b00       data   0x000007
+Main.o:TFTPBootloadProcess     actrec   0x000b0c       data   0x00000b
+Main.o:RawWriteFlashBlock     actrec   0x000b17       data   0x000006
+Main.o:RawEraseFlashBlock     actrec   0x000b17       data   0x000003
+     Main.o:EraseLastPage     actrec   0x000b1d       data   0x000002
+                   .stack      udata   0x000c00       data   0x000100
+            .udata_Main.o      udata   0x000d00       data   0x0000c5
+                  BUFFERS      udata   0x000e00       data   0x000080
+              SFR_BANKED0      udata   0x000e80       data   0x000006
+              SFR_BANKED1      udata   0x000e8a       data   0x000001
+              SFR_BANKED2      udata   0x000e97       data   0x000003
+              SFR_BANKED3      udata   0x000ea0       data   0x000001
+              SFR_BANKED4      udata   0x000ea2       data   0x000003
+              SFR_BANKED5      udata   0x000ea6       data   0x000002
+              SFR_BANKED6      udata   0x000eaa       data   0x000002
+              SFR_BANKED7      udata   0x000eb2       data   0x000001
+              SFR_BANKED8      udata   0x000eb4       data   0x000001
+              SFR_BANKED9      udata   0x000eb6       data   0x000004
+             SFR_BANKED10      udata   0x000ec0       data   0x000012
+             SFR_BANKED11      udata   0x000ed4       data   0x000002
+             SFR_BANKED12      udata   0x000ed8       data   0x000002
+             SFR_BANKED13      udata   0x000ee2       data   0x000016
+             SFR_BANKED14      udata   0x000efb       data   0x000001
+             SFR_BANKED15      udata   0x000efd       data   0x000002
+            FLASHWRITEMEM      udata   0x000f00       data   0x000040
+            .idata_Main.o      idata   0x000f40       data   0x000001
+         .udata_fxm3232.o      udata   0x000f41       data   0x000000
+         .idata_fxm3232.o      idata   0x000f41       data   0x000000
+            SFR_UNBANKED0      udata   0x000f60       data   0x0000a0
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x00dbc0    0x00dbc7      
+                            0x00dc00    0x00fb66      
+                            0x00fff8    0x00fffb      
+                            0x00fffd    0x00fffd      
+            8052 out of 8264 program addresses used, program memory utilization is 97%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+               ARPProcess   0x00e1ec    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+           CalcIPChecksum   0x00f7b0    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                DecodeHex   0x00ebc8    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+               EraseFlash   0x00f044    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+            EraseLastPage   0x00f27c    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                  FXM3232   0x00faca    program     extern C:\MCC18\src\traditional\math\fxm3232.c
+                  GetTime   0x00f77e    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                 HexToBin   0x00eb96    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+             MACDiscardRx   0x00f82e    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                 MACFlush   0x00f8fa    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+              MACGetArray   0x00f862    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+             MACIsTxReady   0x00f918    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+              MACPutArray   0x00f8c8    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+       RawEraseFlashBlock   0x00f12c    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+       RawWriteFlashBlock   0x00f5fc    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                  SendACK   0x00e966    program     static                          
+         SendTFTPResponse   0x00ea18    program     static                          
+      TFTPBootloadProcess   0x00e398    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+          ValidationError   0x00e8c6    program     static                          
+          WriteFlashBlock   0x00f378    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+              WritePHYReg   0x00f956    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+              _2jContinue   0x00fa42    program     static C:\MCC18\src\traditional\stdclib\memset.asm
+              _3jContinue   0x00fa0e    program     static C:\MCC18\src\traditional\stdclib\mcpyp2r.asm
+                   _3jEnd   0x00fa4c    program     static C:\MCC18\src\traditional\stdclib\memset.asm
+              _4jContinue   0x00f9ba    program     static C:\MCC18\src\traditional\stdclib\memcpy.asm
+                   _4jEnd   0x00fa18    program     static C:\MCC18\src\traditional\stdclib\mcpyp2r.asm
+                   _5jEnd   0x00f9c4    program     static C:\MCC18\src\traditional\stdclib\memcpy.asm
+           ___?:_lbl00016   0x00ded0    program     static                          
+           ___?:_lbl00017   0x00dec4    program     static                          
+           ___?:_lbl00018   0x00df12    program     static                          
+           ___?:_lbl00019   0x00df08    program     static                          
+           ___?:_lbl00029   0x00e04c    program     static                          
+           ___?:_lbl00030   0x00e042    program     static                          
+      ___case_-1_lbl00074   0x00e7ac    program     static                          
+      ___case_-2_lbl00075   0x00e7ac    program     static                          
+       ___case_0_lbl00076   0x00e80c    program     static                          
+    ___case_1544_lbl00032   0x00e082    program     static                          
+       ___case_1_lbl00054   0x00e4a2    program     static                          
+       ___case_1_lbl00086   0x00e89e    program     static                          
+       ___case_2_lbl00065   0x00e624    program     static                          
+       ___case_2_lbl00082   0x00e80e    program     static                          
+       ___case_3_lbl00067   0x00e6be    program     static                          
+       ___case_4_lbl00052   0x00e466    program     static                          
+       ___case_5_lbl00088   0x00e990    program     static                          
+       ___case_8_lbl00033   0x00e09a    program     static                          
+      ___default_lbl00089   0x00e9b2    program     static                          
+           ___do_lbl00011   0x00df2c    program     static                          
+           ___do_lbl00012   0x00df34    program     static                          
+           ___do_lbl00021   0x00de00    program     static                          
+         ___else_lbl00004   0x00dc72    program     static                          
+         ___else_lbl00058   0x00e55e    program     static                          
+         ___else_lbl00179   0x00f4da    program     static                          
+          ___for_lbl00059   0x00e61c    program     static                          
+          ___for_lbl00060   0x00e622    program     static                          
+          ___for_lbl00061   0x00e600    program     static                          
+          ___for_lbl00062   0x00e606    program     static                          
+          ___for_lbl00063   0x00e5e4    program     static                          
+          ___for_lbl00064   0x00e5d8    program     static                          
+          ___for_lbl00077   0x00e864    program     static                          
+          ___for_lbl00078   0x00e86a    program     static                          
+          ___for_lbl00081   0x00e812    program     static                          
+          ___for_lbl00157   0x00f26e    program     static                          
+          ___for_lbl00158   0x00f278    program     static                          
+          ___for_lbl00160   0x00f1e8    program     static                          
+          ___for_lbl00162   0x00f2be    program     static                          
+          ___for_lbl00163   0x00f2c8    program     static                          
+          ___for_lbl00164   0x00f28a    program     static                          
+          ___for_lbl00173   0x00f5cc    program     static                          
+          ___for_lbl00174   0x00f5d6    program     static                          
+          ___for_lbl00176   0x00f57a    program     static                          
+          ___for_lbl00181   0x00f678    program     static                          
+          ___for_lbl00182   0x00f682    program     static                          
+          ___for_lbl00185   0x00f61e    program     static                          
+          ___for_lbl00188   0x00f768    program     static                          
+          ___for_lbl00189   0x00f772    program     static                          
+          ___for_lbl00192   0x00f6d8    program     static                          
+           ___if_lbl00001   0x00dc64    program     static                          
+           ___if_lbl00002   0x00dc64    program     static                          
+           ___if_lbl00003   0x00dc76    program     static                          
+           ___if_lbl00006   0x00dd14    program     static                          
+           ___if_lbl00013   0x00de74    program     static                          
+           ___if_lbl00014   0x00de78    program     static                          
+           ___if_lbl00015   0x00de8c    program     static                          
+           ___if_lbl00020   0x00df2c    program     static                          
+           ___if_lbl00022   0x00df9e    program     static                          
+           ___if_lbl00023   0x00dfca    program     static                          
+           ___if_lbl00028   0x00e00c    program     static                          
+           ___if_lbl00034   0x00e0b6    program     static                          
+           ___if_lbl00035   0x00e0de    program     static                          
+           ___if_lbl00036   0x00e15e    program     static                          
+           ___if_lbl00037   0x00e190    program     static                          
+           ___if_lbl00038   0x00e1ae    program     static                          
+           ___if_lbl00053   0x00e518    program     static                          
+           ___if_lbl00055   0x00e52c    program     static                          
+           ___if_lbl00056   0x00e580    program     static                          
+           ___if_lbl00057   0x00e580    program     static                          
+           ___if_lbl00066   0x00e6c6    program     static                          
+           ___if_lbl00068   0x00e712    program     static                          
+           ___if_lbl00069   0x00e730    program     static                          
+           ___if_lbl00070   0x00e746    program     static                          
+           ___if_lbl00079   0x00e862    program     static                          
+           ___if_lbl00080   0x00e864    program     static                          
+           ___if_lbl00083   0x00e89c    program     static                          
+           ___if_lbl00084   0x00e89c    program     static                          
+           ___if_lbl00085   0x00e926    program     static                          
+           ___if_lbl00087   0x00e9b0    program     static                          
+           ___if_lbl00156   0x00f1d0    program     static                          
+           ___if_lbl00159   0x00f26e    program     static                          
+           ___if_lbl00165   0x00f2ec    program     static                          
+           ___if_lbl00166   0x00f30e    program     static                          
+           ___if_lbl00170   0x00f446    program     static                          
+           ___if_lbl00171   0x00f55c    program     static                          
+           ___if_lbl00172   0x00f55c    program     static                          
+           ___if_lbl00175   0x00f5cc    program     static                          
+           ___if_lbl00177   0x00f5d6    program     static                          
+           ___if_lbl00178   0x00f5d6    program     static                          
+           ___if_lbl00183   0x00f648    program     static                          
+           ___if_lbl00184   0x00f676    program     static                          
+           ___if_lbl00186   0x00f6b2    program     static                          
+           ___if_lbl00187   0x00f6d2    program     static                          
+           ___if_lbl00190   0x00f764    program     static                          
+           ___if_lbl00191   0x00f768    program     static                          
+           ___if_lbl00193   0x00f778    program     static                          
+       ___return_lbl00000   0x00fb38    program     static                          
+       ___return_lbl00000   0x00e1ea    program     static                          
+       ___return_lbl00048   0x00eb94    program     static                          
+       ___return_lbl00154   0x00f27a    program     static                          
+       ___return_lbl00161   0x00f376    program     static                          
+       ___return_lbl00169   0x00f5fa    program     static                          
+       ___return_lbl00180   0x00f77c    program     static                          
+       ___return_lbl00210   0x00f8f8    program     static                          
+       ___return_lbl00219   0x00f976    program     static                          
+   ___switchexit_lbl00031   0x00e1e8    program     static                          
+   ___switchexit_lbl00051   0x00ea18    program     static                          
+   ___switchexit_lbl00073   0x00e944    program     static                          
+        ___while_lbl00007   0x00dd28    program     static                          
+        ___while_lbl00008   0x00dd32    program     static                          
+        ___while_lbl00009   0x00de00    program     static                          
+        ___while_lbl00010   0x00e1ea    program     static                          
+        ___while_lbl00049   0x00e418    program     static                          
+        ___while_lbl00050   0x00e422    program     static                          
+        ___while_lbl00071   0x00e74e    program     static                          
+        ___while_lbl00072   0x00e966    program     static                          
+        ___while_lbl00167   0x00f324    program     static                          
+        ___while_lbl00168   0x00f376    program     static                          
+        ___while_lbl00211   0x00f8c8    program     static                          
+        ___while_lbl00212   0x00f8f8    program     static                          
+        ___while_lbl00220   0x00f970    program     static                          
+        ___while_lbl00221   0x00f976    program     static                          
+               __config_0   0x00fff8    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+               __config_1   0x00fff9    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+               __config_2   0x00fffa    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+               __config_3   0x00fffb    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+               __config_4   0x00fffd    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+               __string_0   0x00fab5    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+               __string_1   0x00faa3    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+               __string_2   0x00fa62    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+               __string_3   0x00fa56    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+               __tmplbl_0   0x00dc3c    program     static                          
+               __tmplbl_1   0x00dce0    program     static                          
+              __tmplbl_10   0x00e000    program     static                          
+              __tmplbl_11   0x00dff2    program     static                          
+              __tmplbl_12   0x00dfe8    program     static                          
+              __tmplbl_13   0x00dfde    program     static                          
+              __tmplbl_14   0x00e070    program     static                          
+              __tmplbl_15   0x00e07e    program     static                          
+               __tmplbl_2   0x00dcb4    program     static                          
+              __tmplbl_23   0x00e42c    program     static                          
+              __tmplbl_24   0x00e43a    program     static                          
+              __tmplbl_25   0x00e448    program     static                          
+              __tmplbl_26   0x00e456    program     static                          
+              __tmplbl_27   0x00e462    program     static                          
+              __tmplbl_28   0x00e552    program     static                          
+              __tmplbl_29   0x00e57c    program     static                          
+               __tmplbl_3   0x00de36    program     static                          
+               __tmplbl_4   0x00de62    program     static                          
+              __tmplbl_47   0x00f1ce    program     static                          
+              __tmplbl_48   0x00f1ac    program     static                          
+              __tmplbl_49   0x00f1aa    program     static                          
+               __tmplbl_5   0x00dee0    program     static                          
+              __tmplbl_50   0x00f1cc    program     static                          
+              __tmplbl_51   0x00f204    program     static                          
+              __tmplbl_52   0x00f2a6    program     static                          
+              __tmplbl_53   0x00f440    program     static                          
+              __tmplbl_54   0x00f4ee    program     static                          
+              __tmplbl_55   0x00f596    program     static                          
+              __tmplbl_56   0x00f63a    program     static                          
+              __tmplbl_57   0x00f6f4    program     static                          
+               __tmplbl_6   0x00df26    program     static                          
+               __tmplbl_7   0x00df22    program     static                          
+               __tmplbl_8   0x00dfbc    program     static                          
+               __tmplbl_9   0x00e00a    program     static                          
+            __zero_memory   0x00fb3a    program     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                compare_l   0x00fb5c    program     static C:\MCC18\src\traditional\proc\p18F86J60.asm
+       dwJumpInstructions   0x00dbc0    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                     jEnd   0x00f9ca    program     static C:\MCC18\src\traditional\stdclib\memcpy.asm
+                     jEnd   0x00fa20    program     static C:\MCC18\src\traditional\stdclib\mcpyp2r.asm
+                     jEnd   0x00fa54    program     static C:\MCC18\src\traditional\stdclib\memset.asm
+                    jLoop   0x00f9ae    program     static C:\MCC18\src\traditional\stdclib\memcpy.asm
+                    jLoop   0x00fa02    program     static C:\MCC18\src\traditional\stdclib\mcpyp2r.asm
+                    jLoop   0x00fa36    program     static C:\MCC18\src\traditional\stdclib\memset.asm
+                   loop_h   0x00fb54    program     static C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   loop_l   0x00fb5e    program     static C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     main   0x00dc00    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                   memcpy   0x00f986    program     extern C:\MCC18\src\traditional\stdclib\memcpy.asm
+            memcpypgm2ram   0x00f9dc    program     extern C:\MCC18\src\traditional\stdclib\mcpyp2r.asm
+                   memset   0x00fa22    program     extern C:\MCC18\src\traditional\stdclib\memset.asm
+               zero_block   0x00fb54    program     static C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   ADCON0   0x000fc2       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+               ADCON0bits   0x000fc2       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   ADCON1   0x000fc1       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+               ADCON1bits   0x000fc1       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   ADCON2   0x000fc0       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+               ADCON2bits   0x000fc0       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    ADRES   0x000fc3       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   ADRESH   0x000fc4       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   ADRESL   0x000fc3       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                ARPHeader   0x000b04       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+             ARPHeaderPtr   0x000d45       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                  Address   0x000d7d       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                  Address   0x000d9b       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                  Address   0x000da3       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+               AppDataLen   0x000d4f       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+               AppDataPtr   0x000d4d       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+               AppDataPtr   0x000d30       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                  BAUDCON   0x000f7e       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 BAUDCON1   0x000f7e       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+             BAUDCON1bits   0x000f7e       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 BAUDCON2   0x000f7c       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+             BAUDCON2bits   0x000f7c       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+              BAUDCONbits   0x000f7e       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  BAUDCTL   0x000f7e       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 BAUDCTL1   0x000f7e       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+             BAUDCTL1bits   0x000f7e       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 BAUDCTL2   0x000f7c       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+             BAUDCTL2bits   0x000f7c       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+              BAUDCTLbits   0x000f7e       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                      BSR   0x000fe0       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                BlockData   0x000d9f       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                BlockData   0x000da7       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                BufferLen   0x000d32       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                  CCP1CON   0x000fbd       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+              CCP1CONbits   0x000fbd       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  CCP2CON   0x000fba       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+              CCP2CONbits   0x000fba       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  CCP3CON   0x000fb7       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+              CCP3CONbits   0x000fb7       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  CCP4CON   0x000f73       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+              CCP4CONbits   0x000f73       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  CCP5CON   0x000f70       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+              CCP5CONbits   0x000f70       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    CCPR1   0x000fbe       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   CCPR1H   0x000fbf       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   CCPR1L   0x000fbe       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    CCPR2   0x000fbb       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   CCPR2H   0x000fbc       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   CCPR2L   0x000fbb       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    CCPR3   0x000fb8       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   CCPR3H   0x000fb9       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   CCPR3L   0x000fb8       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    CCPR4   0x000f74       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   CCPR4H   0x000f75       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   CCPR4L   0x000f74       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    CCPR5   0x000f71       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   CCPR5H   0x000f72       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   CCPR5L   0x000f71       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    CMCON   0x000fb4       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                CMCONbits   0x000fb4       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   CVRCON   0x000fb5       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+               CVRCONbits   0x000fb5       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 Checksum   0x000b00       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+    CurrentPacketLocation   0x000d02       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                     DDRA   0x000f92       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 DDRAbits   0x000f92       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     DDRB   0x000f93       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 DDRBbits   0x000f93       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     DDRC   0x000f94       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 DDRCbits   0x000f94       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     DDRD   0x000f95       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 DDRDbits   0x000f95       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     DDRE   0x000f96       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 DDREbits   0x000f96       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     DDRF   0x000f97       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 DDRFbits   0x000f97       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     DDRG   0x000f98       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 DDRGbits   0x000f98       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     DDRH   0x000f99       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 DDRHbits   0x000f99       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     DDRJ   0x000f9a       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 DDRJbits   0x000f9a       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     Data   0x000dc3       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                     Data   0x000daf       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                  ECCP1AS   0x000fb6       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+              ECCP1ASbits   0x000fb6       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 ECCP1CON   0x000fbd       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+             ECCP1CONbits   0x000fbd       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 ECCP1DEL   0x000f79       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+             ECCP1DELbits   0x000f79       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  ECCP2AS   0x000f68       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+              ECCP2ASbits   0x000f68       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 ECCP2CON   0x000fba       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+             ECCP2CONbits   0x000fba       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 ECCP2DEL   0x000f67       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+             ECCP2DELbits   0x000f67       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  ECCP3AS   0x000f6a       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+              ECCP3ASbits   0x000f6a       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 ECCP3CON   0x000fb7       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+             ECCP3CONbits   0x000fb7       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 ECCP3DEL   0x000f69       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+             ECCP3DELbits   0x000f69       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    ECON1   0x000fd2       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                ECON1bits   0x000fd2       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    ECON2   0x000efe       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                ECON2bits   0x000efe       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    EDATA   0x000f61       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                EDATAbits   0x000f61       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   EDMACS   0x000ef6       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  EDMACSH   0x000ef7       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  EDMACSL   0x000ef6       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  EDMADST   0x000ef4       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 EDMADSTH   0x000ef5       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 EDMADSTL   0x000ef4       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   EDMAND   0x000ef2       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  EDMANDH   0x000ef3       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  EDMANDL   0x000ef2       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   EDMAST   0x000ef0       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  EDMASTH   0x000ef1       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  EDMASTL   0x000ef0       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   EECON1   0x000fa6       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+               EECON1bits   0x000fa6       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   EECON2   0x000fa7       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  EFLOCON   0x000e97       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+              EFLOCONbits   0x000e97       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     EHT0   0x000ec0       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     EHT1   0x000ec1       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     EHT2   0x000ec2       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     EHT3   0x000ec3       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     EHT4   0x000ec4       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     EHT5   0x000ec5       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     EHT6   0x000ec6       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     EHT7   0x000ec7       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                      EIE   0x000efb       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  EIEbits   0x000efb       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                      EIR   0x000f60       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  EIRbits   0x000f60       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    EPAUS   0x000e98       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   EPAUSH   0x000e99       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   EPAUSL   0x000e98       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  EPKTCNT   0x000ed9       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    EPMCS   0x000ed0       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   EPMCSH   0x000ed1       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   EPMCSL   0x000ed0       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    EPMM0   0x000ec8       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    EPMM1   0x000ec9       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    EPMM2   0x000eca       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    EPMM3   0x000ecb       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    EPMM4   0x000ecc       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    EPMM5   0x000ecd       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    EPMM6   0x000ece       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    EPMM7   0x000ecf       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     EPMO   0x000ed4       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    EPMOH   0x000ed5       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    EPMOL   0x000ed4       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    ERDPT   0x000f7a       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   ERDPTH   0x000f7b       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   ERDPTL   0x000f7a       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  ERXFCON   0x000ed8       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+              ERXFCONbits   0x000ed8       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    ERXND   0x000eea       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   ERXNDH   0x000eeb       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   ERXNDL   0x000eea       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  ERXRDPT   0x000eec       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 ERXRDPTH   0x000eed       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 ERXRDPTL   0x000eec       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    ERXST   0x000ee8       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   ERXSTH   0x000ee9       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   ERXSTL   0x000ee8       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  ERXWRPT   0x000eee       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 ERXWRPTH   0x000eef       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 ERXWRPTL   0x000eee       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    ESTAT   0x000efd       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                ESTATbits   0x000efd       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                ETHHeader   0x000d18       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+             ETHHeaderPtr   0x000d47       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+             ETHHeaderPtr   0x000d43       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                    ETXND   0x000ee6       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   ETXNDH   0x000ee7       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   ETXNDL   0x000ee6       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    ETXST   0x000ee4       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   ETXSTH   0x000ee5       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   ETXSTL   0x000ee4       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    EWRPT   0x000ee2       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   EWRPTH   0x000ee3       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   EWRPTL   0x000ee2       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+          EraseByteLength   0x000d81       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+         ErasePageAddress   0x000d85       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+      ErasePageEndAddress   0x000d89       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                     FSR0   0x000fe9       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    FSR0H   0x000fea       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    FSR0L   0x000fe9       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     FSR1   0x000fe1       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    FSR1H   0x000fe2       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    FSR1L   0x000fe1       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     FSR2   0x000fd9       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    FSR2H   0x000fda       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    FSR2L   0x000fd9       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    INDF0   0x000fef       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    INDF1   0x000fe7       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    INDF2   0x000fdf       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   INTCON   0x000ff2       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  INTCON2   0x000ff1       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+              INTCON2bits   0x000ff1       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  INTCON3   0x000ff0       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+              INTCON3bits   0x000ff0       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+               INTCONbits   0x000ff2       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+              IPHeaderPtr   0x000d49       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+              IPHeaderPtr   0x000d2c       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                     IPR1   0x000f9f       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 IPR1bits   0x000f9f       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     IPR2   0x000fa2       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 IPR2bits   0x000fa2       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     IPR3   0x000fa5       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 IPR3bits   0x000fa5       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     LATA   0x000f89       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 LATAbits   0x000f89       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     LATB   0x000f8a       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 LATBbits   0x000f8a       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     LATC   0x000f8b       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 LATCbits   0x000f8b       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     LATD   0x000f8c       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 LATDbits   0x000f8c       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     LATE   0x000f8d       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 LATEbits   0x000f8d       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     LATF   0x000f8e       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 LATFbits   0x000f8e       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     LATG   0x000f8f       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 LATGbits   0x000f8f       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     LATH   0x000f90       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 LATHbits   0x000f90       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     LATJ   0x000f91       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 LATJbits   0x000f91       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   Length   0x000db1       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                   MAADR1   0x000e84       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   MAADR2   0x000e85       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   MAADR3   0x000e82       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   MAADR4   0x000e83       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   MAADR5   0x000e80       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   MAADR6   0x000e81       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  MABBIPG   0x000ea4       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   MACON1   0x000ea0       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+               MACON1bits   0x000ea0       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   MACON3   0x000ea2       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+               MACON3bits   0x000ea2       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   MACON4   0x000ea3       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+               MACON4bits   0x000ea3       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    MAIPG   0x000ea6       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   MAIPGH   0x000ea7       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   MAIPGL   0x000ea6       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   MAMXFL   0x000eaa       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  MAMXFLH   0x000eab       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  MAMXFLL   0x000eaa       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    MICMD   0x000eb2       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                MICMDbits   0x000eb2       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     MIRD   0x000eb8       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    MIRDH   0x000eb9       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    MIRDL   0x000eb8       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 MIREGADR   0x000eb4       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   MISTAT   0x000e8a       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+               MISTATbits   0x000e8a       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     MIWR   0x000eb6       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    MIWRH   0x000eb7       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    MIWRL   0x000eb6       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                MyAddress   0x000d0e       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+          NewRXRDLocation   0x000db5       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+       NextPacketLocation   0x000d00       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                   OSCCON   0x000fd3       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+               OSCCONbits   0x000fd3       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  OSCTUNE   0x000f9b       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+              OSCTUNEbits   0x000f9b       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                       PC   0x000ff9       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                      PCL   0x000ff9       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   PCLATH   0x000ffa       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   PCLATU   0x000ffb       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     PIE1   0x000f9d       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 PIE1bits   0x000f9d       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     PIE2   0x000fa0       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 PIE2bits   0x000fa0       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     PIE3   0x000fa3       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 PIE3bits   0x000fa3       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     PIR1   0x000f9e       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 PIR1bits   0x000f9e       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     PIR2   0x000fa1       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 PIR2bits   0x000fa1       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     PIR3   0x000fa4       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 PIR3bits   0x000fa4       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   PLUSW0   0x000feb       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   PLUSW1   0x000fe3       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   PLUSW2   0x000fdb       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    PORTA   0x000f80       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                PORTAbits   0x000f80       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    PORTB   0x000f81       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                PORTBbits   0x000f81       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    PORTC   0x000f82       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                PORTCbits   0x000f82       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    PORTD   0x000f83       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                PORTDbits   0x000f83       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    PORTE   0x000f84       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                PORTEbits   0x000f84       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    PORTF   0x000f85       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                PORTFbits   0x000f85       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    PORTG   0x000f86       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                PORTGbits   0x000f86       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    PORTH   0x000f87       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                PORTHbits   0x000f87       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    PORTJ   0x000f88       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                PORTJbits   0x000f88       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 POSTDEC0   0x000fed       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 POSTDEC1   0x000fe5       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 POSTDEC2   0x000fdd       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 POSTINC0   0x000fee       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 POSTINC1   0x000fe6       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 POSTINC2   0x000fde       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                      PR2   0x000fcb       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                      PR4   0x000f77       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  PREINC0   0x000fec       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  PREINC1   0x000fe4       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  PREINC2   0x000fdc       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     PROD   0x000ff3       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    PRODH   0x000ff4       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    PRODL   0x000ff3       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     RCON   0x000fd0       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 RCONbits   0x000fd0       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    RCREG   0x000fae       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   RCREG1   0x000fae       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   RCREG2   0x000f6e       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    RCSTA   0x000fab       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   RCSTA1   0x000fab       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+               RCSTA1bits   0x000fab       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   RCSTA2   0x000f6b       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+               RCSTA2bits   0x000f6b       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                RCSTAbits   0x000fab       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 Register   0x000dc2       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                    SPBRG   0x000faf       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   SPBRG1   0x000faf       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   SPBRG2   0x000f6f       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   SPBRGH   0x000f7f       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  SPBRGH1   0x000f7f       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  SPBRGH2   0x000f7d       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  SSP1ADD   0x000fc8       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  SSP1BUF   0x000fc9       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 SSP1CON1   0x000fc6       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+             SSP1CON1bits   0x000fc6       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 SSP1CON2   0x000fc5       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+             SSP1CON2bits   0x000fc5       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 SSP1STAT   0x000fc7       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+             SSP1STATbits   0x000fc7       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   SSPADD   0x000fc8       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   SSPBUF   0x000fc9       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  SSPCON1   0x000fc6       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+              SSPCON1bits   0x000fc6       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  SSPCON2   0x000fc5       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+              SSPCON2bits   0x000fc5       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  SSPSTAT   0x000fc7       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+              SSPSTATbits   0x000fc7       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   STATUS   0x000fd8       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+               STATUSbits   0x000fd8       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   STKPTR   0x000ffc       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+               STKPTRbits   0x000ffc       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+               StatusData   0x000da1       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+               StatusData   0x000da9       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                    T0CON   0x000fd5       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                T0CONbits   0x000fd5       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    T1CON   0x000fcd       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                T1CONbits   0x000fcd       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    T2CON   0x000fca       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                T2CONbits   0x000fca       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    T3CON   0x000fb1       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                T3CONbits   0x000fb1       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    T4CON   0x000f76       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                T4CONbits   0x000f76       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   TABLAT   0x000ff5       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   TBLPTR   0x000ff6       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  TBLPTRH   0x000ff7       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  TBLPTRL   0x000ff6       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  TBLPTRU   0x000ff8       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    TMR0H   0x000fd7       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    TMR0L   0x000fd6       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    TMR1H   0x000fcf       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    TMR1L   0x000fce       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     TMR2   0x000fcc       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    TMR3H   0x000fb3       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    TMR3L   0x000fb2       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     TMR4   0x000f78       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                      TOS   0x000ffd       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     TOSH   0x000ffe       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     TOSL   0x000ffd       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     TOSU   0x000fff       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    TRISA   0x000f92       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                TRISAbits   0x000f92       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    TRISB   0x000f93       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                TRISBbits   0x000f93       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    TRISC   0x000f94       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                TRISCbits   0x000f94       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    TRISD   0x000f95       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                TRISDbits   0x000f95       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    TRISE   0x000f96       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                TRISEbits   0x000f96       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    TRISF   0x000f97       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                TRISFbits   0x000f97       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    TRISG   0x000f98       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                TRISGbits   0x000f98       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    TRISH   0x000f99       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                TRISHbits   0x000f99       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    TRISJ   0x000f9a       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                TRISJbits   0x000f9a       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    TXREG   0x000fad       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   TXREG1   0x000fad       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   TXREG2   0x000f6d       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    TXSTA   0x000fac       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   TXSTA1   0x000fac       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+               TXSTA1bits   0x000fac       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   TXSTA2   0x000f6c       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+               TXSTA2bits   0x000f6c       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                TXSTAbits   0x000fac       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+             UDPHeaderPtr   0x000d4b       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+             UDPHeaderPtr   0x000d2e       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+             VerifyPassed   0x000b1c       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                   WDTCON   0x000fd1       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+               WDTCONbits   0x000fd1       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     WREG   0x000fe8       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+             WriteAllowed   0x000b1b       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+              WriteNeeded   0x000b1a       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                 __AARGB0   0x000017       data     extern C:\MCC18\src\traditional\math\aarg.asm
+                 __AARGB1   0x000016       data     extern C:\MCC18\src\traditional\math\aarg.asm
+                 __AARGB2   0x000015       data     extern C:\MCC18\src\traditional\math\aarg.asm
+                 __AARGB3   0x000014       data     extern C:\MCC18\src\traditional\math\aarg.asm
+                 __AARGB4   0x000013       data     extern C:\MCC18\src\traditional\math\aarg.asm
+                 __AARGB5   0x000012       data     extern C:\MCC18\src\traditional\math\aarg.asm
+                 __AARGB6   0x000011       data     extern C:\MCC18\src\traditional\math\aarg.asm
+                 __AARGB7   0x000010       data     extern C:\MCC18\src\traditional\math\aarg.asm
+                   __AEXP   0x000018       data     extern C:\MCC18\src\traditional\math\aarg.asm
+           __ARPProcess:0   0x000d43       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+           __ARPProcess:1   0x000d45       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                 __BARGB0   0x00001c       data     extern C:\MCC18\src\traditional\math\barg.asm
+                 __BARGB1   0x00001b       data     extern C:\MCC18\src\traditional\math\barg.asm
+                 __BARGB2   0x00001a       data     extern C:\MCC18\src\traditional\math\barg.asm
+                 __BARGB3   0x000019       data     extern C:\MCC18\src\traditional\math\barg.asm
+                   __BEXP   0x00001d       data     extern C:\MCC18\src\traditional\math\barg.asm
+       __CalcIPChecksum:0   0x000daf       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+       __CalcIPChecksum:1   0x000db1       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+            __DecodeHex:0   0x000d58       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+            __DecodeHex:1   0x000d5a       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+            __DecodeHex:2   0x000d5c       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+            __DecodeHex:3   0x000d5e       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+            __DecodeHex:4   0x000d60       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+           __EraseFlash:0   0x000d7d       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+           __EraseFlash:1   0x000d81       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+        __EraseLastPage:0   0x000d99       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+        __EraseLastPage:1   0x000d9a       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+             __HexToBin:0   0x000d57       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+          __MACGetArray:0   0x000db7       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+          __MACGetArray:1   0x000db9       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+          __MACPutArray:0   0x000dbc       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+          __MACPutArray:1   0x000dbe       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                  __REMB0   0x000013       data     extern C:\MCC18\src\traditional\math\aarg.asm
+                  __REMB1   0x000012       data     extern C:\MCC18\src\traditional\math\aarg.asm
+                  __REMB2   0x000011       data     extern C:\MCC18\src\traditional\math\aarg.asm
+                  __REMB3   0x000010       data     extern C:\MCC18\src\traditional\math\aarg.asm
+   __RawEraseFlashBlock:0   0x000d8d       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+   __RawWriteFlashBlock:0   0x000da3       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+   __RawWriteFlashBlock:1   0x000da7       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+   __RawWriteFlashBlock:2   0x000da9       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+  __TFTPBootloadProcess:0   0x000d47       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+  __TFTPBootloadProcess:1   0x000d49       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+  __TFTPBootloadProcess:2   0x000d4b       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+  __TFTPBootloadProcess:3   0x000d4d       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+  __TFTPBootloadProcess:4   0x000d4f       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+      __WriteFlashBlock:0   0x000d9b       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+      __WriteFlashBlock:1   0x000d9f       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+      __WriteFlashBlock:2   0x000da1       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+          __WritePHYReg:0   0x000dc2       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+          __WritePHYReg:1   0x000dc3       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                  __tmp_0   0x000000       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+             bByteWritten   0x000d7a       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+            bEraseAppData   0x000d99       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+              bEraseFuses   0x000d9a       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+              bInitialize   0x000d60       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                   bLEDOn   0x000d3e       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+      bNeedLastPageErased   0x000b0b       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+    bNeedUpdatedJumpTable   0x000d0d       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+        bWriteModeEnabled   0x000d0c       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                        c   0x000d57       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                     cRet   0x000b16       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                dwAddress   0x000d5e       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                dwAddress   0x000d8d       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                dwAddress   0x000d53       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+          dwBootloaderEnd   0x000d95       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+          dwBootloaderEnd   0x000b04       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+    dwBootloaderExitTimer   0x000d08       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+        dwBootloaderStart   0x000d91       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+        dwBootloaderStart   0x000b00       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+          dwLEDBlinkTimer   0x000d3a       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+  dwLastWriteBlockAddress   0x000d74       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+       dwNewStartupVector   0x000b03       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                   dwTemp   0x000d70       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                      dwv   0x000b00       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+     dwvLatchedExtAddress   0x000d6c       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                 dwvNewPC   0x000d36       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+    dwvVolatileExtAddress   0x000d68       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                        i   0x000d3f       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                        i   0x000db3       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                        i   0x000dbb       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                        i   0x000b17       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                        i   0x000f40       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                        i   0x000b12       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                        i   0x000b00       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                        j   0x000b13       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                      len   0x000db9       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                      len   0x000dbe       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                      ret   0x000dab       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+           smRecordParser   0x000d61       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                  vAndSum   0x000b19       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                  vAndSum   0x000b0a       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                vChecksum   0x000d79       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+             vDecodedByte   0x000b01       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+             vEncodedByte   0x000b00       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+           vExitRCONState   0x000d40       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+               vFlashData   0x000f00       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+               vFlashSave   0x000300       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                 vHexData   0x000d58       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+            vJumpTableRAM   0x000e40       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+              vMemoryData   0x000d5c       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+              vRecordByte   0x000d62       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+               vRecordLen   0x000d63       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+              vRecordType   0x000d78       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                vTXBuffer   0x000e00       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+              vTXRXBuffer   0x000060       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                      val   0x000dbc       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                      val   0x000db7       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                        w   0x000b17       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                        w   0x000b14       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                        w   0x000b01       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                        w   0x000b02       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                        w   0x000b00       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                        w   0x000b08       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                        w   0x000b1d       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                        w   0x000b18       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+              wHexDataLen   0x000d5a       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+         wHexDataLenLocal   0x000b04       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                  wHexLen   0x000d7b       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+             wNeededBlock   0x000d51       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+              wTXWatchdog   0x000d04       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+               wTimerHigh   0x000d06       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                wTimerVal   0x000dc0       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                       wv   0x000d34       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+            wvBlockNumber   0x000b0e       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+               wvChecksum   0x000d41       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+         wvLatchedAddress   0x000d66       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+              wvPacketLen   0x000b10       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+             wvTFTPOpcode   0x000b0c       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+        wvVolatileAddress   0x000d64       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+       dwJumpInstructions   0x00dbc0    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                     main   0x00dc00    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+               __tmplbl_0   0x00dc3c    program     static                          
+           ___if_lbl00002   0x00dc64    program     static                          
+           ___if_lbl00001   0x00dc64    program     static                          
+         ___else_lbl00004   0x00dc72    program     static                          
+           ___if_lbl00003   0x00dc76    program     static                          
+               __tmplbl_2   0x00dcb4    program     static                          
+               __tmplbl_1   0x00dce0    program     static                          
+           ___if_lbl00006   0x00dd14    program     static                          
+        ___while_lbl00007   0x00dd28    program     static                          
+        ___while_lbl00008   0x00dd32    program     static                          
+           ___do_lbl00021   0x00de00    program     static                          
+        ___while_lbl00009   0x00de00    program     static                          
+               __tmplbl_3   0x00de36    program     static                          
+               __tmplbl_4   0x00de62    program     static                          
+           ___if_lbl00013   0x00de74    program     static                          
+           ___if_lbl00014   0x00de78    program     static                          
+           ___if_lbl00015   0x00de8c    program     static                          
+           ___?:_lbl00017   0x00dec4    program     static                          
+           ___?:_lbl00016   0x00ded0    program     static                          
+               __tmplbl_5   0x00dee0    program     static                          
+           ___?:_lbl00019   0x00df08    program     static                          
+           ___?:_lbl00018   0x00df12    program     static                          
+               __tmplbl_7   0x00df22    program     static                          
+               __tmplbl_6   0x00df26    program     static                          
+           ___if_lbl00020   0x00df2c    program     static                          
+           ___do_lbl00011   0x00df2c    program     static                          
+           ___do_lbl00012   0x00df34    program     static                          
+           ___if_lbl00022   0x00df9e    program     static                          
+               __tmplbl_8   0x00dfbc    program     static                          
+           ___if_lbl00023   0x00dfca    program     static                          
+              __tmplbl_13   0x00dfde    program     static                          
+              __tmplbl_12   0x00dfe8    program     static                          
+              __tmplbl_11   0x00dff2    program     static                          
+              __tmplbl_10   0x00e000    program     static                          
+               __tmplbl_9   0x00e00a    program     static                          
+           ___if_lbl00028   0x00e00c    program     static                          
+           ___?:_lbl00030   0x00e042    program     static                          
+           ___?:_lbl00029   0x00e04c    program     static                          
+              __tmplbl_14   0x00e070    program     static                          
+              __tmplbl_15   0x00e07e    program     static                          
+    ___case_1544_lbl00032   0x00e082    program     static                          
+       ___case_8_lbl00033   0x00e09a    program     static                          
+           ___if_lbl00034   0x00e0b6    program     static                          
+           ___if_lbl00035   0x00e0de    program     static                          
+           ___if_lbl00036   0x00e15e    program     static                          
+           ___if_lbl00037   0x00e190    program     static                          
+           ___if_lbl00038   0x00e1ae    program     static                          
+   ___switchexit_lbl00031   0x00e1e8    program     static                          
+       ___return_lbl00000   0x00e1ea    program     static                          
+        ___while_lbl00010   0x00e1ea    program     static                          
+               ARPProcess   0x00e1ec    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+      TFTPBootloadProcess   0x00e398    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+        ___while_lbl00049   0x00e418    program     static                          
+        ___while_lbl00050   0x00e422    program     static                          
+              __tmplbl_23   0x00e42c    program     static                          
+              __tmplbl_24   0x00e43a    program     static                          
+              __tmplbl_25   0x00e448    program     static                          
+              __tmplbl_26   0x00e456    program     static                          
+              __tmplbl_27   0x00e462    program     static                          
+       ___case_4_lbl00052   0x00e466    program     static                          
+       ___case_1_lbl00054   0x00e4a2    program     static                          
+           ___if_lbl00053   0x00e518    program     static                          
+           ___if_lbl00055   0x00e52c    program     static                          
+              __tmplbl_28   0x00e552    program     static                          
+         ___else_lbl00058   0x00e55e    program     static                          
+              __tmplbl_29   0x00e57c    program     static                          
+           ___if_lbl00056   0x00e580    program     static                          
+           ___if_lbl00057   0x00e580    program     static                          
+          ___for_lbl00064   0x00e5d8    program     static                          
+          ___for_lbl00063   0x00e5e4    program     static                          
+          ___for_lbl00061   0x00e600    program     static                          
+          ___for_lbl00062   0x00e606    program     static                          
+          ___for_lbl00059   0x00e61c    program     static                          
+          ___for_lbl00060   0x00e622    program     static                          
+       ___case_2_lbl00065   0x00e624    program     static                          
+       ___case_3_lbl00067   0x00e6be    program     static                          
+           ___if_lbl00066   0x00e6c6    program     static                          
+           ___if_lbl00068   0x00e712    program     static                          
+           ___if_lbl00069   0x00e730    program     static                          
+           ___if_lbl00070   0x00e746    program     static                          
+        ___while_lbl00071   0x00e74e    program     static                          
+      ___case_-2_lbl00075   0x00e7ac    program     static                          
+      ___case_-1_lbl00074   0x00e7ac    program     static                          
+       ___case_0_lbl00076   0x00e80c    program     static                          
+       ___case_2_lbl00082   0x00e80e    program     static                          
+          ___for_lbl00081   0x00e812    program     static                          
+           ___if_lbl00079   0x00e862    program     static                          
+          ___for_lbl00077   0x00e864    program     static                          
+           ___if_lbl00080   0x00e864    program     static                          
+          ___for_lbl00078   0x00e86a    program     static                          
+           ___if_lbl00084   0x00e89c    program     static                          
+           ___if_lbl00083   0x00e89c    program     static                          
+       ___case_1_lbl00086   0x00e89e    program     static                          
+          ValidationError   0x00e8c6    program     static                          
+           ___if_lbl00085   0x00e926    program     static                          
+   ___switchexit_lbl00073   0x00e944    program     static                          
+                  SendACK   0x00e966    program     static                          
+        ___while_lbl00072   0x00e966    program     static                          
+       ___case_5_lbl00088   0x00e990    program     static                          
+           ___if_lbl00087   0x00e9b0    program     static                          
+      ___default_lbl00089   0x00e9b2    program     static                          
+   ___switchexit_lbl00051   0x00ea18    program     static                          
+         SendTFTPResponse   0x00ea18    program     static                          
+       ___return_lbl00048   0x00eb94    program     static                          
+                 HexToBin   0x00eb96    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                DecodeHex   0x00ebc8    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+               EraseFlash   0x00f044    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+       RawEraseFlashBlock   0x00f12c    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+              __tmplbl_49   0x00f1aa    program     static                          
+              __tmplbl_48   0x00f1ac    program     static                          
+              __tmplbl_50   0x00f1cc    program     static                          
+              __tmplbl_47   0x00f1ce    program     static                          
+           ___if_lbl00156   0x00f1d0    program     static                          
+          ___for_lbl00160   0x00f1e8    program     static                          
+              __tmplbl_51   0x00f204    program     static                          
+          ___for_lbl00157   0x00f26e    program     static                          
+           ___if_lbl00159   0x00f26e    program     static                          
+          ___for_lbl00158   0x00f278    program     static                          
+       ___return_lbl00154   0x00f27a    program     static                          
+            EraseLastPage   0x00f27c    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+          ___for_lbl00164   0x00f28a    program     static                          
+              __tmplbl_52   0x00f2a6    program     static                          
+          ___for_lbl00162   0x00f2be    program     static                          
+          ___for_lbl00163   0x00f2c8    program     static                          
+           ___if_lbl00165   0x00f2ec    program     static                          
+           ___if_lbl00166   0x00f30e    program     static                          
+        ___while_lbl00167   0x00f324    program     static                          
+        ___while_lbl00168   0x00f376    program     static                          
+       ___return_lbl00161   0x00f376    program     static                          
+          WriteFlashBlock   0x00f378    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+              __tmplbl_53   0x00f440    program     static                          
+           ___if_lbl00170   0x00f446    program     static                          
+         ___else_lbl00179   0x00f4da    program     static                          
+              __tmplbl_54   0x00f4ee    program     static                          
+           ___if_lbl00172   0x00f55c    program     static                          
+           ___if_lbl00171   0x00f55c    program     static                          
+          ___for_lbl00176   0x00f57a    program     static                          
+              __tmplbl_55   0x00f596    program     static                          
+           ___if_lbl00175   0x00f5cc    program     static                          
+          ___for_lbl00173   0x00f5cc    program     static                          
+           ___if_lbl00177   0x00f5d6    program     static                          
+           ___if_lbl00178   0x00f5d6    program     static                          
+          ___for_lbl00174   0x00f5d6    program     static                          
+       ___return_lbl00169   0x00f5fa    program     static                          
+       RawWriteFlashBlock   0x00f5fc    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+          ___for_lbl00185   0x00f61e    program     static                          
+              __tmplbl_56   0x00f63a    program     static                          
+           ___if_lbl00183   0x00f648    program     static                          
+           ___if_lbl00184   0x00f676    program     static                          
+          ___for_lbl00181   0x00f678    program     static                          
+          ___for_lbl00182   0x00f682    program     static                          
+           ___if_lbl00186   0x00f6b2    program     static                          
+           ___if_lbl00187   0x00f6d2    program     static                          
+          ___for_lbl00192   0x00f6d8    program     static                          
+              __tmplbl_57   0x00f6f4    program     static                          
+           ___if_lbl00190   0x00f764    program     static                          
+          ___for_lbl00188   0x00f768    program     static                          
+           ___if_lbl00191   0x00f768    program     static                          
+          ___for_lbl00189   0x00f772    program     static                          
+           ___if_lbl00193   0x00f778    program     static                          
+       ___return_lbl00180   0x00f77c    program     static                          
+                  GetTime   0x00f77e    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+           CalcIPChecksum   0x00f7b0    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+             MACDiscardRx   0x00f82e    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+              MACGetArray   0x00f862    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+        ___while_lbl00211   0x00f8c8    program     static                          
+              MACPutArray   0x00f8c8    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+       ___return_lbl00210   0x00f8f8    program     static                          
+        ___while_lbl00212   0x00f8f8    program     static                          
+                 MACFlush   0x00f8fa    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+             MACIsTxReady   0x00f918    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+              WritePHYReg   0x00f956    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+        ___while_lbl00220   0x00f970    program     static                          
+        ___while_lbl00221   0x00f976    program     static                          
+       ___return_lbl00219   0x00f976    program     static                          
+                   memcpy   0x00f986    program     extern C:\MCC18\src\traditional\stdclib\memcpy.asm
+                    jLoop   0x00f9ae    program     static C:\MCC18\src\traditional\stdclib\memcpy.asm
+              _4jContinue   0x00f9ba    program     static C:\MCC18\src\traditional\stdclib\memcpy.asm
+                   _5jEnd   0x00f9c4    program     static C:\MCC18\src\traditional\stdclib\memcpy.asm
+                     jEnd   0x00f9ca    program     static C:\MCC18\src\traditional\stdclib\memcpy.asm
+            memcpypgm2ram   0x00f9dc    program     extern C:\MCC18\src\traditional\stdclib\mcpyp2r.asm
+                    jLoop   0x00fa02    program     static C:\MCC18\src\traditional\stdclib\mcpyp2r.asm
+              _3jContinue   0x00fa0e    program     static C:\MCC18\src\traditional\stdclib\mcpyp2r.asm
+                   _4jEnd   0x00fa18    program     static C:\MCC18\src\traditional\stdclib\mcpyp2r.asm
+                     jEnd   0x00fa20    program     static C:\MCC18\src\traditional\stdclib\mcpyp2r.asm
+                   memset   0x00fa22    program     extern C:\MCC18\src\traditional\stdclib\memset.asm
+                    jLoop   0x00fa36    program     static C:\MCC18\src\traditional\stdclib\memset.asm
+              _2jContinue   0x00fa42    program     static C:\MCC18\src\traditional\stdclib\memset.asm
+                   _3jEnd   0x00fa4c    program     static C:\MCC18\src\traditional\stdclib\memset.asm
+                     jEnd   0x00fa54    program     static C:\MCC18\src\traditional\stdclib\memset.asm
+               __string_3   0x00fa56    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+               __string_2   0x00fa62    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+               __string_1   0x00faa3    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+               __string_0   0x00fab5    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                  FXM3232   0x00faca    program     extern C:\MCC18\src\traditional\math\fxm3232.c
+       ___return_lbl00000   0x00fb38    program     static                          
+            __zero_memory   0x00fb3a    program     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   loop_h   0x00fb54    program     static C:\MCC18\src\traditional\proc\p18F86J60.asm
+               zero_block   0x00fb54    program     static C:\MCC18\src\traditional\proc\p18F86J60.asm
+                compare_l   0x00fb5c    program     static C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   loop_l   0x00fb5e    program     static C:\MCC18\src\traditional\proc\p18F86J60.asm
+               __config_0   0x00fff8    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+               __config_1   0x00fff9    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+               __config_2   0x00fffa    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+               __config_3   0x00fffb    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+               __config_4   0x00fffd    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                  __tmp_0   0x000000       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                 __AARGB7   0x000010       data     extern C:\MCC18\src\traditional\math\aarg.asm
+                  __REMB3   0x000010       data     extern C:\MCC18\src\traditional\math\aarg.asm
+                 __AARGB6   0x000011       data     extern C:\MCC18\src\traditional\math\aarg.asm
+                  __REMB2   0x000011       data     extern C:\MCC18\src\traditional\math\aarg.asm
+                 __AARGB5   0x000012       data     extern C:\MCC18\src\traditional\math\aarg.asm
+                  __REMB1   0x000012       data     extern C:\MCC18\src\traditional\math\aarg.asm
+                 __AARGB4   0x000013       data     extern C:\MCC18\src\traditional\math\aarg.asm
+                  __REMB0   0x000013       data     extern C:\MCC18\src\traditional\math\aarg.asm
+                 __AARGB3   0x000014       data     extern C:\MCC18\src\traditional\math\aarg.asm
+                 __AARGB2   0x000015       data     extern C:\MCC18\src\traditional\math\aarg.asm
+                 __AARGB1   0x000016       data     extern C:\MCC18\src\traditional\math\aarg.asm
+                 __AARGB0   0x000017       data     extern C:\MCC18\src\traditional\math\aarg.asm
+                   __AEXP   0x000018       data     extern C:\MCC18\src\traditional\math\aarg.asm
+                 __BARGB3   0x000019       data     extern C:\MCC18\src\traditional\math\barg.asm
+                 __BARGB2   0x00001a       data     extern C:\MCC18\src\traditional\math\barg.asm
+                 __BARGB1   0x00001b       data     extern C:\MCC18\src\traditional\math\barg.asm
+                 __BARGB0   0x00001c       data     extern C:\MCC18\src\traditional\math\barg.asm
+                   __BEXP   0x00001d       data     extern C:\MCC18\src\traditional\math\barg.asm
+              vTXRXBuffer   0x000060       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+               vFlashSave   0x000300       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+             vEncodedByte   0x000b00       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                        i   0x000b00       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                      dwv   0x000b00       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+        dwBootloaderStart   0x000b00       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                        w   0x000b00       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                 Checksum   0x000b00       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+             vDecodedByte   0x000b01       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                        w   0x000b01       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                        w   0x000b02       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+       dwNewStartupVector   0x000b03       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+         wHexDataLenLocal   0x000b04       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                ARPHeader   0x000b04       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+          dwBootloaderEnd   0x000b04       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                        w   0x000b08       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                  vAndSum   0x000b0a       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+      bNeedLastPageErased   0x000b0b       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+             wvTFTPOpcode   0x000b0c       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+            wvBlockNumber   0x000b0e       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+              wvPacketLen   0x000b10       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                        i   0x000b12       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                        j   0x000b13       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                        w   0x000b14       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                     cRet   0x000b16       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                        w   0x000b17       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                        i   0x000b17       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                        w   0x000b18       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                  vAndSum   0x000b19       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+              WriteNeeded   0x000b1a       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+             WriteAllowed   0x000b1b       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+             VerifyPassed   0x000b1c       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                        w   0x000b1d       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+       NextPacketLocation   0x000d00       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+    CurrentPacketLocation   0x000d02       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+              wTXWatchdog   0x000d04       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+               wTimerHigh   0x000d06       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+    dwBootloaderExitTimer   0x000d08       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+        bWriteModeEnabled   0x000d0c       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+    bNeedUpdatedJumpTable   0x000d0d       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                MyAddress   0x000d0e       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                ETHHeader   0x000d18       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+              IPHeaderPtr   0x000d2c       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+             UDPHeaderPtr   0x000d2e       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+               AppDataPtr   0x000d30       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                BufferLen   0x000d32       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                       wv   0x000d34       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                 dwvNewPC   0x000d36       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+          dwLEDBlinkTimer   0x000d3a       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                   bLEDOn   0x000d3e       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                        i   0x000d3f       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+           vExitRCONState   0x000d40       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+               wvChecksum   0x000d41       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+           __ARPProcess:0   0x000d43       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+             ETHHeaderPtr   0x000d43       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+             ARPHeaderPtr   0x000d45       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+           __ARPProcess:1   0x000d45       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+  __TFTPBootloadProcess:0   0x000d47       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+             ETHHeaderPtr   0x000d47       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+  __TFTPBootloadProcess:1   0x000d49       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+              IPHeaderPtr   0x000d49       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+             UDPHeaderPtr   0x000d4b       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+  __TFTPBootloadProcess:2   0x000d4b       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+               AppDataPtr   0x000d4d       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+  __TFTPBootloadProcess:3   0x000d4d       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+               AppDataLen   0x000d4f       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+  __TFTPBootloadProcess:4   0x000d4f       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+             wNeededBlock   0x000d51       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                dwAddress   0x000d53       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                        c   0x000d57       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+             __HexToBin:0   0x000d57       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                 vHexData   0x000d58       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+            __DecodeHex:0   0x000d58       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+            __DecodeHex:1   0x000d5a       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+              wHexDataLen   0x000d5a       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+              vMemoryData   0x000d5c       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+            __DecodeHex:2   0x000d5c       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                dwAddress   0x000d5e       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+            __DecodeHex:3   0x000d5e       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+              bInitialize   0x000d60       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+            __DecodeHex:4   0x000d60       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+           smRecordParser   0x000d61       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+              vRecordByte   0x000d62       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+               vRecordLen   0x000d63       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+        wvVolatileAddress   0x000d64       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+         wvLatchedAddress   0x000d66       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+    dwvVolatileExtAddress   0x000d68       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+     dwvLatchedExtAddress   0x000d6c       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                   dwTemp   0x000d70       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+  dwLastWriteBlockAddress   0x000d74       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+              vRecordType   0x000d78       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                vChecksum   0x000d79       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+             bByteWritten   0x000d7a       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                  wHexLen   0x000d7b       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                  Address   0x000d7d       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+           __EraseFlash:0   0x000d7d       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+          EraseByteLength   0x000d81       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+           __EraseFlash:1   0x000d81       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+         ErasePageAddress   0x000d85       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+      ErasePageEndAddress   0x000d89       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                dwAddress   0x000d8d       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+   __RawEraseFlashBlock:0   0x000d8d       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+        dwBootloaderStart   0x000d91       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+          dwBootloaderEnd   0x000d95       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+        __EraseLastPage:0   0x000d99       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+            bEraseAppData   0x000d99       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+        __EraseLastPage:1   0x000d9a       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+              bEraseFuses   0x000d9a       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+      __WriteFlashBlock:0   0x000d9b       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                  Address   0x000d9b       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+      __WriteFlashBlock:1   0x000d9f       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                BlockData   0x000d9f       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+      __WriteFlashBlock:2   0x000da1       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+               StatusData   0x000da1       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+   __RawWriteFlashBlock:0   0x000da3       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                  Address   0x000da3       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+   __RawWriteFlashBlock:1   0x000da7       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                BlockData   0x000da7       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+   __RawWriteFlashBlock:2   0x000da9       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+               StatusData   0x000da9       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                      ret   0x000dab       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                     Data   0x000daf       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+       __CalcIPChecksum:0   0x000daf       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                   Length   0x000db1       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+       __CalcIPChecksum:1   0x000db1       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                        i   0x000db3       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+          NewRXRDLocation   0x000db5       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+          __MACGetArray:0   0x000db7       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                      val   0x000db7       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                      len   0x000db9       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+          __MACGetArray:1   0x000db9       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                        i   0x000dbb       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+          __MACPutArray:0   0x000dbc       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                      val   0x000dbc       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                      len   0x000dbe       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+          __MACPutArray:1   0x000dbe       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                wTimerVal   0x000dc0       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                 Register   0x000dc2       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+          __WritePHYReg:0   0x000dc2       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+          __WritePHYReg:1   0x000dc3       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                     Data   0x000dc3       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                vTXBuffer   0x000e00       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+            vJumpTableRAM   0x000e40       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                   MAADR5   0x000e80       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   MAADR6   0x000e81       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   MAADR3   0x000e82       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   MAADR4   0x000e83       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   MAADR1   0x000e84       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   MAADR2   0x000e85       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   MISTAT   0x000e8a       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+               MISTATbits   0x000e8a       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+              EFLOCONbits   0x000e97       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  EFLOCON   0x000e97       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    EPAUS   0x000e98       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   EPAUSL   0x000e98       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   EPAUSH   0x000e99       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   MACON1   0x000ea0       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+               MACON1bits   0x000ea0       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+               MACON3bits   0x000ea2       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   MACON3   0x000ea2       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+               MACON4bits   0x000ea3       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   MACON4   0x000ea3       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  MABBIPG   0x000ea4       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    MAIPG   0x000ea6       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   MAIPGL   0x000ea6       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   MAIPGH   0x000ea7       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   MAMXFL   0x000eaa       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  MAMXFLL   0x000eaa       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  MAMXFLH   0x000eab       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    MICMD   0x000eb2       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                MICMDbits   0x000eb2       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 MIREGADR   0x000eb4       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     MIWR   0x000eb6       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    MIWRL   0x000eb6       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    MIWRH   0x000eb7       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     MIRD   0x000eb8       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    MIRDL   0x000eb8       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    MIRDH   0x000eb9       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     EHT0   0x000ec0       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     EHT1   0x000ec1       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     EHT2   0x000ec2       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     EHT3   0x000ec3       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     EHT4   0x000ec4       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     EHT5   0x000ec5       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     EHT6   0x000ec6       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     EHT7   0x000ec7       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    EPMM0   0x000ec8       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    EPMM1   0x000ec9       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    EPMM2   0x000eca       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    EPMM3   0x000ecb       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    EPMM4   0x000ecc       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    EPMM5   0x000ecd       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    EPMM6   0x000ece       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    EPMM7   0x000ecf       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    EPMCS   0x000ed0       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   EPMCSL   0x000ed0       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   EPMCSH   0x000ed1       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     EPMO   0x000ed4       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    EPMOL   0x000ed4       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    EPMOH   0x000ed5       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  ERXFCON   0x000ed8       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+              ERXFCONbits   0x000ed8       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  EPKTCNT   0x000ed9       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   EWRPTL   0x000ee2       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    EWRPT   0x000ee2       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   EWRPTH   0x000ee3       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    ETXST   0x000ee4       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   ETXSTL   0x000ee4       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   ETXSTH   0x000ee5       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    ETXND   0x000ee6       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   ETXNDL   0x000ee6       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   ETXNDH   0x000ee7       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   ERXSTL   0x000ee8       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    ERXST   0x000ee8       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   ERXSTH   0x000ee9       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   ERXNDL   0x000eea       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    ERXND   0x000eea       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   ERXNDH   0x000eeb       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 ERXRDPTL   0x000eec       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  ERXRDPT   0x000eec       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 ERXRDPTH   0x000eed       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 ERXWRPTL   0x000eee       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  ERXWRPT   0x000eee       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 ERXWRPTH   0x000eef       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  EDMASTL   0x000ef0       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   EDMAST   0x000ef0       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  EDMASTH   0x000ef1       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  EDMANDL   0x000ef2       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   EDMAND   0x000ef2       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  EDMANDH   0x000ef3       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  EDMADST   0x000ef4       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 EDMADSTL   0x000ef4       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 EDMADSTH   0x000ef5       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  EDMACSL   0x000ef6       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   EDMACS   0x000ef6       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  EDMACSH   0x000ef7       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  EIEbits   0x000efb       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                      EIE   0x000efb       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    ESTAT   0x000efd       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                ESTATbits   0x000efd       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    ECON2   0x000efe       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                ECON2bits   0x000efe       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+               vFlashData   0x000f00       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                        i   0x000f40       data     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                      EIR   0x000f60       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  EIRbits   0x000f60       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                EDATAbits   0x000f61       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    EDATA   0x000f61       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+             ECCP2DELbits   0x000f67       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 ECCP2DEL   0x000f67       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+              ECCP2ASbits   0x000f68       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  ECCP2AS   0x000f68       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 ECCP3DEL   0x000f69       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+             ECCP3DELbits   0x000f69       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+              ECCP3ASbits   0x000f6a       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  ECCP3AS   0x000f6a       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+               RCSTA2bits   0x000f6b       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   RCSTA2   0x000f6b       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+               TXSTA2bits   0x000f6c       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   TXSTA2   0x000f6c       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   TXREG2   0x000f6d       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   RCREG2   0x000f6e       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   SPBRG2   0x000f6f       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+              CCP5CONbits   0x000f70       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  CCP5CON   0x000f70       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    CCPR5   0x000f71       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   CCPR5L   0x000f71       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   CCPR5H   0x000f72       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+              CCP4CONbits   0x000f73       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  CCP4CON   0x000f73       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    CCPR4   0x000f74       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   CCPR4L   0x000f74       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   CCPR4H   0x000f75       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    T4CON   0x000f76       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                T4CONbits   0x000f76       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                      PR4   0x000f77       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     TMR4   0x000f78       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+             ECCP1DELbits   0x000f79       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 ECCP1DEL   0x000f79       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    ERDPT   0x000f7a       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   ERDPTL   0x000f7a       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   ERDPTH   0x000f7b       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+             BAUDCTL2bits   0x000f7c       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 BAUDCON2   0x000f7c       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+             BAUDCON2bits   0x000f7c       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 BAUDCTL2   0x000f7c       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  SPBRGH2   0x000f7d       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+              BAUDCTLbits   0x000f7e       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+             BAUDCTL1bits   0x000f7e       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 BAUDCTL1   0x000f7e       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  BAUDCTL   0x000f7e       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+              BAUDCONbits   0x000f7e       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+             BAUDCON1bits   0x000f7e       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 BAUDCON1   0x000f7e       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  BAUDCON   0x000f7e       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   SPBRGH   0x000f7f       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  SPBRGH1   0x000f7f       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                PORTAbits   0x000f80       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    PORTA   0x000f80       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                PORTBbits   0x000f81       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    PORTB   0x000f81       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                PORTCbits   0x000f82       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    PORTC   0x000f82       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    PORTD   0x000f83       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                PORTDbits   0x000f83       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    PORTE   0x000f84       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                PORTEbits   0x000f84       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    PORTF   0x000f85       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                PORTFbits   0x000f85       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    PORTG   0x000f86       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                PORTGbits   0x000f86       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                PORTHbits   0x000f87       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    PORTH   0x000f87       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                PORTJbits   0x000f88       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    PORTJ   0x000f88       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     LATA   0x000f89       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 LATAbits   0x000f89       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 LATBbits   0x000f8a       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     LATB   0x000f8a       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     LATC   0x000f8b       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 LATCbits   0x000f8b       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     LATD   0x000f8c       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 LATDbits   0x000f8c       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 LATEbits   0x000f8d       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     LATE   0x000f8d       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 LATFbits   0x000f8e       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     LATF   0x000f8e       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     LATG   0x000f8f       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 LATGbits   0x000f8f       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     LATH   0x000f90       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 LATHbits   0x000f90       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     LATJ   0x000f91       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 LATJbits   0x000f91       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    TRISA   0x000f92       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                TRISAbits   0x000f92       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     DDRA   0x000f92       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 DDRAbits   0x000f92       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    TRISB   0x000f93       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                TRISBbits   0x000f93       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     DDRB   0x000f93       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 DDRBbits   0x000f93       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    TRISC   0x000f94       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                TRISCbits   0x000f94       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 DDRCbits   0x000f94       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     DDRC   0x000f94       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    TRISD   0x000f95       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                TRISDbits   0x000f95       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 DDRDbits   0x000f95       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     DDRD   0x000f95       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    TRISE   0x000f96       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                TRISEbits   0x000f96       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     DDRE   0x000f96       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 DDREbits   0x000f96       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     DDRF   0x000f97       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 DDRFbits   0x000f97       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                TRISFbits   0x000f97       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    TRISF   0x000f97       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     DDRG   0x000f98       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                TRISGbits   0x000f98       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    TRISG   0x000f98       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 DDRGbits   0x000f98       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 DDRHbits   0x000f99       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     DDRH   0x000f99       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    TRISH   0x000f99       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                TRISHbits   0x000f99       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     DDRJ   0x000f9a       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 DDRJbits   0x000f9a       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    TRISJ   0x000f9a       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                TRISJbits   0x000f9a       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  OSCTUNE   0x000f9b       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+              OSCTUNEbits   0x000f9b       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     PIE1   0x000f9d       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 PIE1bits   0x000f9d       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 PIR1bits   0x000f9e       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     PIR1   0x000f9e       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 IPR1bits   0x000f9f       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     IPR1   0x000f9f       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     PIE2   0x000fa0       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 PIE2bits   0x000fa0       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     PIR2   0x000fa1       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 PIR2bits   0x000fa1       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     IPR2   0x000fa2       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 IPR2bits   0x000fa2       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 PIE3bits   0x000fa3       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     PIE3   0x000fa3       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     PIR3   0x000fa4       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 PIR3bits   0x000fa4       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     IPR3   0x000fa5       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 IPR3bits   0x000fa5       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+               EECON1bits   0x000fa6       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   EECON1   0x000fa6       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   EECON2   0x000fa7       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    RCSTA   0x000fab       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                RCSTAbits   0x000fab       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   RCSTA1   0x000fab       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+               RCSTA1bits   0x000fab       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                TXSTAbits   0x000fac       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+               TXSTA1bits   0x000fac       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   TXSTA1   0x000fac       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    TXSTA   0x000fac       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   TXREG1   0x000fad       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    TXREG   0x000fad       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    RCREG   0x000fae       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   RCREG1   0x000fae       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    SPBRG   0x000faf       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   SPBRG1   0x000faf       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    T3CON   0x000fb1       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                T3CONbits   0x000fb1       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    TMR3L   0x000fb2       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    TMR3H   0x000fb3       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                CMCONbits   0x000fb4       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    CMCON   0x000fb4       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+               CVRCONbits   0x000fb5       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   CVRCON   0x000fb5       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+              ECCP1ASbits   0x000fb6       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  ECCP1AS   0x000fb6       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+             ECCP3CONbits   0x000fb7       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 ECCP3CON   0x000fb7       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  CCP3CON   0x000fb7       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+              CCP3CONbits   0x000fb7       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    CCPR3   0x000fb8       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   CCPR3L   0x000fb8       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   CCPR3H   0x000fb9       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  CCP2CON   0x000fba       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 ECCP2CON   0x000fba       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+             ECCP2CONbits   0x000fba       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+              CCP2CONbits   0x000fba       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   CCPR2L   0x000fbb       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    CCPR2   0x000fbb       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   CCPR2H   0x000fbc       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 ECCP1CON   0x000fbd       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+             ECCP1CONbits   0x000fbd       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  CCP1CON   0x000fbd       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+              CCP1CONbits   0x000fbd       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    CCPR1   0x000fbe       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   CCPR1L   0x000fbe       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   CCPR1H   0x000fbf       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+               ADCON2bits   0x000fc0       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   ADCON2   0x000fc0       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+               ADCON1bits   0x000fc1       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   ADCON1   0x000fc1       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+               ADCON0bits   0x000fc2       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   ADCON0   0x000fc2       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    ADRES   0x000fc3       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   ADRESL   0x000fc3       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   ADRESH   0x000fc4       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 SSP1CON2   0x000fc5       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+              SSPCON2bits   0x000fc5       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  SSPCON2   0x000fc5       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+             SSP1CON2bits   0x000fc5       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+             SSP1CON1bits   0x000fc6       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 SSP1CON1   0x000fc6       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  SSPCON1   0x000fc6       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+              SSPCON1bits   0x000fc6       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+             SSP1STATbits   0x000fc7       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 SSP1STAT   0x000fc7       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  SSPSTAT   0x000fc7       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+              SSPSTATbits   0x000fc7       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   SSPADD   0x000fc8       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  SSP1ADD   0x000fc8       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  SSP1BUF   0x000fc9       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   SSPBUF   0x000fc9       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                T2CONbits   0x000fca       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    T2CON   0x000fca       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                      PR2   0x000fcb       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     TMR2   0x000fcc       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                T1CONbits   0x000fcd       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    T1CON   0x000fcd       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    TMR1L   0x000fce       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    TMR1H   0x000fcf       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 RCONbits   0x000fd0       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     RCON   0x000fd0       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+               WDTCONbits   0x000fd1       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   WDTCON   0x000fd1       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    ECON1   0x000fd2       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                ECON1bits   0x000fd2       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+               OSCCONbits   0x000fd3       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   OSCCON   0x000fd3       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    T0CON   0x000fd5       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                T0CONbits   0x000fd5       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    TMR0L   0x000fd6       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    TMR0H   0x000fd7       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+               STATUSbits   0x000fd8       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   STATUS   0x000fd8       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    FSR2L   0x000fd9       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     FSR2   0x000fd9       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    FSR2H   0x000fda       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   PLUSW2   0x000fdb       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  PREINC2   0x000fdc       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 POSTDEC2   0x000fdd       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 POSTINC2   0x000fde       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    INDF2   0x000fdf       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                      BSR   0x000fe0       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     FSR1   0x000fe1       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    FSR1L   0x000fe1       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    FSR1H   0x000fe2       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   PLUSW1   0x000fe3       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  PREINC1   0x000fe4       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 POSTDEC1   0x000fe5       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 POSTINC1   0x000fe6       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    INDF1   0x000fe7       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     WREG   0x000fe8       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    FSR0L   0x000fe9       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     FSR0   0x000fe9       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    FSR0H   0x000fea       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   PLUSW0   0x000feb       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  PREINC0   0x000fec       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 POSTDEC0   0x000fed       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                 POSTINC0   0x000fee       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    INDF0   0x000fef       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  INTCON3   0x000ff0       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+              INTCON3bits   0x000ff0       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  INTCON2   0x000ff1       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+              INTCON2bits   0x000ff1       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   INTCON   0x000ff2       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+               INTCONbits   0x000ff2       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     PROD   0x000ff3       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    PRODL   0x000ff3       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                    PRODH   0x000ff4       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   TABLAT   0x000ff5       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  TBLPTRL   0x000ff6       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   TBLPTR   0x000ff6       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  TBLPTRH   0x000ff7       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                  TBLPTRU   0x000ff8       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                       PC   0x000ff9       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                      PCL   0x000ff9       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   PCLATH   0x000ffa       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   PCLATU   0x000ffb       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                   STKPTR   0x000ffc       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+               STKPTRbits   0x000ffc       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                      TOS   0x000ffd       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     TOSL   0x000ffd       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     TOSH   0x000ffe       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+                     TOSU   0x000fff       data     extern C:\MCC18\src\traditional\proc\p18F86J60.asm
+
+
