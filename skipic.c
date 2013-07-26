@@ -353,7 +353,7 @@ int main(void)
 		StackTask();
 
 		// This tasks invokes each of the core stack application tasks
-//		StackApplications();
+		StackApplications();
 
 #if defined(STACK_USE_ZEROCONF_LINK_LOCAL)
 		ZeroconfLLProcess();
