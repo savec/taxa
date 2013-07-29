@@ -1,21 +1,21 @@
 MPLINK 4.34, Linker
-Linker Map File - Created Fri Jul 26 21:25:32 2013
+Linker Map File - Created Mon Jul 29 23:23:13 2013
 
                                  Section Info
                   Section       Type    Address   Location Size(Bytes)
                 ---------  ---------  ---------  ---------  ---------
               BOOTJUMPROM    romdata   0x015bc0    program   0x000008
-                  BOOTROM       code   0x015c00    program   0x001d8a
-                   .cinit    romdata   0x01798a    program   0x00000e
-                   STRING       code   0x017998    program   0x0000d0
-             .stringtable    romdata   0x017a68    program   0x000074
-          .code_fxm3232.o       code   0x017adc    program   0x000070
-                    .code       code   0x017b4c    program   0x00002c
-       .romdata_fxm3232.o    romdata   0x017b78    program   0x000000
-       .idata_fxm3232.o_i    romdata   0x017b78    program   0x000000
-          .romdata_Main.o    romdata   0x017b78    program   0x000000
-          .idata_Main.o_i    romdata   0x017b78    program   0x000001
-             .code_Main.o       code   0x017b7a    program   0x000000
+                  BOOTROM       code   0x015c00    program   0x001d88
+                   .cinit    romdata   0x017988    program   0x00000e
+                   STRING       code   0x017996    program   0x0000d0
+             .stringtable    romdata   0x017a66    program   0x000074
+          .code_fxm3232.o       code   0x017ada    program   0x000070
+                    .code       code   0x017b4a    program   0x00002c
+       .romdata_fxm3232.o    romdata   0x017b76    program   0x000000
+       .idata_fxm3232.o_i    romdata   0x017b76    program   0x000000
+          .romdata_Main.o    romdata   0x017b76    program   0x000000
+          .idata_Main.o_i    romdata   0x017b76    program   0x000001
+             .code_Main.o       code   0x017b78    program   0x000000
      .config_17ff8_Main.o    romdata   0x017ff8    program   0x000001
      .config_17ff9_Main.o    romdata   0x017ff9    program   0x000001
      .config_17ffa_Main.o    romdata   0x017ffa    program   0x000001
@@ -66,224 +66,224 @@ Main.o:RawEraseFlashBlock     actrec   0x000b17       data   0x000003
                                Start         End      
                            ---------   ---------      
                             0x015bc0    0x015bc7      
-                            0x015c00    0x017b78      
+                            0x015c00    0x017b76      
                             0x017ff8    0x017ffb      
                             0x017ffd    0x017ffd      
-            8070 out of 8264 program addresses used, program memory utilization is 97%
+            8068 out of 8264 program addresses used, program memory utilization is 97%
 
 
 
                               Symbols - Sorted by Name
                      Name    Address   Location    Storage File                     
                 ---------  ---------  ---------  --------- ---------                
-               ARPProcess   0x0161ec    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
-           CalcIPChecksum   0x0177c2    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
-                DecodeHex   0x016bcc    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
-               EraseFlash   0x017048    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
-            EraseLastPage   0x017284    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
-                  FXM3232   0x017adc    program     extern C:\MCC18\src\traditional\math\fxm3232.c
-                  GetTime   0x017790    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
-                 HexToBin   0x016b9a    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
-             MACDiscardRx   0x017840    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
-                 MACFlush   0x01790c    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
-              MACGetArray   0x017874    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
-             MACIsTxReady   0x01792a    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
-              MACPutArray   0x0178da    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
-       RawEraseFlashBlock   0x017134    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
-       RawWriteFlashBlock   0x01760e    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
-                  SendACK   0x01696a    program     static                          
-         SendTFTPResponse   0x016a1c    program     static                          
-      TFTPBootloadProcess   0x016398    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
-          ValidationError   0x0168ca    program     static                          
-          WriteFlashBlock   0x017384    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
-              WritePHYReg   0x017968    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
-              _2jContinue   0x017a54    program     static C:\MCC18\src\traditional\stdclib\memset.asm
-              _3jContinue   0x017a20    program     static C:\MCC18\src\traditional\stdclib\mcpyp2r.asm
-                   _3jEnd   0x017a5e    program     static C:\MCC18\src\traditional\stdclib\memset.asm
-              _4jContinue   0x0179cc    program     static C:\MCC18\src\traditional\stdclib\memcpy.asm
-                   _4jEnd   0x017a2a    program     static C:\MCC18\src\traditional\stdclib\mcpyp2r.asm
-                   _5jEnd   0x0179d6    program     static C:\MCC18\src\traditional\stdclib\memcpy.asm
-           ___?:_lbl00016   0x015ed0    program     static                          
-           ___?:_lbl00017   0x015ec4    program     static                          
-           ___?:_lbl00018   0x015f12    program     static                          
-           ___?:_lbl00019   0x015f08    program     static                          
-           ___?:_lbl00029   0x01604c    program     static                          
-           ___?:_lbl00030   0x016042    program     static                          
-      ___case_-1_lbl00074   0x0167b0    program     static                          
-      ___case_-2_lbl00075   0x0167b0    program     static                          
-       ___case_0_lbl00076   0x016810    program     static                          
-    ___case_1544_lbl00032   0x016082    program     static                          
-       ___case_1_lbl00054   0x0164a2    program     static                          
-       ___case_1_lbl00086   0x0168a2    program     static                          
-       ___case_2_lbl00065   0x016628    program     static                          
-       ___case_2_lbl00082   0x016812    program     static                          
-       ___case_3_lbl00067   0x0166c2    program     static                          
-       ___case_4_lbl00052   0x016466    program     static                          
-       ___case_5_lbl00088   0x016994    program     static                          
-       ___case_8_lbl00033   0x01609a    program     static                          
-      ___default_lbl00089   0x0169b6    program     static                          
-           ___do_lbl00011   0x015f2c    program     static                          
-           ___do_lbl00012   0x015f34    program     static                          
-           ___do_lbl00021   0x015e00    program     static                          
+               ARPProcess   0x0161ea    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+           CalcIPChecksum   0x0177c0    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                DecodeHex   0x016bca    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+               EraseFlash   0x017046    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+            EraseLastPage   0x017282    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                  FXM3232   0x017ada    program     extern C:\MCC18\src\traditional\math\fxm3232.c
+                  GetTime   0x01778e    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                 HexToBin   0x016b98    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+             MACDiscardRx   0x01783e    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                 MACFlush   0x01790a    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+              MACGetArray   0x017872    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+             MACIsTxReady   0x017928    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+              MACPutArray   0x0178d8    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+       RawEraseFlashBlock   0x017132    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+       RawWriteFlashBlock   0x01760c    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                  SendACK   0x016968    program     static                          
+         SendTFTPResponse   0x016a1a    program     static                          
+      TFTPBootloadProcess   0x016396    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+          ValidationError   0x0168c8    program     static                          
+          WriteFlashBlock   0x017382    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+              WritePHYReg   0x017966    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+              _2jContinue   0x017a52    program     static C:\MCC18\src\traditional\stdclib\memset.asm
+              _3jContinue   0x017a1e    program     static C:\MCC18\src\traditional\stdclib\mcpyp2r.asm
+                   _3jEnd   0x017a5c    program     static C:\MCC18\src\traditional\stdclib\memset.asm
+              _4jContinue   0x0179ca    program     static C:\MCC18\src\traditional\stdclib\memcpy.asm
+                   _4jEnd   0x017a28    program     static C:\MCC18\src\traditional\stdclib\mcpyp2r.asm
+                   _5jEnd   0x0179d4    program     static C:\MCC18\src\traditional\stdclib\memcpy.asm
+           ___?:_lbl00016   0x015ece    program     static                          
+           ___?:_lbl00017   0x015ec2    program     static                          
+           ___?:_lbl00018   0x015f10    program     static                          
+           ___?:_lbl00019   0x015f06    program     static                          
+           ___?:_lbl00029   0x01604a    program     static                          
+           ___?:_lbl00030   0x016040    program     static                          
+      ___case_-1_lbl00074   0x0167ae    program     static                          
+      ___case_-2_lbl00075   0x0167ae    program     static                          
+       ___case_0_lbl00076   0x01680e    program     static                          
+    ___case_1544_lbl00032   0x016080    program     static                          
+       ___case_1_lbl00054   0x0164a0    program     static                          
+       ___case_1_lbl00086   0x0168a0    program     static                          
+       ___case_2_lbl00065   0x016626    program     static                          
+       ___case_2_lbl00082   0x016810    program     static                          
+       ___case_3_lbl00067   0x0166c0    program     static                          
+       ___case_4_lbl00052   0x016464    program     static                          
+       ___case_5_lbl00088   0x016992    program     static                          
+       ___case_8_lbl00033   0x016098    program     static                          
+      ___default_lbl00089   0x0169b4    program     static                          
+           ___do_lbl00011   0x015f2a    program     static                          
+           ___do_lbl00012   0x015f32    program     static                          
+           ___do_lbl00021   0x015dfe    program     static                          
          ___else_lbl00004   0x015c72    program     static                          
-         ___else_lbl00058   0x016562    program     static                          
-         ___else_lbl00179   0x0174e6    program     static                          
-          ___for_lbl00059   0x016620    program     static                          
-          ___for_lbl00060   0x016626    program     static                          
-          ___for_lbl00061   0x016604    program     static                          
-          ___for_lbl00062   0x01660a    program     static                          
-          ___for_lbl00063   0x0165e8    program     static                          
-          ___for_lbl00064   0x0165dc    program     static                          
-          ___for_lbl00077   0x016868    program     static                          
-          ___for_lbl00078   0x01686e    program     static                          
-          ___for_lbl00081   0x016816    program     static                          
-          ___for_lbl00157   0x017276    program     static                          
-          ___for_lbl00158   0x017280    program     static                          
-          ___for_lbl00160   0x0171f0    program     static                          
-          ___for_lbl00162   0x0172c8    program     static                          
-          ___for_lbl00163   0x0172d2    program     static                          
-          ___for_lbl00164   0x017294    program     static                          
-          ___for_lbl00173   0x0175de    program     static                          
-          ___for_lbl00174   0x0175e8    program     static                          
-          ___for_lbl00176   0x01758c    program     static                          
-          ___for_lbl00181   0x01768a    program     static                          
-          ___for_lbl00182   0x017694    program     static                          
-          ___for_lbl00185   0x017630    program     static                          
-          ___for_lbl00188   0x01777a    program     static                          
-          ___for_lbl00189   0x017784    program     static                          
-          ___for_lbl00192   0x0176ea    program     static                          
+         ___else_lbl00058   0x016560    program     static                          
+         ___else_lbl00179   0x0174e4    program     static                          
+          ___for_lbl00059   0x01661e    program     static                          
+          ___for_lbl00060   0x016624    program     static                          
+          ___for_lbl00061   0x016602    program     static                          
+          ___for_lbl00062   0x016608    program     static                          
+          ___for_lbl00063   0x0165e6    program     static                          
+          ___for_lbl00064   0x0165da    program     static                          
+          ___for_lbl00077   0x016866    program     static                          
+          ___for_lbl00078   0x01686c    program     static                          
+          ___for_lbl00081   0x016814    program     static                          
+          ___for_lbl00157   0x017274    program     static                          
+          ___for_lbl00158   0x01727e    program     static                          
+          ___for_lbl00160   0x0171ee    program     static                          
+          ___for_lbl00162   0x0172c6    program     static                          
+          ___for_lbl00163   0x0172d0    program     static                          
+          ___for_lbl00164   0x017292    program     static                          
+          ___for_lbl00173   0x0175dc    program     static                          
+          ___for_lbl00174   0x0175e6    program     static                          
+          ___for_lbl00176   0x01758a    program     static                          
+          ___for_lbl00181   0x017688    program     static                          
+          ___for_lbl00182   0x017692    program     static                          
+          ___for_lbl00185   0x01762e    program     static                          
+          ___for_lbl00188   0x017778    program     static                          
+          ___for_lbl00189   0x017782    program     static                          
+          ___for_lbl00192   0x0176e8    program     static                          
            ___if_lbl00001   0x015c64    program     static                          
            ___if_lbl00002   0x015c64    program     static                          
            ___if_lbl00003   0x015c76    program     static                          
-           ___if_lbl00006   0x015d14    program     static                          
-           ___if_lbl00013   0x015e74    program     static                          
-           ___if_lbl00014   0x015e78    program     static                          
-           ___if_lbl00015   0x015e8c    program     static                          
-           ___if_lbl00020   0x015f2c    program     static                          
-           ___if_lbl00022   0x015f9e    program     static                          
-           ___if_lbl00023   0x015fca    program     static                          
-           ___if_lbl00028   0x01600c    program     static                          
-           ___if_lbl00034   0x0160b6    program     static                          
-           ___if_lbl00035   0x0160de    program     static                          
-           ___if_lbl00036   0x01615e    program     static                          
-           ___if_lbl00037   0x016190    program     static                          
-           ___if_lbl00038   0x0161ae    program     static                          
-           ___if_lbl00053   0x01651c    program     static                          
-           ___if_lbl00055   0x016530    program     static                          
-           ___if_lbl00056   0x016584    program     static                          
-           ___if_lbl00057   0x016584    program     static                          
-           ___if_lbl00066   0x0166ca    program     static                          
-           ___if_lbl00068   0x016716    program     static                          
-           ___if_lbl00069   0x016734    program     static                          
-           ___if_lbl00070   0x01674a    program     static                          
-           ___if_lbl00079   0x016866    program     static                          
-           ___if_lbl00080   0x016868    program     static                          
-           ___if_lbl00083   0x0168a0    program     static                          
-           ___if_lbl00084   0x0168a0    program     static                          
-           ___if_lbl00085   0x01692a    program     static                          
-           ___if_lbl00087   0x0169b4    program     static                          
-           ___if_lbl00156   0x0171d8    program     static                          
-           ___if_lbl00159   0x017276    program     static                          
-           ___if_lbl00165   0x0172f6    program     static                          
-           ___if_lbl00166   0x017318    program     static                          
-           ___if_lbl00170   0x017452    program     static                          
-           ___if_lbl00171   0x01756a    program     static                          
-           ___if_lbl00172   0x01756a    program     static                          
-           ___if_lbl00175   0x0175de    program     static                          
-           ___if_lbl00177   0x0175e8    program     static                          
-           ___if_lbl00178   0x0175e8    program     static                          
-           ___if_lbl00183   0x01765a    program     static                          
-           ___if_lbl00184   0x017688    program     static                          
-           ___if_lbl00186   0x0176c4    program     static                          
-           ___if_lbl00187   0x0176e4    program     static                          
-           ___if_lbl00190   0x017776    program     static                          
-           ___if_lbl00191   0x01777a    program     static                          
-           ___if_lbl00193   0x01778a    program     static                          
-       ___return_lbl00000   0x017b4a    program     static                          
-       ___return_lbl00000   0x0161ea    program     static                          
-       ___return_lbl00048   0x016b98    program     static                          
-       ___return_lbl00154   0x017282    program     static                          
-       ___return_lbl00161   0x017382    program     static                          
-       ___return_lbl00169   0x01760c    program     static                          
-       ___return_lbl00180   0x01778e    program     static                          
-       ___return_lbl00210   0x01790a    program     static                          
-       ___return_lbl00219   0x017988    program     static                          
-   ___switchexit_lbl00031   0x0161e8    program     static                          
-   ___switchexit_lbl00051   0x016a1c    program     static                          
-   ___switchexit_lbl00073   0x016948    program     static                          
-        ___while_lbl00007   0x015d28    program     static                          
-        ___while_lbl00008   0x015d32    program     static                          
-        ___while_lbl00009   0x015e00    program     static                          
-        ___while_lbl00010   0x0161ea    program     static                          
-        ___while_lbl00049   0x016418    program     static                          
-        ___while_lbl00050   0x016422    program     static                          
-        ___while_lbl00071   0x016752    program     static                          
-        ___while_lbl00072   0x01696a    program     static                          
-        ___while_lbl00167   0x017330    program     static                          
-        ___while_lbl00168   0x017382    program     static                          
-        ___while_lbl00211   0x0178da    program     static                          
-        ___while_lbl00212   0x01790a    program     static                          
-        ___while_lbl00220   0x017982    program     static                          
-        ___while_lbl00221   0x017988    program     static                          
+           ___if_lbl00006   0x015d12    program     static                          
+           ___if_lbl00013   0x015e72    program     static                          
+           ___if_lbl00014   0x015e76    program     static                          
+           ___if_lbl00015   0x015e8a    program     static                          
+           ___if_lbl00020   0x015f2a    program     static                          
+           ___if_lbl00022   0x015f9c    program     static                          
+           ___if_lbl00023   0x015fc8    program     static                          
+           ___if_lbl00028   0x01600a    program     static                          
+           ___if_lbl00034   0x0160b4    program     static                          
+           ___if_lbl00035   0x0160dc    program     static                          
+           ___if_lbl00036   0x01615c    program     static                          
+           ___if_lbl00037   0x01618e    program     static                          
+           ___if_lbl00038   0x0161ac    program     static                          
+           ___if_lbl00053   0x01651a    program     static                          
+           ___if_lbl00055   0x01652e    program     static                          
+           ___if_lbl00056   0x016582    program     static                          
+           ___if_lbl00057   0x016582    program     static                          
+           ___if_lbl00066   0x0166c8    program     static                          
+           ___if_lbl00068   0x016714    program     static                          
+           ___if_lbl00069   0x016732    program     static                          
+           ___if_lbl00070   0x016748    program     static                          
+           ___if_lbl00079   0x016864    program     static                          
+           ___if_lbl00080   0x016866    program     static                          
+           ___if_lbl00083   0x01689e    program     static                          
+           ___if_lbl00084   0x01689e    program     static                          
+           ___if_lbl00085   0x016928    program     static                          
+           ___if_lbl00087   0x0169b2    program     static                          
+           ___if_lbl00156   0x0171d6    program     static                          
+           ___if_lbl00159   0x017274    program     static                          
+           ___if_lbl00165   0x0172f4    program     static                          
+           ___if_lbl00166   0x017316    program     static                          
+           ___if_lbl00170   0x017450    program     static                          
+           ___if_lbl00171   0x017568    program     static                          
+           ___if_lbl00172   0x017568    program     static                          
+           ___if_lbl00175   0x0175dc    program     static                          
+           ___if_lbl00177   0x0175e6    program     static                          
+           ___if_lbl00178   0x0175e6    program     static                          
+           ___if_lbl00183   0x017658    program     static                          
+           ___if_lbl00184   0x017686    program     static                          
+           ___if_lbl00186   0x0176c2    program     static                          
+           ___if_lbl00187   0x0176e2    program     static                          
+           ___if_lbl00190   0x017774    program     static                          
+           ___if_lbl00191   0x017778    program     static                          
+           ___if_lbl00193   0x017788    program     static                          
+       ___return_lbl00000   0x017b48    program     static                          
+       ___return_lbl00000   0x0161e8    program     static                          
+       ___return_lbl00048   0x016b96    program     static                          
+       ___return_lbl00154   0x017280    program     static                          
+       ___return_lbl00161   0x017380    program     static                          
+       ___return_lbl00169   0x01760a    program     static                          
+       ___return_lbl00180   0x01778c    program     static                          
+       ___return_lbl00210   0x017908    program     static                          
+       ___return_lbl00219   0x017986    program     static                          
+   ___switchexit_lbl00031   0x0161e6    program     static                          
+   ___switchexit_lbl00051   0x016a1a    program     static                          
+   ___switchexit_lbl00073   0x016946    program     static                          
+        ___while_lbl00007   0x015d26    program     static                          
+        ___while_lbl00008   0x015d30    program     static                          
+        ___while_lbl00009   0x015dfe    program     static                          
+        ___while_lbl00010   0x0161e8    program     static                          
+        ___while_lbl00049   0x016416    program     static                          
+        ___while_lbl00050   0x016420    program     static                          
+        ___while_lbl00071   0x016750    program     static                          
+        ___while_lbl00072   0x016968    program     static                          
+        ___while_lbl00167   0x01732e    program     static                          
+        ___while_lbl00168   0x017380    program     static                          
+        ___while_lbl00211   0x0178d8    program     static                          
+        ___while_lbl00212   0x017908    program     static                          
+        ___while_lbl00220   0x017980    program     static                          
+        ___while_lbl00221   0x017986    program     static                          
                __config_0   0x017ff8    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
                __config_1   0x017ff9    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
                __config_2   0x017ffa    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
                __config_3   0x017ffb    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
                __config_4   0x017ffd    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
-               __string_0   0x017ac7    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
-               __string_1   0x017ab5    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
-               __string_2   0x017a74    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
-               __string_3   0x017a68    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+               __string_0   0x017ac5    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+               __string_1   0x017ab3    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+               __string_2   0x017a72    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+               __string_3   0x017a66    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
                __tmplbl_0   0x015c3c    program     static                          
                __tmplbl_1   0x015ce0    program     static                          
-              __tmplbl_10   0x016000    program     static                          
-              __tmplbl_11   0x015ff2    program     static                          
-              __tmplbl_12   0x015fe8    program     static                          
-              __tmplbl_13   0x015fde    program     static                          
-              __tmplbl_14   0x016070    program     static                          
-              __tmplbl_15   0x01607e    program     static                          
+              __tmplbl_10   0x015ffe    program     static                          
+              __tmplbl_11   0x015ff0    program     static                          
+              __tmplbl_12   0x015fe6    program     static                          
+              __tmplbl_13   0x015fdc    program     static                          
+              __tmplbl_14   0x01606e    program     static                          
+              __tmplbl_15   0x01607c    program     static                          
                __tmplbl_2   0x015cb4    program     static                          
-              __tmplbl_23   0x01642c    program     static                          
-              __tmplbl_24   0x01643a    program     static                          
-              __tmplbl_25   0x016448    program     static                          
-              __tmplbl_26   0x016456    program     static                          
-              __tmplbl_27   0x016462    program     static                          
-              __tmplbl_28   0x016556    program     static                          
-              __tmplbl_29   0x016580    program     static                          
-               __tmplbl_3   0x015e36    program     static                          
-               __tmplbl_4   0x015e62    program     static                          
-              __tmplbl_47   0x0171d6    program     static                          
-              __tmplbl_48   0x0171b4    program     static                          
-              __tmplbl_49   0x0171b2    program     static                          
-               __tmplbl_5   0x015ee0    program     static                          
-              __tmplbl_50   0x0171d4    program     static                          
-              __tmplbl_51   0x01720c    program     static                          
-              __tmplbl_52   0x0172b0    program     static                          
-              __tmplbl_53   0x01744c    program     static                          
-              __tmplbl_54   0x0174fc    program     static                          
-              __tmplbl_55   0x0175a8    program     static                          
-              __tmplbl_56   0x01764c    program     static                          
-              __tmplbl_57   0x017706    program     static                          
-               __tmplbl_6   0x015f26    program     static                          
-               __tmplbl_7   0x015f22    program     static                          
-               __tmplbl_8   0x015fbc    program     static                          
-               __tmplbl_9   0x01600a    program     static                          
-            __zero_memory   0x017b4c    program     extern C:\MCC18\src\traditional\proc\p18F66J65.asm
-                compare_l   0x017b6e    program     static C:\MCC18\src\traditional\proc\p18F66J65.asm
+              __tmplbl_23   0x01642a    program     static                          
+              __tmplbl_24   0x016438    program     static                          
+              __tmplbl_25   0x016446    program     static                          
+              __tmplbl_26   0x016454    program     static                          
+              __tmplbl_27   0x016460    program     static                          
+              __tmplbl_28   0x016554    program     static                          
+              __tmplbl_29   0x01657e    program     static                          
+               __tmplbl_3   0x015e34    program     static                          
+               __tmplbl_4   0x015e60    program     static                          
+              __tmplbl_47   0x0171d4    program     static                          
+              __tmplbl_48   0x0171b2    program     static                          
+              __tmplbl_49   0x0171b0    program     static                          
+               __tmplbl_5   0x015ede    program     static                          
+              __tmplbl_50   0x0171d2    program     static                          
+              __tmplbl_51   0x01720a    program     static                          
+              __tmplbl_52   0x0172ae    program     static                          
+              __tmplbl_53   0x01744a    program     static                          
+              __tmplbl_54   0x0174fa    program     static                          
+              __tmplbl_55   0x0175a6    program     static                          
+              __tmplbl_56   0x01764a    program     static                          
+              __tmplbl_57   0x017704    program     static                          
+               __tmplbl_6   0x015f24    program     static                          
+               __tmplbl_7   0x015f20    program     static                          
+               __tmplbl_8   0x015fba    program     static                          
+               __tmplbl_9   0x016008    program     static                          
+            __zero_memory   0x017b4a    program     extern C:\MCC18\src\traditional\proc\p18F66J65.asm
+                compare_l   0x017b6c    program     static C:\MCC18\src\traditional\proc\p18F66J65.asm
        dwJumpInstructions   0x015bc0    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
-                     jEnd   0x0179dc    program     static C:\MCC18\src\traditional\stdclib\memcpy.asm
-                     jEnd   0x017a32    program     static C:\MCC18\src\traditional\stdclib\mcpyp2r.asm
-                     jEnd   0x017a66    program     static C:\MCC18\src\traditional\stdclib\memset.asm
-                    jLoop   0x0179c0    program     static C:\MCC18\src\traditional\stdclib\memcpy.asm
-                    jLoop   0x017a14    program     static C:\MCC18\src\traditional\stdclib\mcpyp2r.asm
-                    jLoop   0x017a48    program     static C:\MCC18\src\traditional\stdclib\memset.asm
-                   loop_h   0x017b66    program     static C:\MCC18\src\traditional\proc\p18F66J65.asm
-                   loop_l   0x017b70    program     static C:\MCC18\src\traditional\proc\p18F66J65.asm
+                     jEnd   0x0179da    program     static C:\MCC18\src\traditional\stdclib\memcpy.asm
+                     jEnd   0x017a30    program     static C:\MCC18\src\traditional\stdclib\mcpyp2r.asm
+                     jEnd   0x017a64    program     static C:\MCC18\src\traditional\stdclib\memset.asm
+                    jLoop   0x0179be    program     static C:\MCC18\src\traditional\stdclib\memcpy.asm
+                    jLoop   0x017a12    program     static C:\MCC18\src\traditional\stdclib\mcpyp2r.asm
+                    jLoop   0x017a46    program     static C:\MCC18\src\traditional\stdclib\memset.asm
+                   loop_h   0x017b64    program     static C:\MCC18\src\traditional\proc\p18F66J65.asm
+                   loop_l   0x017b6e    program     static C:\MCC18\src\traditional\proc\p18F66J65.asm
                      main   0x015c00    program     extern D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
-                   memcpy   0x017998    program     extern C:\MCC18\src\traditional\stdclib\memcpy.asm
-            memcpypgm2ram   0x0179ee    program     extern C:\MCC18\src\traditional\stdclib\mcpyp2r.asm
-                   memset   0x017a34    program     extern C:\MCC18\src\traditional\stdclib\memset.asm
-               zero_block   0x017b66    program     static C:\MCC18\src\traditional\proc\p18F66J65.asm
+                   memcpy   0x017996    program     extern C:\MCC18\src\traditional\stdclib\memcpy.asm
+            memcpypgm2ram   0x0179ec    program     extern C:\MCC18\src\traditional\stdclib\mcpyp2r.asm
+                   memset   0x017a32    program     extern C:\MCC18\src\traditional\stdclib\memset.asm
+               zero_block   0x017b64    program     static C:\MCC18\src\traditional\proc\p18F66J65.asm
                    ADCON0   0x000fc2       data     extern C:\MCC18\src\traditional\proc\p18F66J65.asm
                ADCON0bits   0x000fc2       data     extern C:\MCC18\src\traditional\proc\p18F66J65.asm
                    ADCON1   0x000fc1       data     extern C:\MCC18\src\traditional\proc\p18F66J65.asm
@@ -824,200 +824,200 @@ Main.o:RawEraseFlashBlock     actrec   0x000b17       data   0x000003
            ___if_lbl00003   0x015c76    program     static                          
                __tmplbl_2   0x015cb4    program     static                          
                __tmplbl_1   0x015ce0    program     static                          
-           ___if_lbl00006   0x015d14    program     static                          
-        ___while_lbl00007   0x015d28    program     static                          
-        ___while_lbl00008   0x015d32    program     static                          
-           ___do_lbl00021   0x015e00    program     static                          
-        ___while_lbl00009   0x015e00    program     static                          
-               __tmplbl_3   0x015e36    program     static                          
-               __tmplbl_4   0x015e62    program     static                          
-           ___if_lbl00013   0x015e74    program     static                          
-           ___if_lbl00014   0x015e78    program     static                          
-           ___if_lbl00015   0x015e8c    program     static                          
-           ___?:_lbl00017   0x015ec4    program     static                          
-           ___?:_lbl00016   0x015ed0    program     static                          
-               __tmplbl_5   0x015ee0    program     static                          
-           ___?:_lbl00019   0x015f08    program     static                          
-           ___?:_lbl00018   0x015f12    program     static                          
-               __tmplbl_7   0x015f22    program     static                          
-               __tmplbl_6   0x015f26    program     static                          
-           ___if_lbl00020   0x015f2c    program     static                          
-           ___do_lbl00011   0x015f2c    program     static                          
-           ___do_lbl00012   0x015f34    program     static                          
-           ___if_lbl00022   0x015f9e    program     static                          
-               __tmplbl_8   0x015fbc    program     static                          
-           ___if_lbl00023   0x015fca    program     static                          
-              __tmplbl_13   0x015fde    program     static                          
-              __tmplbl_12   0x015fe8    program     static                          
-              __tmplbl_11   0x015ff2    program     static                          
-              __tmplbl_10   0x016000    program     static                          
-               __tmplbl_9   0x01600a    program     static                          
-           ___if_lbl00028   0x01600c    program     static                          
-           ___?:_lbl00030   0x016042    program     static                          
-           ___?:_lbl00029   0x01604c    program     static                          
-              __tmplbl_14   0x016070    program     static                          
-              __tmplbl_15   0x01607e    program     static                          
-    ___case_1544_lbl00032   0x016082    program     static                          
-       ___case_8_lbl00033   0x01609a    program     static                          
-           ___if_lbl00034   0x0160b6    program     static                          
-           ___if_lbl00035   0x0160de    program     static                          
-           ___if_lbl00036   0x01615e    program     static                          
-           ___if_lbl00037   0x016190    program     static                          
-           ___if_lbl00038   0x0161ae    program     static                          
-   ___switchexit_lbl00031   0x0161e8    program     static                          
-       ___return_lbl00000   0x0161ea    program     static                          
-        ___while_lbl00010   0x0161ea    program     static                          
-               ARPProcess   0x0161ec    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
-      TFTPBootloadProcess   0x016398    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
-        ___while_lbl00049   0x016418    program     static                          
-        ___while_lbl00050   0x016422    program     static                          
-              __tmplbl_23   0x01642c    program     static                          
-              __tmplbl_24   0x01643a    program     static                          
-              __tmplbl_25   0x016448    program     static                          
-              __tmplbl_26   0x016456    program     static                          
-              __tmplbl_27   0x016462    program     static                          
-       ___case_4_lbl00052   0x016466    program     static                          
-       ___case_1_lbl00054   0x0164a2    program     static                          
-           ___if_lbl00053   0x01651c    program     static                          
-           ___if_lbl00055   0x016530    program     static                          
-              __tmplbl_28   0x016556    program     static                          
-         ___else_lbl00058   0x016562    program     static                          
-              __tmplbl_29   0x016580    program     static                          
-           ___if_lbl00056   0x016584    program     static                          
-           ___if_lbl00057   0x016584    program     static                          
-          ___for_lbl00064   0x0165dc    program     static                          
-          ___for_lbl00063   0x0165e8    program     static                          
-          ___for_lbl00061   0x016604    program     static                          
-          ___for_lbl00062   0x01660a    program     static                          
-          ___for_lbl00059   0x016620    program     static                          
-          ___for_lbl00060   0x016626    program     static                          
-       ___case_2_lbl00065   0x016628    program     static                          
-       ___case_3_lbl00067   0x0166c2    program     static                          
-           ___if_lbl00066   0x0166ca    program     static                          
-           ___if_lbl00068   0x016716    program     static                          
-           ___if_lbl00069   0x016734    program     static                          
-           ___if_lbl00070   0x01674a    program     static                          
-        ___while_lbl00071   0x016752    program     static                          
-      ___case_-2_lbl00075   0x0167b0    program     static                          
-      ___case_-1_lbl00074   0x0167b0    program     static                          
-       ___case_0_lbl00076   0x016810    program     static                          
-       ___case_2_lbl00082   0x016812    program     static                          
-          ___for_lbl00081   0x016816    program     static                          
-           ___if_lbl00079   0x016866    program     static                          
-          ___for_lbl00077   0x016868    program     static                          
-           ___if_lbl00080   0x016868    program     static                          
-          ___for_lbl00078   0x01686e    program     static                          
-           ___if_lbl00084   0x0168a0    program     static                          
-           ___if_lbl00083   0x0168a0    program     static                          
-       ___case_1_lbl00086   0x0168a2    program     static                          
-          ValidationError   0x0168ca    program     static                          
-           ___if_lbl00085   0x01692a    program     static                          
-   ___switchexit_lbl00073   0x016948    program     static                          
-                  SendACK   0x01696a    program     static                          
-        ___while_lbl00072   0x01696a    program     static                          
-       ___case_5_lbl00088   0x016994    program     static                          
-           ___if_lbl00087   0x0169b4    program     static                          
-      ___default_lbl00089   0x0169b6    program     static                          
-   ___switchexit_lbl00051   0x016a1c    program     static                          
-         SendTFTPResponse   0x016a1c    program     static                          
-       ___return_lbl00048   0x016b98    program     static                          
-                 HexToBin   0x016b9a    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
-                DecodeHex   0x016bcc    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
-               EraseFlash   0x017048    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
-       RawEraseFlashBlock   0x017134    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
-              __tmplbl_49   0x0171b2    program     static                          
-              __tmplbl_48   0x0171b4    program     static                          
-              __tmplbl_50   0x0171d4    program     static                          
-              __tmplbl_47   0x0171d6    program     static                          
-           ___if_lbl00156   0x0171d8    program     static                          
-          ___for_lbl00160   0x0171f0    program     static                          
-              __tmplbl_51   0x01720c    program     static                          
-          ___for_lbl00157   0x017276    program     static                          
-           ___if_lbl00159   0x017276    program     static                          
-          ___for_lbl00158   0x017280    program     static                          
-       ___return_lbl00154   0x017282    program     static                          
-            EraseLastPage   0x017284    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
-          ___for_lbl00164   0x017294    program     static                          
-              __tmplbl_52   0x0172b0    program     static                          
-          ___for_lbl00162   0x0172c8    program     static                          
-          ___for_lbl00163   0x0172d2    program     static                          
-           ___if_lbl00165   0x0172f6    program     static                          
-           ___if_lbl00166   0x017318    program     static                          
-        ___while_lbl00167   0x017330    program     static                          
-        ___while_lbl00168   0x017382    program     static                          
-       ___return_lbl00161   0x017382    program     static                          
-          WriteFlashBlock   0x017384    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
-              __tmplbl_53   0x01744c    program     static                          
-           ___if_lbl00170   0x017452    program     static                          
-         ___else_lbl00179   0x0174e6    program     static                          
-              __tmplbl_54   0x0174fc    program     static                          
-           ___if_lbl00172   0x01756a    program     static                          
-           ___if_lbl00171   0x01756a    program     static                          
-          ___for_lbl00176   0x01758c    program     static                          
-              __tmplbl_55   0x0175a8    program     static                          
-           ___if_lbl00175   0x0175de    program     static                          
-          ___for_lbl00173   0x0175de    program     static                          
-           ___if_lbl00177   0x0175e8    program     static                          
-           ___if_lbl00178   0x0175e8    program     static                          
-          ___for_lbl00174   0x0175e8    program     static                          
-       ___return_lbl00169   0x01760c    program     static                          
-       RawWriteFlashBlock   0x01760e    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
-          ___for_lbl00185   0x017630    program     static                          
-              __tmplbl_56   0x01764c    program     static                          
-           ___if_lbl00183   0x01765a    program     static                          
-           ___if_lbl00184   0x017688    program     static                          
-          ___for_lbl00181   0x01768a    program     static                          
-          ___for_lbl00182   0x017694    program     static                          
-           ___if_lbl00186   0x0176c4    program     static                          
-           ___if_lbl00187   0x0176e4    program     static                          
-          ___for_lbl00192   0x0176ea    program     static                          
-              __tmplbl_57   0x017706    program     static                          
-           ___if_lbl00190   0x017776    program     static                          
-          ___for_lbl00188   0x01777a    program     static                          
-           ___if_lbl00191   0x01777a    program     static                          
-          ___for_lbl00189   0x017784    program     static                          
-           ___if_lbl00193   0x01778a    program     static                          
-       ___return_lbl00180   0x01778e    program     static                          
-                  GetTime   0x017790    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
-           CalcIPChecksum   0x0177c2    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
-             MACDiscardRx   0x017840    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
-              MACGetArray   0x017874    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
-        ___while_lbl00211   0x0178da    program     static                          
-              MACPutArray   0x0178da    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
-       ___return_lbl00210   0x01790a    program     static                          
-        ___while_lbl00212   0x01790a    program     static                          
-                 MACFlush   0x01790c    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
-             MACIsTxReady   0x01792a    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
-              WritePHYReg   0x017968    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
-        ___while_lbl00220   0x017982    program     static                          
-        ___while_lbl00221   0x017988    program     static                          
-       ___return_lbl00219   0x017988    program     static                          
-                   memcpy   0x017998    program     extern C:\MCC18\src\traditional\stdclib\memcpy.asm
-                    jLoop   0x0179c0    program     static C:\MCC18\src\traditional\stdclib\memcpy.asm
-              _4jContinue   0x0179cc    program     static C:\MCC18\src\traditional\stdclib\memcpy.asm
-                   _5jEnd   0x0179d6    program     static C:\MCC18\src\traditional\stdclib\memcpy.asm
-                     jEnd   0x0179dc    program     static C:\MCC18\src\traditional\stdclib\memcpy.asm
-            memcpypgm2ram   0x0179ee    program     extern C:\MCC18\src\traditional\stdclib\mcpyp2r.asm
-                    jLoop   0x017a14    program     static C:\MCC18\src\traditional\stdclib\mcpyp2r.asm
-              _3jContinue   0x017a20    program     static C:\MCC18\src\traditional\stdclib\mcpyp2r.asm
-                   _4jEnd   0x017a2a    program     static C:\MCC18\src\traditional\stdclib\mcpyp2r.asm
-                     jEnd   0x017a32    program     static C:\MCC18\src\traditional\stdclib\mcpyp2r.asm
-                   memset   0x017a34    program     extern C:\MCC18\src\traditional\stdclib\memset.asm
-                    jLoop   0x017a48    program     static C:\MCC18\src\traditional\stdclib\memset.asm
-              _2jContinue   0x017a54    program     static C:\MCC18\src\traditional\stdclib\memset.asm
-                   _3jEnd   0x017a5e    program     static C:\MCC18\src\traditional\stdclib\memset.asm
-                     jEnd   0x017a66    program     static C:\MCC18\src\traditional\stdclib\memset.asm
-               __string_3   0x017a68    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
-               __string_2   0x017a74    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
-               __string_1   0x017ab5    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
-               __string_0   0x017ac7    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
-                  FXM3232   0x017adc    program     extern C:\MCC18\src\traditional\math\fxm3232.c
-       ___return_lbl00000   0x017b4a    program     static                          
-            __zero_memory   0x017b4c    program     extern C:\MCC18\src\traditional\proc\p18F66J65.asm
-                   loop_h   0x017b66    program     static C:\MCC18\src\traditional\proc\p18F66J65.asm
-               zero_block   0x017b66    program     static C:\MCC18\src\traditional\proc\p18F66J65.asm
-                compare_l   0x017b6e    program     static C:\MCC18\src\traditional\proc\p18F66J65.asm
-                   loop_l   0x017b70    program     static C:\MCC18\src\traditional\proc\p18F66J65.asm
+           ___if_lbl00006   0x015d12    program     static                          
+        ___while_lbl00007   0x015d26    program     static                          
+        ___while_lbl00008   0x015d30    program     static                          
+           ___do_lbl00021   0x015dfe    program     static                          
+        ___while_lbl00009   0x015dfe    program     static                          
+               __tmplbl_3   0x015e34    program     static                          
+               __tmplbl_4   0x015e60    program     static                          
+           ___if_lbl00013   0x015e72    program     static                          
+           ___if_lbl00014   0x015e76    program     static                          
+           ___if_lbl00015   0x015e8a    program     static                          
+           ___?:_lbl00017   0x015ec2    program     static                          
+           ___?:_lbl00016   0x015ece    program     static                          
+               __tmplbl_5   0x015ede    program     static                          
+           ___?:_lbl00019   0x015f06    program     static                          
+           ___?:_lbl00018   0x015f10    program     static                          
+               __tmplbl_7   0x015f20    program     static                          
+               __tmplbl_6   0x015f24    program     static                          
+           ___if_lbl00020   0x015f2a    program     static                          
+           ___do_lbl00011   0x015f2a    program     static                          
+           ___do_lbl00012   0x015f32    program     static                          
+           ___if_lbl00022   0x015f9c    program     static                          
+               __tmplbl_8   0x015fba    program     static                          
+           ___if_lbl00023   0x015fc8    program     static                          
+              __tmplbl_13   0x015fdc    program     static                          
+              __tmplbl_12   0x015fe6    program     static                          
+              __tmplbl_11   0x015ff0    program     static                          
+              __tmplbl_10   0x015ffe    program     static                          
+               __tmplbl_9   0x016008    program     static                          
+           ___if_lbl00028   0x01600a    program     static                          
+           ___?:_lbl00030   0x016040    program     static                          
+           ___?:_lbl00029   0x01604a    program     static                          
+              __tmplbl_14   0x01606e    program     static                          
+              __tmplbl_15   0x01607c    program     static                          
+    ___case_1544_lbl00032   0x016080    program     static                          
+       ___case_8_lbl00033   0x016098    program     static                          
+           ___if_lbl00034   0x0160b4    program     static                          
+           ___if_lbl00035   0x0160dc    program     static                          
+           ___if_lbl00036   0x01615c    program     static                          
+           ___if_lbl00037   0x01618e    program     static                          
+           ___if_lbl00038   0x0161ac    program     static                          
+   ___switchexit_lbl00031   0x0161e6    program     static                          
+       ___return_lbl00000   0x0161e8    program     static                          
+        ___while_lbl00010   0x0161e8    program     static                          
+               ARPProcess   0x0161ea    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+      TFTPBootloadProcess   0x016396    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+        ___while_lbl00049   0x016416    program     static                          
+        ___while_lbl00050   0x016420    program     static                          
+              __tmplbl_23   0x01642a    program     static                          
+              __tmplbl_24   0x016438    program     static                          
+              __tmplbl_25   0x016446    program     static                          
+              __tmplbl_26   0x016454    program     static                          
+              __tmplbl_27   0x016460    program     static                          
+       ___case_4_lbl00052   0x016464    program     static                          
+       ___case_1_lbl00054   0x0164a0    program     static                          
+           ___if_lbl00053   0x01651a    program     static                          
+           ___if_lbl00055   0x01652e    program     static                          
+              __tmplbl_28   0x016554    program     static                          
+         ___else_lbl00058   0x016560    program     static                          
+              __tmplbl_29   0x01657e    program     static                          
+           ___if_lbl00056   0x016582    program     static                          
+           ___if_lbl00057   0x016582    program     static                          
+          ___for_lbl00064   0x0165da    program     static                          
+          ___for_lbl00063   0x0165e6    program     static                          
+          ___for_lbl00061   0x016602    program     static                          
+          ___for_lbl00062   0x016608    program     static                          
+          ___for_lbl00059   0x01661e    program     static                          
+          ___for_lbl00060   0x016624    program     static                          
+       ___case_2_lbl00065   0x016626    program     static                          
+       ___case_3_lbl00067   0x0166c0    program     static                          
+           ___if_lbl00066   0x0166c8    program     static                          
+           ___if_lbl00068   0x016714    program     static                          
+           ___if_lbl00069   0x016732    program     static                          
+           ___if_lbl00070   0x016748    program     static                          
+        ___while_lbl00071   0x016750    program     static                          
+      ___case_-2_lbl00075   0x0167ae    program     static                          
+      ___case_-1_lbl00074   0x0167ae    program     static                          
+       ___case_0_lbl00076   0x01680e    program     static                          
+       ___case_2_lbl00082   0x016810    program     static                          
+          ___for_lbl00081   0x016814    program     static                          
+           ___if_lbl00079   0x016864    program     static                          
+          ___for_lbl00077   0x016866    program     static                          
+           ___if_lbl00080   0x016866    program     static                          
+          ___for_lbl00078   0x01686c    program     static                          
+           ___if_lbl00084   0x01689e    program     static                          
+           ___if_lbl00083   0x01689e    program     static                          
+       ___case_1_lbl00086   0x0168a0    program     static                          
+          ValidationError   0x0168c8    program     static                          
+           ___if_lbl00085   0x016928    program     static                          
+   ___switchexit_lbl00073   0x016946    program     static                          
+                  SendACK   0x016968    program     static                          
+        ___while_lbl00072   0x016968    program     static                          
+       ___case_5_lbl00088   0x016992    program     static                          
+           ___if_lbl00087   0x0169b2    program     static                          
+      ___default_lbl00089   0x0169b4    program     static                          
+   ___switchexit_lbl00051   0x016a1a    program     static                          
+         SendTFTPResponse   0x016a1a    program     static                          
+       ___return_lbl00048   0x016b96    program     static                          
+                 HexToBin   0x016b98    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                DecodeHex   0x016bca    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+               EraseFlash   0x017046    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+       RawEraseFlashBlock   0x017132    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+              __tmplbl_49   0x0171b0    program     static                          
+              __tmplbl_48   0x0171b2    program     static                          
+              __tmplbl_50   0x0171d2    program     static                          
+              __tmplbl_47   0x0171d4    program     static                          
+           ___if_lbl00156   0x0171d6    program     static                          
+          ___for_lbl00160   0x0171ee    program     static                          
+              __tmplbl_51   0x01720a    program     static                          
+          ___for_lbl00157   0x017274    program     static                          
+           ___if_lbl00159   0x017274    program     static                          
+          ___for_lbl00158   0x01727e    program     static                          
+       ___return_lbl00154   0x017280    program     static                          
+            EraseLastPage   0x017282    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+          ___for_lbl00164   0x017292    program     static                          
+              __tmplbl_52   0x0172ae    program     static                          
+          ___for_lbl00162   0x0172c6    program     static                          
+          ___for_lbl00163   0x0172d0    program     static                          
+           ___if_lbl00165   0x0172f4    program     static                          
+           ___if_lbl00166   0x017316    program     static                          
+        ___while_lbl00167   0x01732e    program     static                          
+        ___while_lbl00168   0x017380    program     static                          
+       ___return_lbl00161   0x017380    program     static                          
+          WriteFlashBlock   0x017382    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+              __tmplbl_53   0x01744a    program     static                          
+           ___if_lbl00170   0x017450    program     static                          
+         ___else_lbl00179   0x0174e4    program     static                          
+              __tmplbl_54   0x0174fa    program     static                          
+           ___if_lbl00172   0x017568    program     static                          
+           ___if_lbl00171   0x017568    program     static                          
+          ___for_lbl00176   0x01758a    program     static                          
+              __tmplbl_55   0x0175a6    program     static                          
+           ___if_lbl00175   0x0175dc    program     static                          
+          ___for_lbl00173   0x0175dc    program     static                          
+           ___if_lbl00177   0x0175e6    program     static                          
+           ___if_lbl00178   0x0175e6    program     static                          
+          ___for_lbl00174   0x0175e6    program     static                          
+       ___return_lbl00169   0x01760a    program     static                          
+       RawWriteFlashBlock   0x01760c    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+          ___for_lbl00185   0x01762e    program     static                          
+              __tmplbl_56   0x01764a    program     static                          
+           ___if_lbl00183   0x017658    program     static                          
+           ___if_lbl00184   0x017686    program     static                          
+          ___for_lbl00181   0x017688    program     static                          
+          ___for_lbl00182   0x017692    program     static                          
+           ___if_lbl00186   0x0176c2    program     static                          
+           ___if_lbl00187   0x0176e2    program     static                          
+          ___for_lbl00192   0x0176e8    program     static                          
+              __tmplbl_57   0x017704    program     static                          
+           ___if_lbl00190   0x017774    program     static                          
+          ___for_lbl00188   0x017778    program     static                          
+           ___if_lbl00191   0x017778    program     static                          
+          ___for_lbl00189   0x017782    program     static                          
+           ___if_lbl00193   0x017788    program     static                          
+       ___return_lbl00180   0x01778c    program     static                          
+                  GetTime   0x01778e    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+           CalcIPChecksum   0x0177c0    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+             MACDiscardRx   0x01783e    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+              MACGetArray   0x017872    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+        ___while_lbl00211   0x0178d8    program     static                          
+              MACPutArray   0x0178d8    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+       ___return_lbl00210   0x017908    program     static                          
+        ___while_lbl00212   0x017908    program     static                          
+                 MACFlush   0x01790a    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+             MACIsTxReady   0x017928    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+              WritePHYReg   0x017966    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+        ___while_lbl00220   0x017980    program     static                          
+        ___while_lbl00221   0x017986    program     static                          
+       ___return_lbl00219   0x017986    program     static                          
+                   memcpy   0x017996    program     extern C:\MCC18\src\traditional\stdclib\memcpy.asm
+                    jLoop   0x0179be    program     static C:\MCC18\src\traditional\stdclib\memcpy.asm
+              _4jContinue   0x0179ca    program     static C:\MCC18\src\traditional\stdclib\memcpy.asm
+                   _5jEnd   0x0179d4    program     static C:\MCC18\src\traditional\stdclib\memcpy.asm
+                     jEnd   0x0179da    program     static C:\MCC18\src\traditional\stdclib\memcpy.asm
+            memcpypgm2ram   0x0179ec    program     extern C:\MCC18\src\traditional\stdclib\mcpyp2r.asm
+                    jLoop   0x017a12    program     static C:\MCC18\src\traditional\stdclib\mcpyp2r.asm
+              _3jContinue   0x017a1e    program     static C:\MCC18\src\traditional\stdclib\mcpyp2r.asm
+                   _4jEnd   0x017a28    program     static C:\MCC18\src\traditional\stdclib\mcpyp2r.asm
+                     jEnd   0x017a30    program     static C:\MCC18\src\traditional\stdclib\mcpyp2r.asm
+                   memset   0x017a32    program     extern C:\MCC18\src\traditional\stdclib\memset.asm
+                    jLoop   0x017a46    program     static C:\MCC18\src\traditional\stdclib\memset.asm
+              _2jContinue   0x017a52    program     static C:\MCC18\src\traditional\stdclib\memset.asm
+                   _3jEnd   0x017a5c    program     static C:\MCC18\src\traditional\stdclib\memset.asm
+                     jEnd   0x017a64    program     static C:\MCC18\src\traditional\stdclib\memset.asm
+               __string_3   0x017a66    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+               __string_2   0x017a72    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+               __string_1   0x017ab3    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+               __string_0   0x017ac5    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
+                  FXM3232   0x017ada    program     extern C:\MCC18\src\traditional\math\fxm3232.c
+       ___return_lbl00000   0x017b48    program     static                          
+            __zero_memory   0x017b4a    program     extern C:\MCC18\src\traditional\proc\p18F66J65.asm
+                   loop_h   0x017b64    program     static C:\MCC18\src\traditional\proc\p18F66J65.asm
+               zero_block   0x017b64    program     static C:\MCC18\src\traditional\proc\p18F66J65.asm
+                compare_l   0x017b6c    program     static C:\MCC18\src\traditional\proc\p18F66J65.asm
+                   loop_l   0x017b6e    program     static C:\MCC18\src\traditional\proc\p18F66J65.asm
                __config_0   0x017ff8    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
                __config_1   0x017ff9    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c
                __config_2   0x017ffa    program     static D:\Work\datakrat\PIC-MAXI-WEB\PIC-MAXI-WEB_5_31\SkiPIC\Internet Bootloader\Main.c

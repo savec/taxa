@@ -515,8 +515,49 @@ static void console_caption(void) {
 	put_string("\t\'c\' to clean syslog;\r\n");
 	put_string("\t\'r\' to restore defaults;\r\n");
 	put_string("\t\'t\' to print last event;\r\n");
-	put_string("\t\'n\' to print next event;\r\n\r\n");
+	put_string("\t\'n\' to print next event;\r\n");
+	put_string("\t\'b\' to reboot system;\r\n\r\n");
 }
+
+static void reboot(void)
+{
+	static struct
+	{
+		BYTE vMACAddress[6];
+		DWORD dwIPAddress;
+		WORD wChecksum;
+	} BootloaderAddress;
+
+	// Get our MAC address, IP address, and compute a checksum of them
+	memcpy((void*)&BootloaderAddress.vMACAddress[0], (void*)&AppConfig.MyMACAddr.v[0], sizeof(AppConfig.MyMACAddr));
+	BootloaderAddress.dwIPAddress = AppConfig.MyIPAddr.Val;
+	BootloaderAddress.wChecksum = CalcIPChecksum((BYTE*)&BootloaderAddress, sizeof(BootloaderAddress) - sizeof(BootloaderAddress.wChecksum));
+
+	// To enter the bootloader, we need to clear the /POR bit in RCON.
+	// Otherwise, the bootloader will immediately hand off execution
+	// to us.
+	#if defined(USE_LCD)
+		strcpypgm2ram((char*)LCDText, "Bootloader Reset");
+		LCDUpdate();
+	#endif
+	RCONbits.POR = 0;
+
+	INTCONbits.GIEL = 0;
+	INTCONbits.GIEH = 0;
+
+	#if defined(__18CXX)
+	{
+		WORD_VAL wvPROD;
+
+		wvPROD.Val = ((WORD)&BootloaderAddress);
+		PRODH = wvPROD.v[1];
+		PRODL = wvPROD.v[0];
+	}
+	#endif
+
+	Reset();
+}
+
 
 void config(void)
 {
@@ -581,6 +622,9 @@ void config(void)
 					put_string("There are no more events\r\n");
 
 				break;
+			} else if (buffer[0] == 'b' || buffer[0] == 'B') {
+
+				reboot();
 			}
 
 

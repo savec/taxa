@@ -152,6 +152,7 @@ file_124=.
 file_125=.
 file_126=.
 file_127=.
+file_128=.
 [GENERATED_FILES]
 file_000=no
 file_001=no
@@ -281,6 +282,7 @@ file_124=no
 file_125=no
 file_126=no
 file_127=no
+file_128=no
 [OTHER_FILES]
 file_000=no
 file_001=no
@@ -410,6 +412,7 @@ file_124=no
 file_125=no
 file_126=no
 file_127=no
+file_128=no
 [FILE_INFO]
 file_000=skipic.c
 file_001=..\Microchip\TCPIP Stack\ARP.c
@@ -539,6 +542,7 @@ file_124=m_smachine.h
 file_125=eventer.h
 file_126=trace.h
 file_127=version.h
+file_128=18f97j60_g.lkr
 [SUITE_INFO]
 suite_guid={5B7D72DD-9861-47BD-9F60-2BE967BF8416}
 suite_state=

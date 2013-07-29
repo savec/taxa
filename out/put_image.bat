@@ -1,0 +1,1 @@
+tftp 192.168.0.60 put SkiPIC.hex
