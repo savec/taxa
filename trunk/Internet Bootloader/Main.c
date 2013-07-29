@@ -54,7 +54,7 @@
 #define MAC_ADDRESS6		0x00
 #define IP_ADDRESS0			192
 #define IP_ADDRESS1			168
-#define IP_ADDRESS2			97
+#define IP_ADDRESS2			0
 #define IP_ADDRESS3			60
 
 #define TFTP_UDP_PORT		69
