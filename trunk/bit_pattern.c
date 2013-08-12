@@ -14,6 +14,14 @@ void bp_setbit(unsigned char *bitPattern, unsigned char bitIndex)
    bitPattern[bytePos] |= 1 << bitPos;
 }
 
+void bp_rstbit(unsigned char *bitPattern, unsigned char bitIndex)
+{
+   unsigned char bytePos = bitIndex >> 3;
+   unsigned char bitPos = bitIndex & 7;
+   bitPattern[bytePos] &= ~(1 << bitPos);
+}
+
+
 unsigned char bp_tstbit(unsigned char *bitPattern, unsigned char bitIndex)
 {
    unsigned char bytePos = bitIndex >> 3;

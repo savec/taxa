@@ -13,12 +13,12 @@
 
 //#define MIN_WIEGAND_PULSE_LEN	TICK_SECOND/2ul
 
-#define BP_SIZE	5
+#define BP_SIZE	(128/8)
 
-#define WIEGAND_34_LEN				34
-#define WIEGAND_34_HALF_DATA_LEN	16
-#define WIEGAND_34_LDATA_START		1
-#define WIEGAND_34_HDATA_START		(WIEGAND_34_LEN/2)
+#define WIEGAND_LEN				AppConfig.r1_framelen
+#define WIEGAND_DATA_START		1
+#define WIEGAND_DATA_BITS		(WIEGAND_LEN - 2)
+#define WIEGAND_DATA_BYTES		((WIEGAND_DATA_BITS / 8) + ((WIEGAND_DATA_BITS % 8) ? 1 : 0))
 
 typedef enum {
 	WG_READER_VOID = 0,
