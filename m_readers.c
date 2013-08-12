@@ -25,19 +25,6 @@ static mailbox_t mailbox;
 
 volatile static serial_buffer_t sb;
 
-static void uid2hex(BYTE * uid, BYTE * hex, BYTE size)
-{
-	BYTE *s = hex;
-	BYTE *b = uid + (size - 1);
-
-	for (; size--; s += 2, b--) {
-		s[0] = btohexa_high(*b);
-		s[1] = btohexa_low(*b);
-	}
-
-	*s = '\0';
-}
-
 static void serial_reset_state(void)
 {
 //	BYTE l = splhigh();
@@ -77,44 +64,48 @@ BYTE serial_cnt(void)
 	return sb.cnt;
 }
 
-BYTE w34_get_odd(unsigned char *bp)
+static BYTE wg_remove_odd(void)
 {
-	return bp_tstbit(bp, 0) ? 1 : 0;
+	BYTE odd = bp_tstbit(code, WIEGAND_LEN - 1);
+	bp_rstbit(code, WIEGAND_LEN - 1);
+
+	return !!odd;
 }
 
-BYTE w34_get_even(unsigned char *bp)
+static BYTE wg_remove_even(void)
 {
-	return bp_tstbit(bp, WIEGAND_34_LEN - 1) ? 1 : 0;
+	BYTE even = bp_tstbit(code, 0);
+	bp_rstbit(code, 0);
+
+	return !!even;
 }
 
-void w34_get_ldata(unsigned char *bp, WORD *ldata)
+/*
+ * byte_num: 0 - LSB
+ * parity bits must be set to 0 before calling
+ * returns byte of data from code (whithout parity bits), if byte_num out of range returns 0
+ */
+
+static BYTE wg_get_byte(BYTE byte_num)
 {
 	int i;
+	BYTE data = 0;
 
-	for(*ldata = 0, i = WIEGAND_34_HALF_DATA_LEN - 1; i >= 0; i--) {
-		*ldata <<= 1;
-		if(bp_tstbit(bp, WIEGAND_34_LDATA_START + i)) *ldata |= 1;
+	if(byte_num > sizeof(code) - 1)
+		return 0;
+
+	for(i = (byte_num + 1) * 8 - 1; i >= byte_num * 8; i--) {
+		data <<= 1;
+		if(bp_tstbit(code, WIEGAND_DATA_START + i)) data |= 1;
 	}
+
+	return data;
 }
 
-void w34_get_hdata(unsigned char *bp, WORD *hdata)
-{
-	int i;
-
-	for(*hdata = 0, i = WIEGAND_34_HALF_DATA_LEN - 1; i >= 0; i--) {
-		*hdata <<= 1;
-		if(bp_tstbit(bp, WIEGAND_34_HDATA_START + i)) *hdata |= 1;
-	}
-}
-
-
-
-//#define w34_get_ldata(bp, ldata)	((bp >> 1) & 0xffff)
-//#define w34_get_hdata(bp, hdata)	((bp >> (WIEGAND_34_LEN / 2)) & 0xffff)
 #define wg_reset_state()						\
 do {										\
 	bp_bzero(processing_code, sizeof(processing_code));					\
-	position = WIEGAND_34_LEN - 1;	\
+	position = WIEGAND_LEN - 1;	\
 	wg_status = WG_READER_VOID;					\
 } while(0)
 
@@ -217,8 +208,6 @@ void readers_init(void)
 			wg_status = WG_READER_INPROGRESS;				\
 		} else { 									\
 			bp_cp(processing_code, code, sizeof(processing_code)); 				\
-			bp_bzero(processing_code, sizeof(processing_code)); 					\
-			position = WIEGAND_34_LEN - 1;			\
 			wg_status = WG_READER_READY; 					\
 		} 											\
 	}while(0)
@@ -299,12 +288,42 @@ static BOOL serial_get_uid(BYTE *uid)
 	return result;
 }
 
+static BOOL wg_lo_is_even(void)
+{
+	BYTE s;
+	int i;
+	BYTE start = WIEGAND_DATA_START;
+	BYTE end = WIEGAND_DATA_START + ((WIEGAND_DATA_BITS / 2) + ((WIEGAND_DATA_BITS & 1) ? 1 : 0));
+
+	for(i = start; i < end; i ++)
+		if(bp_tstbit(code, i))
+			s ^= 1;
+
+	return (s == 0);
+}
+
+static BOOL wg_hi_is_odd(void)
+{
+	BYTE s;
+	int i;
+	BYTE start = WIEGAND_DATA_START + ((WIEGAND_DATA_BITS / 2) - ((WIEGAND_DATA_BITS & 1) ? 1 : 0));
+	BYTE end = WIEGAND_LEN - 1;
+
+	for(i = start; i < end; i ++)
+		if(bp_tstbit(code, i))
+			s ^= 1;
+
+	return (s == 1);
+}
+
+
 //  Wiegand reading
 static BOOL wg_get_uid(BYTE *uid)
 {
-	WORD ldata;
-	WORD hdata;
+	BYTE data;
 	DWORD d_uid;
+	BYTE odd, even;
+	int i;
 
 
 	switch(wg_status) {
@@ -319,19 +338,23 @@ static BOOL wg_get_uid(BYTE *uid)
 
 	case WG_READER_READY:
 
-		w34_get_ldata(code, &ldata);
-		w34_get_hdata(code, &hdata);
-
-		// odd/even check here
-
-		d_uid = swapl(((DWORD)hdata << 16) | ldata);
-
 		wg_reset_state();
 
-		uid2hex(&d_uid, uid, sizeof(d_uid));
+		odd = wg_remove_odd();
+		even = wg_remove_even();
+
+		if((wg_lo_is_even() && !even) || (wg_hi_is_odd() && !odd))
+			return FALSE;
+
+		for(i = 0; i < WIEGAND_DATA_BYTES; i ++) {
+			data = wg_get_byte(i);
+			*uid++ = btohexa_high(data);
+			*uid++ = btohexa_low(data);
+		}
+
+		*uid = '\0';
 
 		return TRUE;
-
 	}
 }
 
