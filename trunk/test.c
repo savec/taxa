@@ -15,8 +15,8 @@
 #include "m_smachine.h"
 #include "version.h"
 
-//static rom char * projectname = SVN_URL;
-static rom char * projectname = PROJ_NAME;
+static rom char * projectname = SVN_URL;
+//static rom char * projectname = PROJ_NAME;
 static rom char * buildtime = SVN_DATETIME;
 
 static uid_t uid;
@@ -25,6 +25,7 @@ static BYTE str_log[40];
 
 void test(void) {
 	DWORD t/*, data*/;
+	BYTE read_cnt = 0;
 
 	strncpypgm2ram(LCD_STRING_0, projectname, 16);
 	strncpypgm2ram(LCD_STRING_1, buildtime, 16);
@@ -41,9 +42,11 @@ void test(void) {
 
 	while (1) {
 
+		led(-1);
+
 		if (readers_get_uid(&uid)) {
 
-			sprintf(LCD_STRING_0, "[%s]:%d", (char *) uid.uid, uid.gate);
+			sprintf(LCD_STRING_0, "[%s]:%d %d", (char *) uid.uid, uid.gate, ++read_cnt);
 			sprintf(str_log, "RD [%s]:%d", (char *) uid.uid, uid.gate);
 
 			slog_put(str_log);
