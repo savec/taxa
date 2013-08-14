@@ -25,6 +25,42 @@ static mailbox_t mailbox;
 
 volatile static serial_buffer_t sb;
 
+
+static void led_on(void)
+{
+	LED1_IO = 1;
+}
+
+static void led_off(void)
+{
+	LED1_IO = 0;
+}
+
+void led(int on)
+{
+	static DWORD t;
+	static BOOL armed = 0;
+
+	switch(on) {
+	case -1:
+		if(armed && ((TickGet() - t) > (TICK_SECOND / 10L))) {
+			led_off();
+			armed = 0;
+		}
+		break;
+	case 0:
+		led_off();
+		armed = 0;
+		break;
+	case 1:
+		t = TickGet();
+		led_on();
+		armed = 1;
+		break;
+	}
+
+}
+
 static void serial_reset_state(void)
 {
 //	BYTE l = splhigh();
@@ -229,9 +265,23 @@ void wg_readers_isr(void)
 //Serial reading
 static BOOL serial_decode(BYTE *from, BYTE * to, BYTE count)
 {
-	strncpy(to, from, count); 	// in our case it's simple copy
-    *(to+count) = '\0';
-						// Reader2 AppConfig prms will be added later XXX
+	static BYTE code_str[SERIAL_MAX_FRAME_LEN];
+	int i;
+
+	if(count < (AppConfig.r2_code_begin + AppConfig.r2_code_len))
+		return FALSE;
+
+	if(AppConfig.r2_convert2hex) {
+		for(i = 0; i < count; i ++, from ++) {
+			*to++ = btohexa_high(*from);
+			*to++ = btohexa_low(*from);
+		}
+		*to = '\0';
+	} else {
+		strncpy(to, from + AppConfig.r2_code_begin, ((AppConfig.r2_code_len) ? AppConfig.r2_code_len : count));
+	    *(to + ((AppConfig.r2_code_len) ? AppConfig.r2_code_len : count)) = '\0';
+	}
+
 	return TRUE;
 }
 
@@ -267,18 +317,18 @@ static BOOL serial_get_uid(BYTE *uid)
 		    	result = serial_decode(code_str, uid, cnt);
 		    	cnt = 0;
 	    		serial_status = SERIAL_WAIT_FRAME;
-
-            } else if (AppConfig.r2_framelen) { // stopbyte & FrameLen - Alternative
-                if (cnt >= AppConfig.r2_framelen)  {
-			    	result = serial_decode(code_str, uid, cnt);
-			    	cnt = 0;
-				    serial_status = SERIAL_WAIT_FRAME;
-                }
-            } else if( data == AppConfig.r2_stop_byte) {
-			    	result = serial_decode(code_str, uid, --cnt);
-			    	cnt = 0;
-		    		serial_status = SERIAL_WAIT_FRAME;
-            }
+	    		led(1);
+            } else if (AppConfig.r2_framelen && cnt >= AppConfig.r2_framelen) { // stopbyte & FrameLen - Alternative
+				result = serial_decode(code_str, uid, cnt);
+				cnt = 0;
+				serial_status = SERIAL_WAIT_FRAME;
+				led(1);
+			} else if (data == AppConfig.r2_stop_byte) {
+				result = serial_decode(code_str, uid, --cnt);
+				cnt = 0;
+				serial_status = SERIAL_WAIT_FRAME;
+				led(1);
+			}
 
 			break;
 
@@ -339,6 +389,7 @@ static BOOL wg_get_uid(BYTE *uid)
 	case WG_READER_READY:
 
 		wg_reset_state();
+		led(1);
 
 		odd = wg_remove_odd();
 		even = wg_remove_even();
@@ -384,8 +435,10 @@ wg_reader_status_e wg_readers_getstatus(void)
 
 // Reader Processor
 void readers_module(void)
-  {
+{
 	bd_t ipacket;
+
+	led(-1);
 
 	if(mail_reciev(MYSELF, &ipacket)) {
 		readers_process_buffer(ipacket);

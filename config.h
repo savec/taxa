@@ -77,11 +77,11 @@ typedef struct {
 
 #define DFLT_R1_PARITY "Classic e/o"
 #define DFLT_R2_ACTIVITY 1
-#define DFLT_R2_CONVERT2HEX 1
+#define DFLT_R2_CONVERT2HEX 0
 #define DFLT_R2_FRAMELEN 20
 #define DFLT_R2_STOPBYTE 0x0D
 #define DFLT_R2_CODE_BEGIN 0
-#define DFLT_R2_CODE_LEN 20
+#define DFLT_R2_CODE_LEN 0
 #define DFLT_R2_MAX_DELAY 10
 
 #define DFLT_ACC_HOST_TOUT 10
