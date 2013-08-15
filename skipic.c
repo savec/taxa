@@ -331,6 +331,8 @@ int main(void)
 //			LCDTest(val >> 2);
 //		}
 
+		LCD_serve_tout_prompt();
+
 		if(net_cfg_activity())
 			config();
 

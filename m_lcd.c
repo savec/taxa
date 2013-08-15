@@ -5,10 +5,14 @@
  *      Author: admin
  */
 
+#include "TCPIP Stack/TCPIP.h"
 #include "m_lcd.h"
 
 decode_t decode_cb = NULL;
 //BYTE (*decode_cb)(BYTE);
+
+static DWORD lcd_tout, lcd_timestamp;
+
 
 static rom BYTE cp1251[] = {/*À*/65, /*Á*/160, /*Â*/66, /*Ã*/161, /*Ä*/224, /*Å*/
 71, /*Æ*/163, /*Ç*/164, /*È*/165, /*É*/166, /*Ê*/75, /*Ë*/167, /*Ì*/77, /*Í*/
@@ -19,6 +23,7 @@ static rom BYTE cp1251[] = {/*À*/65, /*Á*/160, /*Â*/66, /*Ã*/161, /*Ä*/224, /*Å*
 111, /*ï*/190, /*ð*/112, /*ñ*/99, /*ò*/191, /*ó*/121, /*ô*/228, /*õ*/120, /*ö*/
 229, /*÷*/192, /*ø*/193, /*ù*/230, /*ú*/194, /*û*/195, /*ü*/196, /*ý*/197,
 /*þ*/198, /*ÿ*/199 };
+
 
 void LCDTest(WORD offset)
 {
@@ -53,3 +58,20 @@ BYTE * LCD_decode(BYTE *str)
 	return str;
 }
 
+void LCD_apply(DWORD tout)
+{
+	lcd_tout = tout;
+	lcd_timestamp = TickGet();
+	LCD_decode(LCD_ALL);
+	LCDUpdate();
+}
+
+void LCD_serve_tout_prompt(void)
+{
+	static DWORD t;
+
+	if(lcd_tout && ((TickGet() - lcd_timestamp) > lcd_tout)) {
+		sm_lcd_prompt();
+		lcd_tout = 0;
+	}
+}
