@@ -278,9 +278,14 @@ static int process_host_buffer(bd_t handler)
 	case TYPE_NPDL:
 
 	if(hdr->hdr_s.packtype_u.npdl.qac == QAC_AR_REQUEST) {
+
 		BYTE msg_len = hdr->hdr_s.packtype_u.npdl.len - (sizeof(ar_rsp) - MAX_MSG_SIZE) - 2;
 		ar_rsp *request = (ar_rsp *) &hdr->raw[RAW_DATA];
-		 ServiceIt (request->access_code, request->msg,  msg_len);
+
+		if(state == WAIT_HOST_ANSWER)	// else DropIt() )
+			ServiceIt (request->access_code, request->msg,  msg_len);
+
+
 //		msg_len = (msg_len > 32) ? 32 : msg_len;
 
 //		memset((void *)LCDText, ' ', 32);
