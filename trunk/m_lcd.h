@@ -20,6 +20,8 @@ typedef BYTE (*decode_t)(BYTE);
 void LCDTest(WORD offset);
 void LCD_init(void);
 BYTE * LCD_decode(BYTE *str);
+void LCD_serve_tout_prompt(void);
+void LCD_apply(DWORD tout);
 
 #define LCD_STRING_0	(LCDText)
 #if LCD_HEIDHT>1
