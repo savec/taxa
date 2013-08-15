@@ -328,7 +328,7 @@ skip_reciev:
 	/* check timeouts */
 	for (i = 0; i < NBUFFERS; i++) {
 		if ((bpool[i].status == BD_NEED_ACK) && (TickGet() - bpool[i].timestamp
-				> TICK_SECOND / 2)) {
+				> ((TICK_SECOND / 100L) * (DWORD)AppConfig.acc_host_tout))))) {
 			bpool[i].status = BD_TIMEOUT;
 			mail_send(bpool[i].owner, i);
 		}
