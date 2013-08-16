@@ -60,18 +60,18 @@ BYTE * LCD_decode(BYTE *str)
 
 void LCD_apply(DWORD tout)
 {
-	lcd_tout = tout;
-	lcd_timestamp = TickGet();
-	LCD_decode(LCD_ALL);
-	LCDUpdate();
+	// lcd_tout = tout;
+	// lcd_timestamp = TickGet();
+	// LCD_decode(LCD_ALL);
+	// LCDUpdate();
 }
 
 void LCD_serve_tout_prompt(void)
 {
-	static DWORD t;
+	// static DWORD t;
 
-	if(lcd_tout && ((TickGet() - lcd_timestamp) > lcd_tout)) {
-		sm_lcd_prompt();
-		lcd_tout = 0;
-	}
+	// if(lcd_tout && ((TickGet() - lcd_timestamp) > lcd_tout)) {
+	// 	sm_lcd_prompt();
+	// 	lcd_tout = 0;
+	// }
 }
