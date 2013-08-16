@@ -346,6 +346,9 @@ void main(void)
 	bWriteModeEnabled = FALSE;
 	bNeedUpdatedJumpTable = FALSE;
 
+	// LCD light on
+	LATGbits.LATG5 = 1;
+	TRISGbits.TRISG5 = 0;
 	//
 	// Configure the Ethernet module for operation
 	//
