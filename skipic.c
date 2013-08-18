@@ -267,13 +267,19 @@ int main(void)
 	StackInit();
 	net_init();
 	LCD_init();
-	sm_init();
 
 
 //	if(!BUTTON1_IO)
 //		config();
 
 	readers_init();
+
+	LCD_show_addresses();
+	t = TickGet();
+	while(TickGet() - t < TICK_SECOND * 3)
+		continue;
+
+	sm_init();
 
 	if(!BUTTON0_IO)
 		test();
