@@ -50,10 +50,17 @@ void accessor_module(void)
 
 		break;
 	case CHECK_SM:
-		if(sm_is_ready())
+		if(sm_is_ready()) {
 			event_send(MODULE_SRVMACHINE, EVT_SM_PREPARE);
-		else
-			break;	// XXX check it
+		} else {
+			strcpy(LCD_STRING_0, AppConfig.acc_busy_msg);
+			LCD_decode(LCD_ALL);
+			LCDUpdate();
+			LCD_set_tout(TICK_SECOND * 5);
+
+			state = WAIT_UID;
+			break;
+		}
 
 		/* It's OK, send to host */
 		opacket = bcp_obtain_buffer(MYSELF);
@@ -166,10 +173,11 @@ void ServiceIt (BYTE aCode, char* msg, int len_msg)
 		event_send(MODULE_SRVMACHINE, EVT_SM_DISABLE_CONTROL);
 		state = WAIT_UID;
 		readers_reset_state();
+		LCD_set_tout(TICK_SECOND * 5);
 	} else {
 		event_send(MODULE_SRVMACHINE, EVT_SM_ENABLE_CONTROL);
 		state = WAIT_SM;
-        }       
+    }
 }
 
 static int process_tout_buffer(bd_t handler)

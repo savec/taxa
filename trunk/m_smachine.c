@@ -16,7 +16,7 @@ sm_state_e state;
 rom static char * ver = "SM0.01";
 static mailbox_t mailbox;
 static event_t event;
-
+static BOOL sm_is_sig_done(void);
 
 #define MYSELF	MODULE_SRVMACHINE
 
@@ -58,19 +58,11 @@ static int process_buffer(bd_t handler)
 	return result;
 }
 
- static void sm_lcd_prompt(void)
-{
-	strcpy(LCD_STRING_0, AppConfig.acc_prompt_msg);
-	strcpypgm2ram(LCD_STRING_1, "                ");
-	LCD_decode(LCD_ALL);
-	LCDUpdate();
-}
-
 void sm_init(void)
 {
 	// XXX check INs
 
-	sm_lcd_prompt();
+	LCD_prompt();
 
 	mail_subscribe(MYSELF, &mailbox);
 	state = SM_READY;
@@ -78,7 +70,7 @@ void sm_init(void)
 }
 
 BOOL sm_is_ready(void) {
-	return TRUE;	// XXX check it
+	return !sm_is_sig_done();	// XXX check it
 }
 
 static void sm_control_off(void)
@@ -236,26 +228,26 @@ static void sm_control(int on)
 		break;
 	}
 }
-static void sm_lcd(int on)
-{
-	static DWORD t;
-	static BOOL armed = 0;
-
-	switch(on) {
-	case -1:
-		if(armed && ((TickGet() - t) > (TICK_SECOND * 5))) {
-			sm_lcd_prompt();
-			armed = 0;
-		}
-		break;
-	case 1:
-		t = TickGet();
-
-		armed = 1;
-		break;
-	}
-
-}
+//static void sm_lcd(int on)
+//{
+//	static DWORD t;
+//	static BOOL armed = 0;
+//
+//	switch(on) {
+//	case -1:
+//		if(armed && ((TickGet() - t) > (TICK_SECOND * 5))) {
+//			LCD_prompt();
+//			armed = 0;
+//		}
+//		break;
+//	case 1:
+//		t = TickGet();
+//
+//		armed = 1;
+//		break;
+//	}
+//
+//}
 
 static BOOL sm_is_sig_done(void)
 {
@@ -302,7 +294,7 @@ void sm_module(void)
 
 	sm_indicator(-1);
 	sm_control(-1);
-	sm_lcd(-1);
+//	sm_lcd(-1);
 
 	switch(state) {
 	case SM_INIT:
@@ -330,7 +322,6 @@ void sm_module(void)
 				state = SM_WORK;
             }
             else {
-            	sm_lcd(1);
             	state = SM_READY;
             }
 		}
@@ -338,12 +329,12 @@ void sm_module(void)
 	case SM_WORK:
 		if((TickGet() - t) > ((TICK_SECOND * (DWORD)AppConfig.sm_service_time) / 100L)) {
 			event_send(MODULE_ACCESSOR, EVT_AC_TOUT);
-			sm_lcd_prompt();
+			LCD_prompt();
 			state = SM_FINAL;
 		} else if (sm_is_sig_done()) {
 			sm_control(0);
 			event_send(MODULE_ACCESSOR, EVT_AC_DONE);
-			sm_lcd_prompt();
+			LCD_prompt();
 			state = SM_FINAL;
 		}
 		break;

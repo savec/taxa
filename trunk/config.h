@@ -112,6 +112,8 @@ void config(void);
 void config_restore_defaults(void);
 void config_restore(void);
 void config_save(void);
+int cvrt_ip_out(char *from, char *to);
+int cvrt_mac_out(char *from, char *to);
 extern APP_CONFIG AppConfig;
 
 #endif /* CONFIG_H_ */

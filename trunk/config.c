@@ -10,8 +10,6 @@
 
 static int cvrt_ip_in(char *from, char *to);
 static int cvrt_mac_in(char *from, char *to);
-static int cvrt_ip_out(char *from, char *to);
-static int cvrt_mac_out(char *from, char *to);
 
 static BYTE string_buf[60];
 
@@ -387,7 +385,7 @@ int config_show_param(ROM const menu_prm_t * prm)
 #define isdigit(ch) ((ch) >= '0' && (ch) <= '9')
 #define isdot(ch)   ((ch) == '.')
 
-static int cvrt_ip_out(char *from, char *to)
+int cvrt_ip_out(char *from, char *to)
 {
 	BYTE i;
 	BYTE sbyte[4];
@@ -408,7 +406,7 @@ static int cvrt_ip_out(char *from, char *to)
 	return 1;
 }
 
-static int cvrt_mac_out(char *from, char *to)
+int cvrt_mac_out(char *from, char *to)
 {
 	BYTE i;
 	for (i = 0; i < 6; i++, to += 3, from++) {

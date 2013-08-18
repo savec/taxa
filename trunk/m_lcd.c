@@ -7,6 +7,7 @@
 
 #include "TCPIP Stack/TCPIP.h"
 #include "m_lcd.h"
+#include "config.h"
 
 decode_t decode_cb = NULL;
 //BYTE (*decode_cb)(BYTE);
@@ -58,20 +59,42 @@ BYTE * LCD_decode(BYTE *str)
 	return str;
 }
 
-void LCD_apply(DWORD tout)
+void LCD_set_tout(DWORD tout)
 {
-	// lcd_tout = tout;
-	// lcd_timestamp = TickGet();
-	// LCD_decode(LCD_ALL);
-	// LCDUpdate();
+	 lcd_tout = tout;
+	 lcd_timestamp = TickGet();
 }
 
 void LCD_serve_tout_prompt(void)
 {
-	// static DWORD t;
+	 static DWORD t;
 
-	// if(lcd_tout && ((TickGet() - lcd_timestamp) > lcd_tout)) {
-	// 	sm_lcd_prompt();
-	// 	lcd_tout = 0;
-	// }
+	 if(lcd_tout && ((TickGet() - lcd_timestamp) > lcd_tout)) {
+		 LCD_prompt();
+	 	lcd_tout = 0;
+	 }
+}
+
+void LCD_prompt(void)
+{
+	strcpy(LCD_STRING_0, AppConfig.acc_prompt_msg);
+	strcpypgm2ram(LCD_STRING_1, "                ");
+	LCD_decode(LCD_ALL);
+	LCDUpdate();
+}
+
+void LCD_show_addresses(void)
+{
+	BYTE *p_str = LCD_STRING_1;
+	BYTE i;
+
+	cvrt_ip_out(&AppConfig.MyIPAddr, LCD_STRING_0);
+
+	for (i = 0; i < 6; i++) {
+		*p_str ++ = btohexa_high(AppConfig.MyMACAddr.v[i]);
+		*p_str ++ = btohexa_low(AppConfig.MyMACAddr.v[i]);
+	}
+	*p_str = '\0';
+	LCD_decode(LCD_ALL);
+	LCDUpdate();
 }
