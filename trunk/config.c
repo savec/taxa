@@ -111,7 +111,7 @@ static ROM const menu_prm_t r2_stop_byte_p = { TYPE_CHAR, "Stop byte",
 
 //BYTE r2_code_begin = 0;
 static ROM const menu_prm_t r2_code_begin_p = { TYPE_CHAR, "Code begin",
-		(void *) &AppConfig.r2_code_begin, { { 0, 255 } } };
+		(void *) &AppConfig.r2_code_begin, { { 1, 255 } } };
 
 //BYTE r2_code_len = 0;
 static ROM const menu_prm_t r2_code_len_p = { TYPE_CHAR, "Code length",

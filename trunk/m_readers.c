@@ -265,21 +265,25 @@ void wg_readers_isr(void)
 //Serial reading
 static BOOL serial_decode(BYTE *from, BYTE * to, BYTE count)
 {
-	static BYTE code_str[SERIAL_MAX_FRAME_LEN];
+	// static BYTE code_str[SERIAL_MAX_FRAME_LEN];
+	BYTE code_begin = (AppConfig.r2_code_begin) ? (AppConfig.r2_code_begin - 1) : 0; // 0, 1 -> 0
+	BYTE code_len = (AppConfig.r2_code_len) ? AppConfig.r2_code_len : count;
 	int i;
 
-	if(count < (AppConfig.r2_code_begin + AppConfig.r2_code_len))
+	if(count < (code_begin + code_len))
 		return FALSE;
 
+	from += code_begin;
+
 	if(AppConfig.r2_convert2hex) {
-		for(i = 0; i < count; i ++, from ++) {
+		for(i = 0; i < code_len; i ++, from ++) {
 			*to++ = btohexa_high(*from);
 			*to++ = btohexa_low(*from);
 		}
 		*to = '\0';
 	} else {
-		strncpy(to, from + AppConfig.r2_code_begin, ((AppConfig.r2_code_len) ? AppConfig.r2_code_len : count));
-	    *(to + ((AppConfig.r2_code_len) ? AppConfig.r2_code_len : count)) = '\0';
+		strncpy(to, from, code_len);
+	    *(to + code_len) = '\0';
 	}
 
 	return TRUE;
