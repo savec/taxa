@@ -21,8 +21,8 @@ static BYTE host_read = 0;
 
 //static DWORD slog_pos;
 //static DWORD get_pos;
-static DWORD cnt_events;
-static DWORD cnt_not_read;
+static DWORD cnt_events = 0;
+static DWORD cnt_not_read = 0;
 
 static DWORD cnt_lost = 0;
 
@@ -217,6 +217,10 @@ static int slog_cnt_events(DWORD from, DWORD to) {
 
 static int slog_scan(void) {
 	int pos_start, pos_end, cnt;
+
+#ifdef DUMMY_LOGGER
+	return 0;
+#endif	
 
 	pos_start = cyclic_search(0, SLOG_EMPTY, SLOG_EMPTY);
 
@@ -468,6 +472,10 @@ int slog_put(const char *buf) {
 	BYTE timestamp[20], *p_timestamp = timestamp;
 	BYTE total_len;
 
+#ifdef DUMMY_LOGGER
+	return 0;
+#endif
+
 	slog_get_timestamp(timestamp);
 
 	total_len = strlen(timestamp) + strlen(buf) + 2;
@@ -509,6 +517,10 @@ int slog_getlast(BYTE *buf, size_t len) {
 	DWORD cached_tail;
 	BYTE ch;
 
+#ifdef DUMMY_LOGGER
+	return 0;
+#endif	
+
 	if (cnt_events == 0)
 		return 0;
 
@@ -530,6 +542,11 @@ int slog_getlast(BYTE *buf, size_t len) {
 }
 
 int slog_getnext(BYTE *buf, size_t len) {
+
+#ifdef DUMMY_LOGGER
+	return 0;
+#endif
+
 	if (cnt_events == 0)
 		return 0;
 
