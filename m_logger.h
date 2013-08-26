@@ -17,6 +17,8 @@ typedef struct {
 	BYTE seconds;
 } time_t;
 
+#define DUMMY_LOGGER
+
 #define PAGE_SIZE	264ul
 #define PAGES_NUM	496
 
