@@ -15,7 +15,6 @@
 static unsigned char code[BP_SIZE], processing_code[BP_SIZE];
 
 static BYTE position;
-static volatile DWORD t = 0;
 static wg_reader_status_e wg_status = WG_READER_VOID;
 static serial_reader_status_e serial_status = SERIAL_WAIT_FRAME;
 
@@ -253,13 +252,13 @@ void wg_readers_isr(void)
 	if(INTCONbits.INT0IF) {
 		INTCONbits.INT0IF = 0;
 		shift_position();
-		t = TickGet();
+		// t = TickGet();
 	}
 	if(INTCON3bits.INT2IF) {
 		INTCON3bits.INT2IF = 0;
 		bp_setbit(processing_code, position);
 		shift_position();
-		t = TickGet();
+		// t = TickGet();
 	}
 }
 //Serial reading
@@ -378,14 +377,16 @@ static BOOL wg_get_uid(BYTE *uid)
 	DWORD d_uid;
 	BYTE odd, even;
 	int i;
+	static DWORD t = 0;
 
 
 	switch(wg_status) {
 	case WG_READER_VOID:
+		t = TickGet();
 		return FALSE;
 
 	case WG_READER_INPROGRESS:
-		if(TickGet() - t > TICK_SECOND/2) {
+		if(TickGet() - t > TICK_SECOND) {
 			wg_reset_state();
 		}
 		return FALSE;
