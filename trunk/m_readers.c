@@ -12,9 +12,9 @@
 #include "trace.h"
 
 
-static unsigned char code[BP_SIZE], processing_code[BP_SIZE];
+volatile static unsigned char code[BP_SIZE], processing_code[BP_SIZE];
 
-static BYTE position;
+volatile static BYTE position;
 volatile static wg_reader_status_e wg_status = WG_READER_VOID;
 static serial_reader_status_e serial_status = SERIAL_WAIT_FRAME;
 
