@@ -320,17 +320,17 @@ static BOOL serial_get_uid(BYTE *uid)
 		    	result = serial_decode(code_str, uid, cnt);
 		    	cnt = 0;
 	    		serial_status = SERIAL_WAIT_FRAME;
-	    		led(1);
+	    		// led(1);
             } else if (AppConfig.r2_framelen && cnt >= AppConfig.r2_framelen) { // stopbyte & FrameLen - Alternative
 				result = serial_decode(code_str, uid, cnt);
 				cnt = 0;
 				serial_status = SERIAL_WAIT_FRAME;
-				led(1);
+				// led(1);
 			} else if (data == AppConfig.r2_stop_byte) {
 				result = serial_decode(code_str, uid, --cnt);
 				cnt = 0;
 				serial_status = SERIAL_WAIT_FRAME;
-				led(1);
+				// led(1);
 			}
 
 			break;
@@ -394,7 +394,7 @@ static BOOL wg_get_uid(BYTE *uid)
 	case WG_READER_READY:
 
 		wg_reset_state();
-		led(1);
+		// led(1);
 
 		odd = wg_remove_odd();
 		even = wg_remove_even();
@@ -420,6 +420,7 @@ BYTE readers_get_uid(uid_t *uid)
 	if(AppConfig.r1_activity) {
 		if(wg_get_uid(uid->uid)) {
 			uid->gate = 1;
+			led(1);
 			return 1;
 		}
 	}
@@ -427,6 +428,7 @@ BYTE readers_get_uid(uid_t *uid)
 	if(AppConfig.r2_activity) {
 		if(serial_get_uid(uid->uid)) {
 			uid->gate = 2;
+			led(1);
 			return 1;
 		}
 	}
