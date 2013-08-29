@@ -269,6 +269,8 @@ static BOOL serial_decode(BYTE *from, BYTE * to, BYTE count)
 	BYTE code_len = (AppConfig.r2_code_len) ? AppConfig.r2_code_len : count;
 	int i;
 
+	led(1);
+
 	if(count < (code_begin + code_len))
 		return FALSE;
 
@@ -394,7 +396,8 @@ static BOOL wg_get_uid(BYTE *uid)
 	case WG_READER_READY:
 
 		wg_reset_state();
-		// led(1);
+		
+		led(1);
 
 		odd = wg_remove_odd();
 		even = wg_remove_even();
@@ -420,7 +423,7 @@ BYTE readers_get_uid(uid_t *uid)
 	if(AppConfig.r1_activity) {
 		if(wg_get_uid(uid->uid)) {
 			uid->gate = 1;
-			led(1);
+			// led(1);
 			return 1;
 		}
 	}
@@ -428,7 +431,7 @@ BYTE readers_get_uid(uid_t *uid)
 	if(AppConfig.r2_activity) {
 		if(serial_get_uid(uid->uid)) {
 			uid->gate = 2;
-			led(1);
+			// led(1);
 			return 1;
 		}
 	}
