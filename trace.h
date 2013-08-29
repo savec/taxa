@@ -10,7 +10,7 @@
 #include "TCPIP Stack/TCPIP.h"
 #include <stdio.h>
 
-//#define UART_TRACE
+#define UART_TRACE
 
 #ifdef UART_TRACE
 extern BYTE trace_buf[];
