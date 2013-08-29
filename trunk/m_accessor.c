@@ -64,12 +64,17 @@ void accessor_module(void)
 
 		/* It's OK, send to host */
 		opacket = bcp_obtain_buffer(MYSELF);
-		TRACE("\n\rACS: buffer obtained (QAC_AR_REQUEST)");
+		
 
 		if (opacket < 0) {
+
+			TRACE("\n\rACS: can't obtaine buffer (QAC_AR_REQUEST)");
+			
 			break;
 		}
 		{
+			TRACE("\n\rACS: buffer obtained (QAC_AR_REQUEST)");
+
 			bcp_header_t * hdr = (bcp_header_t *) bcp_buffer(opacket)->buf;
 			ar_req *request = (ar_req *) &hdr->raw[RAW_DATA];
 

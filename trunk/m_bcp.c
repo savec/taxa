@@ -303,7 +303,7 @@ void bcp_module(void)
 	bd_t i;
 
 	if (ibuffer < 0) {
-		TRACE("\n\rcan't obtaine buffer");
+		TRACE("\n\rBCP: can't obtaine buffer");
 		goto skip_reciev;
 	}
 
