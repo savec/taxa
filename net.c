@@ -7,6 +7,7 @@
 
 #include "net.h"
 #include "config.h"
+#include "trace.h"
 
 static SOCKET host_soc, cfg_soc;
 static net_status_e status;
@@ -45,6 +46,9 @@ int net_recieve_data(BYTE *data, size_t size) {
 	if (recieved > 0) {
 		//			connect(host_soc, (struct sockaddr*) &host_addr, addrlen);
 		status = NET_CONNECTED;
+		TRACE("\n\rnet_recieve_data: %i bytes recieved", recieved);
+	} else if(recieved < 0) {
+		TRACE("\n\rnet_recieve_data: SOCKET_ERROR");
 	}
 
 	return recieved;
@@ -83,10 +87,18 @@ BOOL net_cfg_activity(void)
 
 int net_send_data(const BYTE *data, size_t size)
 {
-	if (status != NET_CONNECTED)
-		return -1;
+	int result;
 
-	return sendto( host_soc, (const char*) data, size, 0, (struct sockaddr*) &host_addr, sizeof(struct sockaddr) );
+	if (status != NET_CONNECTED) {
+		TRACE("\n\rnet_send_data: NET_LISTENING status");
+		return -1;
+	}
+
+	result = sendto( host_soc, (const char*) data, size, 0, (struct sockaddr*) &host_addr, sizeof(struct sockaddr) );
+
+	TRACE("\n\rnet_send_data: sendto result %i", result);
+
+	return result;
 //	return send(host_soc, (const char*) data, size, 0);
 }
 
