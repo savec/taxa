@@ -73,11 +73,10 @@ void accessor_module(void)
 			break;
 		}
 		{
-			TRACE("\n\rACS: buffer obtained (QAC_AR_REQUEST)");
-
 			bcp_header_t * hdr = (bcp_header_t *) bcp_buffer(opacket)->buf;
 			ar_req *request = (ar_req *) &hdr->raw[RAW_DATA];
-
+			TRACE("\n\rACS: buffer obtained (QAC_AR_REQUEST)");
+			
 			hdr->hdr_s.type = TYPE_NPDL;
 			SET_FQ(hdr->hdr_s.type);
 			hdr->hdr_s.packtype_u.npdl.qac = QAC_AR_REQUEST;
