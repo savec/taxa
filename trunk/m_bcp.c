@@ -56,8 +56,10 @@ int bcp_reciev_buffer(bd_t handler)
 	bcp_header_t * hdr;
 	WORD crc;
 
-	if (handler < 0 || handler > NBUFFERS - 1)
+	if (handler < 0 || handler > NBUFFERS - 1) {
+		TRACE("\n\rbcp_reciev_buffer: invalid handler");
 		return -1;
+	}
 
 	recieved = net_recieve_data(bpool[handler].buf, SIZEOF_BUF);
 	if (recieved <= 0)
@@ -67,16 +69,20 @@ int bcp_reciev_buffer(bd_t handler)
 
 	crc = CRC16_MODBUS((BYTE *) hdr, BCP_HEADER_SIZE - 2);
 
-	if ((hdr->hdr_s.crcl ^ (BYTE) crc) || (hdr->hdr_s.crch ^ (BYTE) (crc >> 8)))
+	if ((hdr->hdr_s.crcl ^ (BYTE) crc) || (hdr->hdr_s.crch ^ (BYTE) (crc >> 8))) {
+		TRACE("\n\rbcp_reciev_buffer: header crc error");
 		return 0;
-
+	}
+		
 	if (TYPE(hdr->hdr_s.type) == TYPE_NPDL) {
 		crc = CRC16_MODBUS((BYTE *) hdr + BCP_HEADER_SIZE,
 				hdr->hdr_s.packtype_u.npdl.len - 2);
 		if ((hdr->raw[BCP_HEADER_SIZE + hdr->hdr_s.packtype_u.npdl.len - 2]
 				^ (BYTE) crc) || (hdr->raw[BCP_HEADER_SIZE
-				+ hdr->hdr_s.packtype_u.npdl.len - 1] ^ (BYTE) (crc >> 8)))
+				+ hdr->hdr_s.packtype_u.npdl.len - 1] ^ (BYTE) (crc >> 8))) {
+			TRACE("\n\rbcp_reciev_buffer: npdl crc error");
 			return 0;
+		}
 	}
 
 	return recieved;
@@ -88,8 +94,10 @@ int bcp_send_buffer(bd_t handler)
 	bcp_header_t * hdr;
 	WORD crc;
 
-	if (handler < 0 || handler > NBUFFERS - 1)
+	if (handler < 0 || handler > NBUFFERS - 1) {
+		TRACE("\n\rbcp_send_buffer: invalid handler");
 		return -1;
+	}
 
 	hdr = (bcp_header_t *) bpool[handler].buf;
 
@@ -114,6 +122,7 @@ int bcp_send_buffer(bd_t handler)
 				= (BYTE) (crc >> 8); /* HI as we are in little endian */
 		break;
 	default:
+		TRACE("\n\rbcp_send_buffer: invalid packet type");
 		return -1;
 	}
 
