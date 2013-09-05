@@ -17,13 +17,16 @@ void net_init(void)
 {
 	struct sockaddr_in addr;
 
-	host_soc = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
+	if((host_soc = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) == INVALID_SOCKET)
+		TRACE("\n\nnet_init: cant't create host socket");
 
 	addr.sin_port = AppConfig.comm_port;
 	addr.sin_addr.S_un.S_addr = IP_ADDR_ANY;
 	bind(host_soc, (struct sockaddr*) &addr, sizeof(struct sockaddr_in));
 
-	cfg_soc = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
+	if((cfg_soc = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) == INVALID_SOCKET)
+		TRACE("\n\nnet_init: cant't create config socket");
+
 	addr.sin_port = 8080;
 	addr.sin_addr.S_un.S_addr = IP_ADDR_ANY;
 	bind(cfg_soc, (struct sockaddr*) &addr, sizeof(struct sockaddr_in));
