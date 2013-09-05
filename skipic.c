@@ -112,6 +112,7 @@
 #include "config.h"
 #include "m_accessor.h"
 #include "m_smachine.h"
+#include "trace.h"
 #include <stdio.h>
 
 // Used for Wi-Fi assertions
@@ -327,7 +328,7 @@ int main(void)
 	// If a task needs very long time to do its job, it must be broken
 	// down into smaller pieces so that other tasks can have CPU time.
 
-
+	TRACE("\n\nskipic: HELLO WORLD!");
 
 	while (1) {
 
