@@ -44,6 +44,7 @@ void net_init(void)
 
 int net_recieve_data(BYTE *data, size_t size) {
 	int recieved, addrlen;
+	net_status_e c_status = status;
 
 	//	switch (status) {
 	//
@@ -61,6 +62,10 @@ int net_recieve_data(BYTE *data, size_t size) {
 	} else if(recieved < 0) {
 		TRACE("\n\rnet_recieve_data: SOCKET_ERROR");
 	}
+
+	if(c_status != status)
+		TRACE("\n\rnet_recieve_data: status changed to %i", (int)status);
+
 
 	return recieved;
 
@@ -99,13 +104,17 @@ BOOL net_cfg_activity(void)
 int net_send_data(const BYTE *data, size_t size)
 {
 	int result;
+	net_status_e c_status = status;
 
 	if (status != NET_CONNECTED) {
-		TRACE("\n\rnet_send_data: NET_LISTENING status");
+		TRACE("\n\rnet_send_data: status = %i", (int)status);
 		return -1;
 	}
 
 	result = sendto( host_soc, (const char*) data, size, 0, (struct sockaddr*) &host_addr, sizeof(struct sockaddr) );
+
+	if(c_status != status)
+		TRACE("\n\rnet_send_data: status changed to %i", (int)status);
 
 	TRACE("\n\rnet_send_data: sendto result %i", result);
 
