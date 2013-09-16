@@ -98,3 +98,10 @@ void LCD_show_addresses(void)
 	LCD_decode(LCD_ALL);
 	LCDUpdate();
 }
+
+void LCD_BackLight(BYTE light)
+{
+	// LCD light on/off
+	LATGbits.LATG5 = light ? 1 : 0;
+	TRISGbits.TRISG5 = 0;
+} 
