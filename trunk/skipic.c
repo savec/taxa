@@ -246,6 +246,7 @@ int main(void)
 #if defined(USE_LCD)
 	// Initialize and display the stack version on the LCD
 	LCDInit();
+    LCD_BackLight(1);
 	DelayMs(100);
 //	strcpypgm2ram((char*) LCDText, "SkiPIC " PRJ_VERSION);
 //	LCDUpdate();

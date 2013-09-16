@@ -24,6 +24,7 @@ void LCD_serve_tout_prompt(void);
 void LCD_set_tout(DWORD tout);
 void LCD_prompt(void);
 void LCD_show_addresses(void);
+void LCD_BackLight(BYTE light);
 
 #define LCD_STRING_0	(LCDText)
 #if LCD_HEIDHT>1
