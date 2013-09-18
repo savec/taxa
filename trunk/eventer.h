@@ -13,6 +13,7 @@
 
 typedef WORD event_t;
 
+void eventer_init(void);
 void event_send(modules_e module, event_t event);
 int event_recieve(modules_e module, event_t *event);
 
