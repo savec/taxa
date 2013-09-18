@@ -275,6 +275,7 @@ int main(void)
 //		config();
 
 	readers_init();
+	eventer_init();
 
 	LCD_show_addresses();
 	t = TickGet();
