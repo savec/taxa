@@ -321,7 +321,7 @@
  *   Berkeley Sockets are disabled.  Set this value as low as your application
  *   requires to avoid waisting RAM.
  */
-#define BSD_SOCKET_COUNT (2u)
+#define BSD_SOCKET_COUNT (3u)
 
 
 // =======================================================================
