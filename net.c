@@ -4,21 +4,29 @@
  *  Created on: 09.02.2013
  *      Author: admin
  */
-
+//#include <string.h>
+#include "TCPIP Stack/TCPIP.h"
+#include <stdio.h>
 #include "net.h"
 #include "config.h"
 #include "trace.h"
+#include "version.h"
 
-static SOCKET host_soc, cfg_soc;
+static SOCKET host_soc, cfg_soc, dk_soc;
 static net_status_e status;
-static struct sockaddr host_addr, cfg_addr;
+static struct sockaddr host_addr, cfg_addr, dk_host_addr;
+
+#define DK_T_REQUEST		"X"
+#define DK_T_ANSWER			"A"
+#define DK_T_STATUS_STR		"N**M*"
+#define DK_T_BUFSTAT_STR	"nc"
 
 void net_init(void)
 {
 	struct sockaddr_in addr;
 
 	if((host_soc = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) == INVALID_SOCKET) {
-		TRACE("\n\nPANIC: cant't create host socket");
+		TRACE("\n\nPANIC: can't create host socket");
 		INTCONbits.GIEL = 0;
 		INTCONbits.GIEH = 0;
 		for(;;);
@@ -29,7 +37,7 @@ void net_init(void)
 	bind(host_soc, (struct sockaddr*) &addr, sizeof(struct sockaddr_in));
 
 	if((cfg_soc = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) == INVALID_SOCKET) {
-		TRACE("\n\nPANIC: cant't create config socket");
+		TRACE("\n\nPANIC: can't create config socket");
 		INTCONbits.GIEL = 0;
 		INTCONbits.GIEH = 0;
 		for(;;);
@@ -38,6 +46,18 @@ void net_init(void)
 	addr.sin_port = 8080;
 	addr.sin_addr.S_un.S_addr = IP_ADDR_ANY;
 	bind(cfg_soc, (struct sockaddr*) &addr, sizeof(struct sockaddr_in));
+
+	if((dk_soc = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) == INVALID_SOCKET) {
+		TRACE("\n\nPANIC: can't create dk-tibbo socket");
+		INTCONbits.GIEL = 0;
+		INTCONbits.GIEH = 0;
+		for(;;);
+	}
+
+	addr.sin_port = 65535;
+	addr.sin_addr.S_un.S_addr = IP_ADDR_ANY;
+	bind(dk_soc, (struct sockaddr*) &addr, sizeof(struct sockaddr_in));
+
 
 	status = NET_LISTENING;
 }
@@ -80,6 +100,155 @@ void net_disconnect(void)
 	status = NET_LISTENING;
 }
 
+
+char * strtok(char *s, const char *delim)
+{
+	int i;
+	static char *last_pos;
+	char *pos = (s) ? s : last_pos;
+	char *res;
+
+	if(*pos == '\0')
+		return NULL;
+
+	while(1) {									/*remove leading delimiters*/
+		for(i = 0; i < strlen(delim); i++)
+			if(*pos == delim[i]) {
+				pos ++;
+			}
+		if(i == strlen(delim)/* || *res == '\0'*/)
+			break;
+	}
+	res = pos;
+	while(*pos) {
+		for(i = 0; i < strlen(delim); i++)
+			if(*pos == delim[i]) {
+				*pos = '\0';
+				last_pos = pos + 1;
+				return res;
+			}
+		pos ++;
+	}
+
+	last_pos = pos;
+	return res;
+}
+
+#define IP_IS_VALID(ip) (ip.v[0] > 0 && ip.v[0] < 256)
+
+static int get_dot_delimit_octets(char * s, char *out, char size)
+{
+	int i, oct;
+	char * tok;
+	char d[] = {'.', '\0'};
+
+	for (tok = strtok(s, d), i = 0; tok && i < size; tok = strtok(NULL, d), i ++) {
+		oct = atoi(tok);
+		if(oct >= 0 && oct < 256)
+			*out++ = oct;
+		else
+			return -1;
+	}
+
+	if(i < size - 1)
+		return -1;
+	else
+		return 0;
+}
+
+void net_serve_dk(void)
+{
+	int recieved, addrlen, result;
+	static BYTE buf[128];
+	char *tok;
+
+	addrlen = sizeof(struct sockaddr);
+
+	recieved = recvfrom(dk_soc, (char*) buf, sizeof(buf), 0,
+			(struct sockaddr*) &dk_host_addr, &addrlen);
+
+	if (!recieved)
+		return;
+
+	if (buf[0] == DK_T_REQUEST[0]) {
+		TRACE("net_serve_dk: dk-t soc resieved %c\n\r", buf[0]);
+
+		sprintf(buf, DK_T_ANSWER"%d.%d.%d.%d.%d.%d/%d/"DK_T_STATUS_STR"/"
+		DK_T_BUFSTAT_STR"/"SVN_URL" "SVN_DATETIME"|12345678",
+				AppConfig.MyMACAddr.v[0], AppConfig.MyMACAddr.v[1],
+				AppConfig.MyMACAddr.v[2], AppConfig.MyMACAddr.v[3],
+				AppConfig.MyMACAddr.v[4], AppConfig.MyMACAddr.v[5],
+				AppConfig.comm_port);
+
+		result = sendto(dk_soc, (const char*) buf, strlen(buf), 0,
+				(struct sockaddr*) &dk_host_addr, sizeof(struct sockaddr));
+
+		TRACE("net_serve_dk: %d bytes sent to host\n\r", result);
+	} else if (buf[0] == DK_T_ANSWER[0]) {
+		char delim[] = {DK_T_ANSWER[0], '|', '/', '\0'};
+		char str_mac[24];
+		char str_ip[16];
+		char str_hkey[16];
+		MAC_ADDR mac;
+		IP_ADDR ip;
+
+		buf[recieved] = '\0';
+		TRACE("net_serve_dk: dk-t soc resieved %s\n\r", buf);
+
+		/* get MAC */
+		tok = strtok(buf, delim);
+		strncpy(str_mac, tok, sizeof(str_mac));
+
+		/* get IP */
+		tok = strtok(NULL, delim);
+		strncpy(str_ip, tok, sizeof(str_ip));
+
+		/* get HKEY */
+		tok = strtok(NULL, delim);
+		strncpy(str_hkey, tok, sizeof(str_hkey));
+
+//		TRACE("net_serve_dk: MAC:%s IP:%s HKEY:%s\n\r", str_mac, str_ip, str_hkey);
+		if(get_dot_delimit_octets(str_mac, (char *)&mac, sizeof(mac)) < 0) {
+			TRACE("net_serve_dk: wrong MAC format!\n\r");
+			return;
+		}
+
+		TRACE("net_serve_dk: MAC %d-%d-%d-%d-%d-%d\n\r",
+				mac.v[0], mac.v[1],
+				mac.v[2], mac.v[3],
+				mac.v[4], mac.v[5]);
+
+		if(AppConfig.MyMACAddr.v[0] != mac.v[0] || AppConfig.MyMACAddr.v[1] != mac.v[1] ||
+		   AppConfig.MyMACAddr.v[2] != mac.v[2] || AppConfig.MyMACAddr.v[3] != mac.v[3] ||
+		   AppConfig.MyMACAddr.v[4] != mac.v[4] || AppConfig.MyMACAddr.v[5] != mac.v[5])
+			return;
+
+		if(get_dot_delimit_octets(str_ip, (char *)&ip, sizeof(ip)) < 0) {
+			TRACE("net_serve_dk: wrong IP format!\n\r");
+
+			sprintf(buf, "F|%s", str_hkey);	/* F */
+			result = sendto(dk_soc, (const char*) buf, strlen(buf), 0,
+					(struct sockaddr*) &dk_host_addr, sizeof(struct sockaddr));
+		}
+
+		TRACE("net_serve_dk: IP %d-%d-%d-%d\n\r",
+				ip.v[0], ip.v[1],
+				ip.v[2], ip.v[3]);
+
+		AppConfig.MyIPAddr.Val = ip.Val;
+
+		sprintf(buf, DK_T_ANSWER"|%s", str_hkey);	/* OK */
+		result = sendto(dk_soc, (const char*) buf, strlen(buf), 0,
+				(struct sockaddr*) &dk_host_addr, sizeof(struct sockaddr));
+
+		TRACE("net_serve_dk: %d bytes sent to host\n\r", result);
+
+
+	} else {
+	}
+}
+
+
 BOOL net_cfg_activity(void)
 {
 	int recieved, addrlen;
@@ -90,7 +259,8 @@ BOOL net_cfg_activity(void)
 	recieved = recvfrom(cfg_soc, (char*) str, sizeof(str), 0,
 			(struct sockaddr*) &cfg_addr, &addrlen);
 
-	if(recieved) {
+	if(recieved && recieved < sizeof(str)) {	/* 	potential exposure: if recieved == sizeof(str)
+	 	 	 	 	 	 	 	 	 	 	 		then '\0' will be placed out of str boundaries */
 		BYTE cfg_str[15];
 		strcpypgm2ram(cfg_str, CFG_START);
 		str[recieved] = '\0';

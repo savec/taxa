@@ -24,6 +24,7 @@ int net_send_data(const BYTE *data, size_t size);
 net_status_e net_getstatus(void);
 void net_disconnect(void);
 BOOL net_cfg_activity(void);
+void net_serve_dk(void);
 int net_send_string(const BYTE *str);
 BYTE net_get_string(BYTE *str, BYTE maxlen);
 

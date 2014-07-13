@@ -330,7 +330,7 @@ int main(void)
 	// If a task needs very long time to do its job, it must be broken
 	// down into smaller pieces so that other tasks can have CPU time.
 
-	TRACE("\n\nskipic: HELLO WORLD!");
+	TRACE("\r\nskipic: HELLO WORLD!");
 
 	while (1) {
 
@@ -345,6 +345,7 @@ int main(void)
 		if(net_cfg_activity())
 			config();
 
+		net_serve_dk();
 		bcp_module();
 		readers_module();
 		accessor_module();
