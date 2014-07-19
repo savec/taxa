@@ -8,5 +8,5 @@
 #include "trace.h"
 
 #ifdef UART_TRACE
-BYTE trace_buf[80];
+BYTE trace_buf[128];
 #endif

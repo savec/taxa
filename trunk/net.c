@@ -21,6 +21,8 @@ static struct sockaddr host_addr, cfg_addr, dk_host_addr;
 #define DK_T_STATUS_STR		"N**M*"
 #define DK_T_BUFSTAT_STR	"nc"
 
+//#define NET_NAME	"R2D2_0"
+
 void net_init(void)
 {
 	struct sockaddr_in addr;
@@ -155,12 +157,58 @@ static int get_dot_delimit_octets(char * s, char *out, char size)
 	else
 		return 0;
 }
+/*
+        public static UInt32 FNV_hash_32(UInt32 Mkey, byte[] Bytes)
+
+        {
+
+            //const UInt32 offset_basis = 2166136261 ;
+
+            const UInt32 FNV_prime = 16777619;
+
+            //UInt32 hash = offset_basis;
+
+            UInt32 hash = Mkey;
+
+            foreach(byte  b in Bytes)
+
+               {hash ^= b; hash *= FNV_prime;}
+
+            return hash;
+
+        }
+*/
+
+static DWORD FNV_hash_32(DWORD mkey, char * s)
+{
+	DWORD FNV_prime = 16777619;
+	DWORD hash = mkey;
+	char *p;
+
+	for(p = s; *p; p++)
+	{
+		hash ^= *p;
+		hash *= FNV_prime;
+	}
+	return hash;
+}
+
+static void get_substring(const char * s, const char *ss, char c, char size)
+{
+	char *from = s;
+	char *to = ss;
+
+	while(*from != c && *from && size--)
+		*to++ = *from++;
+	*to = '\0';
+}
 
 void net_serve_dk(void)
 {
 	int recieved, addrlen, result;
-	static BYTE buf[128];
+	static BYTE buf[100];
 	char *tok;
+	static DWORD last_mkey = 0;
 
 	addrlen = sizeof(struct sockaddr);
 
@@ -173,27 +221,36 @@ void net_serve_dk(void)
 	if (buf[0] == DK_T_REQUEST[0]) {
 		TRACE("net_serve_dk: dk-t soc resieved %c\n\r", buf[0]);
 
+		while((last_mkey = TickGet()) == 0)	// MKEY must not be equal 0
+			;
+
 		sprintf(buf, DK_T_ANSWER"%d.%d.%d.%d.%d.%d/%d/"DK_T_STATUS_STR"/"
-		DK_T_BUFSTAT_STR"/"SVN_URL" "SVN_DATETIME"|12345678",
+		DK_T_BUFSTAT_STR"/" "R2D2_%d" "|%lu",
 				AppConfig.MyMACAddr.v[0], AppConfig.MyMACAddr.v[1],
 				AppConfig.MyMACAddr.v[2], AppConfig.MyMACAddr.v[3],
 				AppConfig.MyMACAddr.v[4], AppConfig.MyMACAddr.v[5],
-				AppConfig.comm_port);
+				AppConfig.comm_port, AppConfig.comm_station_id, last_mkey);
 
 		result = sendto(dk_soc, (const char*) buf, strlen(buf), 0,
 				(struct sockaddr*) &dk_host_addr, sizeof(struct sockaddr));
 
-		TRACE("net_serve_dk: %d bytes sent to host\n\r", result);
+		TRACE("net_serve_dk: %d bytes sent to host:\n\r%s\n\r", result, buf);
 	} else if (buf[0] == DK_T_ANSWER[0]) {
 		char delim[] = {DK_T_ANSWER[0], '|', '/', '\0'};
 		char str_mac[24];
 		char str_ip[16];
 		char str_hkey[16];
+		static BYTE str[42];
 		MAC_ADDR mac;
 		IP_ADDR ip;
+		DWORD expected_hash, hash;
 
 		buf[recieved] = '\0';
 		TRACE("net_serve_dk: dk-t soc resieved %s\n\r", buf);
+
+		get_substring(buf, str, '|', sizeof(str) - 1);	// get copy of buf
+		TRACE("net_serve_dk: getting copy %s\n\r", str);
+
 
 		/* get MAC */
 		tok = strtok(buf, delim);
@@ -223,12 +280,36 @@ void net_serve_dk(void)
 		   AppConfig.MyMACAddr.v[4] != mac.v[4] || AppConfig.MyMACAddr.v[5] != mac.v[5])
 			return;
 
+		if (last_mkey == 0) {
+			TRACE("net_serve_dk: unexpected request\n\r");
+
+			sprintf(buf, "F|%s", str_hkey); /* F */
+			result = sendto(dk_soc, (const char*) buf, strlen(buf), 0,
+					(struct sockaddr*) &dk_host_addr, sizeof(struct sockaddr));
+			TRACE("net_serve_dk: %d bytes sent to host\n\r", result);
+			return;
+		}
+
 		if(get_dot_delimit_octets(str_ip, (char *)&ip, sizeof(ip)) < 0) {
 			TRACE("net_serve_dk: wrong IP format!\n\r");
 
 			sprintf(buf, "F|%s", str_hkey);	/* F */
 			result = sendto(dk_soc, (const char*) buf, strlen(buf), 0,
 					(struct sockaddr*) &dk_host_addr, sizeof(struct sockaddr));
+			TRACE("net_serve_dk: %d bytes sent to host\n\r", result);
+			return;
+		}
+
+		expected_hash = FNV_hash_32(last_mkey, str);
+
+		if(expected_hash != atoul(str_hkey)) {
+			TRACE("net_serve_dk: expected hash:%lu, but recieved:%lu\n\r",
+					expected_hash, atoul(str_hkey));
+			sprintf(buf, "D|%s", str_hkey);	/* D */
+			result = sendto(dk_soc, (const char*) buf, strlen(buf), 0,
+					(struct sockaddr*) &dk_host_addr, sizeof(struct sockaddr));
+			TRACE("net_serve_dk: %d bytes sent to host\n\r", result);
+			return;
 		}
 
 		TRACE("net_serve_dk: IP %d-%d-%d-%d\n\r",
@@ -240,7 +321,6 @@ void net_serve_dk(void)
 		sprintf(buf, DK_T_ANSWER"|%s", str_hkey);	/* OK */
 		result = sendto(dk_soc, (const char*) buf, strlen(buf), 0,
 				(struct sockaddr*) &dk_host_addr, sizeof(struct sockaddr));
-
 		TRACE("net_serve_dk: %d bytes sent to host\n\r", result);
 
 
