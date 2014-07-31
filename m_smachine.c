@@ -58,16 +58,20 @@ static int process_buffer(bd_t handler)
 	return result;
 }
 
-void sm_init(void)
-{
-	// XXX check INs
-
-	LCD_prompt();
-
-	mail_subscribe(MYSELF, &mailbox);
-	state = SM_INIT; //SM_READY;
-
-}
+//void sm_init(void)
+//{
+//	// XXX check INs
+//
+//	LCD_prompt();
+//
+//	mail_subscribe(MYSELF, &mailbox);
+//        sm_indicator_off();
+//        sm_control_off();
+//	    state = SM_READY;
+//
+////	state = SM_INIT; //SM_READY;
+//
+//}
 
 BOOL sm_is_ready(void) {
 	return !sm_is_sig_done();	// XXX check it
@@ -283,6 +287,20 @@ static BOOL sm_is_sig_failure(void)
 	return result;
 }
 
+void sm_init(void)
+{
+	// XXX check INs
+
+	LCD_prompt();
+
+	mail_subscribe(MYSELF, &mailbox);
+        sm_indicator_off();
+        sm_control_off();
+	    state = SM_READY;
+
+//	state = SM_INIT; //SM_READY;
+
+}
 
 void sm_module(void)
 {
@@ -298,10 +316,10 @@ void sm_module(void)
 
 	switch(state) {
 	case SM_INIT:
-        sm_indicator_off();
-        sm_control_off();
-	    state = SM_READY;
-
+//        sm_indicator_off();
+//        sm_control_off();
+//	    state = SM_READY;
+//
 		break;
 	case SM_READY:
 		if(event_recieve(MYSELF, &event)) {

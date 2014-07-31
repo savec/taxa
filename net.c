@@ -225,7 +225,10 @@ void net_serve_dk(void)
 			;
 
 		sprintf(buf, DK_T_ANSWER"%d.%d.%d.%d.%d.%d/%d/"DK_T_STATUS_STR"/"
-		DK_T_BUFSTAT_STR"/" "R2D2_%d" "|%lu",
+//		DK_T_BUFSTAT_STR"/"PROJ_NAME" "SVN_DATETIME"|12345678",
+//		DK_T_BUFSTAT_STR"/" "R2D2_%d" "|%lu",
+		DK_T_BUFSTAT_STR"/"PROJ_NAME"#%d/rv"SVN_REVISION"|%lu",
+
 				AppConfig.MyMACAddr.v[0], AppConfig.MyMACAddr.v[1],
 				AppConfig.MyMACAddr.v[2], AppConfig.MyMACAddr.v[3],
 				AppConfig.MyMACAddr.v[4], AppConfig.MyMACAddr.v[5],

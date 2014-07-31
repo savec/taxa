@@ -345,10 +345,11 @@ static BOOL serial_get_uid(BYTE *uid)
 
 static BOOL wg_lo_is_even(void)
 {
-	BYTE s;
+	BYTE s=0;
 	int i;
 	BYTE start = WIEGAND_DATA_START;
-	BYTE end = WIEGAND_DATA_START + ((WIEGAND_DATA_BITS / 2) + ((WIEGAND_DATA_BITS & 1) ? 1 : 0));
+//	BYTE end = WIEGAND_DATA_START + ((WIEGAND_DATA_BITS / 2) + ((WIEGAND_DATA_BITS & 1) ? 1 : 0));
+	BYTE end = WIEGAND_DATA_START + ((WIEGAND_DATA_BITS+1)>>1);
 
 	for(i = start; i < end; i ++)
 		if(bp_tstbit(code, i))
@@ -359,10 +360,11 @@ static BOOL wg_lo_is_even(void)
 
 static BOOL wg_hi_is_odd(void)
 {
-	BYTE s;
+	BYTE s=0;
 	int i;
-	BYTE start = WIEGAND_DATA_START + ((WIEGAND_DATA_BITS / 2) - ((WIEGAND_DATA_BITS & 1) ? 1 : 0));
-	BYTE end = WIEGAND_LEN - 1;
+//	BYTE start = WIEGAND_DATA_START + ((WIEGAND_DATA_BITS / 2) - ((WIEGAND_DATA_BITS & 1) ? 1 : 0));
+	BYTE start = WIEGAND_DATA_START + (WIEGAND_DATA_BITS>>1);
+    BYTE end = WIEGAND_LEN - 1;
 
 	for(i = start; i < end; i ++)
 		if(bp_tstbit(code, i))
