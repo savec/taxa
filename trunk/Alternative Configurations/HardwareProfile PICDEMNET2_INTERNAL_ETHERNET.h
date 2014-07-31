@@ -1694,6 +1694,7 @@
 	#define LED1_IO				(LATJbits.LATJ1)
 	#define LED2_TRIS			(TRISJbits.TRISJ2)
 	#define LED2_IO				(LATJbits.LATJ2)
+/* зпалатка ==iVOm== неверное определение битов IO
 	#define	LED3_TRIS			(TRISGbits.TRISG5) // AKA LIGHT_LCD
 	#define LED3_IO				(PORTGbits.RG5)
 	#define	LED4_TRIS			(TRISGbits.TRISG5) // AKA LIGHT_LCD
@@ -1702,7 +1703,16 @@
 	#define	LED5_IO				(PORTGbits.RG7) // AKA REL1
 	#define	LED6_TRIS			(TRISGbits.TRISG6)
 	#define	LED6_IO				(PORTGbits.RG6) // AKA REL2
-
+*/
+	#define	LED3_TRIS			(TRISGbits.TRISG5) // Maxi-Web LIGHT_LCD
+	#define LED3_IO				(LATGbits.LATG5)
+	#define	LED4_TRIS			(TRISGbits.TRISG5) // Maxi-Web LIGHT_LCD
+	#define LED4_IO				(LATGbits.LATG5)
+	#define	LED5_TRIS			(TRISGbits.TRISG7)
+	#define	LED5_IO				(LATGbits.LATG7) // Maxi-Web REL1
+	#define	LED6_TRIS			(TRISGbits.TRISG6)
+	#define	LED6_IO				(LATGbits.LATG6) // Maxi-Web REL2
+// конец зпалатка ==iVOm==*/
 	/* ignore rest of LEDs */
 	#define LED7_TRIS			LED0_TRIS
 	#define LED7_IO				LED0_IO
