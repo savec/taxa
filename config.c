@@ -258,6 +258,8 @@ static ROM const menu_section_t * ROM sections[] =
 				&reader1_settings_s, &reader2_settings_s, &accessor_settings_s,
 				&serv_machine_settings_s, 0 };
 
+static DWORD last_activity;
+
 #define n_elements(x) (sizeof(x)/sizeof(x[0]))
 
 void config_show_sections(void)
@@ -556,6 +558,14 @@ static void reboot(void)
 	Reset();
 }
 
+void check_activity(void)
+{
+	if (TickGet() - last_activity < IDLE_TOUT)
+		return;
+
+	config_restore();
+	Reset();
+}
 
 void config(void)
 {
@@ -572,13 +582,17 @@ void config(void)
 
 	console_caption();
 	config_show_sections();
+	last_activity = TickGet();
 
 	while (1) { // XXX add switch/case
+		check_activity();
 		switch (state) {
 		case SHOW_SECTIONS:
 
 			if(!get_string(buffer, sizeof(buffer)))
 				break;
+
+			last_activity = TickGet();
 
 			if (buffer[0] == 'l' || buffer[0] == 'L') {
 				slog_flush();
@@ -639,6 +653,7 @@ void config(void)
 
 			if(!get_string(buffer, sizeof(buffer)))
 				break;
+			last_activity = TickGet();
 			if (!isdigit(buffer[0])/* || escape_there(buffer)*/) {
 				config_show_sections();
 				state = SHOW_SECTIONS;
@@ -655,7 +670,7 @@ void config(void)
 
 			if(!get_string(buffer, sizeof(buffer)))
 				break;
-
+			last_activity = TickGet();
 			switch (sections[ch_section]->prms[ch_param]->type) {
 			case TYPE_CHAR:
 				if (!isdigit(buffer[0])/* || escape_there(buffer)*/) {

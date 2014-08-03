@@ -10,6 +10,7 @@
 
 #define CFG_START "config"
 
+#define IDLE_TOUT (TICK_SECOND * 10)
 //#define put_string	putsUSART
 //#define put_rom_string	putrsUSART
 //#define get_string	ReadStringUART
